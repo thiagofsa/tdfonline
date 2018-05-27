@@ -5,6 +5,8 @@ package br.com.tfdonline.controller;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,6 +31,12 @@ import org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 	 
 	 
 	/**
@@ -139,6 +147,9 @@ import org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView;
 	  // Add our datasource parameter
 	  model.addAttribute("datasource", datasource);
 	  model.addAttribute("format", type);
+	
+		model.addAttribute("qrCode", "Flávio, é nozes!");
+	
 	  
 	  //model.addAttribute("url", "reports/MotoristasReport.jrxml");
 	  
@@ -161,7 +172,13 @@ import org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView;
 	   
 	   */
 	  return modelAndView;
-	  
-	 
-	   }
+	  	 
+	  }
+ 
+ 	
+ 		
+ 
+ 
+ 
+ 
  }
