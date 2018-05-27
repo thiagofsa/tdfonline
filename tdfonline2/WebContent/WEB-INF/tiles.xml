@@ -43,7 +43,7 @@
    </definition>
    
 
-<!-- Lista motoristas pageS -->
+<!-- Motoristas pageS -->
 	 
    <definition name="listamotoristaspage" extends="base.definition">  
        <put-attribute name="title" value="Lista Motoristas" />  
@@ -65,6 +65,9 @@
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
    </definition>
+   
+   
+	   
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
    
@@ -99,6 +102,10 @@
        <put-attribute name="body" value="/WEB-INF/views/resultemail.jsp" />  
    </definition>    
  
+  <definition name="downloadpage" extends="base.definition">  
+       <put-attribute name="title" value="Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/downloadpage.jsp" />  
+   </definition>
  
  
 </tiles-definitions>
