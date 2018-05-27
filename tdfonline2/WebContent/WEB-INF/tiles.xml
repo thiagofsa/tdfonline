@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE tiles-definitions PUBLIC  
+      "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
+      "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
+<tiles-definitions>  
+ 
+   <!-- Base Define -->
+   <definition name="base.definition" 
+       template="/WEB-INF/layouts/classic.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />  
+       <!-- <put-attribute name="menu" value="/WEB-INF/views/menu.jsp" /> -->
+       <put-attribute name="menu" value="/WEB-INF/views/menu-collapse.jsp" />
+       <put-attribute name="body" value="" />  
+       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
+   </definition>  
+ 
+   <!-- Home Page -->
+   <definition name="homepage" extends="base.definition">  
+       <put-attribute name="title" value="Home Page" />  
+       <put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+       <put-attribute name="page_description" value="Educate yourself with EANA Research..."/>
+         
+   </definition>
+   
+   
+   <!-- paciente pages -->
+   
+   <definition name="cadastropacientepage" extends="base.definition">  
+       <put-attribute name="title" value="Cadastra Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/paciente/cadastropacientepage.jsp" />  
+   </definition>
+   
+   <definition name="pacientecadastradopage" extends="base.definition">  
+       <put-attribute name="title" value="Cadastra Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/paciente/pacientecadastradopage.jsp" />  
+   </definition>
+   
+   <!-- Lista pacientes page -->
+   <definition name="listapacientespage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Pacientes" />  
+       <put-attribute name="body" value="/WEB-INF/views/paciente/listapacientespage.jsp" />  
+   </definition>
+   
+
+<!-- Lista motoristas pageS -->
+	 
+   <definition name="listamotoristaspage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Motoristas" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/lista.jsp" />  
+   </definition>
+   
+   <definition name="motoristaform" extends="base.definition">  
+       <put-attribute name="title" value="Lista Motoristas" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristaform.jsp" />  
+   </definition>
+   
+   <definition name="findmotorista" extends="base.definition">  
+       <put-attribute name="title" value="Localiza Motoristas" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/find.jsp" />  
+   </definition>
+   
+   
+   <definition name="motoristashow" extends="base.definition">  
+       <put-attribute name="title" value="Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
+   </definition>
+   
+   <!-- ############### UNIDADE SAUDE PageS ######################-->
+   
+   
+   
+   
+    <!-- Lista pacientes page -->
+   <definition name="listaunidadesaudespage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Unidades Saudes" />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/lista.jsp" />  
+   </definition>
+   
+   
+   
+   
+   
+         
+   
+   <!-- ############# ContactUs Page ###############-->
+   
+   
+   <definition name="contactuspage" extends="base.definition">  
+       <put-attribute name="title" value="Contact Us" />  
+       <put-attribute name="body" value="/WEB-INF/views/contactuspage.jsp" />  
+   </definition>  
+   
+        
+  
+   <!--ResultEmail Page -->
+   <definition name="resultemail" extends="base.definition">  
+       <put-attribute name="title" value="Contact with success!" />  
+       <put-attribute name="body" value="/WEB-INF/views/resultemail.jsp" />  
+   </definition>    
+ 
+ 
+ 
+</tiles-definitions>
