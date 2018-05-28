@@ -148,7 +148,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  model.addAttribute("datasource", datasource);
 	  model.addAttribute("format", type);
 	
-		model.addAttribute("qrCode", "Flávio, é nozes!");
+		model.addAttribute("qrCode", "199104006-7!");
 	
 	  
 	  //model.addAttribute("url", "reports/MotoristasReport.jrxml");
