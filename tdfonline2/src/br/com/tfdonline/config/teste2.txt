@@ -1,4 +1,7 @@
 
 alterando online
+<<<<<<< HEAD
 sd
 alterando online
+=======
+>>>>>>> branch 'master' of https://github.com/thiagofsa/tdfonline2
