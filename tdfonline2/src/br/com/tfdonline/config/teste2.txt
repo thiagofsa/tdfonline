@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 alterando online
 <<<<<<< HEAD
@@ -7,3 +8,13 @@ alterando online
 >>>>>>> branch 'master' of https://github.com/thiagofsa/tdfonline2
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 555555
+=======
+
+alterando online
+<<<<<<< HEAD
+sd
+alterando online
+=======
+>>>>>>> branch 'master' of https://github.com/thiagofsa/tdfonline2
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+>>>>>>> branch 'master' of https://github.com/thiagofsa/tdfonline2
