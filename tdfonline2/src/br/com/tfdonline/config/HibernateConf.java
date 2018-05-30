@@ -1,6 +1,6 @@
 package br.com.tfdonline.config;
-//teste3dsfsf
-//alteradodo github
+
+//alteradodo github na quarta..
 import java.io.IOException;
 import java.util.Properties;
 import javax.sql.DataSource;
