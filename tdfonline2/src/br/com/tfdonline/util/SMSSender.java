@@ -19,7 +19,8 @@ public class SMSSender {
                 "&msg=" + URLEncoder.encode(mensagem, "UTF-8");
 		  
 		            
-        URL url = new URL("http://www.facilitamovel.com/api/simpleSend.ft?" + urlParameters);   
+        URL url = new URL("http://www.facilitamovel.com/api/simpleSend.ft?" + urlParameters);
+        System.out.println("Enviado URL via "+ url.toString());
           
         
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();             
