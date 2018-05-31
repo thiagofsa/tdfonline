@@ -14,14 +14,14 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="61" splitType="Stretch">
 			<staticText>
-				<reportElement key="" x="160" y="10" width="270" height="51" isPrintInFirstWholeBand="true" uuid="102425ca-4f32-43a1-ade8-95d38f57829e"/>
+				<reportElement key="" x="80" y="5" width="360" height="51" isPrintInFirstWholeBand="true" uuid="102425ca-4f32-43a1-ade8-95d38f57829e"/>
 				<textElement textAlignment="Center">
 					<font size="20"/>
 					<paragraph lineSpacing="Fixed"/>
 				</textElement>
-				<text><![CDATA[Relatório de Motoristas]]></text>
+				<text><![CDATA[Relatório de Motoristas + QRCode]]></text>
 			</staticText>
 		</band>
 	</title>
