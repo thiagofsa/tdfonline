@@ -27,7 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
 import br.com.tfdonline.modelo.UnidadeSaude;
-import br.com.tfdonline.modelo.Paciente;
+
 
 
 	@Controller

@@ -24,25 +24,7 @@
    </definition>
    
    
-   <!-- paciente pages -->
    
-   <definition name="cadastropacientepage" extends="base.definition">  
-       <put-attribute name="title" value="Cadastra Paciente" />  
-       <put-attribute name="body" value="/WEB-INF/views/paciente/cadastropacientepage.jsp" />  
-   </definition>
-   
-   <definition name="pacientecadastradopage" extends="base.definition">  
-       <put-attribute name="title" value="Cadastra Paciente" />  
-       <put-attribute name="body" value="/WEB-INF/views/paciente/pacientecadastradopage.jsp" />  
-   </definition>
-   
-   <!-- Lista pacientes page -->
-   <definition name="listapacientespage" extends="base.definition">  
-       <put-attribute name="title" value="Lista Pacientes" />  
-       <put-attribute name="body" value="/WEB-INF/views/paciente/listapacientespage.jsp" />  
-   </definition>
-   
-
 <!-- Motoristas pageS -->
 	 
    <definition name="listamotoristaspage" extends="base.definition">  
@@ -74,11 +56,29 @@
    
    
    
-    <!-- Lista pacientes page -->
+    <!-- Lista unidade saude page -->
    <definition name="listaunidadesaudespage" extends="base.definition">  
        <put-attribute name="title" value="Lista Unidades Saudes" />  
        <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/lista.jsp" />  
    </definition>
+   
+   
+   <definition name="motoristaform" extends="base.definition">  
+       <put-attribute name="title" value="Lista Motoristas" />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/listaform.jsp" />  
+   </definition>
+   
+   <definition name="findmotorista" extends="base.definition">  
+       <put-attribute name="title" value="Localiza Motoristas" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/find.jsp" />  
+   </definition>
+   
+   
+   <definition name="motoristashow" extends="base.definition">  
+       <put-attribute name="title" value="Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
+   </definition>
+   
    
    
    

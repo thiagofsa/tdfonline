@@ -27,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.MotoristaDAOI;
 import br.com.tfdonline.modelo.Motorista;
-import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.validator.MotoristaFormValidator;
 
 	@Controller
