@@ -173,6 +173,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  // Return the View and the Model combined
 	   
 	   */
+	  System.out.println("Testando o envio de SMS........");
 	  try {
 		SMSSender.sendMessage("Testando o SMS para o TFDControl", "81998409178");
 	} catch (IOException e) {
