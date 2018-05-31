@@ -148,8 +148,8 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  model.addAttribute("datasource", datasource);
 	  model.addAttribute("format", type);
 	
-		model.addAttribute("qrCode", "199104006-7!");
-	
+		model.addAttribute("qrCode", "user=Daniel % url=www.tfd.com.br/valida?user=daniel");
+		System.out.println("user=Daniel % url=www.tfd.com.br/valida?user=daniel");
 	  
 	  //model.addAttribute("url", "reports/MotoristasReport.jrxml");
 	  
