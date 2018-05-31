@@ -8,6 +8,10 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
+import br.com.facilitamovel.bean.Retorno;
+import br.com.facilitamovel.bean.SmsSimples;
+import br.com.facilitamovel.service.SendMessage;
+
 public class SMSSender {
 
 	
@@ -20,34 +24,25 @@ public class SMSSender {
 		  
 		            
         URL url = new URL("http://www.facilitamovel.com/api/simpleSend.ft?" + urlParameters);
-        System.out.println("Enviado URL via "+ url.toString());
+        System.out.println("Enviado SMS via "+ url.toString());
           
         
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();             
-        connection.setDoOutput(true);  
-        connection.setDoInput(true);  
-        connection.setInstanceFollowRedirects(false);   
-        connection.setRequestMethod("POST");   
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");   
-        connection.setRequestProperty("charset", "utf-8");  
-        connection.setRequestProperty("Content-Length", "" + Integer.toString(urlParameters.getBytes().length));  
-        connection.setUseCaches (false);  
-  
-        OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());  
-        wr.write(urlParameters);  
-        wr.flush();  
-          
-        BufferedReader rd = new BufferedReader(new InputStreamReader(connection.getInputStream()));  
-        StringBuffer strRet = new StringBuffer();  
-        String line;  
-        while ((line = rd.readLine()) != null) {  
-            strRet.append(line);  
-        }  
-        wr.close();  
-        rd.close();  
-          
-        System.out.println("Retorno da Chamada HTTP:"+ strRet);
-		return "Retorno da Chamada HTTP:"+ strRet;  
+        SmsSimples sms = new SmsSimples();
+		sms.setUser("tfdcontrol");
+		sms.setPassword("tfd1408");
+		sms.setDestinatario(numero);
+		sms.setMessage(mensagem);
+		Retorno retorno = null;
+		try {
+			retorno = SendMessage.simpleSend(sms);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Codigo:" + retorno.getCodigo());
+		System.out.println("Descricao:" + retorno.getMensagem());
+	    
+		return retorno.getMensagem();  
   
     }  
 		
