@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import br.com.tfdonline.dao.*;
 import br.com.tfdonline.report.JasperReportsViewFactory;
+import br.com.tfdonline.util.SMSSender;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -148,7 +149,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  model.addAttribute("datasource", datasource);
 	  model.addAttribute("format", type);
 	
-	  model.addAttribute("qrCode", "user=Daniel % url=www.tfd.com.br/valida?user=daniel");
+	  model.addAttribute("qrCode", "user=Daniel%url=www.tfd.com.br/valida?user=daniel");
 	  System.out.println("user=Daniel & url=www.tfd.com.br/valida?user=daniel");
 	  System.out.println("Finalmente gerei o report");
 	  
@@ -172,12 +173,23 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  // Return the View and the Model combined
 	   
 	   */
+	  try {
+		SMSSender.sendMessage("Testando o SMS para o TFDControl", "81998409178");
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		System.out.println("Problema no envio do SMS");
+		e.printStackTrace();
+	}
+	  
 	  return modelAndView;
 	  	 
 	  }
  
- 	
+ 	public void sendSMS(String numero,  String titulo, String corpo) {
  		
+ 		
+ 	}
+ 	
  
  
  
