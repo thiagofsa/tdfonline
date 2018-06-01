@@ -25,9 +25,9 @@
     <li>
       <a href="">Un Saude</a>
       <ul class="sub">
-        <li><a href="${pageContext.request.contextPath}/unidadesaudes/add">Cadastrar Motorista</a></li>
-        <li><a href="${pageContext.request.contextPath}/unidadesaudes/find">Pesquisar Motorista</a></li>
-        <li><a href="${pageContext.request.contextPath}/unidadesaudes">Listar Motoristas</a></li>        
+        <li><a href="${pageContext.request.contextPath}/unidadesaudes/add">Cadastrar Unid Saude</a></li>
+        <li><a href="${pageContext.request.contextPath}/unidadesaudes/find">Pesquisar Unid Saude</a></li>
+        <li><a href="${pageContext.request.contextPath}/unidadesaudes">Listar Unid Saude</a></li>        
       </ul>  
     </li>
     

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Motorista;
-import br.com.tfdonline.modelo.Paciente;
+
 
 @Repository
 @Transactional

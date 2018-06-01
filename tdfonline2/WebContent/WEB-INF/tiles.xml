@@ -23,8 +23,6 @@
          
    </definition>
    
-   
-   
 <!-- Motoristas pageS -->
 	 
    <definition name="listamotoristaspage" extends="base.definition">  
@@ -56,27 +54,27 @@
    
    
    
-    <!-- Lista unidade saude page -->
+    <!--  Unidade Saude page -->
    <definition name="listaunidadesaudespage" extends="base.definition">  
        <put-attribute name="title" value="Lista Unidades Saudes" />  
        <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/lista.jsp" />  
    </definition>
    
    
-   <definition name="motoristaform" extends="base.definition">  
-       <put-attribute name="title" value="Lista Motoristas" />  
-       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/listaform.jsp" />  
+   <definition name="unidadesaudeform" extends="base.definition">  
+       <put-attribute name="title" value="Unidades Saude " />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/unidadesaudeform.jsp" />  
    </definition>
    
-   <definition name="findmotorista" extends="base.definition">  
-       <put-attribute name="title" value="Localiza Motoristas" />  
-       <put-attribute name="body" value="/WEB-INF/views/motoristas/find.jsp" />  
+   <definition name="findunidadesaude" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Unidade Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/find.jsp" />  
    </definition>
    
    
-   <definition name="motoristashow" extends="base.definition">  
-       <put-attribute name="title" value="Motorista" />  
-       <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
+   <definition name="unidadesaudeshow" extends="base.definition">  
+       <put-attribute name="title" value="Unidades de Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/show.jsp" />  
    </definition>
    
    

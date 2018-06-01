@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.UnidadeSaude;
-import br.com.tfdonline.modelo.Paciente;
 
 @Repository
 @Transactional
@@ -97,11 +96,11 @@ public class UnidadeSaudeDAOImpl implements UnidadeSaudeDAOI, Serializable{
 		// TODO Auto-generated method stub
 		if (findByID(unidadesaude.getId())==null) {
 			this.addUnidadeSaude(unidadesaude);
-			System.out.println("estou no DAO, tentanto add o unidadesaude...");
+			System.out.println("estou no DAO, tentanto ADD a unidadesaude...");
 		} else {
 			
 			this.updateUnidadeSaude(unidadesaude);
-			System.out.println("estou no DAO, tentanto ATUALIZAR o unidadesaude...");
+			System.out.println("estou no DAO, tentanto ATUALIZAR a unidadesaude...");
 		}
 	}
 

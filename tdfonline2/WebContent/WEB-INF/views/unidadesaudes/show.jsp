@@ -20,29 +20,25 @@
 		</div>
 	</c:if>
 
-	<h1>Motorista Details</h1>
+	<h1>Un Saude - Detalhes </h1>
 	<br />
 
 	<div class="row">
 		<label class="col-sm-2">ID</label>
-		<div class="col-sm-10">${motorista.id}</div>
+		<div class="col-sm-10">${unidadesaude.id}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Nome</label>
-		<div class="col-sm-10">${motorista.nome}</div>
+		<label class="col-sm-2">Descricao</label>
+		<div class="col-sm-10">${unidadesaude.descricao}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Email</label>
-		<div class="col-sm-10">${motorista.email}</div>
+		<label class="col-sm-2">Logradouro</label>
+		<div class="col-sm-10">${unidadesaude.logradouro}</div>
 	</div>
 
-	<div class="row">
-		<label class="col-sm-2">Endereço</label>
-		<div class="col-sm-10">${motorista.endereco}</div>
-	</div>
-
+	
 	
 </div>
 
