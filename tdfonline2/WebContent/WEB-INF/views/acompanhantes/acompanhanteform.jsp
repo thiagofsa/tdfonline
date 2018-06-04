@@ -11,40 +11,40 @@
 <div class="container">
 
 	<c:choose>
-		<c:when test="${unidadesaudeForm['new']}">
-			<h1>Cadastrar Motorista</h1>
+		<c:when test="${acompanhanteForm['new']}">
+			<h1>Cadastrar Acompanhante</h1>
 		</c:when>
 		<c:otherwise>
-			<h1>Atualizar Motorista</h1>
+			<h1>Atualizar Acompanhante</h1>
 		</c:otherwise>
 	</c:choose>
 	<br />
 
-	<spring:url value="/unidadesaudes" var="unidadesaudeActionUrl" />
+	<spring:url value="/acompanhantes" var="acompanhanteActionUrl" />
 
 	<form:form class="form-horizontal" method="post" 
-                modelAttribute="unidadesaudeForm" action="${unidadesaudeActionUrl}">
+                modelAttribute="acompanhanteForm" action="${acompanhanteActionUrl}">
 
 		<form:hidden path="id" />
 
-		<spring:bind path="descricao">
+		<spring:bind path="nome">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Nome</label>
 			<div class="col-sm-10">
-				<form:input path="descricao" type="text" class="form-control" 
-                                id="descricao" placeholder="Descricao" />
-				<form:errors path="descricao" class="control-label" />
+				<form:input path="nome" type="text" class="form-control" 
+                                id="nome" placeholder="Nome" />
+				<form:errors path="nome" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
 
-		<spring:bind path="logradouro">
+		<spring:bind path="telefone">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Email</label>
+			<label class="col-sm-2 control-label">Telefone</label>
 			<div class="col-sm-10">
-				<form:input path="logradouro" class="form-control" 
-                                id="logradouro" placeholder="Logradouro" />
-				<form:errors path="logradouro" class="control-label" />
+				<form:input path="telefone" class="form-control" 
+                                id="telefone" placeholder="Telefone" />
+				<form:errors path="telefone" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -54,7 +54,7 @@
 		<div class="form-group">
 		  <div class="col-sm-offset-2 col-sm-10">
 			<c:choose>
-			  <c:when test="${unidadesaudeForm['new']}">
+			  <c:when test="${acompanhanteForm['new']}">
 			     <button type="submit" class="btn-lg btn-primary pull-right">Cadastrar
                              </button>
 			  </c:when>

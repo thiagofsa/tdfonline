@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<spring:url value="/acompanhantes/find2" var="findUrl" />
+<spring:url value="/procedimentos/find2" var="findUrl" />
 
 	<form:form class="form-horizontal" 
-                modelAttribute="acompanhanteForm" action="${findUrl}">
+                modelAttribute="procedimentoForm" action="${findUrl}">
 
 		
 		<spring:bind path="nome">

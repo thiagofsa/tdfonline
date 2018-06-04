@@ -34,6 +34,10 @@ private static final long serialVersionUID = 1L;
 	
 	private String telefone;
 	
+	public UnidadeSaude() {
+		
+		this.id=-1;
+	}
 	public Integer getId() {
 		return id;
 	}

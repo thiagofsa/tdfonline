@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
-<!DOCTYPE html>
-<html lang="en">
+
 
 
 <body>
@@ -22,34 +21,33 @@
 		    </div>
 		</c:if>
 
-		<h1>Todos os Acompanhantes</h1>
+		<h1>Todos os Marcacaos</h1>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>#ID</th>
-					<th>Nome</th>
-					<th>Telefone</th>
+					<th>Data</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 
-			<c:forEach var="acompanhante" items="${acompanhantes}">
+			<c:forEach var="marcacao" items="${marcacaos}">
 			    <tr>
 				<td>
-					${acompanhante.id}
+					${marcacao.id}
 				</td>
-				<td>${acompanhante.nome}</td>
-				<td>${acompanhante.telefone}</td>
+				<td>${marcacao.data}</td>
+				
 				
 				
 				<td>
-				  <spring:url value="/acompanhantes/${acompanhante.id}" var="acompanhanteUrl" />
-				  <spring:url value="/acompanhantes/${acompanhante.id}/delete" var="deleteUrl" /> 
-				  <spring:url value="/acompanhantes/${acompanhante.id}/update" var="updateUrl" />
+				  <spring:url value="/marcacaos/${marcacao.id}" var="marcacaoUrl" />
+				  <spring:url value="/marcacaos/${marcacao.id}/delete" var="deleteUrl" /> 
+				  <spring:url value="/marcacaos/${marcacao.id}/update" var="updateUrl" />
 
 				  <button class="btn btn-info" 
-                                          onclick="location.href='${acompanhanteUrl}'">Detalhes</button>
+                                          onclick="location.href='${marcacaoUrl}'">Detalhes</button>
 				  <button class="btn btn-primary" 
                                           onclick="location.href='${updateUrl}'">Atualizar</button>
 				  <button class="btn btn-danger" 

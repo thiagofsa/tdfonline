@@ -80,8 +80,6 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 		}
 
-
-
 		// save or update motorista
 		// 1. @ModelAttribute bind form value
 		// 2. @Validated form validator

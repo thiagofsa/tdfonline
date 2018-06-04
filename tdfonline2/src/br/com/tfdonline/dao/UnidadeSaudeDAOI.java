@@ -18,6 +18,6 @@ public interface UnidadeSaudeDAOI {
 
 	void saveOrUpdate(UnidadeSaude unidadesaude);
 	
-	public List<UnidadeSaude> findbyName(String nome);
+	public List<UnidadeSaude> findbyDescricao(String descricao);
 	
 }

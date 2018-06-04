@@ -22,34 +22,32 @@
 		    </div>
 		</c:if>
 
-		<h1>Todos os Acompanhantes</h1>
+		<h1>Todos os Beneficios</h1>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>#ID</th>
 					<th>Nome</th>
-					<th>Telefone</th>
 					<th>Action</th>
 				</tr>
 			</thead>
 
-			<c:forEach var="acompanhante" items="${acompanhantes}">
+			<c:forEach var="beneficio" items="${beneficios}">
 			    <tr>
 				<td>
-					${acompanhante.id}
+					${beneficio.id}
 				</td>
-				<td>${acompanhante.nome}</td>
-				<td>${acompanhante.telefone}</td>
-				
+				<td>${beneficio.nome}</td>
+						
 				
 				<td>
-				  <spring:url value="/acompanhantes/${acompanhante.id}" var="acompanhanteUrl" />
-				  <spring:url value="/acompanhantes/${acompanhante.id}/delete" var="deleteUrl" /> 
-				  <spring:url value="/acompanhantes/${acompanhante.id}/update" var="updateUrl" />
+				  <spring:url value="/beneficios/${beneficio.id}" var="beneficioUrl" />
+				  <spring:url value="/beneficios/${beneficio.id}/delete" var="deleteUrl" /> 
+				  <spring:url value="/beneficios/${beneficio.id}/update" var="updateUrl" />
 
 				  <button class="btn btn-info" 
-                                          onclick="location.href='${acompanhanteUrl}'">Detalhes</button>
+                                          onclick="location.href='${beneficioUrl}'">Detalhes</button>
 				  <button class="btn btn-primary" 
                                           onclick="location.href='${updateUrl}'">Atualizar</button>
 				  <button class="btn btn-danger" 

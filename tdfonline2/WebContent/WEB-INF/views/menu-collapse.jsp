@@ -31,6 +31,41 @@
       </ul>  
     </li>
     
+    <li>
+      <a href="">Acompanhante</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/acompanhantes/add">Cadastrar Acompanhante</a></li>
+        <li><a href="${pageContext.request.contextPath}/acompanhantes/find">Pesquisar Acompanhante</a></li>
+        <li><a href="${pageContext.request.contextPath}/acompanhantes">Listar Acompanhantes</a></li>        
+      </ul>  
+    </li>
+    
+    <li>
+      <a href="">Beneficio</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/beneficios/add">Cadastrar Beneficio</a></li>
+        <li><a href="${pageContext.request.contextPath}/beneficios/find">Pesquisar Beneficio</a></li>
+        <li><a href="${pageContext.request.contextPath}/beneficios">Listar Beneficios</a></li>        
+      </ul>  
+    </li>
+    
+    <li>
+      <a href="">Procedimento</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/procedimentos/add">Cadastrar Procedimento</a></li>
+        <li><a href="${pageContext.request.contextPath}/procedimentos/find">Pesquisar Procedimento</a></li>
+        <li><a href="${pageContext.request.contextPath}/procedimentos">Listar Procedimentos</a></li>        
+      </ul>  
+    </li>
+    
+    <li>
+      <a href="">Marcacao</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/marcacaos/add">Cadastrar Marcacao</a></li>
+        <li><a href="${pageContext.request.contextPath}/marcacaos/find">Pesquisar Marcacao</a></li>
+        <li><a href="${pageContext.request.contextPath}/marcacaos">Listar Marcacaos</a></li>        
+      </ul>  
+    </li>
     
   </ul>
 </nav>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
+
 <!DOCTYPE tiles-definitions PUBLIC  
       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"  
       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">  
@@ -51,9 +52,6 @@
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
    
-   
-   
-   
     <!--  Unidade Saude page -->
    <definition name="listaunidadesaudespage" extends="base.definition">  
        <put-attribute name="title" value="Lista Unidades Saudes" />  
@@ -77,6 +75,108 @@
        <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/show.jsp" />  
    </definition>
    
+
+<!--  Acompanhante page -->
+   <definition name="listaacompanhantespage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Acompanhantes" />  
+       <put-attribute name="body" value="/WEB-INF/views/acompanhantes/lista.jsp" />  
+   </definition>
+   
+   <definition name="acompanhanteform" extends="base.definition">  
+       <put-attribute name="title" value="Acompanhante " />  
+       <put-attribute name="body" value="/WEB-INF/views/acompanhantes/acompanhanteform.jsp" />  
+   </definition>
+   
+   <definition name="findacompanhante" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Acompanhante" />  
+       <put-attribute name="body" value="/WEB-INF/views/acompanhantes/find.jsp" />  
+   </definition>
+   
+   <definition name="acompanhanteshow" extends="base.definition">  
+       <put-attribute name="title" value="Acompanhante" />  
+       <put-attribute name="body" value="/WEB-INF/views/acompanhantes/show.jsp" />  
+   </definition>
+   
+   
+   <!--  Beneficio pages -->
+   <definition name="listabeneficiospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Beneficios" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/lista.jsp" />  
+   </definition>
+   
+   <definition name="beneficioform" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/beneficioform.jsp" />  
+   </definition>
+   
+   <definition name="findbeneficio" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/find.jsp" />  
+   </definition>
+   
+   <definition name="beneficioshow" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/show.jsp" />  
+   </definition>
+   
+   
+   <!--  Procedimento pages -->
+   <definition name="listaprocedimentospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Procedimentos" />  
+       <put-attribute name="body" value="/WEB-INF/views/procedimentos/lista.jsp" />  
+   </definition>
+   
+   <definition name="procedimentoform" extends="base.definition">  
+       <put-attribute name="title" value="Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/procedimentos/procedimentoform.jsp" />  
+   </definition>
+   
+   <definition name="findprocedimento" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/procedimentos/find.jsp" />  
+   </definition>
+   
+   <definition name="procedimentoshow" extends="base.definition">  
+       <put-attribute name="title" value="Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/procedimentos/show.jsp" />  
+   </definition>
+   
+   
+   <!--  Marcacao pages -->
+   <definition name="listamarcacaospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Marcacaos" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/lista.jsp" />  
+   </definition>
+   
+   <definition name="marcacaoform" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/marcacaoform.jsp" />  
+   </definition>
+   
+   <definition name="findmarcacao" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/find.jsp" />  
+   </definition>
+   
+   <definition name="marcacaoshow" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/show.jsp" />  
+   </definition>
+   
+   <definition name="selectpacienteform" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao -> Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectpacienteform.jsp" />  
+   </definition>
+   
+   <definition name="selectunidadesaudeform" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao -> Unidade Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectunidadesaudeform.jsp" />  
+   </definition>
+   
+   <definition name="selectprocedimentoform" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao -> Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectprocedimentoform.jsp" />  
+   </definition>
    
    
    

@@ -78,11 +78,11 @@ public class UnidadeSaudeDAOImpl implements UnidadeSaudeDAOI, Serializable{
            return lista;
 		    	
  	 }
-	public List<UnidadeSaude> findbyName(String nome){
+	public List<UnidadeSaude> findbyDescricao(String descricao){
 		
 		
-		String hql = "from UnidadeSaude where nome like :keyword";
-		String keyword = nome;
+		String hql = "from UnidadeSaude where descricao like :keyword";
+		String keyword = descricao;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
 		 

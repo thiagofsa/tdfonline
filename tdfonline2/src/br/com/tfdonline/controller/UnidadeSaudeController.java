@@ -74,7 +74,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 		public String showFindUnidadeSaudeForm(@RequestParam("descricao") String descricao, Model model) {
 			System.out.println("chamando o unidadesaudes/find/descricao............"+descricao);
 			logger.debug("UnidadeSaudes.FindByName()");
-			model.addAttribute("unidadesaudes", unidadesaudeDAO.findbyName(descricao));
+			model.addAttribute("unidadesaudes", unidadesaudeDAO.findbyDescricao(descricao));
 			return "listaunidadesaudespage";
 
 		}
@@ -197,6 +197,9 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 
 			logger.debug("deleteUnidadeSaude() : {}", id);
 			System.out.println("deletando o unidadesaude ="+ id);
+			
+			redirectAttributes.addFlashAttribute("css", "success");
+			redirectAttributes.addFlashAttribute("msg", "UnidadeSaude deletada com sucesso!");
 
 			unidadesaudeDAO.deleteUnidadeSaudeByID(new Integer(id));
 			

@@ -42,7 +42,25 @@ private static final long serialVersionUID = 1L;
 	private String logradouro;
 	private String observacoes;
 	private String tiposanguineo;
-	private boolean diabetico;
+	private String diabetico;
+	
+	public Paciente () {
+		
+		
+	}
+	
+	 @ManyToMany(cascade = { 
+		        CascadeType.PERSIST, 
+		        CascadeType.MERGE
+		    })
+	 
+	 @JoinTable(name = "beneficiopaciente",
+	    		 joinColumns = { @JoinColumn(name = "idpaciente") }, 
+	    	     inverseJoinColumns = { @JoinColumn(name = "idbeneficio") }
+		    )
+	 
+	private List<Beneficio> beneficios = new ArrayList<Beneficio>();
+	
 	
 	 @ManyToMany(cascade = { 
 		        CascadeType.PERSIST, 
@@ -54,8 +72,8 @@ private static final long serialVersionUID = 1L;
 		    )
 	 
 	private List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
-	
-	
+	 
+	 
 	
 	public Integer getId() {
 		return id;
@@ -144,17 +162,25 @@ private static final long serialVersionUID = 1L;
 	public void setTiposanguineo(String tiposanguineo) {
 		this.tiposanguineo = tiposanguineo;
 	}
-	public boolean isDiabetico() {
-		return diabetico;
-	}
-	public void setDiabetico(boolean diabetico) {
-		this.diabetico = diabetico;
-	}
+	
+	
 	public List<Acompanhante> getAcompanhantes() {
 		return acompanhantes;
 	}
 	public void setAcompanhantes(List<Acompanhante> acompanhantes) {
 		this.acompanhantes = acompanhantes;
+	}
+	public List<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+	public void setBeneficios(List<Beneficio> beneficios) {
+		this.beneficios = beneficios;
+	}
+	public String getDiabetico() {
+		return diabetico;
+	}
+	public void setDiabetico(String diabetico) {
+		this.diabetico = diabetico;
 	}
 	
 	

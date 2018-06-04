@@ -20,25 +20,20 @@
 		</div>
 	</c:if>
 
-	<h1>Acompanhante - Detalhes </h1>
+	<h1>Beneficio - Detalhes </h1>
 	<br />
 
 	<div class="row">
 		<label class="col-sm-2">ID</label>
-		<div class="col-sm-10">${acompanhante.id}</div>
+		<div class="col-sm-10">${beneficio.id}</div>
 	</div>
 
 	<div class="row">
 		<label class="col-sm-2">Nome</label>
-		<div class="col-sm-10">${acompanhante.nome}</div>
+		<div class="col-sm-10">${beneficio.nome}</div>
 	</div>
 
-	<div class="row">
-		<label class="col-sm-2">Telefone</label>
-		<div class="col-sm-10">${acompanhante.telefone}</div>
-	</div>
-
-	
+		
 	
 </div>
 
