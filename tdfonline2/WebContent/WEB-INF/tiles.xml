@@ -120,6 +120,54 @@
    </definition>
    
    
+   
+   <!--  Veiculo pages -->
+   
+   <definition name="listaveiculospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Beneficios" />  
+       <put-attribute name="body" value="/WEB-INF/views/veiculos/lista.jsp" />  
+   </definition>
+   
+   <definition name="veiculoform" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/veiculos/veiculoform.jsp" />  
+   </definition>
+   
+   <definition name="findveiculo" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/veiculos/find.jsp" />  
+   </definition>
+   
+   <definition name="veiculoshow" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/veiculos/show.jsp" />  
+   </definition>
+   
+   
+   <!--  Pauta pages -->
+   
+   <definition name="listapautaspage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Beneficios" />  
+       <put-attribute name="body" value="/WEB-INF/views/pautas/lista.jsp" />  
+   </definition>
+   
+   <definition name="pautaform" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/pautas/pautaform.jsp" />  
+   </definition>
+   
+   <definition name="findpauta" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/pautas/find.jsp" />  
+   </definition>
+   
+   <definition name="pautashow" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio" />  
+       <put-attribute name="body" value="/WEB-INF/views/pautas/show.jsp" />  
+   </definition>
+   
+   
+   
    <!--  Procedimento pages -->
    <definition name="listaprocedimentospage" extends="base.definition">  
        <put-attribute name="title" value="Lista Procedimentos" />  
@@ -177,6 +225,43 @@
        <put-attribute name="title" value="Marcacao -> Procedimento" />  
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectprocedimentoform.jsp" />  
    </definition>
+   
+      <!--  Distribuicao pages -->
+   <definition name="listadistribuicaospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Distribuicaos" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/lista.jsp" />  
+   </definition>
+   
+   <definition name="distribuicaoform" extends="base.definition">  
+       <put-attribute name="title" value="Distribuicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/distribuicaoform.jsp" />  
+   </definition>
+   
+   <definition name="finddistribuicao" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Distribuicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/find.jsp" />  
+   </definition>
+   
+   <definition name="distribuicaoshow" extends="base.definition">  
+       <put-attribute name="title" value="Distribuicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/show.jsp" />  
+   </definition>
+   
+   <definition name="selectmotoristaform" extends="base.definition">  
+       <put-attribute name="title" value="Distribuicao -> Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectmotoristaform.jsp" />  
+   </definition>
+   
+   <definition name="selectveiculoform" extends="base.definition">  
+       <put-attribute name="title" value="Distribuicao -> Unidade Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectveiculoform.jsp" />  
+   </definition>
+   
+   <definition name="selectpautaform" extends="base.definition">  
+       <put-attribute name="title" value="Distribuicao -> Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectpautaform.jsp" />  
+   </definition>
+   
    
    
    

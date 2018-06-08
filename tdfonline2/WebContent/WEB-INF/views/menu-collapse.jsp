@@ -67,6 +67,35 @@
       </ul>  
     </li>
     
+    <li>
+      <a href="">Distribuicao</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/distribuicaos/add">Cadastrar Distribuicao</a></li>
+        <li><a href="${pageContext.request.contextPath}/distribuicaos/find">Pesquisar Distribuicao</a></li>
+        <li><a href="${pageContext.request.contextPath}/distribuicaos">Listar Distribuicaos</a></li>        
+      </ul>  
+    </li>
+    
+    <li>
+      <a href="">Veiculo</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/veiculos/add">Cadastrar Veiculo</a></li>
+        <li><a href="${pageContext.request.contextPath}/veiculos/find">Pesquisar Veiculo</a></li>
+        <li><a href="${pageContext.request.contextPath}/veiculos">Listar Veiculos</a></li>        
+      </ul>  
+    </li>
+    
+    
+    
+     <li>
+      <a href="">Pauta</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/pautas/add">Cadastrar Pauta</a></li>
+        <li><a href="${pageContext.request.contextPath}/pautas/find">Pesquisar Pauta</a></li>
+        <li><a href="${pageContext.request.contextPath}/pautas">Listar Pautas</a></li>        
+      </ul>  
+    </li>
+    
   </ul>
 </nav>
 </div>
