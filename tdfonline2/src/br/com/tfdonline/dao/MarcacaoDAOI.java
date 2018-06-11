@@ -20,6 +20,8 @@ public interface MarcacaoDAOI {
 
 	void saveOrUpdate(Marcacao marcacao);
 	
+	public List<Marcacao> findbyNomePaciente(String nomepaciente);
+	
 	public List<Marcacao> findbyData(Date data);
 
 	List<Marcacao> findbyData(Date datainicial, Date datafinal);

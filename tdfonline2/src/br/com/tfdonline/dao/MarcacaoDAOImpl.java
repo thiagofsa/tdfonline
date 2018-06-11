@@ -101,7 +101,7 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 	@Override
 	public List<Marcacao> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial) {
 	
-	return findbyData(datainicial, new Date());
+	return findbyData(datainicial, datainicial);
 	
 	}	
 	@Override
@@ -113,6 +113,20 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("start", datainicial);
 		query.setParameter("end", datafinal);
+		 
+		List<Marcacao> lista = query.list();
+		
+		return lista;
+	}
+
+
+	@Override
+	public List<Marcacao> findbyNomePaciente(String nomepaciente) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Marcacao m WHERE m.paciente.nome like :keyword";
+		String keyword = nomepaciente;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", "%" + keyword + "%");
 		 
 		List<Marcacao> lista = query.list();
 		

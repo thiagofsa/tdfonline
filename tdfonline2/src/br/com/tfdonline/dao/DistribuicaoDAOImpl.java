@@ -111,7 +111,7 @@ public class DistribuicaoDAOImpl implements DistribuicaoDAOI, Serializable{
 	@Override
 	public List<Distribuicao> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial) {
 	
-	return findbyData(datainicial, new Date());
+	return findbyData(datainicial, datainicial);
 	
 	}	
 	@Override

@@ -96,6 +96,17 @@
       </ul>  
     </li>
     
+    <li>
+      <a href="">Encaminhamento</a>
+      <ul class="sub">
+        <li><a href="${pageContext.request.contextPath}/encaminhamentos/add">Cadastrar Encaminhamento</a></li>
+        <li><a href="${pageContext.request.contextPath}/encaminhamentos/find">Pesquisar Encaminhamento</a></li>
+        <li><a href="${pageContext.request.contextPath}/encaminhamentos">Listar Encaminhamentos</a></li>        
+      </ul>  
+    </li>
+    
+    
+    
   </ul>
 </nav>
 </div>

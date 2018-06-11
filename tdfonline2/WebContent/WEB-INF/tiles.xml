@@ -226,6 +226,44 @@
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectprocedimentoform.jsp" />  
    </definition>
    
+   
+   
+     <!--  Encaminhamento pages -->
+   
+   <definition name="listaencaminhamentospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Encaminhamentos" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/lista.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentoform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentoform.jsp" />  
+   </definition>
+   
+   <definition name="findencaminhamento" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/find.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentoshow" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/show.jsp" />  
+   </definition>
+   
+   <definition name="selectdistribuicaoform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento -> Distribuicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/selectdistribuicaoform.jsp" />  
+   </definition>
+   
+     
+   <definition name="selectmarcacaoform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento -> Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/selectmarcacaoform.jsp" />  
+   </definition>
+   
+   
+   
+   
       <!--  Distribuicao pages -->
    <definition name="listadistribuicaospage" extends="base.definition">  
        <put-attribute name="title" value="Lista Distribuicaos" />  
