@@ -20,4 +20,6 @@ public interface AcompanhanteDAOI {
 	
 	public List<Acompanhante> findbyName(String nome);
 	
+	public List<Acompanhante> findbyPacienteID(Integer pacienteid);
+	
 }

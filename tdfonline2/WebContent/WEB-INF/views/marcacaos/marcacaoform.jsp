@@ -1,4 +1,4 @@
-<%@ page session="false"%>
+	<%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -30,6 +30,11 @@
 	<spring:url value="/selectprocedimento/marcacaos/" var="selectprocedimentoUrl" />
 					  <button class="btn btn-info" 
                                           onclick="location.href='${selectprocedimentoUrl}'">Selecionar Procedimento</button>                                          
+
+	<spring:url value="/selectacompanhante/marcacaos/" var="selectacompanhanteUrl" />
+					  <button class="btn btn-info" 
+                                          onclick="location.href='${selectacompanhanteUrl}'">Selecionar Acompanhante(s)</button>                                          
+                                          
 
 	<spring:url value="/marcacaos" var="marcacaoActionUrl" />
 
@@ -91,6 +96,36 @@
     		</div>
 		  </div>
 		</spring:bind>
+
+
+<c:if test="${not empty acompanhantespaciente}">
+
+	<table>
+  
+  <tr>
+  <td> ID Acompanhante</td> <td> Nome</td>
+  </tr>
+   
+  <c:forEach items="${acompanhantespaciente}" var="acompanhante" varStatus="status">
+  <tr>
+     
+        <td>
+    
+        <td><c:out value="${acompanhante.id}"/> </td>
+        <td><c:out value="${acompanhante.nome}"/> </td>
+        
+    
+        </td>
+     
+     </tr>
+   </c:forEach>
+
+
+  
+</table> 
+</c:if>
+	
+	<Br>
 
 				
 				

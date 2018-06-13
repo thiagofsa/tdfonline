@@ -104,5 +104,11 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 		}
 	}
 
+
+	@Override
+	public List<Acompanhante> findbyPacienteID(Integer pacienteid) {
+		return null;
+	}
+
 	
 }

@@ -5,8 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-<html lang="en">
-
 
 <div class="container">
 
@@ -82,5 +80,3 @@
 </div>
 
 
-</body>
-</html>

@@ -46,8 +46,6 @@
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
    </definition>
-   
-   
 	   
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
@@ -224,6 +222,11 @@
    <definition name="selectprocedimentoform" extends="base.definition">  
        <put-attribute name="title" value="Marcacao -> Procedimento" />  
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectprocedimentoform.jsp" />  
+   </definition>
+   
+    <definition name="selectacompanhanteform" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao -> Acompanhante" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectacompanhanteform.jsp" />  
    </definition>
    
    

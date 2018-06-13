@@ -10,6 +10,7 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -65,7 +66,7 @@ private static final long serialVersionUID = 1L;
 	 @ManyToMany(cascade = { 
 		        CascadeType.PERSIST, 
 		        CascadeType.MERGE
-		    })
+		    }, fetch = FetchType.EAGER)
 	 @JoinTable(name = "acompanhantepaciente",
 	    		 joinColumns = { @JoinColumn(name = "idpaciente") }, 
 	    	     inverseJoinColumns = { @JoinColumn(name = "idacompanhante") }

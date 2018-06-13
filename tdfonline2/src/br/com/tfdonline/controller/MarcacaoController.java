@@ -4,6 +4,7 @@ package br.com.tfdonline.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,10 +28,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
 import br.com.tfdonline.dao.PacienteDAOI;
 import br.com.tfdonline.dao.ProcedimentoDAOI;
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
+import br.com.tfdonline.modelo.Acompanhante;
+import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.modelo.Procedimento;
@@ -54,6 +58,9 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 
 		@Autowired
 		private ProcedimentoDAOI procedimentoDAO;
+		
+		@Autowired
+		private AcompanhanteDAOI acompanhanteDAO;
 	
 		
 		@InitBinder
@@ -253,8 +260,75 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 		
 		}
 		
+		//populando um grid de Acompanhantes para serem escolhidos
 		
+		@RequestMapping(value = {"/selectacompanhante/marcacaos/" })
+		public String selectAcompanhante(@ModelAttribute("marcacaoForm")  Marcacao marcacao,
+				BindingResult result, Model model, 
+				final RedirectAttributes redirectAttributes, HttpServletRequest request){
+		 	
+			//primeira vez da exibicao...vamos popular o form
+			Marcacao marcacaoSession = (Marcacao) request.getSession().getAttribute("marcacaoSession");
+			
+			System.out.println("Paciente selecionado na Marcacao-->"+ marcacaoSession.getPaciente().getNome());
+			model.addAttribute("acompanhantespaciente",  marcacaoSession.getPaciente().getAcompanhantes());
+			
+			//colocando os dados da marcacao na sessao..			
+				
+			request.getSession().setAttribute("marcacaoSession", marcacaoSession);
+				
+			
+		 	return "selectacompanhanteform";
+		 	
+	    }
+		
+		
+		@RequestMapping(value = {"/selectacompanhante/marcacao2/" })
+		public String selectAcompanhante2(@ModelAttribute("marcacaoForm")  Marcacao marcacao, Model model,HttpServletRequest request ){
+		 	
+			System.out.println("chamando o marcacaos/selectacompanhante2/............");
+			
+			//Processar o checkbox itens marcados....
+			
+			Marcacao marcacaoSession = (Marcacao) request.getSession().getAttribute("marcacaoSession");
+			System.out.println("Paciente selecionado..."+ marcacaoSession.getPaciente().getNome());
+			
+			//array de IDs passados pelos checkboxes...
+			List<String> acompanhantes= marcacao.getAcompanhantespacientesmarcacaostring();
+			
+			System.out.println("Acompanhantes selecionados..."+ acompanhantes.size());
+			
+			String acomp =null;
+			
+			//convertendo o array de IDs numa lista de Acompanhantes
+			List<Acompanhante> acompanhantespacientemarcacao =  new ArrayList<Acompanhante>();
 
+			for (int i=0; i< acompanhantes.size(); i++) {
+				acomp = acompanhantes.get(i);
+				System.out.println("id acomp="+acomp);
+				acompanhantespacientemarcacao.add(acompanhanteDAO.findByID(new Integer (acomp)));
+				System.out.println(acompanhantespacientemarcacao.get(i).getNome());
+				
+			}
+			//colocando os Acompanhantes no objeto marcacao do modelo e da sessao.
+			marcacao.setAcompanhantespacientemarcacao(acompanhantespacientemarcacao);
+			marcacaoSession.setAcompanhantespacientemarcacao(acompanhantespacientemarcacao);
+			
+			System.out.println("Acompanhantes inseridos na sessao="+ marcacaoSession.getAcompanhantespacientemarcacao().size());
+			
+			model.addAttribute("marcacaoForm", marcacaoSession);
+			request.getSession().setAttribute("marcacaoSession", marcacaoSession);
+			model.addAttribute("acompanhantespaciente", acompanhantespacientemarcacao);
+			
+		 	return "marcacaoform";
+		 	
+		 	 
+		 	
+	    }
+	    
+		
+		
+		
 		
 		@RequestMapping(value = "/marcacaos", method = RequestMethod.POST)
 		//public String saveOrUpdateMarcacao(@ModelAttribute("marcacaoForm") @Validated Marcacao marcacao,
@@ -263,7 +337,6 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 				final RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
 			
-			//marcacao = request.getSession().getAttribute("marcacaoSession");
 			
 			System.out.println("Em saveOrUpdate, salvando ou atualizando marcacao.............");
 			
@@ -274,6 +347,8 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			System.out.println("ID de Paciente passada pelo form="+ marcacao.getPaciente().getId());
 			System.out.println("ID de UnidadeSaude passada pelo form="+ marcacao.getUnidadesaude().getId());
 			System.out.println("ID de Procedimento passada pelo form="+ marcacao.getProcedimento().getId());
+			System.out.println("Num de Acompanhante passada pelo form="+ marcacaoSession.getAcompanhantespacientemarcacao().size());
+			marcacao.setAcompanhantespacientemarcacao(marcacaoSession.getAcompanhantespacientemarcacao());
 			
 			
 			

@@ -1,7 +1,9 @@
 package br.com.tfdonline.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,10 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,7 +38,12 @@ private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "dataviagem")
 	private Date data;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date datamarcacao;
 	
 
 	@OneToOne
@@ -47,6 +57,21 @@ private static final long serialVersionUID = 1L;
 	@OneToOne
     @JoinColumn(name = "idunidadesaude")
 	UnidadeSaude unidadesaude;
+	
+	 @ManyToMany(cascade = { 
+			 CascadeType.PERSIST,
+				CascadeType.MERGE 
+		    })
+	 @JoinTable(name = "acompanhantepacientemarcacao",
+	    		 joinColumns = { @JoinColumn(name = "idmarcacao") }, 
+	    	     inverseJoinColumns = { @JoinColumn(name = "idacompanhante") }
+		    )
+	 private List<Acompanhante> acompanhantespacientemarcacao = new ArrayList<Acompanhante>();
+	 
+	@Transient
+	 private List<String> acompanhantespacientesmarcacaostring = new ArrayList<String>();
+	 
+	 
 	
 	public Marcacao() {
 		this.setId(-1);
@@ -126,6 +151,30 @@ private static final long serialVersionUID = 1L;
 			return true;
 		else
 			return false;
+	}
+
+	public List<Acompanhante> getAcompanhantespacientemarcacao() {
+		return acompanhantespacientemarcacao;
+	}
+
+	public void setAcompanhantespacientemarcacao(List<Acompanhante> acompanhantespacientemarcacao) {
+		this.acompanhantespacientemarcacao = acompanhantespacientemarcacao;
+	}
+
+	public List<String> getAcompanhantespacientesmarcacaostring() {
+		return acompanhantespacientesmarcacaostring;
+	}
+
+	public void setAcompanhantespacientesmarcacaostring(List<String> acompanhantespacientesmarcacaostring) {
+		this.acompanhantespacientesmarcacaostring = acompanhantespacientesmarcacaostring;
+	}
+
+	public Date getDatamarcacao() {
+		return datamarcacao;
+	}
+
+	public void setDatamarcacao(Date datamarcacao) {
+		this.datamarcacao = datamarcacao;
 	}
 	
 

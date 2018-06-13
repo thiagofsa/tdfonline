@@ -103,6 +103,9 @@ public class PacienteDAOImpl implements PacienteDAOI, Serializable{
 			System.out.println("estou no DAO, tentanto ATUALIZAR a paciente...");
 		}
 	}
+	
+	
+	
 
 	
 }
