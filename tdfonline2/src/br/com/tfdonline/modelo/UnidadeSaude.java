@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,7 +24,9 @@ private static final long serialVersionUID = 1L;
 	
 	private String descricao;
 	
-	private Integer idcidade;
+	@OneToOne
+    @JoinColumn(name = "idcidade")
+	Cidade cidade;
 
 	private String logradouro;
 	
@@ -54,13 +58,7 @@ private static final long serialVersionUID = 1L;
 		this.descricao = descricao;
 	}
 
-	public Integer getIdcidade() {
-		return idcidade;
-	}
-
-	public void setIdcidade(Integer idcidade) {
-		this.idcidade = idcidade;
-	}
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -133,6 +131,12 @@ private static final long serialVersionUID = 1L;
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public Cidade getCidade() {
+		return cidade;
+	}
+	public void setCidade(Cidade cidade) {
+		this.cidade = cidade;
 	}		
 	
 

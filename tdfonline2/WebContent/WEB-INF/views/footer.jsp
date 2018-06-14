@@ -1,6 +1,12 @@
-<div
-  style="background: #E0E0E0; text-align: center; padding: 5px; margin-top: 10px;">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<link rel="stylesheet" href= "<c:url value='/resources/css/footer.css'/>" >
+
+
+<footer class="footer" >  
     
-  <p>Copyright &copy; F&S Dev</p>
+  <p>Copyright &copy; [nomedaempresa]</p>
     
-</div>
+</footer>
+

@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
+import br.com.tfdonline.modelo.Cidade;
 import br.com.tfdonline.modelo.UnidadeSaude;
 
 	@Controller
@@ -179,7 +180,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			unidadesaude.setNumero("xx");
 			unidadesaude.setBairro("bairro");
 			unidadesaude.setComplemento("complemento");
-			unidadesaude.setIdcidade(-1);
+			unidadesaude.setCidade(new Cidade());
 			
 			model.addAttribute("unidadesaudeForm", unidadesaude);
 

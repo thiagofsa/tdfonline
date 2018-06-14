@@ -46,6 +46,11 @@
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
    </definition>
+   
+    <definition name="motoristacadastro" extends="base.definition">  
+       <put-attribute name="title" value="Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristacadastro.jsp" />  
+   </definition>
 	   
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
@@ -197,6 +202,11 @@
    <definition name="marcacaoform" extends="base.definition">  
        <put-attribute name="title" value="Marcacao" />  
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/marcacaoform.jsp" />  
+   </definition>
+   
+   <definition name="marcacaocadastro" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/marcacaocadastro.jsp" />  
    </definition>
    
    <definition name="findmarcacao" extends="base.definition">  

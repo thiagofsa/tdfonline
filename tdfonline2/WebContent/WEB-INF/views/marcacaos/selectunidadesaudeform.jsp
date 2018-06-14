@@ -62,6 +62,7 @@
 			<thead>
 				<tr>
 					<th>#ID</th>
+					<th>Cidade</th>
 					<th>Descricao</th>
 					<th>Action</th>
 				</tr>
@@ -72,6 +73,7 @@
 				<td>
 					${unidadesaude.id}
 				</td>
+				<td>${unidadesaude.cidade.descricao}</td>
 				<td>${unidadesaude.descricao}</td>
 				
 				<td>

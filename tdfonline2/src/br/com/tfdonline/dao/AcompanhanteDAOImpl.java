@@ -1,6 +1,7 @@
 package br.com.tfdonline.dao;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -106,8 +107,33 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 
 
 	@Override
-	public List<Acompanhante> findbyPacienteID(Integer pacienteid) {
-		return null;
+	public List<Acompanhante> findbyMarcacaoID(Integer marcacaoid) {
+		// TODO Auto-generated method stub
+		
+		
+		System.out.println("Entrando no AcompanhanteDAO.findbyMarcacaoID()");
+		System.out.println("Valor do ID Marcacao="+ marcacaoid );
+		
+		
+		String squery = "select apm.idacompanhante from Acompanhantepacientemarcacao apm, Marcacao m where m.id=apm.idmarcacao and m.id=:marcacaoid";
+		List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("marcacaoid",marcacaoid);
+		
+		List result = query.list();
+		Acompanhante acompanhante ;
+		for (int i=0; i< result.size(); i++) {
+			
+			
+			System.out.println("Linha"+i+ "=" +result.get(i));
+			acompanhante = findByID((Integer)result.get(i));
+			acompanhantes.add(acompanhante);
+			
+		}
+		
+		
+		return acompanhantes;
 	}
 
 	

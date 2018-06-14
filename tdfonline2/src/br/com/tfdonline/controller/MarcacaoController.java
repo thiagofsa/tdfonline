@@ -76,7 +76,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 		public String showAllMarcacaos(Model model) {
 
 			logger.debug("showAllMarcacaos()");
-			model.addAttribute("marcacaos", marcacaoDAO.findAll());
+			model.addAttribute("marcacaos", marcacaoDAO.findLast());
 			return "listamarcacaospage";
 
 		}
@@ -88,17 +88,45 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			 	
 				
 				Marcacao marcacao = new Marcacao();
-				marcacao.setData(new Date());
+				marcacao.setDataviagem(new Date());
+				marcacao.setPaciente(new Paciente());
+				marcacao.setProcedimento(new Procedimento());
+				marcacao.setUnidadesaude(new UnidadeSaude());
+				
 			 	model.addAttribute("marcacaoForm", marcacao);
+			 	
 			 	return "findmarcacao";
 		    }
 		 
 		// find2 page
 		@RequestMapping(value = "/marcacaos/find2")
-		public String showFindMarcacaoForm(@RequestParam("data") Date data, Model model) {
-			System.out.println("chamando o marcacaos/find/descricao............"+data);
-			logger.debug("Marcacaos.FindByData()");
-			model.addAttribute("marcacaos", marcacaoDAO.findbyData(data));
+		public String showFindMarcacaoForm(@RequestParam("nome") String nome, @RequestParam("datafim") Date datafim, @RequestParam("dataini") Date dataini, Model model) {
+			
+			
+			List<Marcacao> marcacaoLista= new ArrayList<Marcacao>();
+					
+			System.out.println("chamando o marcacaos/find/............");
+			System.out.println("Nome="+nome);
+			System.out.println("dataini="+dataini);
+			System.out.println("datafim="+datafim);
+				
+				if ((dataini!=null) && (datafim!=null)) {
+				
+					//busca com datas e nome
+					if (nome.trim().length()>0) {
+						marcacaoLista= marcacaoDAO.findbyNomeData(dataini, datafim, nome);
+					
+					
+					} else {
+					//apenas as datas	
+						marcacaoLista= marcacaoDAO.findbyData(dataini, datafim);
+						
+					}
+				
+				}
+			
+			model.addAttribute("marcacaos", marcacaoLista);
+			
 			return "listamarcacaospage";
 
 		}
@@ -134,6 +162,8 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			
 			model.addAttribute("procedimento", procedimento);	
 			
+
+			
 		 	return "selectprocedimentoform";
 		 	
 	    }
@@ -147,6 +177,8 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			marcacao.setProcedimento(procedimento);
 			request.getSession().setAttribute("marcacaoSession", marcacao);
 			model.addAttribute("marcacaoForm", marcacao);
+			
+			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
 			
 			return "marcacaoform";
 			
@@ -199,6 +231,8 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			marcacao.setUnidadesaude(unidadesaude);
 			request.getSession().setAttribute("marcacaoSession", marcacao);
 			model.addAttribute("marcacaoForm", marcacao);
+			
+			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
 			
 			return "marcacaoform";
 			
@@ -255,6 +289,8 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			request.getSession().setAttribute("marcacaoSession", marcacao);
 			model.addAttribute("marcacaoForm", marcacao);
 			
+			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
+			
 			return "marcacaoform";
 			
 		
@@ -271,7 +307,10 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			Marcacao marcacaoSession = (Marcacao) request.getSession().getAttribute("marcacaoSession");
 			
 			System.out.println("Paciente selecionado na Marcacao-->"+ marcacaoSession.getPaciente().getNome());
+			
 			model.addAttribute("acompanhantespaciente",  marcacaoSession.getPaciente().getAcompanhantes());
+			//antes...
+			//model.addAttribute("acompanhantespaciente",  marcacaoSession.getAcompanhantespacientemarcacao());
 			
 			//colocando os dados da marcacao na sessao..			
 				
@@ -384,7 +423,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 
 		}
 
-		// show update form , chamado pela listagem, para preencher o form com o id passado e devolvero form pra edicao para o marcacaoformpage
+		// show update form , chamado pela listagem, para preencher o form com o id passado e devolver o form pra edicao para o marcacaoformpage
 		@RequestMapping(value = "/marcacaos/{id}/update")
 		public String showUpdateMarcacaoForm(@PathVariable("id") int id, Model model,HttpServletRequest request) {
 			
@@ -401,8 +440,10 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 				System.out.println("Marcacao nao localizado");
 			
 			
+			marcacao.setAcompanhantespacientemarcacao(acompanhanteDAO.findbyMarcacaoID(id));
+			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
 			model.addAttribute("marcacaoForm", marcacao);
-			
+					
 			request.getSession().setAttribute("marcacaoSession", marcacao);
 						
 			return "marcacaoform";
@@ -435,7 +476,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 						// set default value
 			Marcacao marcacao = new Marcacao();
 			marcacao.setId(-1);
-			marcacao.setData(new Date());
+			marcacao.setDataviagem(new Date());
 			
 			marcacao.setPaciente(new Paciente());
 			marcacao.setUnidadesaude(new UnidadeSaude());
@@ -447,7 +488,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 
 			
 
-			return "marcacaoform";
+			return "marcacaocadastro";
 
 		}
 

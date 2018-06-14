@@ -2,15 +2,24 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="pt-br">
 
-<body>
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+    <link href="../resources/css/bootstrap.css"  rel="stylesheet" >
+    <link href="../resources/css/fontawesome-all.min.css"  rel="stylesheet" > 
+    
+  </head> 
+ 
+  <body>
 
-	<div class="container">
+<div class="container">
 
 		<c:if test="${not empty msg}">
 		    <div class="alert alert-${css} alert-dismissible" role="alert">
@@ -22,12 +31,14 @@
 		    </div>
 		</c:if>
 
-		<h1>Todos os motoristas</h1>
+		<div   class="text-center">
+		Relação dos Motoristas
+		</div>
 
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#ID</th>
+					<th>ID</th>
 					<th>Nome</th>
 					<th>Email</th>
 					<th>Endereco</th>
@@ -59,12 +70,13 @@
 			    </tr>
 			</c:forEach>
 		</table>
-
+		
+		<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/motoristas/add">Novo</a>
 	</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-</body>
-</html>
+	
+	
+	<script src="../resources/js/jquery.min.js"  type="text/javascript"></script>
+	<script src="../resources/js/popper.min.js"  type="text/javascript"></script>
+	<script src="../resources/js/bootstrap.js"  type="text/javascript"></script>
+	</body>
+	</html>

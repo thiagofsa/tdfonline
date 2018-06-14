@@ -1,4 +1,4 @@
-	<%@ page session="false"%>
+<%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -6,6 +6,19 @@
 
 <!DOCTYPE html>
 
+<html lang="pt-br">
+
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+   <link href="../../resources/css/bootstrap.css"  rel="stylesheet" >
+    <link href="../../resources/css/fontawesome-all.min.css"  rel="stylesheet" > 
+   
+  </head> 
+
+<body>
 
 <div class="container">
 
@@ -85,13 +98,13 @@
 		
 		<form:hidden path="procedimento.id" />
 		
-		<spring:bind path="data">
+		<spring:bind path="dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			
 			 <div class="control-group">
-        		<form:label cssClass="control-label" path="data">Data:</form:label>
+        		<form:label cssClass="control-label" path="dataviagem">Data:</form:label>
         		<div class="controls">
-            	<form:input path="data" class="date" />
+            	<form:input path="dataviagem" class="date" />
         		</div>
     		</div>
 		  </div>
@@ -148,5 +161,8 @@
 </div>
 
 
-</body>
-</html>
+	<script src="../../resources/js/jquery.min.js"  type="text/javascript"></script>
+	<script src="../../resources/js/popper.min.js"  type="text/javascript"></script>
+	<script src="../../resources/js/bootstrap.js"  type="text/javascript"></script>
+	</body>
+	</html>

@@ -59,6 +59,8 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 		}
 		
+		
+		
 				
 		@RequestMapping(value = {"/motoristas/find" })
 		    public String findMotorista(Model model) {
@@ -179,7 +181,7 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 			populateDefaultModel(model);
 
-			return "motoristaform";
+			return "motoristacadastro";
 
 		}
 

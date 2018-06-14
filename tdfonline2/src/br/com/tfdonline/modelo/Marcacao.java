@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,14 +33,17 @@ private static final long serialVersionUID = 1L;
 	@Column(name="id")
 	private Integer id;
 	
-	private Integer status;
-	private String hora;
+	
+	private String horaprocedimento;
+	
 	private String localacolhimento;
+	
+	private String observacao;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "dataviagem")
-	private Date data;
+	private Date dataviagem;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -60,7 +64,7 @@ private static final long serialVersionUID = 1L;
 	
 	 @ManyToMany(cascade = { 
 			 CascadeType.PERSIST,
-				CascadeType.MERGE 
+				CascadeType.MERGE,  
 		    })
 	 @JoinTable(name = "acompanhantepacientemarcacao",
 	    		 joinColumns = { @JoinColumn(name = "idmarcacao") }, 
@@ -74,7 +78,7 @@ private static final long serialVersionUID = 1L;
 	 
 	
 	public Marcacao() {
-		this.setId(-1);
+		
 	}
 
 	public Integer getId() {
@@ -86,13 +90,7 @@ private static final long serialVersionUID = 1L;
 	}
 
 	
-	public String getHora() {
-		return hora;
-	}
-
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
+	
 
 	public String getLocalacolhimento() {
 		return localacolhimento;
@@ -102,14 +100,7 @@ private static final long serialVersionUID = 1L;
 		this.localacolhimento = localacolhimento;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
+	
 	public UnidadeSaude getUnidadesaude() {
 		return unidadesaude;
 	}
@@ -138,13 +129,7 @@ private static final long serialVersionUID = 1L;
 		return serialVersionUID;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 	
 	public boolean isNew() {
 		if ((id==null)|| (id<0))
@@ -175,6 +160,30 @@ private static final long serialVersionUID = 1L;
 
 	public void setDatamarcacao(Date datamarcacao) {
 		this.datamarcacao = datamarcacao;
+	}
+
+	public String getHoraprocedimento() {
+		return horaprocedimento;
+	}
+
+	public void setHoraprocedimento(String horaprocedimento) {
+		this.horaprocedimento = horaprocedimento;
+	}
+
+	public Date getDataviagem() {
+		return dataviagem;
+	}
+
+	public void setDataviagem(Date dataviagem) {
+		this.dataviagem = dataviagem;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 	
 

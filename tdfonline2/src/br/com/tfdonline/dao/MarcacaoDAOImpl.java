@@ -76,7 +76,19 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		// TODO Auto-generated method stub
 		 
 		   Query query  = sessionFactory.getCurrentSession().createQuery("from Marcacao");
-           List<Marcacao> lista = (List<Marcacao>) query.list(); 
+		   List<Marcacao> lista = (List<Marcacao>) query.list(); 
+           System.out.println("-------->>  Marcacaos encontrados ="+ lista.size());
+           return lista;
+		    	
+ 	 }
+	
+	@Override
+	public List<Marcacao> findLast() {
+		// TODO Auto-generated method stub
+		 
+		   Query query  = sessionFactory.getCurrentSession().createQuery("from Marcacao m ORDER BY m.id DESC");
+		   query.setMaxResults(15);
+		   List<Marcacao> lista = (List<Marcacao>) query.list(); 
            System.out.println("-------->>  Marcacaos encontrados ="+ lista.size());
            return lista;
 		    	
@@ -108,7 +120,7 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 	public List<Marcacao> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial, @DateTimeFormat(pattern = "yyyy-MM-dd") Date datafinal) {
 
 				
-		String hql = "FROM Marcacao m WHERE m.data BETWEEN :start AND :end";
+		String hql = "FROM Marcacao m WHERE m.dataviagem BETWEEN :start AND :end";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("start", datainicial);
@@ -120,6 +132,23 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 	}
 
 
+	
+	public List<Marcacao> findbyNomeData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial, @DateTimeFormat(pattern = "yyyy-MM-dd") Date datafinal, String nome) {
+
+				
+		String hql = "FROM Marcacao m WHERE m.dataviagem BETWEEN :start AND :end AND m.paciente.nome like:keynome" ;
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keynome", "%" + nome + "%");
+		query.setParameter("start", datainicial);
+		query.setParameter("end", datafinal);
+		 
+		List<Marcacao> lista = query.list();
+		
+		return lista;
+	}
+	
 	@Override
 	public List<Marcacao> findbyNomePaciente(String nomepaciente) {
 		// TODO Auto-generated method stub

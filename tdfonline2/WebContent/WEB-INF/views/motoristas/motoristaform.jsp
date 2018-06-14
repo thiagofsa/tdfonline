@@ -6,18 +6,23 @@
 
 <!DOCTYPE html>
 
+<html lang="pt-br">
+
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+   <link href="../../resources/css/bootstrap.css"  rel="stylesheet" >
+    <link href="../../resources/css/fontawesome-all.min.css"  rel="stylesheet" > 
+   
+  </head> 
+ 
+  <body>
+
 <div class="container">
 
-	<c:choose>
-		<c:when test="${motoristaForm['new']}">
-			<h1>Cadastrar Motorista</h1>
-		</c:when>
-		<c:otherwise>
-			<h1>Atualizar Motorista</h1>
-		</c:otherwise>
-	</c:choose>
-	<br />
-
+	
 	<spring:url value="/motoristas" var="motoristaActionUrl" />
 
 	<form:form class="form-horizontal" method="post" 
@@ -63,20 +68,28 @@
 		
 		<div class="form-group">
 		  <div class="col-sm-offset-2 col-sm-10">
+			
 			<c:choose>
 			  <c:when test="${motoristaForm['new']}">
-			     <button type="submit" class="btn-lg btn-primary pull-right">Cadastrar
-                             </button>
+			     <button type="submit" class="btn-lg btn-primary pull-right">Cadastrar</button>                             
 			  </c:when>
+			  
 			  <c:otherwise>
-			     <button type="submit" class="btn-lg btn-primary pull-right">Atualizar
-                             </button>
+			     <button type="submit" class="btn-lg btn-primary pull-right">Atualizar</button>                     
 			  </c:otherwise>
+			  
 			</c:choose>
+			
 		  </div>
+		  
 		</div>
+		
 	</form:form>
 
 </div>
 
-
+	<script src="../../resources/js/jquery.min.js"  type="text/javascript"></script>
+	<script src="../../resources/js/popper.min.js"  type="text/javascript"></script>
+	<script src="../../resources/js/bootstrap.js"  type="text/javascript"></script>
+	</body>
+	</html>

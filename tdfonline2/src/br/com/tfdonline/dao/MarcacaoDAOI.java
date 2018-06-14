@@ -3,6 +3,8 @@ package br.com.tfdonline.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Motorista;
 
@@ -23,7 +25,11 @@ public interface MarcacaoDAOI {
 	public List<Marcacao> findbyNomePaciente(String nomepaciente);
 	
 	public List<Marcacao> findbyData(Date data);
+	
+	public List<Marcacao> findLast();
 
 	List<Marcacao> findbyData(Date datainicial, Date datafinal);
+	
+	public List<Marcacao> findbyNomeData(Date datainicial,  Date datafinal, String nome) ;
 	
 }
