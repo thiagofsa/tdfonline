@@ -1,0 +1,22 @@
+header{
+	text-align: center;
+}
+	
+	
+header p{
+	display: inline-block;
+	font-size: 1.75em;	
+}
+
+header img{
+	position: absolute;
+	right: 2px; 
+	margin: 0.25em;	
+}
+
+@media (max-width: 766px) {
+	
+	header{
+		display: none;	
+	}
+}
