@@ -16,7 +16,7 @@
 
 		<c:if test="${not empty msg}">
 		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" 
+			<button type="button" class="close" dataviagem-dismiss="alert" 
                                 aria-label="Close">
 				<span aria-hidden="true">×</span>
 			</button>
@@ -29,13 +29,13 @@
 	<form:form class="form-horizontal" 
                 modelAttribute="marcacao" action="${selectmarcacaoUrl}">
 		
-		<spring:bind path="data">
+		<spring:bind path="dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Data Marcacao </label>
 			<div class="col-sm-10">
-				<form:input path="data" type="text" class="form-control" 
-                                id="data" placeholder="Data" />
-				<form:errors path="data" class="control-label" />
+				<form:input path="dataviagem" type="text" class="form-control" 
+                                id="dataviagem" placeholder="Data" />
+				<form:errors path="dataviagem" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -75,7 +75,7 @@
 					${marcacao.id}
 				</td>
 				<td>
-					${marcacao.data}
+					${marcacao.dataviagem}
 				</td>
 				<td>${marcacao.paciente.nome}</td>
 				

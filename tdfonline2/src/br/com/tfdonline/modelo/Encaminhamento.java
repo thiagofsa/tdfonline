@@ -29,9 +29,15 @@ private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataviagem;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
-	private int vagas;
+	private Integer vagas;
+	
+	private Integer embarcado;
 	
 	@OneToOne
     @JoinColumn(name = "iddistribuicao")
@@ -49,14 +55,7 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
+	
 	public int getVagas() {
 		return vagas;
 	}
@@ -90,5 +89,33 @@ private static final long serialVersionUID = 1L;
 			return true;
 		else
 			return false;
+	}
+
+	public Date getDataviagem() {
+		return dataviagem;
+	}
+
+	public void setDataviagem(Date dataviagem) {
+		this.dataviagem = dataviagem;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Integer getEmbarcado() {
+		return embarcado;
+	}
+
+	public void setEmbarcado(Integer embarcado) {
+		this.embarcado = embarcado;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
 	}
 }

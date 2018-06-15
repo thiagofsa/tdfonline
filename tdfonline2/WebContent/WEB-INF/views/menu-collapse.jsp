@@ -50,9 +50,11 @@
           Encaminhamentos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Novo</a>
-          <a class="dropdown-item" href="#">Listar</a>          
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/add">Novo</a>                    
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/find">Pesquisar</a>   
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/lote">Em Lote</a>       
         </div>
+        
       </li>
       
       <li class="nav-item dropdown">

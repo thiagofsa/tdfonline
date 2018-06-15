@@ -37,7 +37,7 @@
 				<td>
 					${encaminhamento.id}
 				</td>
-				<td>${encaminhamento.data}</td>
+				<td>${encaminhamento.dataviagem}</td>
 				
 				
 				

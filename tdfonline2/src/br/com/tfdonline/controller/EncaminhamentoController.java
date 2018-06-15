@@ -2,8 +2,9 @@ package br.com.tfdonline.controller;
 
 
 import java.text.SimpleDateFormat;
-
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -69,6 +71,70 @@ import br.com.tfdonline.modelo.Marcacao;
 
 		}
 		
+		
+	// 	Carrega as dsitribuicoes do dia e as marcacacoes em aberto a partir de uma data especifica
+			@RequestMapping(value = {"/encaminhamentos/lote" })
+			    public String encaminhamentoLoteForm( Model model) {
+				 	 Date dataini = null, datafim = null;
+					
+					if (dataini==null) {
+						dataini =new Date();
+					}
+					if (datafim==null) {
+						datafim =new Date();
+					}
+				
+					model.addAttribute("distribuicaos", distribuicaoDAO.findbyData(dataini, datafim));
+					//parei aqui..
+					model.addAttribute("marcacaos", marcacaoDAO.findbyNaoEncaminhadas(dataini, datafim));
+					
+				 	return "encaminhamentolote";
+			    }
+			 
+			// 
+			@RequestMapping(value = "/encaminhamentos/lote2")
+			public String encaminhamentoLoteProcessa(@RequestParam("idsmarcacao")String[] idsmarcacao, @RequestParam("iddistribuicao")String iddistribuicao) {
+				
+				System.out.println("chamando o encaminhamentos/lote2............");
+				System.out.println("ID Distribuicao recebido..." + iddistribuicao);
+				System.out.println("IDs Marcacao recebido.." );
+				
+				Marcacao marcacao= null;
+				Distribuicao distribuicao=null;
+				distribuicao= distribuicaoDAO.findByID(Integer.parseInt(iddistribuicao));
+						
+				for (int i=0; i<idsmarcacao.length; i++) {
+					
+					System.out.println("ID Marcacao " + idsmarcacao[i]);
+					marcacao = marcacaoDAO.findByID(Integer.parseInt(idsmarcacao[i]));
+					
+					Encaminhamento encaminhamento = new Encaminhamento();
+					encaminhamento.setId(-1);
+					encaminhamento.setDistribuicao(distribuicao);
+					encaminhamento.setMarcacao(marcacao);
+					encaminhamento.setDataviagem(marcacao.getDataviagem());
+					
+					//calcular paciente + marcacao.getacompanhantepacientemarcacao..
+					encaminhamento.setVagas(2);
+					encaminhamento.setEmbarcado(0);
+					
+					System.out.println("Salvando o encaminhamento " + i);
+					encaminhamentoDAO.saveOrUpdate(encaminhamento);
+					
+					System.out.println("Setando a marcacao para encaminhada");
+					marcacao.setEncaminhada(1);
+					marcacaoDAO.saveOrUpdate(marcacao);
+					
+					
+				}
+				System.out.println(idsmarcacao.length + " encaminhamentos em lote salvos com sucesso!");
+				
+				
+				
+				
+				return "encaminhamentoloteprocessado";
+
+			}		
 				
 		// popula o form para a pesquisa de Encaminhamento
 		@RequestMapping(value = {"/encaminhamentos/find" })
@@ -76,17 +142,17 @@ import br.com.tfdonline.modelo.Marcacao;
 			 	
 				
 				Encaminhamento encaminhamento = new Encaminhamento();
-				encaminhamento.setData(new Date());
+				encaminhamento.setDataviagem(new Date());
 			 	model.addAttribute("encaminhamentoForm", encaminhamento);
 			 	return "findencaminhamento";
 		    }
 		 
 		// find2 page
 		@RequestMapping(value = "/encaminhamentos/find2")
-		public String showFindEncaminhamentoForm(@RequestParam("data") Date data, Model model) {
+		public String showFindEncaminhamentoForm(@RequestParam("dataviagem")@DateTimeFormat(pattern = "yyyy-MM-dd") Date data, Model model) {
 			System.out.println("chamando o encaminhamentos/find/descricao............"+data);
 			logger.debug("Encaminhamentos.FindByData()");
-			model.addAttribute("encaminhamentos", encaminhamentoDAO.findbyData(data));
+			model.addAttribute("encaminhamentos", encaminhamentoDAO.findbyData(data, data));
 			return "listaencaminhamentospage";
 
 		}
@@ -113,7 +179,7 @@ import br.com.tfdonline.modelo.Marcacao;
 	    }
 		
 		@RequestMapping(value = {"/encaminhamentos/selectmarcacao2" })
-		public String selectMarcacao(@RequestParam("data") Date data, Model model, @ModelAttribute("marcacao") Marcacao marcacao){
+		public String selectMarcacao(@RequestParam("dataviagem") Date data, Model model, @ModelAttribute("marcacao") Marcacao marcacao){
 		 	
 			System.out.println("chamando o encaminhamentos/SelectMarcacao2/............Marcacao.nome="+data);
 			
@@ -167,7 +233,7 @@ import br.com.tfdonline.modelo.Marcacao;
 	    }
 		
 		@RequestMapping(value = {"/encaminhamentos/selectdistribuicao2" })
-		public String selectDistribuicao(@RequestParam("data") Date data, Model model, @ModelAttribute("distribuicao") Distribuicao distribuicao){
+		public String selectDistribuicao(@RequestParam("dataviagem")@DateTimeFormat(pattern = "yyyy-MM-dd") Date data, Model model, @ModelAttribute("distribuicao") Distribuicao distribuicao){
 		 	
 			System.out.println("chamando o encaminhamentos/Selectdistribuicao2/............Distribuicao.data="+data);
 			
@@ -236,7 +302,7 @@ import br.com.tfdonline.modelo.Marcacao;
 				  redirectAttributes.addFlashAttribute("msg", "Encaminhamento atualizado com sucesso!");
 				}
 				
-				System.out.println("SaveOrUpdate: Data da Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getData());
+				System.out.println("SaveOrUpdate: Data da Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getDataviagem());
 				System.out.println("SaveOrUpdate: ID Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getId());
 				
 				encaminhamentoDAO.saveOrUpdate(encaminhamento);
@@ -266,7 +332,7 @@ import br.com.tfdonline.modelo.Marcacao;
 			
 			
 			if (encaminhamento!=null) {
-				 System.out.println("Encaminhamento Encontrada ------->Data da Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getData());
+				 System.out.println("Encaminhamento Encontrada ------->Data da Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getDataviagem());
 				 encaminhamento.setId(id);
 			}else
 				System.out.println("Encaminhamento nao localizado");
@@ -343,7 +409,8 @@ import br.com.tfdonline.modelo.Marcacao;
 
 		}
 
-	
+
+		
 
 	}
 	

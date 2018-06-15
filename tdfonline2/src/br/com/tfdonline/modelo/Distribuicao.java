@@ -29,8 +29,8 @@ private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date data;
-	private int vagas;
+	private Date dataviagem;
+	private Integer vagas;
 	
 	
 	@OneToOne
@@ -53,14 +53,7 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
+	
 	
 	public Motorista getMotorista() {
 		return motorista;
@@ -97,11 +90,21 @@ private static final long serialVersionUID = 1L;
 			return false;
 	}
 
-	public int getVagas() {
+	
+
+	public Date getDataviagem() {
+		return dataviagem;
+	}
+
+	public void setDataviagem(Date dataviagem) {
+		this.dataviagem = dataviagem;
+	}
+
+	public Integer getVagas() {
 		return vagas;
 	}
 
-	public void setVagas(int vagas) {
+	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
 	}	
 

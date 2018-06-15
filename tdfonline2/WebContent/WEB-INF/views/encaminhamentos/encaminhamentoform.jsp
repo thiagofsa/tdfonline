@@ -38,13 +38,13 @@
 		<form:hidden path="id" />
 		
 	
-		<spring:bind path="distribuicao.data">
+		<spring:bind path="distribuicao.dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Data da Distribuicao</label>
 			<div class="col-sm-10">
-				<form:input path="distribuicao.data" type="text" class="form-control" 
-                                id="distribuicao.data" placeholder="Data" />
-				<form:errors path="distribuicao.data" class="control-label" />
+				<form:input path="distribuicao.dataviagem" type="text" class="form-control" 
+                                id="distribuicao.dataviagem" placeholder="Data" />
+				<form:errors path="distribuicao.dataviagem" class="control-label" />
 			</div>
 		
 		<form:hidden path="distribuicao.id" />	  
@@ -53,18 +53,32 @@
 		</spring:bind>
 		
 			
-		<spring:bind path="marcacao.data">
+		<spring:bind path="marcacao.dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Marcacao</label>
+			<label class="col-sm-2 control-label">Marcacao -Data Viagem</label>
 			<div class="col-sm-10">
-				<form:input path="marcacao.data" type="text" class="form-control" 
-                                id="marcacao.data" placeholder="ID Proc" />
-				<form:errors path="marcacao.data" class="control-label" />
+				<form:input path="marcacao.dataviagem" type="text" class="form-control" 
+                                id="marcacao.dataviagem" placeholder="ID Proc" />
+				<form:errors path="marcacao.dataviagem" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
 		
 		<form:hidden path="marcacao.id" />
+		
+		
+		<spring:bind path="dataviagem">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Data da Viagem</label>
+			<div class="col-sm-10">
+				<form:input path="dataviagem" type="text" class="form-control" 
+                                id="dataviagem" placeholder="ID Proc" />
+				<form:errors path="dataviagem" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		
 		
 			
 				

@@ -263,6 +263,19 @@
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/show.jsp" />  
    </definition>
    
+   
+   <definition name="encaminhamentolote" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento em Lote" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentolote.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentoloteprocessado" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento em Lote" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentoloteprocessado.jsp" />  
+   </definition>
+   
+   
+   
    <definition name="selectdistribuicaoform" extends="base.definition">  
        <put-attribute name="title" value="Encaminhamento -> Distribuicao" />  
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/selectdistribuicaoform.jsp" />  

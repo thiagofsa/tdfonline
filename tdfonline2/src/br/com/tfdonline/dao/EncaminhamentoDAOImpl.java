@@ -86,7 +86,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	@Override
 	public void saveOrUpdate(Encaminhamento encaminhamento) {
 		// TODO Auto-generated method stub
-		if (findByID(encaminhamento.getId())==null) {
+		if ((findByID(encaminhamento.getId())==null) ){
 			this.addEncaminhamento(encaminhamento);
 			System.out.println("estou no DAOSAVEUPDATE, tentanto ADD a encaminhamento...");
 		} else {
@@ -104,11 +104,13 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	return findbyData(datainicial, new Date());
 	
 	}	
+	
+	
 	@Override
 	public List<Encaminhamento> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial, @DateTimeFormat(pattern = "yyyy-MM-dd") Date datafinal) {
 
 				
-		String hql = "FROM Encaminhamento m WHERE m.data BETWEEN :start AND :end";
+		String hql = "FROM Encaminhamento m WHERE m.dataviagem BETWEEN :start AND :end";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("start", datainicial);
@@ -117,6 +119,13 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		List<Encaminhamento> lista = query.list();
 		
 		return lista;
+	}
+
+
+	@Override
+	public List<Encaminhamento> dataviagem(Date data) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

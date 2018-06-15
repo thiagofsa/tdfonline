@@ -20,8 +20,10 @@ public interface EncaminhamentoDAOI {
 
 	void saveOrUpdate(Encaminhamento encaminhamento);
 	
-	public List<Encaminhamento> findbyData(Date data);
+	public List<Encaminhamento> dataviagem(Date data);
 
 	List<Encaminhamento> findbyData(Date datainicial, Date datafinal);
+
+	List<Encaminhamento> findbyData(Date datainicial);
 	
 }

@@ -118,7 +118,7 @@ public class DistribuicaoDAOImpl implements DistribuicaoDAOI, Serializable{
 	public List<Distribuicao> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial, @DateTimeFormat(pattern = "yyyy-MM-dd") Date datafinal) {
 
 				
-		String hql = "FROM Distribuicao m WHERE m.data BETWEEN :start AND :end";
+		String hql = "FROM Distribuicao d WHERE d.dataviagem BETWEEN :start AND :end";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("start", datainicial);

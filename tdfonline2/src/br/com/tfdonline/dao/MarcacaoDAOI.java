@@ -32,4 +32,7 @@ public interface MarcacaoDAOI {
 	
 	public List<Marcacao> findbyNomeData(Date datainicial,  Date datafinal, String nome) ;
 	
+	public List<Marcacao> findbyNaoEncaminhadas(Date datainicial,  Date datafinal) ;
+	
+	
 }

@@ -11,33 +11,20 @@
                 modelAttribute="encaminhamentoForm" action="${findUrl}">
 
 		
-	<spring:bind path="data">
+	<spring:bind path="dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			
 			 <div class="control-group">
-        		<form:label cssClass="control-label" path="data">Data:</form:label>
+        		<form:label cssClass="control-label" path="dataviagem">Data Viagem:</form:label>
         		<div class="controls">
-            	<form:input path="data" class="date" />
+            	<form:input path="dataviagem" class="date" />
         		</div>
     		</div>
 		  </div>
 		</spring:bind>
 
 
-	<spring:bind path="vagas">
-		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			
-			 <div class="control-group">
-        		<form:label cssClass="control-label" path="vagas">Vagas:</form:label>
-        		<div class="controls">
-            	<form:input path="vagas" class="date" />
-        		</div>
-    		</div>
-		  </div>
-		</spring:bind>
-
-
-				
 		<div class="form-group">
 		  <div class="col-sm-offset-2 col-sm-10">
 			

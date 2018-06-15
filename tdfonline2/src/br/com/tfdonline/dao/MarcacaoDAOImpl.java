@@ -162,5 +162,22 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		return lista;
 	}
 
+
+	@Override
+	public List<Marcacao> findbyNaoEncaminhadas(Date datainicial, Date datafinal) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Marcacao m WHERE m.dataviagem BETWEEN :start AND :end AND m.encaminhada<1" ;
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		query.setParameter("start", datainicial);
+		query.setParameter("end", datafinal);
+		 
+		List<Marcacao> lista = query.list();
+		
+		return lista;
+	}
+
 	
 }

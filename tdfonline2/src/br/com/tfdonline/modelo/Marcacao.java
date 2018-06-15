@@ -40,6 +40,14 @@ private static final long serialVersionUID = 1L;
 	
 	private String observacao;
 	
+	private Integer encaminhada;
+	
+	private Integer confirmada;
+	
+	
+	
+	private int ida;
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "dataviagem")
@@ -47,7 +55,7 @@ private static final long serialVersionUID = 1L;
 	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date datamarcacao;
+	private Date data;
 	
 
 	@OneToOne
@@ -154,13 +162,7 @@ private static final long serialVersionUID = 1L;
 		this.acompanhantespacientesmarcacaostring = acompanhantespacientesmarcacaostring;
 	}
 
-	public Date getDatamarcacao() {
-		return datamarcacao;
-	}
-
-	public void setDatamarcacao(Date datamarcacao) {
-		this.datamarcacao = datamarcacao;
-	}
+	
 
 	public String getHoraprocedimento() {
 		return horaprocedimento;
@@ -184,6 +186,42 @@ private static final long serialVersionUID = 1L;
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
+	}
+
+	public int getEncaminhada() {
+		return encaminhada;
+	}
+
+	public void setEncaminhada(int encaminhada) {
+		this.encaminhada = encaminhada;
+	}
+
+	public int getIda() {
+		return ida;
+	}
+
+	public void setIda(int ida) {
+		this.ida = ida;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public Integer getConfirmada() {
+		return confirmada;
+	}
+
+	public void setConfirmada(Integer confirmada) {
+		this.confirmada = confirmada;
+	}
+
+	public void setEncaminhada(Integer encaminhada) {
+		this.encaminhada = encaminhada;
 	}
 	
 

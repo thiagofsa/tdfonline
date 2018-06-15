@@ -81,7 +81,7 @@ import br.com.tfdonline.modelo.Veiculo;
 			 	
 				
 				Distribuicao distribuicao = new Distribuicao();
-				distribuicao.setData(new Date());
+				distribuicao.setDataviagem(new Date());
 			 	model.addAttribute("distribuicaoForm", distribuicao);
 			 	return "finddistribuicao";
 		    }
@@ -366,7 +366,7 @@ import br.com.tfdonline.modelo.Veiculo;
 						// set default value
 			Distribuicao distribuicao = new Distribuicao();
 			distribuicao.setId(-1);
-			distribuicao.setData(new Date());
+			distribuicao.setDataviagem(new Date());
 			
 			distribuicao.setMotorista(new Motorista());
 			distribuicao.setVeiculo(new Veiculo());
