@@ -2,9 +2,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-<!DOCTYPE html>
 
 
 <div class="container">
@@ -52,14 +49,71 @@
 		  </div>
 		</spring:bind>
 		
+		<spring:bind path="distribuicao.vagas">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Distribuicao - Vagas</label>
+			<div class="col-sm-10">
+				<form:input path="distribuicao.vagas" type="text" class="form-control" 
+                                id="distribuicao.vagas" placeholder="..." />
+				<form:errors path="distribuicao.vagas" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
 			
 		<spring:bind path="marcacao.dataviagem">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Marcacao -Data Viagem</label>
 			<div class="col-sm-10">
 				<form:input path="marcacao.dataviagem" type="text" class="form-control" 
-                                id="marcacao.dataviagem" placeholder="ID Proc" />
+                                id="marcacao.dataviagem" placeholder="..." />
 				<form:errors path="marcacao.dataviagem" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		
+		<spring:bind path="marcacao.paciente.nome">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Marcacao -Paciente</label>
+			<div class="col-sm-10">
+				<form:input path="marcacao.paciente.nome" type="text" class="form-control" 
+                                id="marcacao.paciente.nome" placeholder="..." />
+				<form:errors path="marcacao.paciente.nome" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		<spring:bind path="marcacao.procedimento.nome">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Marcacao -Procedimento</label>
+			<div class="col-sm-10">
+				<form:input path="marcacao.procedimento.nome" type="text" class="form-control" 
+                                id="marcacao.procedimento.nome" placeholder="..." />
+				<form:errors path="marcacao.procedimento.nome" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		<spring:bind path="marcacao.unidadesaude.descricao">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Marcacao -US</label>
+			<div class="col-sm-10">
+				<form:input path="marcacao.unidadesaude.descricao" type="text" class="form-control" 
+                                id="marcacao.unidadesaude.descricao" placeholder="..." />
+				<form:errors path="marcacao.unidadesaude.descricao" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		
+		<spring:bind path="marcacao.vagas">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Marcacao - Vagas</label>
+			<div class="col-sm-10">
+				<form:input path="marcacao.vagas" type="text" class="form-control" 
+                                id="marcacao.vagas" placeholder="..." />
+				<form:errors path="marcacao.vagas" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -78,12 +132,9 @@
 		  </div>
 		</spring:bind>
 		
-		
-		
-			
-				
+						
 		<div class="form-group">
-		  <div class="col-sm-offset-2 col-sm-10">
+		  
 			<c:choose>
 			  <c:when test="${encaminhamentoForm['new']}">
 			     <button type="submit" class="btn-lg btn-primary pull-right">Cadastrar
@@ -94,9 +145,13 @@
                              </button>
 			  </c:otherwise>
 			</c:choose>
-		  </div>
+		  
 		</div>
+		
+		
 	</form:form>
+	
+	<br><br><br><br><br><br>
 
 </div>
 

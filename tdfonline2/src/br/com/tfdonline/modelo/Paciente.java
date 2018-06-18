@@ -3,6 +3,7 @@ package br.com.tfdonline.modelo;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -34,7 +35,7 @@ private static final long serialVersionUID = 1L;
 	private String cpf;
 	private String email;
 	private String telefone;
-	private String datanascimento;
+	private Date datanascimento;
 	private String cartaosus;
 	private String rg;
 	private String complemento;
@@ -106,12 +107,7 @@ private static final long serialVersionUID = 1L;
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public String getDatanascimento() {
-		return datanascimento;
-	}
-	public void setDatanascimento(String datanascimento) {
-		this.datanascimento = datanascimento;
-	}
+	
 	public String getCartaosus() {
 		return cartaosus;
 	}
@@ -182,6 +178,12 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setDiabetico(String diabetico) {
 		this.diabetico = diabetico;
+	}
+	public void setDatanascimento(Date datanascimento) {
+		this.datanascimento = datanascimento;
+	}
+	public Date getDatanascimento() {
+		return datanascimento;
 	}
 	
 	

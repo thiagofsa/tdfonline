@@ -102,7 +102,7 @@
 		
 		<spring:bind path="unidadesaude.descricao">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Procedimento</label>
+			<label class="col-sm-2 control-label">Unidade Saude</label>
 			<div class="col-sm-10">
 				<form:input path="unidadesaude.descricao" type="text" class="form-control" 
                                 id="unidadesaude.descricao" placeholder="ID Proc" />
@@ -159,7 +159,18 @@
 		  </div>
 		</spring:bind>
 		
-		
+
+	<spring:bind path="vagas">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			
+			 <div class="control-group">
+        		<form:label cssClass="control-label" path="vagas">Vagas:</form:label>
+        		<div class="controls">
+            	<form:label path="vagas" class="date" />
+        		</div>
+    		</div>
+		  </div>
+		</spring:bind>		
 
 
 <c:if test="${not empty acompanhantespaciente}">

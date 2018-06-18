@@ -48,6 +48,7 @@
         <td><c:out value="${distribuicao.veiculo.descricao}"/> </td>
         <td><c:out value="${distribuicao.motorista.nome}"/> </td>
         <td><c:out value="${distribuicao.vagas}"/> </td>
+
         
      
      </tr>
@@ -69,6 +70,7 @@
         <td>Paciente</td>
         <td>Destino - Un. Saúde </td>
         <td>Confirmada</td>
+        <td>Total de Vagas </td>
         
      </tr>
      
@@ -81,6 +83,7 @@
         <td><c:out value="${marcacao.paciente.nome}"/> </td>
         <td><c:out value="${marcacao.unidadesaude.descricao}"/> </td>
         <td><c:out value="${marcacao.confirmada}"/> </td>
+        <td><c:out value="${marcacao.vagas}"/> </td>
      
      </tr>
    </c:forEach>

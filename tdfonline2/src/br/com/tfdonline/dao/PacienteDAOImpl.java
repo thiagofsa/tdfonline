@@ -61,7 +61,7 @@ public class PacienteDAOImpl implements PacienteDAOI, Serializable{
 	@Override
 	public void updatePaciente(Paciente paciente) {
 		// TODO Auto-generated method stub
-		sessionFactory.getCurrentSession().clear();
+		//**sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().update(paciente);
 				
 		System.out.println("---> Paciente atualizado pelo DAO!!!");

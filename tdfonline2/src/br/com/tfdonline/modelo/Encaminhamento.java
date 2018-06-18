@@ -3,8 +3,10 @@ package br.com.tfdonline.modelo;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -39,30 +41,14 @@ private static final long serialVersionUID = 1L;
 	
 	private Integer embarcado;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "iddistribuicao")
 	Distribuicao distribuicao;
 	
-	@OneToOne
+	@OneToOne 
     @JoinColumn(name = "idmarcacao")
 	Marcacao marcacao;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	
-	public int getVagas() {
-		return vagas;
-	}
-
-	public void setVagas(int vagas) {
-		this.vagas = vagas;
-	}
 
 	public Distribuicao getDistribuicao() {
 		return distribuicao;
@@ -118,4 +104,20 @@ private static final long serialVersionUID = 1L;
 	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
 	}
+
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	
+	public int getVagas() {
+		return vagas;
+	}
+
+
 }

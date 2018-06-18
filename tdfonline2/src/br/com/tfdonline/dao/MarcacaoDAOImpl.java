@@ -64,8 +64,11 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 	@Override
 	public void updateMarcacao(Marcacao marcacao) {
 		// TODO Auto-generated method stub
-		//sessionFactory.getCurrentSession().clear();
+		//
 		sessionFactory.getCurrentSession().merge(marcacao);
+
+		//**sessionFactory.getCurrentSession().clear();
+		//**sessionFactory.getCurrentSession().update(marcacao);
 				
 		System.out.println("---> Marcacao atualizado pelo DAO!!!");
 		

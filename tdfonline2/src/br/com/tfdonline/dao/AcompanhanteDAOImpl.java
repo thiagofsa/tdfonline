@@ -115,11 +115,13 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 		System.out.println("Valor do ID Marcacao="+ marcacaoid );
 		
 		
-		String squery = "select apm.idacompanhante from Acompanhantepacientemarcacao apm, Marcacao m where m.id=apm.idmarcacao and m.id=:marcacaoid";
+		String squery = "select apm.idacompanhante from Acompanhantepacientemarcacao apm, Marcacao m where m.id=apm.idmarcacao and m.id="+marcacaoid;
+		
 		List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(squery);
-		query.setParameter("marcacaoid",marcacaoid);
+			
+		
 		
 		List result = query.list();
 		Acompanhante acompanhante ;

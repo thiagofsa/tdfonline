@@ -39,8 +39,10 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 	public void deleteMotoristaByID(Integer id) {
 		System.out.println("recebi dentro do DAO o id="+  id);
 		Motorista motorista = sessionFactory.getCurrentSession().load(Motorista.class,id);
+		motorista.setAtivo(0);
 		sessionFactory.getCurrentSession().clear();
-		sessionFactory.getCurrentSession().delete(motorista);
+		sessionFactory.getCurrentSession().update(motorista);
+		
 		System.out.println("dentro do MOtoristaDAO..deletei o Motorista");
 		
 	}
@@ -69,7 +71,7 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 		// TODO Auto-generated method stub
 		 
 		 
-		   Query query  = sessionFactory.getCurrentSession().createQuery("from Motorista");
+		   Query query  = sessionFactory.getCurrentSession().createQuery("from Motorista m where m.ativo>0 ");
            List<Motorista> lista = (List<Motorista>) query.list(); 
            System.out.println("-------->>  Motoristas encontrados ="+ lista.size());
            return lista;
@@ -78,7 +80,7 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 	public List<Motorista> findbyName(String nome){
 		
 		
-		String hql = "from Motorista where nome like :keyword";
+		String hql = "from Motorista m where m.nome like :keyword AND m.ativo>0" ;
 		String keyword = nome;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
@@ -86,7 +88,7 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 		List<Motorista> lista = query.list();
 		return lista;
 		
-	}
+	}	
 
 	@Override
 	public void saveOrUpdate(Motorista motorista) {

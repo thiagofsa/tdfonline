@@ -4,6 +4,7 @@ package br.com.tfdonline.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,12 +28,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.DistribuicaoDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
 
 import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Distribuicao;
 import br.com.tfdonline.modelo.Marcacao;
+import br.com.tfdonline.util.DateUtils;
 
 
 	@Controller
@@ -48,9 +52,11 @@ import br.com.tfdonline.modelo.Marcacao;
 		@Autowired
 		private DistribuicaoDAOI distribuicaoDAO;
 		
-	
 		@Autowired
 		private MarcacaoDAOI marcacaoDAO;
+		
+		@Autowired
+		private AcompanhanteDAOI acompanhanteDAO;
 	
 		
 		@InitBinder
@@ -71,6 +77,74 @@ import br.com.tfdonline.modelo.Marcacao;
 
 		}
 		
+		//save or update
+		
+				@RequestMapping(value = "/encaminhamentos", method = RequestMethod.POST)
+				public String saveOrUpdateEncaminhamento(@ModelAttribute("encaminhamentoForm")  Encaminhamento encaminhamento,
+						BindingResult result, Model model, 
+						final RedirectAttributes redirectAttributes, HttpServletRequest request) {
+
+				
+					System.out.println("Em saveOrUpdate, salvando ou atualizando Encaminhamento.............");
+					Encaminhamento encaminhamentoSession = (Encaminhamento) request.getSession().getAttribute("encaminhamentoSession");
+					
+					System.out.println("ID de encaminhamento da session="+ encaminhamentoSession.getId());
+					System.out.println("ID de encaminhamento passada pelo form="+ encaminhamento.getId());
+					System.out.println("ID de Distribuicao passada pelo form="+ encaminhamento.getDistribuicao().getId());
+					System.out.println("ID de Marcacao passada pelo form="+ encaminhamento.getMarcacao().getId());
+				
+					Distribuicao distribuicao = distribuicaoDAO.findByID(encaminhamento.getDistribuicao().getId());
+					Marcacao marcacao = marcacaoDAO.findByID(encaminhamento.getMarcacao().getId());
+					
+					
+						// Add message to flash scope
+						redirectAttributes.addFlashAttribute("css", "success");
+						if(encaminhamento.isNew()){
+						  redirectAttributes.addFlashAttribute("msg", "Encaminhamento adicionado com sucesso!");
+						}else{
+						  redirectAttributes.addFlashAttribute("msg", "Encaminhamento atualizado com sucesso!");
+						}
+						
+						System.out.println("SaveOrUpdate: Data da Distribuicao do encaminhamento="+ encaminhamento.getDistribuicao().getDataviagem());
+						System.out.println("SaveOrUpdate: ID Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getId());
+						
+						//calculo das vagas de acompanhantes e paciente
+						//List<Acompanhante> acompanhantespacientemarcacao = acompanhanteDAO.findbyMarcacaoID(marcacao.getId());
+						//marcacao.setAcompanhantespacientemarcacao(acompanhantespacientemarcacao);
+						//int vagasMarcacao = marcacao.getAcompanhantespacientemarcacao().size();
+						System.out.println("************quantidade de acompanhantes da marcacao="+ marcacao.getVagas());
+						
+						encaminhamento.setVagas(marcacao.getVagas());
+						System.out.println("Vagas reservadas para a marcacao="+ encaminhamento.getVagas());
+						
+						
+											
+						//**										
+						//fim calculo vagas
+						
+						System.out.println(".....Salvo ou atualizado o encaminhamento.....");
+						System.out.println("redirecionando para... \"redirect:/encaminhamentos/\" + encaminhamento.getId();");
+						// POST/REDIRECT/GET
+						
+						System.out.println("Vagas reservadas :"+ encaminhamento.getVagas());
+						
+						int vagas =  distribuicao.getVagas()- marcacao.getVagas();
+						System.out.println("Atualizando a  quantidade de vagas da distribuicao para: "+ vagas);
+						distribuicao.setVagas(vagas);
+						System.out.println("Setando a marcacao 	para encaminhada");
+						marcacao.setEncaminhada(1);
+						
+						
+						distribuicaoDAO.saveOrUpdate(distribuicao);
+						marcacaoDAO.saveOrUpdate(marcacao);
+						encaminhamentoDAO.saveOrUpdate(encaminhamento);
+						
+						
+						
+						return "redirect:/encaminhamentos/" + encaminhamento.getId();
+
+
+				}
 		
 	// 	Carrega as dsitribuicoes do dia e as marcacacoes em aberto a partir de uma data especifica
 			@RequestMapping(value = {"/encaminhamentos/lote" })
@@ -101,35 +175,68 @@ import br.com.tfdonline.modelo.Marcacao;
 				
 				Marcacao marcacao= null;
 				Distribuicao distribuicao=null;
+				
 				distribuicao= distribuicaoDAO.findByID(Integer.parseInt(iddistribuicao));
 						
 				for (int i=0; i<idsmarcacao.length; i++) {
 					
+					Encaminhamento encaminhamento = new Encaminhamento();
+					
 					System.out.println("ID Marcacao " + idsmarcacao[i]);
 					marcacao = marcacaoDAO.findByID(Integer.parseInt(idsmarcacao[i]));
 					
-					Encaminhamento encaminhamento = new Encaminhamento();
+					//calculo das vagas de acompanhantes e paciente
+					List<Acompanhante> acompanhantespacientemarcacao = acompanhanteDAO.findbyMarcacaoID(marcacao.getId());
+					marcacao.setAcompanhantespacientemarcacao(acompanhantespacientemarcacao);
+					int vagasMarcacao = marcacao.getAcompanhantespacientemarcacao().size();
+					System.out.println("************quantidade de acompanhantes da marcacao="+ vagasMarcacao);
+					
+					//somando acompanhantes e paciente
+					
+					vagasMarcacao = vagasMarcacao + 1;
+					
+					try {
+						//se paciente for criança de colo...
+						if (DateUtils.getAge(marcacao.getPaciente().getDatanascimento())<6) {
+							vagasMarcacao = vagasMarcacao - 1;
+							System.out.println("Paciente de colo, diminuindo uma vaga da reserva.....");
+							
+						}
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						System.out.println("Erro de conversão de data");
+						e.printStackTrace();
+					}
+						
+					//**										
+					//fim calculo vagas
+					
 					encaminhamento.setId(-1);
 					encaminhamento.setDistribuicao(distribuicao);
 					encaminhamento.setMarcacao(marcacao);
 					encaminhamento.setDataviagem(marcacao.getDataviagem());
-					
-					//calcular paciente + marcacao.getacompanhantepacientemarcacao..
-					encaminhamento.setVagas(2);
 					encaminhamento.setEmbarcado(0);
+					encaminhamento.setVagas(vagasMarcacao);
+					encaminhamento.setData(new Date());
+					
 					
 					System.out.println("Salvando o encaminhamento " + i);
-					encaminhamentoDAO.saveOrUpdate(encaminhamento);
+
+					System.out.println("Vagas reservadas :"+ vagasMarcacao);
 					
+					int vagas =  distribuicao.getVagas() - vagasMarcacao;
+					System.out.println("Atualizando a  quantidade de vagas da distribuicao para: "+ vagas);
+					distribuicao.setVagas(vagas);
 					System.out.println("Setando a marcacao para encaminhada");
 					marcacao.setEncaminhada(1);
 					marcacaoDAO.saveOrUpdate(marcacao);
+					distribuicaoDAO.saveOrUpdate(distribuicao);
+					encaminhamentoDAO.saveOrUpdate(encaminhamento);
+					
 					
 					
 				}
 				System.out.println(idsmarcacao.length + " encaminhamentos em lote salvos com sucesso!");
-				
-				
 				
 				
 				return "encaminhamentoloteprocessado";
@@ -183,7 +290,7 @@ import br.com.tfdonline.modelo.Marcacao;
 		 	
 			System.out.println("chamando o encaminhamentos/SelectMarcacao2/............Marcacao.nome="+data);
 			
-			model.addAttribute("marcacaos", marcacaoDAO.findbyData(data));
+			model.addAttribute("marcacaos", marcacaoDAO.findbyNaoEncaminhadas(data, data));
 			System.out.println("MarcacaoDAO chamado...");
 			
 			model.addAttribute("marcacao", marcacao);	
@@ -206,11 +313,7 @@ import br.com.tfdonline.modelo.Marcacao;
 			
 		
 		}
-		
-		
-	
-		
-		
+				
 		
 		//populando uma vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectdistribuicao/encaminhamentos/" })
@@ -262,64 +365,8 @@ import br.com.tfdonline.modelo.Marcacao;
 			
 		
 		}
+			
 		
-	
-		
-		
-		
-		
-		@RequestMapping(value = "/encaminhamentos", method = RequestMethod.POST)
-		//public String saveOrUpdateEncaminhamento(@ModelAttribute("encaminhamentoForm") @Validated Encaminhamento encaminhamento,
-		public String saveOrUpdateEncaminhamento(@ModelAttribute("encaminhamentoForm")  Encaminhamento encaminhamento,
-				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes, HttpServletRequest request) {
-
-			
-			//encaminhamento = request.getSession().getAttribute("encaminhamentoSession");
-			
-			System.out.println("Em saveOrUpdate, salvando ou atualizando encaminhamento.............");
-			
-			Encaminhamento encaminhamentoSession = (Encaminhamento) request.getSession().getAttribute("encaminhamentoSession");
-			System.out.println("ID de encaminhamento da session="+ encaminhamentoSession.getId());
-			
-			System.out.println("ID de encaminhamento passada pelo form="+ encaminhamento.getId());
-			System.out.println("ID de Distribuicao passada pelo form="+ encaminhamento.getDistribuicao().getId());
-		
-			System.out.println("ID de Marcacao passada pelo form="+ encaminhamento.getMarcacao().getId());
-			
-			
-			
-		/*	if (result.hasErrors()) {
-				populateDefaultModel(model);
-				return "encaminhamentoform";
-			} else*/ {
-
-				// Add message to flash scope
-				redirectAttributes.addFlashAttribute("css", "success");
-				if(encaminhamento.isNew()){
-				  redirectAttributes.addFlashAttribute("msg", "Encaminhamento adicionado com sucesso!");
-				}else{
-				  redirectAttributes.addFlashAttribute("msg", "Encaminhamento atualizado com sucesso!");
-				}
-				
-				System.out.println("SaveOrUpdate: Data da Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getDataviagem());
-				System.out.println("SaveOrUpdate: ID Distribuicao da encaminhamento="+ encaminhamento.getDistribuicao().getId());
-				
-				encaminhamentoDAO.saveOrUpdate(encaminhamento);
-				System.out.println(".....Salvo ou atualizado o encaminhamento.....");
-				System.out.println("redirecionando para... \"redirect:/encaminhamentos/\" + encaminhamento.getId();");
-				// POST/REDIRECT/GET
-				
-				
-				return "redirect:/encaminhamentos/" + encaminhamento.getId();
-				//return "/encaminhamentos/" + encaminhamento.getId();
-
-				// POST/FORWARD/GET
-				// return "encaminhamento/list";
-
-			}
-
-		}
 
 		// show update form , chamado pela listagem, para preencher o form com o id passado e devolvero form pra edicao para o encaminhamentoformpage
 		@RequestMapping(value = "/encaminhamentos/{id}/update")

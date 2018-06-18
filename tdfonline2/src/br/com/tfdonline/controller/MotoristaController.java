@@ -94,7 +94,7 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 			logger.debug("saveOrUpdateMotorista() : {}", motorista);
 			System.out.println("Depois do formMotorista, salvando ou atualizando motorista.............");
-			System.out.println("Rua do motorista a ser atualizada="+ motorista.getEndereco());
+			System.out.println("Rua do motorista a ser atualizada="+ motorista.getCpf());
 			
 		/*	if (result.hasErrors()) {
 				populateDefaultModel(model);
@@ -109,7 +109,7 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 				  redirectAttributes.addFlashAttribute("msg", "Motorista atualizado com sucesso!");
 				}
 				
-				System.out.println("----->nova rua ====="+ motorista.getEndereco());
+				System.out.println("----->nova rua ====="+ motorista.getCpf());
 				motoristaDAO.saveOrUpdate(motorista);
 				System.out.println(".....Salvo ou atualizado o motorista.....");
 				System.out.println("redirecionando para... \"redirect:/motoristas/\" + motorista.getId();");

@@ -44,6 +44,8 @@ private static final long serialVersionUID = 1L;
 	
 	private Integer confirmada;
 	
+	private Integer vagas;
+	
 	
 	
 	private int ida;
@@ -57,16 +59,22 @@ private static final long serialVersionUID = 1L;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
-
-	@OneToOne
+	
+	@OneToOne(cascade = { 
+	         CascadeType.MERGE
+	    }) 
     @JoinColumn(name = "idpaciente")
 	Paciente paciente;
 	
-	@OneToOne
+	@OneToOne(cascade = { 
+	         CascadeType.MERGE
+	    }) 
     @JoinColumn(name = "idprocedimento")
 	Procedimento procedimento;
 	
-	@OneToOne
+	@OneToOne (cascade = { 
+	         CascadeType.MERGE
+	    }) 
     @JoinColumn(name = "idunidadesaude")
 	UnidadeSaude unidadesaude;
 	
@@ -82,7 +90,6 @@ private static final long serialVersionUID = 1L;
 	 
 	@Transient
 	 private List<String> acompanhantespacientesmarcacaostring = new ArrayList<String>();
-	 
 	 
 	
 	public Marcacao() {
@@ -222,6 +229,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setEncaminhada(Integer encaminhada) {
 		this.encaminhada = encaminhada;
+	}
+
+	public Integer getVagas() {
+		return vagas;
+	}
+
+	public void setVagas(Integer vagas) {
+		this.vagas = vagas;
 	}
 	
 

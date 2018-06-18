@@ -26,7 +26,9 @@ private static final long serialVersionUID = 1L;
 	
 	private String telefone;
 	
-	private String endereco;
+	private String cpf;
+	
+	private Integer ativo;
 
 	public String getNome() {
 		return nome;
@@ -67,16 +69,25 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Integer getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
 	}
 	
 }

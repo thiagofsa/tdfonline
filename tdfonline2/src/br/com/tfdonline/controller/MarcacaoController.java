@@ -39,6 +39,7 @@ import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.modelo.Procedimento;
 import br.com.tfdonline.modelo.UnidadeSaude;
+import br.com.tfdonline.util.DateUtils;
 
 	@Controller
 
@@ -92,8 +93,9 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 				marcacao.setPaciente(new Paciente());
 				marcacao.setProcedimento(new Procedimento());
 				marcacao.setUnidadesaude(new UnidadeSaude());
-				
+				marcacao.setVagas(0);
 			 	model.addAttribute("marcacaoForm", marcacao);
+			 	
 			 	
 			 	return "findmarcacao";
 		    }
@@ -289,7 +291,26 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			request.getSession().setAttribute("marcacaoSession", marcacao);
 			model.addAttribute("marcacaoForm", marcacao);
 			
-			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
+			List<Acompanhante> acompanhantespaciente = marcacao.getAcompanhantespacientemarcacao();
+			
+			
+			//calculando se será necessário a vaga para o paciente..
+			int totalVagas =  1;
+			
+			try {
+				if (DateUtils.getAge(paciente.getDatanascimento())<6) {
+					totalVagas = totalVagas - 1 ;
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Erro de conversao de data de nascimento do paciente");
+				e.printStackTrace();
+			}
+			
+			marcacao.setVagas( totalVagas);
+			System.out.println("MarcacaoController.selectPaciente() --> Vagas reservadas "+ totalVagas );
+			model.addAttribute("acompanhantespaciente",acompanhantespaciente);
 			
 			return "marcacaoform";
 			
@@ -307,6 +328,7 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			Marcacao marcacaoSession = (Marcacao) request.getSession().getAttribute("marcacaoSession");
 			
 			System.out.println("Paciente selecionado na Marcacao-->"+ marcacaoSession.getPaciente().getNome());
+			
 			
 			model.addAttribute("acompanhantespaciente",  marcacaoSession.getPaciente().getAcompanhantes());
 			//antes...
@@ -355,6 +377,24 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			
 			System.out.println("Acompanhantes inseridos na sessao="+ marcacaoSession.getAcompanhantespacientemarcacao().size());
 			
+			
+			int totalVagas =  1;
+			
+			try {
+				if (DateUtils.getAge(marcacaoSession.getPaciente().getDatanascimento())<6) {
+					totalVagas = totalVagas - 1 ;
+					
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Erro de conversao de data de nascimento do paciente");
+				e.printStackTrace();
+			}
+
+			
+			totalVagas = totalVagas + acompanhantespacientemarcacao.size();
+			marcacaoSession.setVagas(totalVagas);
+			
 			model.addAttribute("marcacaoForm", marcacaoSession);
 			request.getSession().setAttribute("marcacaoSession", marcacaoSession);
 			model.addAttribute("acompanhantespaciente", acompanhantespacientemarcacao);
@@ -387,9 +427,14 @@ import br.com.tfdonline.modelo.UnidadeSaude;
 			System.out.println("ID de UnidadeSaude passada pelo form="+ marcacao.getUnidadesaude().getId());
 			System.out.println("ID de Procedimento passada pelo form="+ marcacao.getProcedimento().getId());
 			System.out.println("Num de Acompanhante passada pelo form="+ marcacaoSession.getAcompanhantespacientemarcacao().size());
+			
+			
+			marcacao.setEncaminhada(0);
+			marcacao.setData(new Date());
+			
+			
 			marcacao.setAcompanhantespacientemarcacao(marcacaoSession.getAcompanhantespacientemarcacao());
-			
-			
+									
 			
 		/*	if (result.hasErrors()) {
 				populateDefaultModel(model);
