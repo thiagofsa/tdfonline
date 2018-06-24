@@ -204,6 +204,7 @@
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/marcacaoform.jsp" />  
    </definition>
    
+     
    <definition name="marcacaocadastro" extends="base.definition">  
        <put-attribute name="title" value="Marcacao" />  
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/marcacaocadastro.jsp" />  

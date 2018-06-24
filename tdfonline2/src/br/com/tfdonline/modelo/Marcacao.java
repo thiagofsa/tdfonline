@@ -104,9 +104,6 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	
-	
-
 	public String getLocalacolhimento() {
 		return localacolhimento;
 	}
@@ -239,5 +236,5 @@ private static final long serialVersionUID = 1L;
 		this.vagas = vagas;
 	}
 	
-
+	
 }

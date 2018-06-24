@@ -81,12 +81,9 @@ import br.com.tfdonline.util.DateUtils;
 			return "listamarcacaospage";
 
 		}
-		
-				
 		// popula o form para a pesquisa de Marcacao
 		@RequestMapping(value = {"/marcacaos/find" })
 		    public String findMarcacao(Model model) {
-			 	
 				
 				Marcacao marcacao = new Marcacao();
 				marcacao.setDataviagem(new Date());
@@ -240,8 +237,6 @@ import br.com.tfdonline.util.DateUtils;
 			
 		
 		}
-		
-		
 		
 		
 		
@@ -494,6 +489,56 @@ import br.com.tfdonline.util.DateUtils;
 			return "marcacaoform";
 
 		}
+		
+		
+		// show update form , chamado pela listagem, para preencher o form com o id passado e devolver o form pra edicao para o marcacaoformpage
+		@RequestMapping(value = "/marcacaos/{id}/replica")
+		public String showReplicaMarcacaoForm(@PathVariable("id") int id, Model model,HttpServletRequest request) {
+			
+			System.out.println("showReplicaMarcacaoFOrm() -->> ID Marcacao passado pelo form = " + id);
+			
+			System.out.println("Pesquisando  ID marcacao no DAO ---> ID = "+id);
+			Marcacao marcacao = marcacaoDAO.findByID(id);
+						
+			if (marcacao!=null) {
+				 System.out.println("Marcacao Encontrada ------->Paciente da marcacao="+ marcacao.getPaciente().getNome());
+				 marcacao.setId(id);
+			}else
+				System.out.println("Marcacao nao localizado");
+			
+			marcacao.setAcompanhantespacientemarcacao(acompanhanteDAO.findbyMarcacaoID(id));
+			
+			Marcacao replica = null;
+			
+				   replica = new Marcacao();
+				   replica.setId(-1);
+				   replica.setConfirmada(0);
+				   replica.setEncaminhada(0);
+				   replica.setHoraprocedimento(marcacao.getHoraprocedimento());
+				   replica.setData(new Date());
+				   replica.setDataviagem(marcacao.getDataviagem());
+				   replica.setUnidadesaude(marcacao.getUnidadesaude());
+				   replica.setProcedimento(marcacao.getProcedimento());
+				   replica.setPaciente(marcacao.getPaciente());
+				   replica.setAcompanhantespacientemarcacao(marcacao.getAcompanhantespacientemarcacao());
+				   replica.setVagas(marcacao.getVagas());
+				   replica.setLocalacolhimento(marcacao.getLocalacolhimento());
+				   replica.setHoraprocedimento(marcacao.getHoraprocedimento());
+				   
+				   
+				   replica.setId(-1);
+				   
+			
+			model.addAttribute("acompanhantespaciente",replica.getAcompanhantespacientemarcacao());
+			model.addAttribute("marcacaoForm", replica);
+					
+			request.getSession().setAttribute("marcacaoSession", replica);
+						
+			return "marcacaoform";
+
+		}
+
+		
 
 		// show marcacao (detalhes)
 		@RequestMapping(value = "/marcacaos/{id}")

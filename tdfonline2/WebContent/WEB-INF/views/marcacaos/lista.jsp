@@ -58,7 +58,7 @@
 				  <spring:url value="/marcacaos/${marcacao.id}" var="marcacaoUrl" />
 				  <spring:url value="/marcacaos/${marcacao.id}/delete" var="deleteUrl" /> 
 				  <spring:url value="/marcacaos/${marcacao.id}/update" var="updateUrl" />
-				  <spring:url value="/marcacaos/${marcacao.id}/update" var="replicarUrl" />
+				  <spring:url value="/marcacaos/${marcacao.id}/replica" var="replicarUrl" />
 
 				  <button class="btn btn-info" 
                                           onclick="location.href='${marcacaoUrl}'">Detalhes</button>
