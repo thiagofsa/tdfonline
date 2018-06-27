@@ -2,68 +2,88 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="pt-br">
 
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" >
+    
+   
+  </head>  
+ 
 <body>
 
-	<div class="container">
+<div class="container">
 
-		<c:if test="${not empty msg}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" 
-                                aria-label="Close">
+	<div  class="space"></div>
+	
+	<c:if test="${not empty msg}">
+	    <div class="alert alert-${css} alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 				<span aria-hidden="true">×</span>
 			</button>
 			<strong>${msg}</strong>
-		    </div>
-		</c:if>
+		 </div>
+	</c:if>
 
-		<h1>Todos os Procedimentos</h1>
+		<div   class="titulo">
+			<h4>Relação dos Procedimentos</h4>
+		</div>
 
-		<table class="table table-striped">
+	<div class="table-responsive-md" >
+		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
-					<th>#ID</th>
-					<th>Nome</th>
-					<th>Area</th>
-					<th>Action</th>
+					<th>Descrição</th>
+					<th class="text-center">Área</th>
+					<th class="text-center">Detalhes</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="procedimento" items="${procedimentos}">
 			    <tr>
-				<td>
-					${procedimento.id}
-				</td>
 				<td>${procedimento.nome}</td>
-				<td>${procedimento.area}</td>
-				
-				
-				<td>
-				  <spring:url value="/procedimentos/${procedimento.id}" var="procedimentoUrl" />
-				  <spring:url value="/procedimentos/${procedimento.id}/delete" var="deleteUrl" /> 
+				<td class="text-center">${procedimento.area}</td>				
+				<td class="text-center">
 				  <spring:url value="/procedimentos/${procedimento.id}/update" var="updateUrl" />
-
-				  <button class="btn btn-info" 
-                                          onclick="location.href='${procedimentoUrl}'">Detalhes</button>
-				  <button class="btn btn-primary" 
-                                          onclick="location.href='${updateUrl}'">Atualizar</button>
-				  <button class="btn btn-danger" 
-                                          onclick="location.href='${deleteUrl}'">Deletar</button>
-                                </td>
+				  <button class="btn btn-sm" onclick="location.href='${updateUrl}'"><i class="fas fa-newspaper"></i></button>
+				 </td>
 			    </tr>
 			</c:forEach>
 		</table>
+		</div>
+		
+		<div class="col-sm-12" >
+			<div class="titulo">	
+				<div  class="col-sm-12"  >	
+					<a class="btn btn-block  btn-outline-primary"  href="${pageContext.request.contextPath}/procedimentos/add"><i class="fas fa-plus-square"></i>  Adcionar Novo Procedimento</a>
+				</div>		
+			</div>		
+		</div>
 
-	</div>
+</div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
-</body>
+<div  class="space"></div>	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>
+	
+	
+  <script>
+  $(document).ready(function() {
+	    $('#Tabela').DataTable();
+	} );
+  </script>
+  
+  
+	</body>
 </html>

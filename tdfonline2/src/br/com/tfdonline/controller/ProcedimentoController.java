@@ -1,11 +1,6 @@
 package br.com.tfdonline.controller;
 
 
-	import java.util.ArrayList;
-	import java.util.LinkedHashMap;
-	import java.util.List;
-	import java.util.Map;
-
 
 
 	import org.slf4j.Logger;
@@ -46,20 +41,18 @@ import br.com.tfdonline.util.SelectFiller;
 		*/
 		
 
-		// list page
+		// list page - Mostra todos os procedimentos
 		@RequestMapping(value = "/procedimentos")
 		public String showAllProcedimentos(Model model) {
 
 			logger.debug("showAllProcedimentos()");
 			model.addAttribute("procedimentos", procedimentoDAO.findAll());
 			return "listaprocedimentospage";
-
 		}
 		
 				
 		@RequestMapping(value = {"/procedimentos/find" })
-		    public String findProcedimento(Model model) {
-			 	
+		    public String findProcedimento(Model model) {			 	
 				
 				Procedimento procedimento = new Procedimento();
 				procedimento.setNome("Informe o nome da Procedimento");
@@ -70,32 +63,31 @@ import br.com.tfdonline.util.SelectFiller;
 		// pesquisar page
 		@RequestMapping(value = "/procedimentos/find2")
 		public String showFindProcedimentoForm(@RequestParam("nome") String nome, Model model) {
+			
 			System.out.println("chamando o procedimentos/find/nome............"+nome);
 			logger.debug("Procedimentos.FindByName()");
 			model.addAttribute("procedimentos", procedimentoDAO.findbyNome(nome));
 			return "listaprocedimentospage";
-
 		}
 
 		// save or update procedimento
 		// 1. @ModelAttribute bind form value
 		// 2. @Validated form validator
 		// 3. RedirectAttributes for flash value
+		
 		@RequestMapping(value = "/procedimentos", method = RequestMethod.POST)
 		//public String saveOrUpdateProcedimento(@ModelAttribute("procedimentoForm") @Validated Procedimento procedimento,
+		
 		public String saveOrUpdateProcedimento(@ModelAttribute("procedimentoForm")  Procedimento procedimento,
-				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes) {
+				BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
 			logger.debug("saveOrUpdateProcedimento() : {}", procedimento);
 			System.out.println("Depois do formProcedimento, salvando ou atualizando procedimento.............");
-			System.out.println("Nome do procedimento a ser atualizada="+ procedimento.getNome());
 			
 		/*	if (result.hasErrors()) {
 				populateDefaultModel(model);
 				return "procedimentoform";
-			} else*/ {
-
+			} else*/ 
 				// Add message to flash scope
 				redirectAttributes.addFlashAttribute("css", "success");
 				if(procedimento.isNew()){
@@ -109,16 +101,10 @@ import br.com.tfdonline.util.SelectFiller;
 				System.out.println(".....Salvo ou atualizado o procedimento.....");
 				System.out.println("redirecionando para... \"redirect:/procedimentos/\" + procedimento.getId();");
 				// POST/REDIRECT/GET
-				return "redirect:/procedimentos/" + procedimento.getId();
-				//return "/procedimentos/" + procedimento.getId();
-
-				// POST/FORWARD/GET
-				// return "procedimento/list";
-
+				return "redirect:/procedimentos/";
 			}
 
-		}
-
+	
 		// show update form
 		@RequestMapping(value = "/procedimentos/{id}/update")
 		public String showUpdateProcedimentoForm(@PathVariable("id") int id, Model model) {
@@ -135,13 +121,10 @@ import br.com.tfdonline.util.SelectFiller;
 
 			model.addAttribute("areas", procedimentoDAO.getAreasProcedimento());
 
-			model.addAttribute("procedimentoForm", procedimento);
-
-			
+			model.addAttribute("procedimentoForm", procedimento);		
 			
 			
 			return "procedimentoform";
-
 		}
 
 		// show procedimento
@@ -171,47 +154,49 @@ import br.com.tfdonline.util.SelectFiller;
 			Procedimento procedimento = new Procedimento();
 
 			// set default value
-			procedimento.setId(-1);
-			procedimento.setNome("Nome do Procedimento");
-			
+			procedimento.setId(-1);					
 			
 			model.addAttribute("areas", procedimentoDAO.getAreasProcedimento());
 						
 			model.addAttribute("procedimentoForm", procedimento);
 
-
-
-			return "procedimentoform";
-
+			return "procedimentocadastro";
 		}
 
 
 		// delete procedimento
 		@RequestMapping(value = "/procedimentos/{id}/delete")
 		public String deleteProcedimento(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
-
+			final RedirectAttributes redirectAttributes, Model model) {
 			
 			logger.debug("deleteProcedimento() : {}", id);
-			System.out.println("deletando o procedimento ="+ id);
+			System.out.println("desativando o procedimento ="+ id);
 			
-			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Procedimento deletado com sucesso!");
-
 			procedimentoDAO.deleteProcedimentoByID(new Integer(id));
 			
 			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Procedimento deletado!");
+			redirectAttributes.addFlashAttribute("msg", "Procedimento deletado com sucesso!");
 			
+			model.addAttribute("procedimentos", procedimentoDAO.findAll());
 			
-			return "redirect:/procedimentos/";
-			//return "listaprocedimentospage";
-
+			return "listaprocedimentospage";
 		}
 
 	
 
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
-

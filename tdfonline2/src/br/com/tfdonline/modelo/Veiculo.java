@@ -21,7 +21,12 @@ private static final long serialVersionUID = 1L;
 	
 	String descricao;
 	String placa;
-	int vagas;
+	Integer vagas;
+	private String tipo;
+	private String situacao;
+	private Integer ativo;
+	private String marca;
+	
 	
 	public Veiculo() {
 		this.id=-1;
@@ -51,11 +56,11 @@ private static final long serialVersionUID = 1L;
 		this.placa = placa;
 	}
 
-	public int getVagas() {
+	public Integer getVagas() {
 		return vagas;
 	}
 
-	public void setVagas(int vagas) {
+	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
 	}
 
@@ -69,5 +74,37 @@ private static final long serialVersionUID = 1L;
 			return true;
 		else
 			return false;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public Integer getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
 	}
 }

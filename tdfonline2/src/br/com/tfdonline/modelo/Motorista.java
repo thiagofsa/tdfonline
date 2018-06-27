@@ -1,6 +1,7 @@
 package br.com.tfdonline.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,6 +30,12 @@ private static final long serialVersionUID = 1L;
 	private String cpf;
 	
 	private Integer ativo;
+	
+	private String matricula;
+	
+	private String categoriacnh;
+	
+	private Date validadecnh;
 
 	public String getNome() {
 		return nome;
@@ -88,6 +95,30 @@ private static final long serialVersionUID = 1L;
 
 	public void setAtivo(Integer ativo) {
 		this.ativo = ativo;
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getCategoriacnh() {
+		return categoriacnh;
+	}
+
+	public void setCategoriacnh(String categoriacnh) {
+		this.categoriacnh = categoriacnh;
+	}
+
+	public Date getValidadecnh() {
+		return validadecnh;
+	}
+
+	public void setValidadecnh(Date validadecnh) {
+		this.validadecnh = validadecnh;
 	}
 	
 }

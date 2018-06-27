@@ -75,6 +75,8 @@
 			</c:forEach>
 		</table>
 
+	<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/usuarios/add">Novo</a>
+
 	</div>
 
 	<script src="../resources/js/jquery.min.js"  type="text/javascript"></script>

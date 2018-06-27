@@ -16,9 +16,6 @@ import br.com.tfdonline.modelo.Procedimento;
 @Transactional
 public class ProcedimentoDAOImpl implements ProcedimentoDAOI, Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
@@ -36,18 +33,23 @@ public class ProcedimentoDAOImpl implements ProcedimentoDAOI, Serializable{
 	
 	@Override
 	public void addProcedimento(Procedimento procedimento) {
-		 sessionFactory.getCurrentSession().save(procedimento);
 		
+		procedimento.setAtivo(1);
+		sessionFactory.getCurrentSession().save(procedimento);		
 	}
 
 	@Override
 	public void deleteProcedimentoByID(Integer id) {
 		System.out.println("recebi dentro do DAO o id="+  id);
-		Procedimento procedimento = sessionFactory.getCurrentSession().load(Procedimento.class,id);
-		sessionFactory.getCurrentSession().clear();
-		sessionFactory.getCurrentSession().delete(procedimento);
-		System.out.println("dentro do DAO..deletei o Procedimento"+ id);
 		
+		Procedimento procedimento = sessionFactory.getCurrentSession().load(Procedimento.class,id);
+		
+		procedimento.setAtivo(0);
+		
+		sessionFactory.getCurrentSession().clear();
+		sessionFactory.getCurrentSession().update(procedimento);
+		
+		System.out.println("dentro do DAO..dsativei o Procedimento"+ id);		
 	}
 
 	@Override
@@ -62,39 +64,40 @@ public class ProcedimentoDAOImpl implements ProcedimentoDAOI, Serializable{
 	@Override
 	public void updateProcedimento(Procedimento procedimento) {
 		// TODO Auto-generated method stub
+		
+		procedimento.setAtivo(1);
 		sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().update(procedimento);
 				
-		System.out.println("---> Procedimento atualizado pelo DAO!!!");
-		
+		System.out.println("---> Procedimento atualizado pelo DAO!!!");		
 	}
 	
 	@Override
 	public List<Procedimento> findAll() {
 		// TODO Auto-generated method stub
 		 
-		   Query query  = sessionFactory.getCurrentSession().createQuery("from Procedimento");
+		   Query query  = sessionFactory.getCurrentSession().createQuery("from Procedimento p where p.ativo = 1  order by nome");
            List<Procedimento> lista = (List<Procedimento>) query.list(); 
            System.out.println("-------->>  Procedimentos encontrados ="+ lista.size());
-           return lista;
-		    	
+           return lista;		    	
  	 }
+	
 	public List<Procedimento> findbyNome(String nome){
 		
 		
-		String hql = "from Procedimento where nome like :keyword";
+		String hql = "from Procedimento where nome like :keyword and ativo = 1";
 		String keyword = nome;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
 		 
 		List<Procedimento> lista = query.list();
-		return lista;
-		
+		return lista;		
 	}
 
 	@Override
 	public void saveOrUpdate(Procedimento procedimento) {
 		// TODO Auto-generated method stub
+		
 		if (findByID(procedimento.getId())==null) {
 			this.addProcedimento(procedimento);
 			System.out.println("estou no DAO, tentanto ADD a procedimento...");
@@ -107,7 +110,6 @@ public class ProcedimentoDAOImpl implements ProcedimentoDAOI, Serializable{
 
 	public  List<String>  getAreasProcedimento(){
 		
-		
 		ArrayList <String> areas = new ArrayList<>();
 		areas = new ArrayList<String> ();
 		areas.add("Area 1");
@@ -115,7 +117,7 @@ public class ProcedimentoDAOImpl implements ProcedimentoDAOI, Serializable{
 		areas.add("Area 3");
 		areas.add("Area 4");
 		
-		return areas;
-		
+		return areas;		
 	}
+
 }

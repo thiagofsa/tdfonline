@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Motorista;
 
-
 @Repository
 @Transactional
 public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
@@ -28,25 +27,30 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 		this.sessionFactory = sessionFactory;
 	}
 	
-	
+		
 	@Override
 	public void addMotorista(Motorista motorista) {
-		 sessionFactory.getCurrentSession().save(motorista);
 		
+		motorista.setAtivo(1);
+		sessionFactory.getCurrentSession().save(motorista);		
 	}
 
+		
 	@Override
 	public void deleteMotoristaByID(Integer id) {
 		System.out.println("recebi dentro do DAO o id="+  id);
+		
 		Motorista motorista = sessionFactory.getCurrentSession().load(Motorista.class,id);
+		
 		motorista.setAtivo(0);
+		
 		sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().update(motorista);
 		
-		System.out.println("dentro do MOtoristaDAO..deletei o Motorista");
-		
+		System.out.println("dentro do MOtoristaDAO..desativei o Motorista");		
 	}
 
+		
 	@Override
 	public Motorista findByID(Integer id) {
 		// TODO Auto-generated method stub
@@ -56,52 +60,53 @@ public class MotoristaDAOImpl implements MotoristaDAOI, Serializable{
 		return motorista;
 	}
 
+		
 	@Override
 	public void updateMotorista(Motorista motorista) {
 		// TODO Auto-generated method stub
+		
+		motorista.setAtivo(1);
 		sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().update(motorista);
 				
-		System.out.println("---> Motorista atualizado pelo DAO!!!");
-		
+		System.out.println("---> Motorista atualizado pelo DAO!!!");		
 	}
+		
 	
 	@Override
 	public List<Motorista> findAll() {
 		// TODO Auto-generated method stub
-		 
-		 
-		   Query query  = sessionFactory.getCurrentSession().createQuery("from Motorista m where m.ativo>0 ");
+		 		 
+		   Query query  = sessionFactory.getCurrentSession().createQuery("from Motorista m where m.ativo = 1  order by nome");
            List<Motorista> lista = (List<Motorista>) query.list(); 
            System.out.println("-------->>  Motoristas encontrados ="+ lista.size());
-           return lista;
-		    	
+           return lista;		    	
  	 }
+	
 	public List<Motorista> findbyName(String nome){
-		
-		
-		String hql = "from Motorista m where m.nome like :keyword AND m.ativo>0" ;
+			
+		String hql = "from Motorista where nome like :keyword  and ativo = 1";
 		String keyword = nome;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
 		 
 		List<Motorista> lista = query.list();
-		return lista;
-		
-	}	
+		return lista;		
+	}
 
+		
 	@Override
 	public void saveOrUpdate(Motorista motorista) {
 		// TODO Auto-generated method stub
+		
 		if (findByID(motorista.getId())==null) {
 			this.addMotorista(motorista);
-			System.out.println("estou no DAO, tentanto add o motorista...");
+			System.out.println("estou no DAO, tentanto2 add o motorista...");
 		} else {
 			
 			this.updateMotorista(motorista);
-			System.out.println("estou no DAO, tentanto ATUALIZAR o motorista...");
+			System.out.println("estou no DAO, tentanto2 ATUALIZAR o motorista...");
 		}
 	}
-
 	
 }

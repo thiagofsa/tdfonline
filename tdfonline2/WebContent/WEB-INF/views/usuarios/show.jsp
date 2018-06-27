@@ -20,20 +20,31 @@
 		</div>
 	</c:if>
 
-	<h1>Veiculo - Detalhes </h1>
+	<h1>Usuario - Detalhes </h1>
 	<br />
 
 	<div class="row">
 		<label class="col-sm-2">ID</label>
-		<div class="col-sm-10">${veiculo.id}</div>
+		<div class="col-sm-10">${usuario.id}</div>
 	</div>
 
 	<div class="row">
+		<label class="col-sm-2">Login</label>
+		<div class="col-sm-10">${usuario.login}</div>
+	</div>
+	
+	
+	<div class="row">
 		<label class="col-sm-2">Nome</label>
-		<div class="col-sm-10">${veiculo.descricao}</div>
+		<div class="col-sm-10">${usuario.nome}</div>
 	</div>
 
-		
+	<div class="row">
+		<label class="col-sm-2">Telefone</label>
+		<div class="col-sm-10">${usuario.telefone}</div>
+	</div>
+
+	
 	
 </div>
 

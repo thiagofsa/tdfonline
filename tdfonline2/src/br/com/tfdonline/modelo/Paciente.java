@@ -187,6 +187,12 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	
+	public boolean isNew() {
+		if ((id==null)|| (id<0))
+			return true;
+		else
+			return false;
+	}
 	
 	
 

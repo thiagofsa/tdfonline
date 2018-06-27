@@ -22,6 +22,7 @@ private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String area ;
 	private String nome;
+	private Integer ativo;
 	
 		
 	public Procedimento () {
@@ -59,8 +60,6 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-	
-
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -71,6 +70,14 @@ private static final long serialVersionUID = 1L;
 			return true;
 		else
 			return false;
+	}
+
+	public Integer getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
 	}
 
 }

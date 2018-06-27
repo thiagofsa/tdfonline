@@ -1,13 +1,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href= "<c:url value='/resources/css/menu.css'/>" >
+<!-- <link rel="stylesheet" href= "<c:url value='/resources/css/menu.css'/>" >   -->
 
 
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
   
-  <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><i class="fas fa-pallet fa-lg"></i></a>
+  <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><i class="fas fa-home fa-lg"></i></a>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,20 +14,21 @@
   
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Cadastros
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/paciente/">Pacientes</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/pacientes/">Pacientes</a>
           <a class="dropdown-item" href="#">Acompanhantes</a>
-          <a class="dropdown-item" href="#">Procedimento Médico</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/procedimentos/">Procedimento Médico</a>
           <a class="dropdown-item" href="#">Unidades de Saúde</a>
           <a class="dropdown-item" href="#">Beneficiários de Diárias</a>
-          <a class="dropdown-item" href="#">Veiculos</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/veiculos">Veiculos</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/motoristas">Motoristas</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Usuarios</a>
           
           <!-- <div class="dropdown-divider"></div> -->
         </div>
@@ -89,9 +89,19 @@
           <a class="dropdown-item" href="#">Fale Conosco</a>
           <a class="dropdown-item" href="#">Sobre</a>          
         </div>
-      </li> 
-      
-      
-    </ul>
+      </li>      
+    </ul>    
+   
+   <div class="dropdown">
+  	
+  	<a class="nav-link dropdown-toggle acertonav" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Olá, ${usuarioLogado.nome}
+  	</a>
+
+  	<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    	<a class="dropdown-item" href="#"><i class="fas fa-user"></i> Minha Conta</a>
+    	<a class="dropdown-item" href="${pageContext.request.contextPath}/logout"><i class="fas fa-window-close"></i> Sair</a>
+    	
+  	</div>
+	</div>
   </div>
 </nav>

@@ -12,7 +12,7 @@
   <head>    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title><tiles:getAsString name="title" /></title>
+    <title>Cadastro de Veiculos</title>
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
@@ -26,8 +26,9 @@
 	<div  class="space" ></div>
 		
 	<div class="titulo"  >
-		<h4>Detalhes Veiculo</h3>
+		<h4>Dados do novo Veiculo</h3>
 	</div>
+
 
 	<spring:url value="/veiculos" var="veiculoActionUrl" />
 
@@ -109,26 +110,17 @@
 		</spring:bind>
 				
 		</div>
-    		
-		<div  class="form-row" >
-			<div class="form-group col-sm-4 text-center">	
-				<spring:url value="/veiculos/${id}/delete" var="deleteUrl" />		
-				<button type="button" class="btn btn-outline-danger"  onclick="location.href='${deleteUrl}'"><i class="fas fa-times-circle"></i></i>  Excluir</button>											
-			</div>
+    
 			
-			<div class="form-group col-sm-4 text-center">		
-				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>  Atualizar</button>				
-			</div>
+		<div  class="form-row" >				
+			<div class="form-group col-sm-6 text-center">		
+				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>  Cadastrar</button>				
+			</div>	
 			
-			<div class="form-group col-sm-4 text-center">				
-				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/veiculos/"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>				
-			</div>			
-					
-		</div> 
-		
-		
-		
-		
+			<div class="form-group col-sm-6 text-center">		
+				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/veiculos"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>				
+			</div>
+		</div>		
 		
 	</form:form>
 </div>

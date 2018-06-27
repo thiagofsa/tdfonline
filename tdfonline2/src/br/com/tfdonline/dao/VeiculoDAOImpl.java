@@ -15,11 +15,6 @@ import br.com.tfdonline.modelo.Veiculo;
 @Transactional
 public class VeiculoDAOImpl implements VeiculoDAOI, Serializable{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -33,20 +28,28 @@ public class VeiculoDAOImpl implements VeiculoDAOI, Serializable{
 	}
 	
 	
+	private static final long serialVersionUID = 1L;
+	
+	
 	@Override
 	public void addVeiculo(Veiculo veiculo) {
-		 sessionFactory.getCurrentSession().save(veiculo);
 		
+		veiculo.setAtivo(1);
+		sessionFactory.getCurrentSession().save(veiculo);		
 	}
 
 	@Override
 	public void deleteVeiculoByID(Integer id) {
 		System.out.println("recebi dentro do DAO o id="+  id);
-		Veiculo veiculo = sessionFactory.getCurrentSession().load(Veiculo.class,id);
-		sessionFactory.getCurrentSession().clear();
-		sessionFactory.getCurrentSession().delete(veiculo);
-		System.out.println("dentro do DAO..deletei o Veiculo"+ id);
 		
+		Veiculo veiculo = sessionFactory.getCurrentSession().load(Veiculo.class,id);
+		
+		veiculo.setAtivo(0);
+		
+		sessionFactory.getCurrentSession().clear();
+		sessionFactory.getCurrentSession().update(veiculo);
+		
+		System.out.println("dentro do DAO.. Desativei o Veiculo"+ id);		
 	}
 
 	@Override
@@ -61,39 +64,40 @@ public class VeiculoDAOImpl implements VeiculoDAOI, Serializable{
 	@Override
 	public void updateVeiculo(Veiculo veiculo) {
 		// TODO Auto-generated method stub
+		
+		veiculo.setAtivo(1);
 		sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().update(veiculo);
 				
-		System.out.println("---> Veiculo atualizado pelo DAO!!!");
-		
+		System.out.println("---> Veiculo atualizado pelo DAO!!!");		
 	}
 	
 	@Override
 	public List<Veiculo> findAll() {
 		// TODO Auto-generated method stub
 		 
-		   Query query  = sessionFactory.getCurrentSession().createQuery("from Veiculo");
+		   Query query  = sessionFactory.getCurrentSession().createQuery("from Veiculo v where v.ativo = 1  order by descricao");
            List<Veiculo> lista = (List<Veiculo>) query.list(); 
            System.out.println("-------->>  Veiculos encontrados ="+ lista.size());
-           return lista;
-		    	
+           return lista;		    	
  	 }
+	
 	public List<Veiculo> findbyDescricao(String descricao){
-		
-		
-		String hql = "from Veiculo where descricao like :keyword";
+			
+		String hql = "from Veiculo where descricao like :keyword and ativo = 1";
 		String keyword = descricao;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
 		 
 		List<Veiculo> lista = query.list();
-		return lista;
-		
+		return lista;		
 	}
 
+	
 	@Override
 	public void saveOrUpdate(Veiculo veiculo) {
 		// TODO Auto-generated method stub
+		
 		if (findByID(veiculo.getId())==null) {
 			this.addVeiculo(veiculo);
 			System.out.println("estou no DAO, tentanto ADD a veiculo...");
@@ -103,6 +107,4 @@ public class VeiculoDAOImpl implements VeiculoDAOI, Serializable{
 			System.out.println("estou no DAO, tentanto ATUALIZAR a veiculo...");
 		}
 	}
-
-	
 }

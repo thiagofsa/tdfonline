@@ -52,6 +52,12 @@
     </property>
 	</bean>
 	
+	<mvc:interceptors>
+    <bean class=
+        "br.com.tfdonline.interceptor.AutorizadorInterceptor" />
+	</mvc:interceptors>
+
+	
 	<mvc:annotation-driven />
 	
 	<context:component-scan base-package="br.com.tfdonline" />

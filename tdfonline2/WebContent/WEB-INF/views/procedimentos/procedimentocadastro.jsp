@@ -25,7 +25,7 @@
 <div  class="space" ></div>
 		
 	<div class="titulo"  >
-		<h4>Detalhes Procedimento</h3>
+		<h4>Novo Procedimento</h3>
 	</div>
 
 	<spring:url value="/procedimentos" var="procedimentoActionUrl" />
@@ -63,16 +63,12 @@
 		</div>
 
 		<div  class="form-row" >
-			<div class="form-group col-sm-4 text-center">	
-				<spring:url value="/procedimentos/${id}/delete" var="deleteUrl" />		
-				<button type="button" class="btn btn-outline-danger"  onclick="location.href='${deleteUrl}'"><i class="fas fa-times-circle"></i></i>  Excluir</button>											
+			
+			<div class="form-group col-sm-6 text-center">		
+				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>  Cadastrar</button>				
 			</div>
 			
-			<div class="form-group col-sm-4 text-center">		
-				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>  Atualizar</button>				
-			</div>
-			
-			<div class="form-group col-sm-4 text-center">				
+			<div class="form-group col-sm-6 text-center">				
 				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/procedimentos/"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>				
 			</div>			
 					

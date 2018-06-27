@@ -48,59 +48,55 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 		}
 		
 		
-
-		// list page
+		// list page - Mostra todos os motoristas
 		@RequestMapping(value = "/motoristas")
 		public String showAllMotoristas(Model model) {
 
 			logger.debug("showAllMotoristas()");
 			model.addAttribute("motoristas", motoristaDAO.findAll());
 			return "listamotoristaspage";
-
 		}
-		
-		
-		
+			
 				
-		@RequestMapping(value = {"/motoristas/find" })
-		    public String findMotorista(Model model) {
-			 	
-				
-				Motorista motorista = new Motorista();
-				motorista.setNome("Informe o nome");
-			 	model.addAttribute("motoristaForm", motorista);
-			 	return "findmotorista";
-		    }
+		@RequestMapping(value = {"/motoristas/find" })		
+		public String findMotorista(Model model) {
+			 					
+			Motorista motorista = new Motorista();
+			motorista.setNome("Informe o nome");
+			model.addAttribute("motoristaForm", motorista);
+			return "findmotorista";
+		}
 		 
 		// pesquisar page
-		@RequestMapping(value = "/motoristas/find2")
+		@RequestMapping(value = "/motoristas/find2")		
 		public String showFindMotoristaForm(@RequestParam("nome") String nome, Model model) {
+			
 			System.out.println("chamando o motoristas/find/nome............"+nome);
 			logger.debug("Motoristas.FindByName()");
 			model.addAttribute("motoristas", motoristaDAO.findbyName(nome));
 			return "listamotoristaspage";
-
 		}
 
+		
+		
 		// save or update motorista
 		// 1. @ModelAttribute bind form value
 		// 2. @Validated form validator
 		// 3. RedirectAttributes for flash value
+			
 		@RequestMapping(value = "/motoristas", method = RequestMethod.POST)
 		//public String saveOrUpdateMotorista(@ModelAttribute("motoristaForm") @Validated Motorista motorista,
+		
 		public String saveOrUpdateMotorista(@ModelAttribute("motoristaForm")  Motorista motorista,
-				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes) {
+				BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
 			logger.debug("saveOrUpdateMotorista() : {}", motorista);
 			System.out.println("Depois do formMotorista, salvando ou atualizando motorista.............");
-			System.out.println("Rua do motorista a ser atualizada="+ motorista.getCpf());
-			
+						
 		/*	if (result.hasErrors()) {
 				populateDefaultModel(model);
 				return "motoristaform";
-			} else*/ {
-
+			} else*/ 
 				// Add message to flash scope
 				redirectAttributes.addFlashAttribute("css", "success");
 				if(motorista.isNew()){
@@ -114,15 +110,9 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 				System.out.println(".....Salvo ou atualizado o motorista.....");
 				System.out.println("redirecionando para... \"redirect:/motoristas/\" + motorista.getId();");
 				// POST/REDIRECT/GET
-				return "redirect:/motoristas/" + motorista.getId();
-				//return "/motoristas/" + motorista.getId();
-
-				// POST/FORWARD/GET
-				// return "motorista/list";
-
-			}
-
-		}
+				
+				return "redirect:/motoristas/";
+				}
 
 		// show update form
 		@RequestMapping(value = "/motoristas/{id}/update")
@@ -140,11 +130,12 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 			
 			model.addAttribute("motoristaForm", motorista);
 			
-			populateDefaultModel(model);
+			//populateDefaultModel(model); Flavio
 			
 			return "motoristaform";
-
-		}
+			}
+		
+		
 
 		// show motorista
 		@RequestMapping(value = "/motoristas/{id}")
@@ -161,8 +152,7 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 			model.addAttribute("motorista", motorista);
 
 			return "motoristashow";
-
-		}
+		}	
 		
 		// show add motorista form
 		@RequestMapping(value = "/motoristas/add", method = RequestMethod.GET)
@@ -174,66 +164,33 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 			// set default value
 			motorista.setId(-1);
-			motorista.setNome("mkyong123");
-			motorista.setEmail("test@gmail.com");
-			motorista.setTelefone("8888-8888");
+						
 			model.addAttribute("motoristaForm", motorista);
 
-			populateDefaultModel(model);
+			//populateDefaultModel(model); flavio
 
 			return "motoristacadastro";
-
 		}
 
-
 		// delete motorista
-		@RequestMapping(value = "/motoristas/{id}/delete")
+		@RequestMapping(value = "/motoristas/{id}/delete")		
 		public String deleteMotorista(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
+				final RedirectAttributes redirectAttributes, Model model) {
 
 			logger.debug("deleteMotorista() : {}", id);
-			System.out.println("deletando o motorista ="+ id);
+			System.out.println("desativando o motorista ="+ id);
 
 			motoristaDAO.deleteMotoristaByID(new Integer(id));
 			
 			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Motorista deletado!");
+			redirectAttributes.addFlashAttribute("msg", "Motorista deletado com sucesso!");
+					
+			model.addAttribute("motoristas", motoristaDAO.findAll());			
 			
-			
-			return "redirect:/motoristas/";
-			//return "listamotoristaspage";
-
+			return "listamotoristaspage";
 		}
 
 	
-
-		private void populateDefaultModel(Model model) {
-
-			
-
-			Map<String, String> skill = new LinkedHashMap<String, String>();
-			skill.put("Ida", "Ida");
-			skill.put("Volta", "Volta");
-			skill.put("Ida e Volta", "Ida e Volta");
-			model.addAttribute("tipoEncaminhamentoList", skill);
-
-			List<Integer> numbers = new ArrayList<Integer>();
-			numbers.add(1);
-			numbers.add(2);
-			numbers.add(3);
-			numbers.add(4);
-			numbers.add(5);
-			model.addAttribute("numberList", numbers);
-
-			Map<String, String> country = new LinkedHashMap<String, String>();
-			country.put("US", "United Stated");
-			country.put("CN", "China");
-			country.put("SG", "Singapore");
-			country.put("MY", "Malaysia");
-			model.addAttribute("countryList", country);
-
-		}
-
+	
 	}
 	
-
