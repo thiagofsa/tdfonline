@@ -22,7 +22,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="${pageContext.request.contextPath}/pacientes/">Pacientes</a>
-          <a class="dropdown-item" href="#">Acompanhantes</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/acompanhantes/">Acompanhantes</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/procedimentos/">Procedimento Médico</a>
           <a class="dropdown-item" href="#">Unidades de Saúde</a>
           <a class="dropdown-item" href="#">Beneficiários de Diárias</a>
