@@ -17,7 +17,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 		 	String uri = request.getRequestURI();
 		 	//	 	garantir acesso as paginas de login e resources para todos os usuarios
 		 	if(uri.endsWith("loginform") || uri.endsWith("login") ||  
-                 uri.endsWith("efetualogin") || 
+                 uri.endsWith("efetualogin") || uri.contains("logout") ||
                          uri.contains("resources")){
              return true;
 		 	}
@@ -28,26 +28,85 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 		 	
 		 		if (uri.contains("usuarios")) {
 		 			
+		 			System.out.println("Tentando acessar o modulo Usuarios.....");
 		 			if (usuario.getAdmin()>0) {
 		 				System.out.println("Usuario adm acessando o modulo Usuarios...");
 		 				return true;
 		 			}
 		 			else {
-		 				System.out.println("Usuario nãoAdmin acessando o modulo Usuarios...acesso negado!");
+		 				System.out.println("Usuario acessando o modulo Usuarios...acesso negado!");
 		 				request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Usuário");
+		 				
+		 				//se nao for nem transporte nem admin, ele é usuario basico
+		 				if ((usuario.getTransporte()<1)) {
+		 					request.setAttribute("msg", "Usuário sem permissão para esta operação (Módulo Usuario");
+		 					response.sendRedirect("usuariobloqueado");
+		 					return true;    
+		 				
+		 				//ou é do transporte
+		 				}else  {
+		 					request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Usuario");
+		 					response.sendRedirect("usuariobloqueado-transporte");
+		 					return true;    
+		 				
+		 				}
+		 				
+
+		 			}
+		 			//se estou acessando o modulo transporte
+		 		} 
+		 			
+		 		if ((uri.contains("motoristas")) || (uri.contains("veiculos"))){
+
+		 			System.out.println("tentando acessar o modulo de transportes.....");
+		 			
+		 			//checar se o usuario logado é de transportes ou admin		 			
+		 			if ((usuario.getTransporte()>0) || (usuario.getAdmin()>0)){		 				
+		 				return true;
+
+		 			//caso seja um usuario  user comum		
+		 			} else {
+		 				request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Transporte");
 		 				response.sendRedirect("usuariobloqueado");
+		 				return false;
+		 				
+		 			}
+
+			 	}
+		 		
+		 		if (uri.contains("acompanhantes") || uri.contains("beneficios") 
+		 				|| uri.contains("distribuicaos")
+		 				|| uri.contains("encaminhamentos") 
+		 				|| uri.contains("marcacaos")
+		 				|| uri.contains("pacientes")
+		 				|| uri.contains("pautas")
+		 				|| uri.contains("procedimentos")
+		 				|| uri.contains("unidadesaudes")
+		 				){
+		 			
+		 			System.out.println("Caso geral.....");
+
+		 			if ((usuario.getAdmin()>0) || (usuario.getTransporte()<1)){		 				
+		 				return true;
+		 		
+		 			}else {
+		 				request.setAttribute("msg", "Usuário sem permissão para esta operação");
+		 				response.sendRedirect("usuariobloqueado-transporte");
 		 				return false;
 		 			}
 		 		}
 		 		
-		 		return true;		
+		 	}//usuario logado
+		 	
+		 	else {
+		 	
+		 	
+		 	response.sendRedirect("loginform");
+	        return false;
+		 	
 		 	}
-		 	
-		 	
-		 
-	        response.sendRedirect("loginform");
-	        return false;    
-	    }
+	 return false;   
+	 }
 	 
 	 
 	

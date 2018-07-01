@@ -324,12 +324,11 @@ import br.com.tfdonline.util.DateUtils;
 			
 			System.out.println("Paciente selecionado na Marcacao-->"+ marcacaoSession.getPaciente().getNome());
 			
+			List<Acompanhante> acompanhatespaciente = acompanhanteDAO.findbyPacienteID(marcacaoSession.getPaciente().getId());
 			
-			model.addAttribute("acompanhantespaciente",  marcacaoSession.getPaciente().getAcompanhantes());
-			//antes...
-			//model.addAttribute("acompanhantespaciente",  marcacaoSession.getAcompanhantespacientemarcacao());
+			model.addAttribute("acompanhantespaciente", acompanhatespaciente );
+
 			
-			//colocando os dados da marcacao na sessao..			
 				
 			request.getSession().setAttribute("marcacaoSession", marcacaoSession);
 				
@@ -506,8 +505,6 @@ import br.com.tfdonline.util.DateUtils;
 			}else
 				System.out.println("Marcacao nao localizado");
 			
-			marcacao.setAcompanhantespacientemarcacao(acompanhanteDAO.findbyMarcacaoID(id));
-			
 			Marcacao replica = null;
 			
 				   replica = new Marcacao();
@@ -520,7 +517,10 @@ import br.com.tfdonline.util.DateUtils;
 				   replica.setUnidadesaude(marcacao.getUnidadesaude());
 				   replica.setProcedimento(marcacao.getProcedimento());
 				   replica.setPaciente(marcacao.getPaciente());
-				   replica.setAcompanhantespacientemarcacao(marcacao.getAcompanhantespacientemarcacao());
+				   
+				   List<Acompanhante> acompanhantespaciente = acompanhanteDAO.findbyMarcacaoID(id);
+				   
+				   replica.setAcompanhantespacientemarcacao(acompanhantespaciente);
 				   replica.setVagas(marcacao.getVagas());
 				   replica.setLocalacolhimento(marcacao.getLocalacolhimento());
 				   replica.setHoraprocedimento(marcacao.getHoraprocedimento());
@@ -610,4 +610,3 @@ import br.com.tfdonline.util.DateUtils;
 
 	}
 	
-

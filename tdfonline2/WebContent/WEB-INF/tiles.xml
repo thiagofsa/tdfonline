@@ -14,21 +14,50 @@
        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
    </definition>  
    
-   <!-- Base Define -->
+   <!-- Login Define -->
    <definition name="login.definition" template="/WEB-INF/layouts/classic-login.jsp">  
        <put-attribute name="title" value="" />  
        <put-attribute name="header" value="/WEB-INF/views/header.jsp" />  
        <put-attribute name="body" value="" />  
        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
-   </definition>   
- 
- 
+   </definition>
+   
+   <!-- Transporte Define -->
+   <definition name="transporte.definition" template="/WEB-INF/layouts/classic.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+       <put-attribute name="menu" value="/WEB-INF/views/menu-transporte.jsp" />
+       <put-attribute name="body" value=""/>  
+       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
+   </definition>
+   
+   <!-- Admin Define -->
+   <definition name="admin.definition" template="/WEB-INF/layouts/classic.jsp">  
+       <put-attribute name="title" value="" />  
+       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
+       <put-attribute name="menu" value="/WEB-INF/views/menu-admin.jsp" />
+       <put-attribute name="body" value=""/>  
+       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
+   </definition>    
+      
+  
    <!-- Home Page -->
    <definition name="homepage" extends="base.definition">  
        <put-attribute name="title" value="Pagina Inicial" />  
        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
    </definition>
    
+   <!-- Home Page Transporte -->
+   <definition name="homepage-transporte" extends="transporte.definition">  
+       <put-attribute name="title" value="Pagina Inicial" />  
+       <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
+   </definition>
+   
+   <!-- Home Page Admin-->
+   <definition name="homepage-admin" extends="admin.definition">  
+       <put-attribute name="title" value="Pagina Inicial" />  
+       <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
+   </definition>
    
    <!-- Login Form -->
    <definition name="loginform" extends="login.definition">  
@@ -65,6 +94,11 @@
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariocadastro.jsp" />  
    </definition>
    
+   <definition name="usuariobloqueado-transporte" extends="transporte.definition">  
+       <put-attribute name="title" value="Usuario" />  
+       <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariobloqueado-transporte.jsp" />  
+   </definition>
+   
    <definition name="usuariobloqueado" extends="base.definition">  
        <put-attribute name="title" value="Usuario" />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariobloqueado.jsp" />  
@@ -74,27 +108,27 @@
    
 	<!-- ######################## MOTORISTAS PAGES ########################## -->
 	 
-   <definition name="listamotoristaspage" extends="base.definition">  
+   <definition name="listamotoristaspage" extends="transporte.definition">  
        <put-attribute name="title" value="Lista de Motoristas" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/lista.jsp" />  
    </definition>
    
-   <definition name="motoristaform" extends="base.definition">  
+   <definition name="motoristaform" extends="transporte.definition">  
        <put-attribute name="title" value="Detalhes do Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristaform.jsp" />  
    </definition>
    
-   <definition name="findmotorista" extends="base.definition">  
+   <definition name="findmotorista" extends="transporte.definition">  
        <put-attribute name="title" value="Localiza Motoristas" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/find.jsp" />  
    </definition>   
    
-   <definition name="motoristashow" extends="base.definition">  
+   <definition name="motoristashow" extends="transporte.definition">  
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
    </definition>
    
-    <definition name="motoristacadastro" extends="base.definition">  
+    <definition name="motoristacadastro" extends="transporte.definition">  
        <put-attribute name="title" value="Novo Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristacadastro.jsp" />  
    </definition>
@@ -202,26 +236,25 @@
        <put-attribute name="body" value="/WEB-INF/views/beneficios/show.jsp" />  
    </definition>
    
-   
-   
+      
    	<!-- ####################### VEICULOS PAGES ############################## -->
    
-   <definition name="listaveiculospage" extends="base.definition">  
+   <definition name="listaveiculospage" extends="transporte.definition">  
        <put-attribute name="title" value="Lista de VeicuLos" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/lista.jsp" />  
    </definition>
    
-   <definition name="veiculoform" extends="base.definition">  
+   <definition name="veiculoform" extends="transporte.definition">  
        <put-attribute name="title" value="Detalhes do Veiculo" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/veiculoform.jsp" />  
    </definition>
    
-   <definition name="findveiculo" extends="base.definition">  
+   <definition name="findveiculo" extends="transporte.definition">  
        <put-attribute name="title" value="Localizar Beneficio" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/find.jsp" />  
    </definition>
    
-   <definition name="veiculocadastro" extends="base.definition">  
+   <definition name="veiculocadastro" extends="transporte.definition">  
        <put-attribute name="title" value="Cadastro de Veiculo" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/veiculocadastro.jsp" />  
    </definition>

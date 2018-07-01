@@ -50,6 +50,17 @@ public class LoginController {
 			 
 			 if (user.getSenha().equals(senha)){
 				 session.setAttribute("usuarioLogado", user);
+				 
+				 if (user.getTransporte()>0) {
+					 System.out.println("Redirecionand para a home do transporte...");
+					 return "homepage-transporte";					 
+				 }
+				 				 
+				 if (user.getAdmin()>0) {
+					 System.out.println("Redirecionand para a home do transporte...");
+					 return "homepage-admin";					 
+				 }
+				 
 				 return "homepage";
 			 }
 			 else {

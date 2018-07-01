@@ -26,8 +26,11 @@ private static final long serialVersionUID = 1L;
 	private String senha;
 	private String telefone;
 	private String email;
-	private Integer admin;
 	
+	private Integer admin;
+	private Integer transporte;
+	
+		
 	
 	
 	public Integer getId() {
@@ -81,6 +84,12 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public Integer getTransporte() {
+		return transporte;
+	}
+	public void setTransporte(Integer transporte) {
+		this.transporte = transporte;
 	}	
 	
 }

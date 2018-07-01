@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -136,6 +137,39 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 		
 		
 		return acompanhantes;
+	}
+
+
+	@Override
+	public List<Acompanhante> findbyPacienteID(Integer pacienteid) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no AcompanhanteDAO.findbyPacienteID()");
+		System.out.println("Valor do ID Marcacao="+ pacienteid );
+		
+		
+		String squery = "select acompanhante.id from acompanhante, acompanhantepaciente where acompanhantepaciente.idacompanhante=acompanhante.id and acompanhantepaciente.idpaciente="+pacienteid;
+		 		
+		List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
+		
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(squery);
+			
+		List result = query.list();
+		
+		Acompanhante acompanhante ;
+		
+		for (int i=0; i< result.size(); i++) {
+		
+			
+			System.out.println("Linha"+i+ "=" +result.get(i));
+			acompanhante = findByID((Integer)result.get(i));
+			acompanhantes.add(acompanhante);
+			
+		}
+			
+				
+		
+		return acompanhantes;
+
 	}
 
 	

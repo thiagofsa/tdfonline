@@ -3,7 +3,6 @@
 
 <!-- <link rel="stylesheet" href= "<c:url value='/resources/css/menu.css'/>" >   -->
 
-
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top ">
   
   <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><i class="fas fa-home fa-lg"></i></a>
@@ -21,48 +20,22 @@
           Cadastros
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/pacientes/">Pacientes</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/acompanhantes/">Acompanhantes</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/procedimentos/">Procedimento Médico</a>
-          <a class="dropdown-item" href="#">Unidades de Saúde</a>
-          <a class="dropdown-item" href="#">Beneficiários de Diárias</a>
-          
-          
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/veiculos">Veiculos</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/motoristas">Motoristas</a>
+    
           
           <!-- <div class="dropdown-divider"></div> -->
         </div>
       </li>
       
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Marcações
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/marcacaos/add">Nova</a>                    
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/marcacaos/find">Pesquisar</a>
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/marcacaos">Listar</a>
-        </div>
-      </li>
-      
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Encaminhamentos
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/add">Novo</a>                    
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/find">Pesquisar</a>   
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/lote">Em Lote</a>       
-        </div>
-        
-      </li>
-      
+           
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Distribuição
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Novo</a>
-          <a class="dropdown-item" href="#">Listar</a>          
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/distribuicaos/add">Novo</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/distribuicaos">Listar</a>          
         </div>
       </li>
       
@@ -71,13 +44,9 @@
           Relatórios
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Pacientes</a>
-          <a class="dropdown-item" href="#">Marcações</a>
-          <a class="dropdown-item" href="#">Encaminhamentos</a>
-          <a class="dropdown-item" href="#">Pautas</a>          
+          <a class="dropdown-item" href="#">Distribuições</a>           
         </div>
       </li>
-      
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

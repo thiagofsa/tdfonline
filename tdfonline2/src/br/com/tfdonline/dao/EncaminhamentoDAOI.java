@@ -11,6 +11,7 @@ public interface EncaminhamentoDAOI {
 	void addEncaminhamento(Encaminhamento encaminhamento);
     
     List<Encaminhamento> findAll();
+    
      
     void deleteEncaminhamentoByID(Integer id);
      

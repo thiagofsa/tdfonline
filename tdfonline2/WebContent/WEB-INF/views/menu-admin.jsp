@@ -26,8 +26,9 @@
           <a class="dropdown-item" href="${pageContext.request.contextPath}/procedimentos/">Procedimento Médico</a>
           <a class="dropdown-item" href="#">Unidades de Saúde</a>
           <a class="dropdown-item" href="#">Beneficiários de Diárias</a>
-          
-          
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/veiculos">Veiculos</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/motoristas">Motoristas</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/usuarios">Usuarios</a>
           
           <!-- <div class="dropdown-divider"></div> -->
         </div>
