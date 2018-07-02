@@ -49,18 +49,28 @@
 		  </div>
 		</spring:bind>
 
-		<spring:bind path="telefone">
+	<spring:bind path="senha">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Telefone</label>
+			<label class="col-sm-2 control-label">Senha</label>
 			<div class="col-sm-10">
-				<form:input path="telefone" class="form-control" 
-                                id="telefone" placeholder="Telefone" />
-				<form:errors path="telefone" class="control-label" />
+				<form:textarea path="senha" class="form-control" 
+                                id="senha" placeholder="senha" />
+				<form:errors path="senha" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+		
+		<spring:bind path="senha">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Repita a Senha</label>
+			<div class="col-sm-10">
+				<form:textarea path="senha" class="form-control" 
+                                id="senha" placeholder="senha" />
+				<form:errors path="senha" class="control-label" />
 			</div>
 		  </div>
 		</spring:bind>
 
-		
 		<spring:bind path="email">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Email</label>
@@ -71,6 +81,19 @@
 			</div>
 		  </div>
 		</spring:bind>
+
+
+	<spring:bind path="telefone">
+		  <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Telefone</label>
+			<div class="col-sm-10">
+				<form:input path="telefone" class="form-control" 
+                                id="telefone" placeholder="Telefone" />
+				<form:errors path="telefone" class="control-label" />
+			</div>
+		  </div>
+		</spring:bind>
+
 		
 		<spring:bind path="admin">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
@@ -101,7 +124,7 @@
 	</form:form>
 
 </div>
-
+<br><br><br>
 
 </body>
 </html>

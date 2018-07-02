@@ -74,14 +74,14 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 
 			 	}
 		 		
-		 		if (uri.contains("acompanhantes") || uri.contains("beneficios") 
-		 				|| uri.contains("distribuicaos")
-		 				|| uri.contains("encaminhamentos") 
-		 				|| uri.contains("marcacaos")
-		 				|| uri.contains("pacientes")
-		 				|| uri.contains("pautas")
-		 				|| uri.contains("procedimentos")
-		 				|| uri.contains("unidadesaudes")
+		 		if (uri.contains("acompanhante") || uri.contains("beneficio") 
+		 				|| uri.contains("distribuicao")
+		 				|| uri.contains("encaminhamento") 
+		 				|| uri.contains("marcacao")
+		 				|| uri.contains("paciente")
+		 				|| uri.contains("pauta")
+		 				|| uri.contains("procedimento")
+		 				|| uri.contains("unidadesaude")
 		 				){
 		 			
 		 			System.out.println("Caso geral.....");
