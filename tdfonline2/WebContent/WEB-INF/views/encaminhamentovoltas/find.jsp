@@ -5,24 +5,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 
-<spring:url value="/pacientes/find2" var="findUrl" />
+<spring:url value="/encaminhamentovoltas/find2" var="findUrl" />
 
 	<form:form class="form-horizontal" 
-                modelAttribute="pacienteForm" action="${findUrl}">
+                modelAttribute="encaminhamentoForm" action="${findUrl}">
 
 		
-		<spring:bind path="nome">
+	<spring:bind path="dataviagemvolta">
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Nome</label>
-			<div class="col-sm-10">
-				<form:input path="nome" type="text" class="form-control" 
-                                id="nome" placeholder="Nome" />
-				<form:errors path="nome" class="control-label" />
-			</div>
+			
+			 <div class="control-group">
+        		<form:label cssClass="control-label" path="dataviagem">Data Viagem de Volta:</form:label>
+        		<div class="controls">
+            	<form:input path="dataviagem" class="date" />
+        		</div>
+    		</div>
 		  </div>
 		</spring:bind>
 
-				
+
+			
 		<div class="form-group">
 		  <div class="col-sm-offset-2 col-sm-10">
 			
