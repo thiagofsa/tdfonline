@@ -4,6 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -13,10 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><tiles:getAsString name="title" /></title>
     
-    <link href="../resources/css/bootstrap.css"  rel="stylesheet" >
-    <link href="../resources/css/fontawesome-all.min.css"  rel="stylesheet" > 
-    
-  </head> 
+    <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >       
+  </head>  
+ 
+<body>
+
+<div class="container">
 
 
 <spring:url value="/marcacaos/find2" var="findUrl" />
@@ -120,8 +124,18 @@
 	
 	</c:if>
 	
-	<script src="../resources/js/jquery.min.js"  type="text/javascript"></script>
-	<script src="../resources/js/popper.min.js"  type="text/javascript"></script>
-	<script src="../resources/js/bootstrap.js"  type="text/javascript"></script>
-	</body>
-	</html>
+	<div  class="spaceabaixo"></div>	
+</div>
+	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+  <script>
+	  $(document).ready(function() {
+		    $('#Tabela').DataTable();
+		} );
+  </script>   
+</body>
+</html>

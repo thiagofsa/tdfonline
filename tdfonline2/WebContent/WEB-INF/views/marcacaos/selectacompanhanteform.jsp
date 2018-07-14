@@ -2,11 +2,19 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<!DOCTYPE html>
 
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
+  </head>  
 <body>
 
 	<div class="container">
@@ -20,6 +28,13 @@
 			<strong>${msg}</strong>
 		    </div>
 		</c:if>
+		
+		<div  class="spacesup"></div>	
+		<div class="titulo"  >
+			<h4>Selecione o acompanhante</h4>
+		</div>
+		
+		
 	</div>
 		
 <spring:url value="/selectacompanhante/marcacao2/" var="acompanhanteUrl" />
@@ -56,9 +71,13 @@
   
 </form:form>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 
+
+<div  class="spaceabaixo"></div>	
+</div>
+	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>	
 </body>
 </html>

@@ -2,16 +2,24 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html lang="pt-br">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" >
+  </head>  
 <body>
+
 
 	<div class="container">
 
+		<div  class="spacesup"></div>
 		<c:if test="${not empty msg}">
 		    <div class="alert alert-${css} alert-dismissible" role="alert">
 			<button type="button" class="close" data-dismiss="alert" 
@@ -22,48 +30,55 @@
 		    </div>
 		</c:if>
 
-		<h1>Todos os Acompanhantes</h1>
+		<div   class="titulo">
+			<h4>Relação dos Acompanhantes</h4>
+		</div>
 
-		<table class="table table-striped">
+		<div class="table-responsive-md" >
+		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
-					<th>#ID</th>
-					<th>Nome</th>
-					<th>Telefone</th>
-					<th>Action</th>
+					<th class="text-center" >Nome</th>
+					<th class="text-center">Telefone</th>
+					<th class="text-center">Detalhes</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="acompanhante" items="${acompanhantes}">
-			    <tr>
-				<td>
-					${acompanhante.id}
-				</td>
+			    <tr>				
 				<td>${acompanhante.nome}</td>
-				<td>${acompanhante.telefone}</td>
+				<td class="text-center">${acompanhante.telefone}</td>				
 				
-				
-				<td>
-				  <spring:url value="/acompanhantes/${acompanhante.id}" var="acompanhanteUrl" />
-				  <spring:url value="/acompanhantes/${acompanhante.id}/delete" var="deleteUrl" /> 
-				  <spring:url value="/acompanhantes/${acompanhante.id}/update" var="updateUrl" />
-
-				  <button class="btn btn-info" 
-                                          onclick="location.href='${acompanhanteUrl}'">Detalhes</button>
-				  <button class="btn btn-primary" 
-                                          onclick="location.href='${updateUrl}'">Atualizar</button>
-				  <button class="btn btn-danger" 
-                                          onclick="location.href='${deleteUrl}'">Deletar</button>
-                                </td>
+				<td class="text-center">
+					<spring:url value="/acompanhantes/${acompanhante.id}/update" var="updateUrl" />				  
+				    <button class="btn btn-sm"  data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-newspaper"></i></button>				  
+                 </td>
 			    </tr>
 			</c:forEach>
 		</table>
+		</div>
+		
+		<div  class="spacesup"></div>	
+				<div class="row" >
+					<div  class="col-md-4"></div>
+					<div  class="col-md-4"  >	
+						<a class="btn btn-block  btn-outline-primary"  href="${pageContext.request.contextPath}/acompanhantes/add"><i class="fas fa-plus-square"></i>  Adcionar Acompanhante</a>
+					</div>
+					<div  class="col-md-4"></div>		
+				</div>	
 
-	</div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
-
+	<div  class="spaceabaixo"></div>	
+</div>
+	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
+  <script>
+	  $(document).ready(function() {
+		    $('#Tabela').DataTable();
+		} );
+  </script>
+   
 </body>
 </html>

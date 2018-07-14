@@ -26,54 +26,24 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 		 	
 		 	if( usuario != null) {
 		 	
+		 		
+		 		if (uri.contains("veiculo") || (uri.contains("motorista"))) {
+		 			return true;
+		 		}
+		 		
+		 		
 		 		if (uri.contains("usuarios")) {
 		 			
-		 			System.out.println("Tentando acessar o modulo Usuarios.....");
+		 			System.out.println(" modulo Usuarios.....");
+		 			
 		 			if (usuario.getAdmin()>0) {
 		 				System.out.println("Usuario adm acessando o modulo Usuarios...");
 		 				return true;
 		 			}
-		 			else {
-		 				System.out.println("Usuario acessando o modulo Usuarios...acesso negado!");
-		 				request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Usuário");
 		 				
-		 				//se nao for nem transporte nem admin, ele é usuario basico
-		 				if ((usuario.getTransporte()<1)) {
-		 					request.setAttribute("msg", "Usuário sem permissão para esta operação (Módulo Usuario");
-		 					response.sendRedirect("usuariobloqueado");
-		 					return true;    
-		 				
-		 				//ou é do transporte
-		 				}else  {
-		 					request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Usuario");
-		 					response.sendRedirect("usuariobloqueado-transporte");
-		 					return true;    
-		 				
-		 				}
-		 				
+		 		}
 
-		 			}
-		 			//se estou acessando o modulo transporte
-		 		} 
-		 			
-		 		if ((uri.contains("motoristas")) || (uri.contains("veiculos"))){
-
-		 			System.out.println("tentando acessar o modulo de transportes.....");
-		 			
-		 			//checar se o usuario logado é de transportes ou admin		 			
-		 			if ((usuario.getTransporte()>0) || (usuario.getAdmin()>0)){		 				
-		 				return true;
-
-		 			//caso seja um usuario  user comum		
-		 			} else {
-		 				request.setAttribute("msg", "Usuário sem permissão para esta opepração (Módulo Transporte");
-		 				response.sendRedirect("usuariobloqueado");
-		 				return false;
-		 				
-		 			}
-
-			 	}
-		 		
+		 		 			 		
 		 		if (uri.contains("acompanhante") || uri.contains("beneficio") 
 		 				|| uri.contains("distribuicao")
 		 				|| uri.contains("encaminhamento") 
@@ -82,33 +52,35 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter{
 		 				|| uri.contains("pauta")
 		 				|| uri.contains("procedimento")
 		 				|| uri.contains("unidadesaude")
+		 				|| uri.contains("home")
+		 				|| uri.contains("/")
 		 				){
 		 			
-		 			System.out.println("Caso geral.....");
+		 			System.out.println("Caso geral, exceto transporte.....");
 
-		 			if ((usuario.getAdmin()>0) || (usuario.getTransporte()<1)){		 				
-		 				return true;
-		 		
-		 			}else {
-		 				request.setAttribute("msg", "Usuário sem permissão para esta operação");
-		 				response.sendRedirect("usuariobloqueado-transporte");
-		 				return false;
+			 			if ((usuario.getAdmin()>0) || (usuario.getTransporte()<1)){		 				
+			 				return true;
+			 		
+			 			}else {
+			 				request.setAttribute("msg", "Usuário sem permissão para esta operação");
+			 				response.sendRedirect("usuariobloqueado-transporte");
+			 				return false;
+			 			}
 		 			}
-		 		}
 		 		
 		 	}//usuario logado
 		 	
 		 	else {
 		 	
 		 	
-		 	response.sendRedirect("loginform");
-	        return false;
+		 		response.sendRedirect("loginform");
+		 		return false;
 		 	
 		 	}
-	 return false;   
-	 }
+		 	
+		 	return false;
 	 
-	 
+}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

@@ -5,25 +5,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
-
 <html lang="pt-br">
-
   <head>    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><tiles:getAsString name="title" /></title>
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
-    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
-   
-  </head>  
-
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >   
+  </head> 
 <body>
 
 <div class="container">
 
-<div  class="space" ></div>
-		
+	<div  class="spacesup"></div>		
 	<div class="titulo"  >
 		<h4>Novo Procedimento</h3>
 	</div>
@@ -62,24 +57,23 @@
 		
 		</div>
 
-		<div  class="form-row" >
+
+		<div  class="form-row justify-content-center" >				
+			<div class="form-group col-xs-6 text-center">		
+				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i> <span class="esconder"> Cadastrar</span></button>				
+			</div>	
 			
-			<div class="form-group col-sm-6 text-center">		
-				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>  Cadastrar</button>				
-			</div>
-			
-			<div class="form-group col-sm-6 text-center">				
+			<div class="form-group col-xs-6 text-center">		
 				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/procedimentos/"><i class="fas fa-arrow-circle-left"></i> Cancelar</a>				
-			</div>			
-					
-		</div>
-		
+			</div>
+		</div>  
+
 	</form:form>
-
+<div  class="spaceabaixo"></div>	
 </div>
-
+	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>	
 </body>
 </html>

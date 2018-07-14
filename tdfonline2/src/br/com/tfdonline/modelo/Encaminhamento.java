@@ -37,9 +37,15 @@ private static final long serialVersionUID = 1L;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
 	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date dataviagemvolta;
+	
 	private Integer vagas;
 	
 	private Integer embarcado;
+	
+	private Integer encaminhamentovoltagerado;
 	
 	@OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "iddistribuicao")
@@ -117,6 +123,22 @@ private static final long serialVersionUID = 1L;
 	
 	public int getVagas() {
 		return vagas;
+	}
+
+	public Date getDataviagemvolta() {
+		return dataviagemvolta;
+	}
+
+	public void setDataviagemvolta(Date dataviagemvolta) {
+		this.dataviagemvolta = dataviagemvolta;
+	}
+
+	public Integer getEncaminhamentovoltagerado() {
+		return encaminhamentovoltagerado;
+	}
+
+	public void setEncaminhamentovoltagerado(Integer encaminhamentovoltagerado) {
+		this.encaminhamentovoltagerado = encaminhamentovoltagerado;
 	}
 
 

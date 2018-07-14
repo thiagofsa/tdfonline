@@ -44,7 +44,13 @@ private static final long serialVersionUID = 1L;
 	private String logradouro;
 	private String observacoes;
 	private String tiposanguineo;
-	private String diabetico;
+	
+	private String agencia;
+	private String banco;
+	private String conta;
+	private Date datavalidadebeneficio;
+	private Integer ativo;
+	
 	
 	public Paciente () {
 		
@@ -173,12 +179,7 @@ private static final long serialVersionUID = 1L;
 	public void setBeneficios(List<Beneficio> beneficios) {
 		this.beneficios = beneficios;
 	}
-	public String getDiabetico() {
-		return diabetico;
-	}
-	public void setDiabetico(String diabetico) {
-		this.diabetico = diabetico;
-	}
+	
 	public void setDatanascimento(Date datanascimento) {
 		this.datanascimento = datanascimento;
 	}
@@ -192,6 +193,36 @@ private static final long serialVersionUID = 1L;
 			return true;
 		else
 			return false;
+	}
+	public String getAgencia() {
+		return agencia;
+	}
+	public void setAgencia(String agencia) {
+		this.agencia = agencia;
+	}
+	public String getBanco() {
+		return banco;
+	}
+	public void setBanco(String banco) {
+		this.banco = banco;
+	}
+	public String getConta() {
+		return conta;
+	}
+	public void setConta(String conta) {
+		this.conta = conta;
+	}
+	public Date getDatavalidadebeneficio() {
+		return datavalidadebeneficio;
+	}
+	public void setDatavalidadebeneficio(Date datavalidadebeneficio) {
+		this.datavalidadebeneficio = datavalidadebeneficio;
+	}
+	public Integer getAtivo() {
+		return ativo;
+	}
+	public void setAtivo(Integer ativo) {
+		this.ativo = ativo;
 	}
 	
 	

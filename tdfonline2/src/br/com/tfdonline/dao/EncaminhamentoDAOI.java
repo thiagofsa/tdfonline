@@ -3,6 +3,8 @@ package br.com.tfdonline.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.Motorista;
 
@@ -27,4 +29,6 @@ public interface EncaminhamentoDAOI {
 
 	List<Encaminhamento> findbyData(Date datainicial);
 	
+	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(Date datavolta); 
+
 }

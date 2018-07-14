@@ -31,7 +31,7 @@ private static final long serialVersionUID = 1L;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataviagem;
 	private Integer vagas;
-	
+	private Integer tipoviagem;//0=ida, 1= volta 
 	
 	@OneToOne
     @JoinColumn(name = "idmotorista")
@@ -106,6 +106,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
+	}
+
+	public Integer getTipoviagem() {
+		return tipoviagem;
+	}
+
+	public void setTipoviagem(Integer tipoviagem) {
+		this.tipoviagem = tipoviagem;
 	}	
 
 

@@ -4178,7 +4178,7 @@
 		var language = settings.oLanguage;
 		var previousSearch = settings.oPreviousSearch;
 		var features = settings.aanFeatures;
-		var input = '<input type="search" class="'+classes.sFilterInput+'"/>';
+		var input = '<input type="search" class=" '+classes.sFilterInput+'"/>';
 	
 		var str = language.sSearch;
 		str = str.match(/_INPUT_/) ?
@@ -11467,7 +11467,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Mostrando _START_ to _END_ de _TOTAL_ linhas",
+			"sInfo": "Mostrando de _START_ ate _END_ de _TOTAL_ linhas",
 	
 	
 			/**
@@ -11488,7 +11488,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "Mostrando de 0 ate 0 de 0 registros",
 	
 	
 			/**
@@ -11510,7 +11510,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(filtered from _MAX_ total entries)",
+			"sInfoFiltered": "(filtrado de _MAX_ registros totais)",
 	
 	
 			/**
@@ -11708,7 +11708,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Pesquisar:",
+			"sSearch": "Busca Rapida:",
 	
 	
 			/**
@@ -11766,7 +11766,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No matching records found"
+			"sZeroRecords": "Nenhum resultado encontrado!"
 		},
 	
 	

@@ -4,11 +4,29 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title><tiles:getAsString name="title" /></title>
+    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" > 
+    
+  </head>  
+<body>
+
+<div class="container"  >
+
+<div  class="spacesup"></div>
+<div  class="spacesup"></div>
 
 <spring:url value="/encaminhamentos/find2" var="findUrl" />
 
-	<form:form class="form-horizontal" 
-                modelAttribute="encaminhamentoForm" action="${findUrl}">
+	<form:form modelAttribute="encaminhamentoForm" action="${findUrl}">
 
 		
 	<spring:bind path="dataviagem">
@@ -34,3 +52,19 @@
 		  </div>
 		</div>
 	</form:form>
+	
+	<div  class="spaceabaixo"></div>	
+</div>
+	
+	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+  <script>
+	  $(document).ready(function() {
+		    $('#Tabela').DataTable();
+		} );
+  </script>   
+</body>
+</html>

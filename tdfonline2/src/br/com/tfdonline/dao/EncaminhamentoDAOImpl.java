@@ -122,6 +122,20 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	}
 
 
+	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datavolta) {
+		
+		String hql = "FROM Encaminhamento m WHERE m.dataviagemvolta = :start and m.encaminhamentovoltagerado<1" ;
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("start", datavolta);
+		
+		 
+		List<Encaminhamento> lista = query.list();
+		
+		return lista;
+	
+	}
+	
 	@Override
 	public List<Encaminhamento> dataviagem(Date data) {
 		// TODO Auto-generated method stub

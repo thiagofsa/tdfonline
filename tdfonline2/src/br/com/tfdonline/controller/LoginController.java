@@ -52,13 +52,13 @@ public class LoginController {
 				 session.setAttribute("usuarioLogado", user);
 				 
 				 if (user.getTransporte()>0) {
-					 System.out.println("Redirecionand para a home do transporte...");
-					 return "homepage-transporte";					 
+					 System.out.println("Redirecionand para a home do 	transporte...");
+					 					 
 				 }
 				 				 
 				 if (user.getAdmin()>0) {
-					 System.out.println("Redirecionand para a home do transporte...");
-					 return "homepage-admin";					 
+					 System.out.println("Redirecionand para a home do adm...");
+					 				 
 				 }
 				 
 				 return "homepage";

@@ -94,7 +94,7 @@ table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.o
   background-color: #acbad4;
 }
 table.dataTable.hover tbody tr:hover, table.dataTable.display tbody tr:hover {
-  background-color: #f6f6f6;
+  background-color: #f3f3f3;
 }
 table.dataTable.hover tbody tr:hover.selected, table.dataTable.display tbody tr:hover.selected {
   background-color: #aab7d1;
@@ -114,7 +114,7 @@ table.dataTable.display tbody tr.selected > .sorting_3 {
   background-color: #acbad5;
 }
 table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
-  background-color: #f1f1f1;
+  background-color: #f9f9f9;
 }
 table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
   background-color: #f3f3f3;
@@ -132,7 +132,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.orde
   background-color: #a9b7d1;
 }
 table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
-  background-color: #fafafa;
+  background-color: #ffffff; /* cor da segunda linha #fafafa flavio*/
 }
 table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
   background-color: #fcfcfc;
@@ -150,7 +150,7 @@ table.dataTable.display tbody tr.even.selected > .sorting_3, table.dataTable.ord
   background-color: #afbdd8;
 }
 table.dataTable.display tbody tr:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1 {
-  background-color: #eaeaea;
+  background-color: #f3f3f3; /*hover da primeira coluna flavio*/
 }
 table.dataTable.display tbody tr:hover > .sorting_2, table.dataTable.order-column.hover tbody tr:hover > .sorting_2 {
   background-color: #ececec;
@@ -273,11 +273,13 @@ table.dataTable td {
   zoom: 1;
 }
 .dataTables_wrapper .dataTables_length {
-  float: left;
-}
-.dataTables_wrapper .dataTables_filter {
   float: right;
   text-align: right;
+  
+}
+.dataTables_wrapper .dataTables_filter {
+  float: left;
+ 
 }
 .dataTables_wrapper .dataTables_filter input {
   margin-left: 0.5em;

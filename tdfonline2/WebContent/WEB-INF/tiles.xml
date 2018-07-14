@@ -8,56 +8,24 @@
    <!-- Base Define -->
    <definition name="base.definition" template="/WEB-INF/layouts/classic.jsp">  
        <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-       <put-attribute name="menu" value="/WEB-INF/views/menu-collapse.jsp" />
+       <put-attribute name="menu" value="/WEB-INF/views/menu-collapse.jsp" />     
        <put-attribute name="body" value=""/>  
        <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
    </definition>  
    
-   <!-- Login Define -->
+   <!-- Base Define -->
    <definition name="login.definition" template="/WEB-INF/layouts/classic-login.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />  
-       <put-attribute name="body" value="" />  
-       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
-   </definition>
-   
-   <!-- Transporte Define -->
-   <definition name="transporte.definition" template="/WEB-INF/layouts/classic.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-       <put-attribute name="menu" value="/WEB-INF/views/menu-transporte.jsp" />
-       <put-attribute name="body" value=""/>  
-       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
-   </definition>
-   
-   <!-- Admin Define -->
-   <definition name="admin.definition" template="/WEB-INF/layouts/classic.jsp">  
-       <put-attribute name="title" value="" />  
-       <put-attribute name="header" value="/WEB-INF/views/header.jsp" />
-       <put-attribute name="menu" value="/WEB-INF/views/menu-admin.jsp" />
-       <put-attribute name="body" value=""/>  
-       <put-attribute name="footer" value="/WEB-INF/views/footer.jsp" />  
-   </definition>    
-      
-  
+       <put-attribute name="title" value="" />    
+       <put-attribute name="body" value="" />    
+   </definition>   
+ 
+ 
    <!-- Home Page -->
    <definition name="homepage" extends="base.definition">  
        <put-attribute name="title" value="Pagina Inicial" />  
        <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
    </definition>
    
-   <!-- Home Page Transporte -->
-   <definition name="homepage-transporte" extends="transporte.definition">  
-       <put-attribute name="title" value="Pagina Inicial" />  
-       <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
-   </definition>
-   
-   <!-- Home Page Admin-->
-   <definition name="homepage-admin" extends="admin.definition">  
-       <put-attribute name="title" value="Pagina Inicial" />  
-       <put-attribute name="body" value="/WEB-INF/views/home.jsp" />        
-   </definition>
    
    <!-- Login Form -->
    <definition name="loginform" extends="login.definition">  
@@ -69,13 +37,14 @@
    
    
    <!--  ###################### Usuario page ################################## -->
+  
    <definition name="listausuariospage" extends="base.definition">  
        <put-attribute name="title" value="Lista Usuarios" />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/lista.jsp" />  
    </definition>
    
    <definition name="usuarioform" extends="base.definition">  
-       <put-attribute name="title" value="Usuario " />  
+       <put-attribute name="title" value="Detalhes Usuário " />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuarioform.jsp" />  
    </definition>
    
@@ -90,45 +59,39 @@
    </definition>
    
    <definition name="usuariocadastro" extends="base.definition">  
-       <put-attribute name="title" value="Usuario" />  
+       <put-attribute name="title" value="Novo Usuário" />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariocadastro.jsp" />  
    </definition>
    
-   <definition name="usuariobloqueado-transporte" extends="transporte.definition">  
-       <put-attribute name="title" value="Usuario" />  
-       <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariobloqueado-transporte.jsp" />  
-   </definition>
-   
    <definition name="usuariobloqueado" extends="base.definition">  
-       <put-attribute name="title" value="Usuario" />  
+       <put-attribute name="title" value="Usuario Bloqueado" />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariobloqueado.jsp" />  
    </definition>
    
-   
-   
+     
 	<!-- ######################## MOTORISTAS PAGES ########################## -->
 	 
-   <definition name="listamotoristaspage" extends="transporte.definition">  
+   <definition name="listamotoristaspage" extends="base.definition">  
        <put-attribute name="title" value="Lista de Motoristas" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/lista.jsp" />  
    </definition>
    
-   <definition name="motoristaform" extends="transporte.definition">  
+   <definition name="motoristaform" extends="base.definition">  
        <put-attribute name="title" value="Detalhes do Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristaform.jsp" />  
    </definition>
    
-   <definition name="findmotorista" extends="transporte.definition">  
+   <definition name="findmotorista" extends="base.definition">  
        <put-attribute name="title" value="Localiza Motoristas" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/find.jsp" />  
    </definition>   
    
-   <definition name="motoristashow" extends="transporte.definition">  
+   <definition name="motoristashow" extends="base.definition">  
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/show.jsp" />  
    </definition>
    
-    <definition name="motoristacadastro" extends="transporte.definition">  
+    <definition name="motoristacadastro" extends="base.definition">  
        <put-attribute name="title" value="Novo Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/motoristas/motoristacadastro.jsp" />  
    </definition>
@@ -136,13 +99,14 @@
 	   
 
 <!--  ########################## PACIENTE PAGE ################################-->
+
    <definition name="listapacientespage" extends="base.definition">  
-       <put-attribute name="title" value="Lista Pacientes" />  
+       <put-attribute name="title" value="Lista de Pacientes" />  
        <put-attribute name="body" value="/WEB-INF/views/pacientes/lista.jsp" />  
    </definition>
    
    <definition name="pacienteform" extends="base.definition">  
-       <put-attribute name="title" value="Paciente " />  
+       <put-attribute name="title" value="Paciente Detalhes" />  
        <put-attribute name="body" value="/WEB-INF/views/pacientes/pacienteform.jsp" />  
    </definition>
    
@@ -152,12 +116,12 @@
    </definition>
    
    <definition name="pacienteshow" extends="base.definition">  
-       <put-attribute name="title" value="Paciente" />  
+       <put-attribute name="title" value="Paciente Detalhes" />  
        <put-attribute name="body" value="/WEB-INF/views/pacientes/show.jsp" />  
    </definition>
    
    <definition name="pacientecadastro" extends="base.definition">  
-       <put-attribute name="title" value="Paciente" />  
+       <put-attribute name="title" value="Cadastrar Paciente" />  
        <put-attribute name="body" value="/WEB-INF/views/pacientes/pacientecadastro.jsp" />  
    </definition>
 
@@ -187,6 +151,11 @@
    <definition name="unidadesaudeshow" extends="base.definition">  
        <put-attribute name="title" value="Unidades de Saude" />  
        <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/show.jsp" />  
+   </definition>
+   
+   <definition name="unidadesaudecadastro" extends="base.definition">  
+       <put-attribute name="title" value="Unidades de Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/unidadesaudes/unidadecadastro.jsp" />  
    </definition>
    
 
@@ -236,25 +205,26 @@
        <put-attribute name="body" value="/WEB-INF/views/beneficios/show.jsp" />  
    </definition>
    
-      
+   
+   
    	<!-- ####################### VEICULOS PAGES ############################## -->
    
-   <definition name="listaveiculospage" extends="transporte.definition">  
+   <definition name="listaveiculospage" extends="base.definition">  
        <put-attribute name="title" value="Lista de VeicuLos" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/lista.jsp" />  
    </definition>
    
-   <definition name="veiculoform" extends="transporte.definition">  
+   <definition name="veiculoform" extends="base.definition">  
        <put-attribute name="title" value="Detalhes do Veiculo" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/veiculoform.jsp" />  
    </definition>
    
-   <definition name="findveiculo" extends="transporte.definition">  
+   <definition name="findveiculo" extends="base.definition">  
        <put-attribute name="title" value="Localizar Beneficio" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/find.jsp" />  
    </definition>
    
-   <definition name="veiculocadastro" extends="transporte.definition">  
+   <definition name="veiculocadastro" extends="base.definition">  
        <put-attribute name="title" value="Cadastro de Veiculo" />  
        <put-attribute name="body" value="/WEB-INF/views/veiculos/veiculocadastro.jsp" />  
    </definition>
@@ -401,6 +371,55 @@
        <put-attribute name="title" value="Encaminhamento -> Marcacao" />  
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/selectmarcacaoform.jsp" />  
    </definition>
+   
+   
+    <!-- ################ ENCAMINHAMENTO VOLTA PAGES  ########################### -->
+   
+   <definition name="listaencaminhamentovoltaspage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Encaminhamentos" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/lista.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentovoltaform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/encaminhamentovoltaform.jsp" />  
+   </definition>
+   
+   <definition name="findencaminhamentovolta" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/find.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentovoltashow" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/show.jsp" />  
+   </definition>
+   
+   
+   <definition name="encaminhamentovoltalote" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento em Lote" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/encaminhamentovoltalote.jsp" />  
+   </definition>
+   
+   <definition name="encaminhamentovoltaloteprocessado" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento em Lote" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/encaminhamentovoltaloteprocessado.jsp" />  
+   </definition>
+   
+   
+   <definition name="selectdistribuicaoencaminhamentovoltaform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento Volta-> Distribuicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/selectdistribuicaoform.jsp" />  
+   </definition>
+   
+   <definition name="selectpacienteencaminhamentovoltaform" extends="base.definition">  
+       <put-attribute name="title" value="Encaminhamento Volta-> Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/selectpacienteform.jsp" />  
+   </definition>
+    
+   
+   
+   
    
    
    

@@ -35,7 +35,7 @@ private static final long serialVersionUID = 1L;
 	
 	private String categoriacnh;
 	
-	private Date validadecnh;
+	
 
 	public String getNome() {
 		return nome;
@@ -113,12 +113,5 @@ private static final long serialVersionUID = 1L;
 		this.categoriacnh = categoriacnh;
 	}
 
-	public Date getValidadecnh() {
-		return validadecnh;
-	}
-
-	public void setValidadecnh(Date validadecnh) {
-		this.validadecnh = validadecnh;
-	}
-	
+		
 }
