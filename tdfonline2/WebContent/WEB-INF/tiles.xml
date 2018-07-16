@@ -205,6 +205,59 @@
        <put-attribute name="body" value="/WEB-INF/views/beneficios/show.jsp" />  
    </definition>
    
+    <definition name="selectbeneficioencaminhamentoform" extends="base.definition">  
+       <put-attribute name="title" value="Beneficio Encaminhamento" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/selectencaminhamentoform.jsp" />  
+   </definition>
+   
+   
+   <!-- ################ BENEFICIOAVULSO PAGES  ########################### -->
+   
+   <definition name="listabeneficioavulsospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista BeneficioAvulso" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/lista.jsp" />  
+   </definition>
+   
+   <definition name="beneficioavulsoform" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/beneficioavulsoform.jsp" />  
+   </definition>   
+     
+   <definition name="beneficioavulsocadastro" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/beneficioavulsocadastro.jsp" />  
+   </definition>
+   
+   <definition name="findbeneficioavulso" extends="base.definition">  
+       <put-attribute name="title" value="Localizar BeneficioAvulso" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/find.jsp" />  
+   </definition>
+   
+   <definition name="beneficioavulsoshow" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/show.jsp" />  
+   </definition>
+   
+   <definition name="selectpacienteform.beneficioavulso" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso -> Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/selectpacienteform.jsp" />  
+   </definition>
+   
+   <definition name="selectunidadesaudeform.beneficioavulso" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso -> Unidade Saude" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/selectunidadesaudeform.jsp" />  
+   </definition>
+   
+   <definition name="selectprocedimentoform.beneficioavulso" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso -> Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/selectprocedimentoform.jsp" />  
+   </definition>
+   
+    <definition name="selectacompanhanteform.beneficioavulso" extends="base.definition">  
+       <put-attribute name="title" value="BeneficioAvulso -> Acompanhante" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficioavulsos/selectacompanhanteform.jsp" />  
+   </definition>
+   
    
    
    	<!-- ####################### VEICULOS PAGES ############################## -->
@@ -230,29 +283,7 @@
    </definition>
    
    
-   <!-- ################ PAUTA PAGES  ########################### -->
-   
-   <definition name="listapautaspage" extends="base.definition">  
-       <put-attribute name="title" value="Lista Beneficios" />  
-       <put-attribute name="body" value="/WEB-INF/views/pautas/lista.jsp" />  
-   </definition>
-   
-   <definition name="pautaform" extends="base.definition">  
-       <put-attribute name="title" value="Beneficio" />  
-       <put-attribute name="body" value="/WEB-INF/views/pautas/pautaform.jsp" />  
-   </definition>
-   
-   <definition name="findpauta" extends="base.definition">  
-       <put-attribute name="title" value="Localizar Beneficio" />  
-       <put-attribute name="body" value="/WEB-INF/views/pautas/find.jsp" />  
-   </definition>
-   
-   <definition name="pautashow" extends="base.definition">  
-       <put-attribute name="title" value="Beneficio" />  
-       <put-attribute name="body" value="/WEB-INF/views/pautas/show.jsp" />  
-   </definition>
-   
-   
+  
    
    <!-- ###################### Procedimento pages #########################-->
    
@@ -417,12 +448,7 @@
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentovoltas/selectpacienteform.jsp" />  
    </definition>
     
-   
-   
-   
-   
-   
-   
+ 
    
       <!-- ################ DISTRIBUICAO PAGES  ########################### -->
       
@@ -456,13 +482,6 @@
        <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectveiculoform.jsp" />  
    </definition>
    
-   <definition name="selectpautaform" extends="base.definition">  
-       <put-attribute name="title" value="Distribuicao -> Procedimento" />  
-       <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectpautaform.jsp" />  
-   </definition>
-   
-   
-   
    <!-- ############# ContactUs Page ###############-->
    
    
@@ -483,6 +502,13 @@
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/downloadpage.jsp" />  
    </definition>
+   
+   
+   <definition name="encaminhamentopormotoristaedatareportpage" extends="base.definition">  
+       <put-attribute name="title" value="Relatorio Enc por Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentopormotoristaedatareportpage.jsp" />  
+   </definition>
+   
  
  
 </tiles-definitions>

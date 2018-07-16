@@ -19,7 +19,6 @@
 <div class="container">
 	
 		<div  class="spacesup"></div>		
-		
 		<div   class="text-center text-uppercase">
 			<h4>Dados do novo motorista</h4>
 		</div>	
@@ -92,7 +91,7 @@
 				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle mx-2"></i> <span class="esconder"> Cadastrar</span></button>				
 			</div>	
 			
-			<div class="form-group col-xs-6 text-center">		
+			<div class="form-group  col-xs-6 text-center">		
 				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/motoristas/"><i class="fas fa-arrow-circle-left mx-2"></i> <span class="esconder"> Cancelar</span></a>				
 			</div>
 		</div>  		

@@ -464,14 +464,14 @@ mark,
   text-transform: uppercase;
 }
 
-.areanotify{
-	width: 100%; 
+.areanotify{/*flavio*/
 	height: 3.5rem;
 }
 
-#textonotify{
+#textonotify{/*flavio*/
 	-moz-animation-delay: 1.3s;
     -webkit-animation-delay: 1.3s;
+    -o-animation-delay: 1.3s;
 	 animation-delay: 1.3s;
 }
 

@@ -41,9 +41,7 @@ private static final long serialVersionUID = 1L;
     @JoinColumn(name = "idveiculo")
 	private Veiculo veiculo;
 	
-	@OneToOne
-    @JoinColumn(name = "idpauta")
-	private Pauta pauta;
+	
 
 	public Integer getId() {
 		return id;
@@ -71,13 +69,7 @@ private static final long serialVersionUID = 1L;
 		this.veiculo = veiculo;
 	}
 
-	public Pauta getPauta() {
-		return pauta;
-	}
-
-	public void setPauta(Pauta pauta) {
-		this.pauta = pauta;
-	}
+	
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;

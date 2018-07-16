@@ -20,25 +20,26 @@
 	<div class="container">
 
 		<div  class="spacesup"></div>
-		<c:if test="${not empty msg}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">×</span>
-			</button>
-			<strong>${msg}</strong>
-		    </div>
-		</c:if>
-
-		<div   class="titulo">
-			<h4>Relação dos Usuários</h4>
+		
+		<div   class="text-center text-uppercase">
+			<h4>Relação dos usuários</h4>
+		</div>
+		
+		<div  class="row areanotify justify-content-end py-3">		
+			<c:if test="${not empty msg}">			    
+				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+			</c:if>		
 		</div>
 
-		<div class="table-responsive-md" >
+
+		<div class="table-responsive-md animated fadein" >
 		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
 					<th class="text-center">Nome</th>
-					<th class="text-center">Tipo</th>
+					<th class="text-center esconder">Login</th>
+					<th class="text-center esconder">Telefone</th>
+					<th class="text-center">Perfil</th>
 					<th class="text-center">Detalhes</th>
 				</tr>
 			</thead>
@@ -46,6 +47,8 @@
 			<c:forEach var="usuario" items="${usuarios}">
 			    <tr>				
 				<td>${usuario.nome}</td>
+				<td  class="text-center esconder">${usuario.login}</td>
+				<td  class="text-center esconder">${usuario.telefone}</td>
 				<td class="text-center" >${usuario.admin}</td>				
 				<td  class="text-center">					
 				  <spring:url value="/usuarios/${usuario.id}/update" var="updateUrl" />

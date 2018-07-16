@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Motorista;
 
 public interface EncaminhamentoDAOI {
@@ -14,6 +15,7 @@ public interface EncaminhamentoDAOI {
     
     List<Encaminhamento> findAll();
     
+    public List<Marcacao> findbyNomePaciente(String nomepaciente);
      
     void deleteEncaminhamentoByID(Integer id);
      
@@ -29,6 +31,8 @@ public interface EncaminhamentoDAOI {
 
 	List<Encaminhamento> findbyData(Date datainicial);
 	
-	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(Date datavolta); 
+	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(Date datavolta);
+	
+	public List<Encaminhamento> findbyMotoristaIDandData(Integer motoristaid, Date dataviagem);
 
 }

@@ -18,22 +18,40 @@
 
 <div class="container">
 
-	<div  class="spacesup"></div>		
-		<div   class="text-center text-uppercase">
-			<h4>Informações da Marcação</h4>
-		</div>
+	<div  class="spacesup"></div>	
+	<div class="titulo"  >
+		<h4>Informações da nova Marcação</h4>
+	</div>
 
-	<spring:url value="/selectpaciente/marcacaos/" var="selectpacienteUrl" />
-	<spring:url value="/selectunidadesaude/marcacaos/" var="selectunidadesaudeUrl" />
-	<spring:url value="/selectprocedimento/marcacaos/" var="selectprocedimentoUrl" />
-	<spring:url value="/selectacompanhante/marcacaos/" var="selectacompanhanteUrl" />
-	                          
-	<spring:url value="/marcacaos" var="marcacaoActionUrl" />
-	<form:form method="post" class="mt-5" modelAttribute="marcacaoForm" action="${marcacaoActionUrl}">
+	<div class="form-row justify-content-center" >
+	<div class="form-group col-lg-3  col-md-6 text-center">
+		<spring:url value="/selectpaciente/beneficioavulsos/" var="selectpacienteUrl" />
+		<button class="btn btn-outline-info" onclick="location.href='${selectpacienteUrl}'">Selecione Paciente</button>
+	</div>	
+	
+	<div class="form-group col-lg-3 col-md-6 text-center">
+		<spring:url value="/selectunidadesaude/beneficioavulsos/" var="selectunidadesaudeUrl" />
+		<button class="btn btn-outline-info" onclick="location.href='${selectunidadesaudeUrl}'">Selecione Unidade Saude</button>                                          
+	</div>                                      
+	
+	<div class="form-group col-lg-3 col-md-6  text-center">
+		<spring:url value="/selectprocedimento/beneficioavulsos/" var="selectprocedimentoUrl" />
+		<button  class="btn btn-outline-info" onclick="location.href='${selectprocedimentoUrl}'">Selecione Procedimento</button>                                          
+	</div>
 
-		<form:hidden path="id"/>
-		<form:hidden path="vagas"/>
-		<form:hidden path="confirmada"/>
+	<div class="form-group col-lg-3 col-md-6 text-center">
+		<spring:url value="/selectacompanhante/beneficioavulsos/" var="selectacompanhanteUrl" />
+		<button  class="btn btn-outline-info" onclick="location.href='${selectacompanhanteUrl}'">Selecione Acompanhante(s)</button>                                          
+	</div>	    
+    </div>
+    
+    <div  class="spacesup"></div>                                     
+
+	<spring:url value="/beneficioavulsos" var="beneficioavulsoActionUrl" />
+
+	<form:form method="post" modelAttribute="beneficioavulsoForm" action="${beneficioavulsoActionUrl}">
+
+		<form:hidden path="id" />
 	
 	<div  class="form-row" >
 		
@@ -41,7 +59,7 @@
 		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
 				<label for="paciente.nome">Nome do Paciente</label>			
 				<form:input path="paciente.nome" type="text" class="form-control mudacursor" id="paciente.nome" 
-				placeholder="Clique aqui para selecionar paciente" onclick="location.href='${selectpacienteUrl}'" readonly="true" />
+				placeholder="Clique para selecionar paciente" onclick="location.href='${selectpacienteUrl}'" readonly="true" />
 				<form:errors path="paciente.nome" class="control-label" />		
 				<form:hidden path="paciente.id" />			  
 		  </div>
@@ -51,7 +69,7 @@
 		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
 				<label for="unidadesaude.descricao">Unidade Saude</label>
 				<form:input path="unidadesaude.descricao" type="text" class="form-control mudacursor" id="unidadesaude.descricao" 
-				placeholder="Clique aqui para selecionar a Unidade de Saúde" onclick="location.href='${selectunidadesaudeUrl}'" readonly="true" />
+				placeholder="Clique para selecionar a Unidade de Saúde" onclick="location.href='${selectunidadesaudeUrl}'" readonly="true" />
 				<form:errors path="unidadesaude.descricao" class="control-label" />
 				<form:hidden path="unidadesaude.id" />
 		  </div>		 
@@ -65,27 +83,30 @@
 		  <div class="form-group col-md-8 ${status.error ? 'has-error' : ''}">
 				<label for="procedimento.nome">Procedimento</label>
 				<form:input path="procedimento.nome" type="text" class="form-control mudacursor" id="procedimento.nome" 
-				placeholder="Clique aqui para selecionar o Procedimento" onclick="location.href='${selectprocedimentoUrl}'" readonly="true"/>
+				placeholder="Clique para selecionar o Procedimento" onclick="location.href='${selectprocedimentoUrl}'" readonly="true" />
 				<form:errors path="procedimento.nome" class="control-label" />
 				<form:hidden path="procedimento.id" />
 		  </div>
 		</spring:bind>		
 		
-		<spring:bind path="dataviagem">
+			
+		
+		<spring:bind path="dataviagemida">
 		  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">			 
-        		<label  for="dataviagem" >Data</label>        		
-            	<form:input path="dataviagem" type="text" class="form-control" id="dataviagem" placeholder="" />
-            	<form:errors path="dataviagem" class="control-label" />	   	
+        		<label  for="dataviagem" >DataViagem Ida</label>        		
+            	<form:input path="dataviagemida" type="text" class="form-control" id="dataviagem" placeholder="" />
+            	<form:errors path="dataviagemida" class="control-label" />	   	
 		  </div>
 		</spring:bind>
 		
-		<spring:bind path="horaprocedimento">
-		  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">
-				<label for="horaprocedimento">Hora</label>				
-				<form:input path="horaprocedimento" type="text" class="form-control" id="horaprocedimento" />
-				<form:errors path="horaprocedimento" class="control-label" />			
+		<spring:bind path="dataviagemvolta">
+		  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">			 
+        		<label  for="dataviagem" >Data Viagem Volta</label>        		
+            	<form:input path="dataviagemvolta" type="text" class="form-control" id="dataviagem" placeholder="" />
+            	<form:errors path="dataviagemvolta" class="control-label" />	   	
 		  </div>
-		</spring:bind>		
+		</spring:bind>
+		
 	</div>
 	
 	<div  class="form-row" >
@@ -98,28 +119,17 @@
 		  </div>
 		</spring:bind>
 	
-		<spring:bind path="localacolhimento">
-		  <div class="form-group col-md-3 ${status.error ? 'has-error' : ''}">
-				<label for="localacolhimento">Acolhimento</label>				
-				<form:input path="localacolhimento" type="text" class="form-control" id="localacolhimento" placeholder="" />
-				<form:errors path="localacolhimento" class="control-label" />			
+				
+		<spring:bind path="vagas">
+		  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">			 
+        		<label  for="vagas" >Vagas</label>        		
+            	<form:input path="vagas" type="text" class="form-control mudacursor" id="vagas" placeholder="" readonly="true" />
+            	<form:errors path="vagas" class="control-label" />	   	
 		  </div>
-		</spring:bind>			
-		
-		<spring:bind path="confirmada">
-			  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">
-				<label for="Status">Status</label>				    			
-	    			<form:select path="confirmada" class="form-control"  id="status" data-toggle="tooltip" data-placement="botton" title="Situação da marcação. Não editável!" required="required"  disabled="true">
-	    				<form:option value="0" label="Espera"/>
-	    				<form:option value="1" label="Confirmada"/>
-	    				<form:option value="2" label="Perdida"/>	    				   				
-					</form:select>    				                               
-					<form:errors path="confirmada" class="control-label" />			
-			  </div>
-			</spring:bind>		
+		</spring:bind>		
 	</div>
 	
-	<label  class="mudacursor" data-toggle="tooltip" data-placement="botton" title="Clique aqui para visualizar os acompanhantes cadastrados do paciente." onclick="location.href='${selectacompanhanteUrl}'" >Clique para selecionar os Acompanhantes:</label>
+	<p  class="mudacursor" onclick="location.href='${selectacompanhanteUrl}'" >Selecione os Acompanhantes:</p>
 
 		<c:if test="${not empty acompanhantespaciente}">
 		
@@ -142,26 +152,29 @@
 			</div>
 		</c:if>
 	
-		<div  class="spaceabaixo"></div>
-		
 		<div  class="form-row justify-content-center" >
 			<div class="form-group col-xs-4 text-center">		
 				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle"></i> <span class="esconder"> Atualizar</span></button>				
 			</div>			
 			
 			<div class="form-group col-xs-4 text-center">	
-				<spring:url value="/marcacaos/${id}/delete" var="deleteUrl" />		
+				<spring:url value="/beneficioavulsos/${id}/delete" var="deleteUrl" />		
 				<button type="button" class="btn btn-outline-danger"  data-toggle="modal" data-target="#exclusao" ><i class="fas fa-trash-alt"></i> <span class="esconder"> Excluir</span></button>											
 			</div>		
 			
 			<div class="form-group col-xs-4 text-center">				
-				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/marcacaos/"><i class="fas fa-arrow-circle-left"></i> <span class="esconder"> Cancelar</span></a>				
+				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/beneficioavulsos/"><i class="fas fa-arrow-circle-left"></i> <span class="esconder"> Cancelar</span></a>				
 			</div>
 			
 									
-		</div>			
+		</div>
+
+				
+				
 		
 	</form:form>
+	
+	
 	
 <div  class="spaceabaixo"></div>	
 </div>

@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.Marcacao;
 
 @Repository
 @Transactional
@@ -140,6 +141,34 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	public List<Encaminhamento> dataviagem(Date data) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public List<Marcacao> findbyNomePaciente(String nomepaciente) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Encaminhamento e WHERE e.distribuicao.motorista.id=:keyword";
+		String keyword = nomepaciente;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", "%" + keyword + "%");
+		 
+		List<Marcacao> lista = query.list();
+		
+		return lista;
+	}
+
+
+	@Override
+	public List<Encaminhamento> findbyMotoristaIDandData(Integer motoristaid, Date dataviagem) {
+		
+		String hql = "FROM Encaminhamento e WHERE e.distribuicao.motorista.id=:keyword and e.dataviagem=:data";
+		;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", motoristaid);
+		query.setParameter("data", dataviagem);
+		List<Encaminhamento> lista = query.list();
+		
+		return lista;
 	}
 
 	

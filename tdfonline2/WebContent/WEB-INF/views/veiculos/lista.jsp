@@ -25,9 +25,9 @@
 			<h4>Relação dos Veículos</h4>
 		</div>
 		
-		<div  class="areanotify  mx-auto text-right">		
+		<div  class="row areanotify justify-content-end py-3">		
 			<c:if test="${not empty msg}">			    
-				<strong id="textonotify" class="animated fadeout font-italic" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
 			</c:if>		
 		</div>
 		

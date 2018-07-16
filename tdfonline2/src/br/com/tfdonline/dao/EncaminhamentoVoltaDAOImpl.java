@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Acompanhante;
+import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.EncaminhamentoVolta;
 
 @Repository
@@ -126,6 +127,19 @@ public class EncaminhamentoVoltaDAOImpl implements EncaminhamentoVoltaDAOI, Seri
 	public List<EncaminhamentoVolta> dataviagem(Date data) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public List<EncaminhamentoVolta> findbyMotoristaID(Integer idmotorista) {
+		// TODO Auto-generated method stub
+		String hql = "FROM EncaminhamentVolta ev WHERE ev.distribuicao.motorista.id="+idmotorista;
+		;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		List<EncaminhamentoVolta> lista = query.list();
+		
+		return lista;
 	}
 
 	

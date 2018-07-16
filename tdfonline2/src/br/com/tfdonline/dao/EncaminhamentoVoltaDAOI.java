@@ -26,4 +26,6 @@ public interface EncaminhamentoVoltaDAOI {
 
 	List<EncaminhamentoVolta> findbyData(Date datainicial);
 	
+	List<EncaminhamentoVolta> findbyMotoristaID(Integer idmotorista);
+	
 }

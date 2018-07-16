@@ -78,13 +78,13 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
            return lista;
 		    	
  	 }
-	public List<Beneficio> findbyName(String nome){
+	public List<Beneficio> findbyPacienteID(Integer idpaciente){
 		
 		
-		String hql = "from Beneficio where nome like :keyword";
-		String keyword = nome;
+		String hql = "from Beneficio b where b.marcacao.paciente.id=:keyword";
+		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("keyword", "%" + keyword + "%");
+		query.setParameter("keyword", idpaciente);
 		 
 		List<Beneficio> lista = query.list();
 		return lista;
@@ -102,6 +102,13 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
 			this.updateBeneficio(beneficio);
 			System.out.println("estou no DAO, tentanto ATUALIZAR a beneficio...");
 		}
+	}
+
+
+	@Override
+	public List<Beneficio> findbyMarcacaoID(Integer idmarcacao) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

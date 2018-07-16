@@ -1,30 +1,30 @@
 package br.com.tfdonline.controller;
 
 
-	import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 	import java.util.List;
-	import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 
-
-	import org.slf4j.Logger;
-	import org.slf4j.LoggerFactory;
-	import org.springframework.beans.factory.annotation.Autowired;
-
-	import org.springframework.stereotype.Controller;
-	import org.springframework.ui.Model;
-	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.ModelAttribute;
-	import org.springframework.web.bind.annotation.PathVariable;
-	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RequestMethod;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.BeneficioDAOI;
+import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Beneficio;
+import br.com.tfdonline.modelo.Encaminhamento;
+
 
 	@Controller
 	public class BeneficioController {
@@ -34,6 +34,10 @@ import br.com.tfdonline.modelo.Beneficio;
 
 		@Autowired
 		private BeneficioDAOI beneficioDAO;
+		@Autowired
+		private EncaminhamentoDAOI encaminhamentoDAO;
+		@Autowired
+		private AcompanhanteDAOI acompanhanteDAO;
 
 		/*@Autowired
 		//BeneficioFormValidator beneficioFormValidator;
@@ -56,26 +60,68 @@ import br.com.tfdonline.modelo.Beneficio;
 
 		}
 		
+		
+		//populando um encaminhamento vazio e direcionando para a pagina de pesquisa
+		@RequestMapping(value = {"/selectencaminhamento/beneficios/" })
+		public String selectEncaminhamento(@ModelAttribute("beneficioForm")  Beneficio beneficio,
+				BindingResult result, Model model, 
+				final RedirectAttributes redirectAttributes, HttpServletRequest request){
+		 	
+			//primeira vez da exibicao...vamos popular o form
+				Encaminhamento encaminhamento = new Encaminhamento();
+				model.addAttribute("encaminhamento", encaminhamento);	
 				
-		@RequestMapping(value = {"/beneficios/find" })
-		    public String findBeneficio(Model model) {
-			 	
+				beneficio.setEncaminhamento(encaminhamento);
+			
 				
-				Beneficio beneficio = new Beneficio();
-				beneficio.setNome("Informe o nome da Beneficio");
-			 	model.addAttribute("beneficioForm", beneficio);
-			 	return "findbeneficio";
-		    }
-		 
-		// pesquisar page
-		@RequestMapping(value = "/beneficios/find2")
-		public String showFindBeneficioForm(@RequestParam("nome") String nome, Model model) {
-			System.out.println("chamando o beneficios/find/descricao............"+nome);
-			logger.debug("Beneficios.FindByName()");
-			model.addAttribute("beneficios", beneficioDAO.findbyName(nome));
-			return "listabeneficiospage";
-
+			//colocando os dados da beneficio na sessao..			
+			if  (request.getSession().getAttribute("beneficioSession")==null) {
+				request.getSession().setAttribute("beneficioSession", beneficio);
+			}
+			
+		 	return "selectbeneficioencaminhamentoform";
+		 	
+	    }
+		
+		@RequestMapping(value = {"/beneficios/selectencaminhamento2" })
+		public String selectEncaminhamento(@RequestParam("nomepaciente") String nomepaciente, Model model, @ModelAttribute("encaminhamento") Encaminhamento encaminhamento){
+		 	
+			System.out.println("chamando o beneficios/SelectEncaminhamento2/............Pacietne.nome="+nomepaciente);
+			
+			model.addAttribute("encaminhamentos", encaminhamentoDAO.findbyNomePaciente(nomepaciente));
+			System.out.println("EncaminhamentoDAO chamado...");
+			
+			model.addAttribute("encaminhamento", encaminhamento);	
+			
+		 	return "selectbeneficioencaminhamentoform";
+		 	
+	    }
+		
+		@RequestMapping(value = "/beneficios/selectencaminhamento/{id}")
+		public String selectEncaminhamento(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+			
+			Beneficio beneficio =(Beneficio) request.getSession().getAttribute("beneficioSession");
+			System.out.println("ID do encaminhamento selecionado em Select Encaminhamento=" + id);
+			
+			Encaminhamento encaminhamento  = encaminhamentoDAO.findByID(id);
+			System.out.println("Encaminhamento.id form encaminhamentoDAO="+ encaminhamento.getId());
+			
+			
+			
+			beneficio.setEncaminhamento(encaminhamento);
+			request.getSession().setAttribute("beneficioSession", beneficio);
+			model.addAttribute("beneficioForm", beneficio);
+			
+			List<Acompanhante> acompanhantespacientemarcacao = acompanhanteDAO.findbyMarcacaoID(encaminhamento.getMarcacao().getId());
+			
+			model.addAttribute("acompanhantespaciente", acompanhantespacientemarcacao);
+			
+			
+			return "beneficioform";
+			
+		
 		}
+				
 
 		// save or update beneficio
 		// 1. @ModelAttribute bind form value
@@ -89,12 +135,11 @@ import br.com.tfdonline.modelo.Beneficio;
 
 			logger.debug("saveOrUpdateBeneficio() : {}", beneficio);
 			System.out.println("Depois do formBeneficio, salvando ou atualizando beneficio.............");
-			System.out.println("Nome do beneficio a ser atualizada="+ beneficio.getNome());
 			
-		/*	if (result.hasErrors()) {
-				populateDefaultModel(model);
-				return "beneficioform";
-			} else*/ {
+			
+			beneficio.setDataviagemida(beneficio.getEncaminhamento().getDataviagem());
+			beneficio.setDataviagemvolta(beneficio.getEncaminhamento().getDataviagemvolta());
+
 
 				// Add message to flash scope
 				redirectAttributes.addFlashAttribute("css", "success");
@@ -104,7 +149,7 @@ import br.com.tfdonline.modelo.Beneficio;
 				  redirectAttributes.addFlashAttribute("msg", "Beneficio atualizado com sucesso!");
 				}
 				
-				System.out.println("----->Nome ====="+ beneficio.getNome());
+				
 				beneficioDAO.saveOrUpdate(beneficio);
 				System.out.println(".....Salvo ou atualizado o beneficio.....");
 				System.out.println("redirecionando para... \"redirect:/beneficios/\" + beneficio.getId();");
@@ -115,7 +160,7 @@ import br.com.tfdonline.modelo.Beneficio;
 				// POST/FORWARD/GET
 				// return "beneficio/list";
 
-			}
+
 
 		}
 
@@ -128,14 +173,14 @@ import br.com.tfdonline.modelo.Beneficio;
 
 			Beneficio beneficio = beneficioDAO.findByID(id);
 			if (beneficio!=null) {
-				System.out.println("evocandoo showUpdateMOtoristaForm.......beneficio encontrado="+beneficio.getNome());
+				
 				
 			}else
 				System.out.println("Beneficio nao localizado");
 			
 			model.addAttribute("beneficioForm", beneficio);
 			
-			populateDefaultModel(model);
+			
 			
 			return "beneficioform";
 
@@ -153,7 +198,7 @@ import br.com.tfdonline.modelo.Beneficio;
 				model.addAttribute("css", "danger");
 				model.addAttribute("msg", "Beneficio não encontrado");
 			}
-			model.addAttribute("beneficio", beneficio);
+			model.addAttribute("beneficioForm", beneficio);
 
 			return "beneficioshow";
 
@@ -161,7 +206,7 @@ import br.com.tfdonline.modelo.Beneficio;
 		
 		// show add beneficio form
 		@RequestMapping(value = "/beneficios/add", method = RequestMethod.GET)
-		public String showAddBeneficioForm(Model model) {
+		public String showAddBeneficioForm(Model model, HttpServletRequest request) {
 
 			logger.debug("showAddBeneficioForm()");
 
@@ -169,13 +214,10 @@ import br.com.tfdonline.modelo.Beneficio;
 
 			// set default value
 			beneficio.setId(-1);
-			beneficio.setNome("Nome do Beneficio");
-			beneficio.setDataautorizacao(new Date());
-			beneficio.setDatavencimento(new Date());
-									
+			
 			model.addAttribute("beneficioForm", beneficio);
-
-			populateDefaultModel(model);
+			request.getSession().setAttribute("beneficioSession", beneficio);
+			
 
 			return "beneficioform";
 
@@ -207,32 +249,7 @@ import br.com.tfdonline.modelo.Beneficio;
 
 	
 
-		private void populateDefaultModel(Model model) {
-
-			
-
-			Map<String, String> skill = new LinkedHashMap<String, String>();
-			skill.put("Ida", "Ida");
-			skill.put("Volta", "Volta");
-			skill.put("Ida e Volta", "Ida e Volta");
-			model.addAttribute("tipoEncaminhamentoList", skill);
-
-			List<Integer> numbers = new ArrayList<Integer>();
-			numbers.add(1);
-			numbers.add(2);
-			numbers.add(3);
-			numbers.add(4);
-			numbers.add(5);
-			model.addAttribute("numberList", numbers);
-
-			Map<String, String> country = new LinkedHashMap<String, String>();
-			country.put("US", "United Stated");
-			country.put("CN", "China");
-			country.put("SG", "Singapore");
-			country.put("MY", "Malaysia");
-			model.addAttribute("countryList", country);
-
-		}
+		
 
 	}
 	

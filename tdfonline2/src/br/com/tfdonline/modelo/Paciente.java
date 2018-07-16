@@ -57,18 +57,7 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
-	 @ManyToMany(cascade = { 
-		        CascadeType.PERSIST, 
-		        CascadeType.MERGE
-		    })
-	 
-	 @JoinTable(name = "beneficiopaciente",
-	    		 joinColumns = { @JoinColumn(name = "idpaciente") }, 
-	    	     inverseJoinColumns = { @JoinColumn(name = "idbeneficio") }
-		    )
-	 
-	private List<Beneficio> beneficios = new ArrayList<Beneficio>();
-	
+	 	
 	
 	 @ManyToMany(cascade = { 
 		        CascadeType.PERSIST, 
@@ -173,12 +162,7 @@ private static final long serialVersionUID = 1L;
 	public void setAcompanhantes(List<Acompanhante> acompanhantes) {
 		this.acompanhantes = acompanhantes;
 	}
-	public List<Beneficio> getBeneficios() {
-		return beneficios;
-	}
-	public void setBeneficios(List<Beneficio> beneficios) {
-		this.beneficios = beneficios;
-	}
+	
 	
 	public void setDatanascimento(Date datanascimento) {
 		this.datanascimento = datanascimento;

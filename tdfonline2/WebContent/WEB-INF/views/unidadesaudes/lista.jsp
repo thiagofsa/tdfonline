@@ -19,18 +19,16 @@
 
 <div class="container">
 
-		<div  class="spacesup"></div>	
-		<c:if test="${not empty msg}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">×</span>
-			</button>
-			<strong>${msg}</strong>
-		    </div>
-		</c:if>
-
-		<div   class="titulo">
-			<h4>Relação das Unidades de Saúde</h4>
+		<div  class="spacesup"></div>
+		
+		<div   class="text-center text-uppercase">
+			<h4>Relação das unidades de Saúde</h4>
+		</div>
+		
+		<div  class="row areanotify justify-content-end py-3">		
+			<c:if test="${not empty msg}">			    
+				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+			</c:if>		
 		</div>
 
 

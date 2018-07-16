@@ -57,7 +57,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="66" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField>
 				<reportElement x="90" y="20" width="100" height="30" uuid="5f7ddbd9-7117-4ada-8a31-17768c43aefb">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="afb9f20d-5c04-470e-aab9-f0dcc3f8a760"/>

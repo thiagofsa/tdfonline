@@ -37,7 +37,7 @@
 			<thead>
 				<tr>
 					<th class="text-center">Descrição</th>
-					<th class="text-center">Área</th>
+					<th class="text-center">Especialidade</th>
 					<th class="text-center">Detalhes</th>
 				</tr>
 			</thead>

@@ -33,9 +33,9 @@
 		
 		<spring:bind path="area">
 		  <div class="form-group col-md-4 ${status.error ? 'has-error' : ''}">
-			<label for="area">Área</label>				    			
+			<label for="area">Especialidade</label>				    			
     			<form:select path="area" class="form-control"  id="area" required="required" >
-    				<form:option value="" label="Escolha uma área"/>
+    				<form:option value="" label="Escolha uma especialidade"/>
     				<form:option value="Ortopedia" label="Ortopedia"/>
     				<form:option value="Cardiologia" label="Cardiologia"/>
     				<form:option value="Neurologia" label="Neurologia"/>

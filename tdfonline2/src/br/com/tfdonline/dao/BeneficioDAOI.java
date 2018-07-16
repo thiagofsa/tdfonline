@@ -18,6 +18,8 @@ public interface BeneficioDAOI {
 
 	void saveOrUpdate(Beneficio beneficio);
 	
-	public List<Beneficio> findbyName(String nome);
+	public List<Beneficio> findbyPacienteID(Integer idpaciente);
+	
+	public List<Beneficio> findbyMarcacaoID(Integer idmarcacao);
 	
 }

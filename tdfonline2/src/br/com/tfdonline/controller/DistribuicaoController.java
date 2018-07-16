@@ -29,11 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.DistribuicaoDAOI;
 import br.com.tfdonline.dao.MotoristaDAOI;
-import br.com.tfdonline.dao.PautaDAOI;
+
 import br.com.tfdonline.dao.VeiculoDAOI;
 import br.com.tfdonline.modelo.Distribuicao;
 import br.com.tfdonline.modelo.Motorista;
-import br.com.tfdonline.modelo.Pauta;
+
 import br.com.tfdonline.modelo.Veiculo;
 
 	@Controller
@@ -52,8 +52,7 @@ import br.com.tfdonline.modelo.Veiculo;
 		@Autowired
 		private VeiculoDAOI veiculoDAO;
 
-		@Autowired
-		private PautaDAOI pautaDAO;
+	
 	
 	
 		@InitBinder
@@ -97,57 +96,6 @@ import br.com.tfdonline.modelo.Veiculo;
 		}
 		
 		
-		
-		//(1)
-		
-		//populando um pauta vazio e direcionando para a pagina de pesquisa
-		@RequestMapping(value = {"/selectpauta/distribuicaos/" })
-		public String selectPauta(@ModelAttribute("distribuicaoForm")  Distribuicao distribuicao,
-				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes, HttpServletRequest request){
-		 	
-			//primeira vez da exibicao...vamos popular o form
-				Pauta pauta = new Pauta();
-				model.addAttribute("pauta", pauta);	
-			
-				
-			//colocando os dados da distribuicao na sessao..			
-			if  (request.getSession().getAttribute("distribuicaoSession")==null) {
-				request.getSession().setAttribute("distribuicaoSession", distribuicao);
-			}
-			
-		 	return "selectpautaform";
-		 	
-	    }
-		
-		@RequestMapping(value = {"/distribuicaos/selectpauta2" })
-		public String selectPauta(@RequestParam("descricao") String descricao, Model model, @ModelAttribute("pauta") Pauta pauta){
-		 	
-			System.out.println("chamando o distribuicaos/SelectPauta2/............Pauta.descricao="+descricao);
-			
-			model.addAttribute("pautas", pautaDAO.findbyDescricao(descricao));
-			System.out.println("PautaDAO chamado...");
-			
-			model.addAttribute("pauta", pauta);	
-			
-		 	return "selectpautaform";
-		 	
-	    }
-		
-		@RequestMapping(value = "/distribuicaos/selectpauta/{id}")
-		public String selectPauta(@PathVariable("id") int id, Model model, HttpServletRequest request) {
-			
-			Distribuicao distribuicao =(Distribuicao) request.getSession().getAttribute("distribuicaoSession");
-			System.out.println("ID da distribuicao na sessao em Select Pauta=" + distribuicao.getId());
-			Pauta pauta  = pautaDAO.findByID(id);
-			distribuicao.setPauta(pauta);
-			request.getSession().setAttribute("distribuicaoSession", distribuicao);
-			model.addAttribute("distribuicaoForm", distribuicao);
-			
-			return "distribuicaoform";
-			
-		
-		}
 		
 		
 		//populando um veiculo vazio e direcionando para a pagina de pesquisa
@@ -276,7 +224,7 @@ import br.com.tfdonline.modelo.Veiculo;
 			System.out.println("ID de distribuicao passada pelo form="+ distribuicao.getId());
 			System.out.println("ID de Motorista passada pelo form="+ distribuicao.getMotorista().getId());
 			System.out.println("ID de Veiculo passada pelo form="+ distribuicao.getVeiculo().getId());
-			System.out.println("ID de Pauta passada pelo form="+ distribuicao.getPauta().getId());
+		
 			
 			distribuicao.setVagas(distribuicao.getVeiculo().getVagas());
 			
@@ -370,7 +318,7 @@ import br.com.tfdonline.modelo.Veiculo;
 			
 			distribuicao.setMotorista(new Motorista());
 			distribuicao.setVeiculo(new Veiculo());
-			distribuicao.setPauta(new Pauta());
+			
 			
 			distribuicao.setVagas(0);
 						

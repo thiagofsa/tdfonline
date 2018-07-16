@@ -23,8 +23,15 @@
   url: the path where the Jasper JRXML file is located
   reportDateKey: the name of the datasource. This is passed by the controller
  --> 
- <bean id="multiReport"
+ <bean id="motoristaReport"
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/MotoristasReport.jrxml"
   	p:reportDataKey="datasource" /> 
+  	
+<bean id="encaminhamentopormotoristaReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/EncaminhamentospormotoristaReport.jrxml"
+  	p:reportDataKey="datasource" />  	
+  	
+  	  	
 </beans>

@@ -179,7 +179,10 @@ import br.com.tfdonline.util.DateUtils;
 			
 			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
 			
-			return "marcacaoform";
+			if (marcacao.isNew()) {
+				return "marcacaocadastro";
+			}else
+				return "marcacaoform";
 			
 		
 		}
@@ -233,7 +236,10 @@ import br.com.tfdonline.util.DateUtils;
 			
 			model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
 			
-			return "marcacaoform";
+			if (marcacao.isNew()) {
+				return "marcacaocadastro";
+			}else
+				return "marcacaoform";
 			
 		
 		}
@@ -255,6 +261,8 @@ import br.com.tfdonline.util.DateUtils;
 				if  (request.getSession().getAttribute("marcacaoSession")==null) {
 					request.getSession().setAttribute("marcacaoSession", marcacao);
 				}
+				
+				
 			
 		 	return "selectpacienteform";
 		 	
@@ -307,7 +315,10 @@ import br.com.tfdonline.util.DateUtils;
 			System.out.println("MarcacaoController.selectPaciente() --> Vagas reservadas "+ totalVagas );
 			model.addAttribute("acompanhantespaciente",acompanhantespaciente);
 			
-			return "marcacaoform";
+			if (marcacao.isNew()) {
+				return "marcacaocadastro";
+			}else
+				return "marcacaoform";
 			
 		
 		}
@@ -393,7 +404,10 @@ import br.com.tfdonline.util.DateUtils;
 			request.getSession().setAttribute("marcacaoSession", marcacaoSession);
 			model.addAttribute("acompanhantespaciente", acompanhantespacientemarcacao);
 			
-		 	return "marcacaoform";
+			if (marcacao.isNew()) {
+				return "marcacaocadastro";
+			}else
+				return "marcacaoform";
 		 	
 		 	 
 		 	

@@ -172,5 +172,36 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 
 	}
 
+
+	@Override
+	public List<Acompanhante> findbyBeneficioAvulsoID(Integer beneficoavulsoid) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no AcompanhanteDAO.findbyBeneficioAvulsoID()");
+		System.out.println("Valor do ID BeneficioAvulso="+ beneficoavulsoid );
+		
+		
+		String squery = "select apba.idacompanhante from Acompanhantepacientebeneficioavulso apba, BeneficioAvulso ba where ba.id=apba.idbeneficioavulso and ba.id="+beneficoavulsoid;
+		
+		List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+			
+		
+		
+		List result = query.list();
+		Acompanhante acompanhante ;
+		for (int i=0; i< result.size(); i++) {
+			
+			
+			System.out.println("Linha"+i+ "=" +result.get(i));
+			acompanhante = findByID((Integer)result.get(i));
+			acompanhantes.add(acompanhante);
+			
+		}
+		
+		
+		return acompanhantes;
+	}
+
 	
 }

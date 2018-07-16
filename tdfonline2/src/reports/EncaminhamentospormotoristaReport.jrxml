@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Encaminhamentopormotorista" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="dataviagem" class="java.util.Date"/>
+	<field name="marcacao.paciente.nome" class="java.lang.String"/>
+	<field name="marcacao.unidadesaude.descricao" class="java.lang.String"/>
+	<field name="marcacao.acompanhantespacientemarcacao" class="java.util.List"/>
+	<title>
+		<band height="88" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="30" y="-10" width="721" height="66" backcolor="#000000" uuid="d8d9e644-3a32-491d-97cb-a277aff17133"/>
+				<staticText>
+					<reportElement style="Title" x="0" y="0" width="370" height="66" uuid="27d8f6ee-f0a9-44f6-a160-1763c3b00f30"/>
+					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4"/>
+					<textElement verticalAlignment="Bottom">
+						<font isBold="false"/>
+					</textElement>
+					<text><![CDATA[Relatório]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="SubTitle" x="370" y="37" width="316" height="29" uuid="cfa21334-0634-4605-9ea7-aca4981f67e4"/>
+					<textElement textAlignment="Right">
+						<font size="22" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Encaminhamentos]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="30" y="56" width="721" height="32" forecolor="#000000" backcolor="#CC0000" uuid="b0c895f6-6dbd-477d-9858-9ad66af087e1"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="553" y="12" width="144" height="20" forecolor="#FFFFFF" uuid="a33fce3b-20c1-4696-873a-fe134d1e7d88"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement x="30" y="12" width="721" height="1" uuid="723ae5ea-200a-4bd9-a884-d64d3c4c6cc3"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="136" splitType="Stretch">
+			<textField>
+				<reportElement x="80" y="50" width="100" height="30" uuid="00b8ad26-ac4a-4c21-9b2d-23af1a795e44"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="199" y="50" width="100" height="30" uuid="051b3b3b-bcfd-4cf1-8cb0-a71113e62f6c"/>
+				<textFieldExpression><![CDATA[$F{dataviagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="50" width="100" height="30" uuid="9fb4e2e3-4925-4703-bf56-0bb1927d2d7c"/>
+				<textFieldExpression><![CDATA[$F{marcacao.paciente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="50" width="147" height="30" uuid="b78ceb94-2b3d-46ed-b2f2-ed5117428554">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4277d19b-de59-48ca-a0ec-c669d4be8df1"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{marcacao.unidadesaude.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="80" y="10" width="100" height="30" uuid="17aee86d-14be-4487-8953-fcd811f40f82"/>
+				<text><![CDATA[Id Enc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="199" y="10" width="100" height="30" uuid="89fde57d-6d80-473d-99e3-06b2cab44b86"/>
+				<text><![CDATA[Data Viagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="10" width="100" height="30" uuid="03da99f7-3f74-41cb-8131-818071a11df4"/>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="430" y="10" width="170" height="30" uuid="27f94641-0452-43a5-88ba-72bf563600d6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4277d19b-de59-48ca-a0ec-c669d4be8df1"/>
+				</reportElement>
+				<text><![CDATA[Unid. Saúde]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="70" y="90" width="200" height="40" uuid="73ecb0be-c62f-4957-af7b-d050a63c83fe"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{marcacao.acompanhantespacientemarcacao})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[ "/reports/AcompanhantesEncaminhamentospormotoristaReport.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="35" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="25" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="802" height="25" forecolor="#D0B48E" backcolor="#000000" uuid="ffb10ec8-0371-4545-8eaa-96d62ad3cec0"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="757" y="3" width="40" height="20" forecolor="#FFFFFF" uuid="b5521ea6-5f36-4864-856f-58d0bcd011f2"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="677" y="3" width="80" height="20" forecolor="#FFFFFF" uuid="e625ea3c-1741-4cfe-81cf-fbbdd00162c8"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="2" y="3" width="197" height="20" forecolor="#FFFFFF" uuid="0c9f7e91-d3f5-47f9-82b7-0b2b3a43a5d6"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

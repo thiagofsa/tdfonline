@@ -87,6 +87,18 @@
       </li>
       
       
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Benefício
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/beneficios/add">Novo - De marcacao</a>
+          <a class="dropdown-item" href="#">Listar</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/beneficioavulsos/add">Novo - Beneficio Avulso</a>          
+        </div>
+      </li>
+      
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Relatórios
@@ -94,8 +106,8 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <a class="dropdown-item" href="#">Pacientes</a>
           <a class="dropdown-item" href="#">Marcações</a>
-          <a class="dropdown-item" href="#">Encaminhamentos</a>
-          <a class="dropdown-item" href="#">Pautas</a>          
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/encaminhamentopormotoristaedatareport">Encaminhamentos por Motorista</a>
+                 
         </div>
       </li>
       

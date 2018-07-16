@@ -20,26 +20,31 @@
 		</div>
 	</c:if>
 
-	<h1>Beneficio - Detalhes </h1>
+	<h1>Beneficio Avulso- Detalhes </h1>
 	<br />
 
 	<div class="row">
 		<label class="col-sm-2">ID</label>
-		<div class="col-sm-10">${id}</div>
+		<div class="col-sm-10">${beneficioavulso.id}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Nome Paciente</label>
-		<div class="col-sm-10">${encaminhamento.marcacao.paciente.nome}</div>
+		<label class="col-sm-2">Data</label>
+		<div class="col-sm-10">${beneficioavulso.dataviagemida}</div>
 	</div>
-	
+
+	<div class="row">
+		<label class="col-sm-2">Paciente</label>
+		<div class="col-sm-10">${beneficioavulso.paciente.nome}</div>
+	</div>
 	
 	<div class="row">
 		<label class="col-sm-2">Valor</label>
-		<div class="col-sm-10">${valor}</div>
+		<div class="col-sm-10">${beneficioavulso.valor}</div>
 	</div>
 
-		
+
+	
 	
 </div>
 

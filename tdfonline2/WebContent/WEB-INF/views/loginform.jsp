@@ -14,7 +14,19 @@
     <title><tiles:getAsString name="title" /></title>
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
-    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >       
+    <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >
+    <style type="text/css">
+    	.icone{
+    		position: relative;
+    	}    	
+    	.icone i{
+		    position: absolute;
+		    right: 0.7rem;
+		    top: 0.7rem; 
+		    color: #22313F;	    
+		}    
+    </style>
+           
   </head>  
  
 <body>
@@ -35,25 +47,26 @@
 					</c:if>
 		
 		
-
-              <h3 class="mb-3 text-center" >TFDControll </h3>
-              <form   class="mx-auto" action="/springtest/efetualogin" method="post">
-              
-                <div class="form-group">
-				    <label for="login">Usuario</label>
-				    <input type="text" class="form-control" id="login" name="login" aria-describedby="login" placeholder="Nome de usuário">
-				</div>
-				
-				<div class="form-group">
-				    <label for="senha">Senha</label>
-				    <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
-				</div>
-				  
-				  <div class="form-group text-center">
-				  	<button type="submit" class="btn btn-block btn-outline-primary mt-4">Entrar</button>  
-				  </div>
-				  
-              </form>
+				<div  id="div">
+		              <h3 class="mb-3 text-center" >TFDControll </h3>
+		              <form   class="mx-auto" action="/springtest/efetualogin" method="post">
+		              
+		                <div class="form-group icone">
+						    <i class="fa fa-user" aria-hidden="true"></i>
+						    <input type="text" class="form-control" id="login" name="login" aria-describedby="login" placeholder="Nome de usuário">
+						</div>
+						
+						<div class="form-group icone">
+						    <i class="fa fa-key" aria-hidden="true"></i>
+						    <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
+						</div>
+						  
+						  <div class="form-group text-center">
+						  	<button type="submit" class="btn btn-block btn-outline-primary mt-4">Entrar</button>  
+						  </div>
+						  
+		              </form>
+		         </div>
 		</div>
 	</div>
 </div>

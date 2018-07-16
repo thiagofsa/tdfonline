@@ -80,7 +80,7 @@ private static final long serialVersionUID = 1L;
 	
 	 @ManyToMany(cascade = { 
 			 CascadeType.PERSIST,
-				CascadeType.MERGE,  
+				CascadeType.MERGE, 
 		    })
 	 @JoinTable(name = "acompanhantepacientemarcacao",
 	    		 joinColumns = { @JoinColumn(name = "idmarcacao") }, 
