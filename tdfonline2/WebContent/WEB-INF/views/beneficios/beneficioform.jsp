@@ -32,54 +32,72 @@
 
 		<form:hidden path="id" />
 
-		<spring:bind path="encaminhamento.marcacao.paciente.nome">
-		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Paciente Nome</label>
-			<div class="col-sm-10">
-				<form:input path="encaminhamento.marcacao.paciente.nome" type="text" class="form-control" 
-                                id="encaminhamento.marcacao.paciente.nome" placeholder="Nome Paciente" />
-				<form:errors path="encaminhamento.marcacao.paciente.nome" class="control-label" />
-			</div>
+		<spring:bind path="paciente.nome">
+		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
+				<label for="paciente.nome">Nome do Paciente</label>			
+				<form:input path="paciente.nome" type="text" class="form-control mudacursor" id="paciente.nome" 
+				placeholder="Clique para selecionar paciente" onclick="location.href='${selectpacienteUrl}'" readonly="true" />
+				<form:errors path="paciente.nome" class="control-label" />		
+				<form:hidden path="paciente.id" />			  
 		  </div>
 		</spring:bind>
-
-
+		
+		<spring:bind path="unidadesaude.descricao">
+		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
+				<label for="unidadesaude.descricao">Unidade Saude</label>
+				<form:input path="unidadesaude.descricao" type="text" class="form-control mudacursor" id="unidadesaude.descricao" 
+				placeholder="Clique para selecionar a Unidade de Saúde" onclick="location.href='${selectunidadesaudeUrl}'" readonly="true" />
+				<form:errors path="unidadesaude.descricao" class="control-label" />
+				<form:hidden path="unidadesaude.id" />
+		  </div>		 
+		</spring:bind>
+		
+	</div>
+		
+	<div  class="form-row" >			
+				
+		<spring:bind path="procedimento.nome">
+		  <div class="form-group col-md-8 ${status.error ? 'has-error' : ''}">
+				<label for="procedimento.nome">Procedimento</label>
+				<form:input path="procedimento.nome" type="text" class="form-control mudacursor" id="procedimento.nome" 
+				placeholder="Clique para selecionar o Procedimento" onclick="location.href='${selectprocedimentoUrl}'" readonly="true" />
+				<form:errors path="procedimento.nome" class="control-label" />
+				<form:hidden path="procedimento.id" />
+		  </div>
+		</spring:bind>		
+		
+		
+		
 		
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Data viagem ida</label>
 			<div class="col-sm-10">
-				<form:input path="encaminhamento.dataviagem" type="text" class="form-control" 
-                                name="dataviagem" id="dataviagem" placeholder="Data viagem" />
+				<form:input path="dataviagemida" type="text" class="form-control" 
+                                name="dataviagemida" id="dataviagemida" placeholder="Data viagem Ida" />
 				
 			</div>
 		  </div>
-		
-		
 		
 		
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
 			<label class="col-sm-2 control-label">Data viagem Volta</label>
 			<div class="col-sm-10">
-				<form:input path="encaminhamento.dataviagemvolta" type="text" class="form-control" 
+				<form:input path="dataviagemvolta" type="text" class="form-control" 
                                 name="dataviagemvolta" id="dataviagemvolta" placeholder="Data viagem Volta" />
 				
 			</div>
 		  </div>
-		
-		
-		<spring:bind path="valor">
-		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label">Valor beneficio</label>
+		  
+		  
+		    <div class="form-group ${status.error ? 'has-error' : ''}">
+			<label class="col-sm-2 control-label">Valor</label>
 			<div class="col-sm-10">
 				<form:input path="valor" type="text" class="form-control" 
-                                id="valor" placeholder="Valor" />
-				<form:errors path="valor" class="control-label" />
+                                name="valor" id="valor" placeholder="Valor" />
+				
 			</div>
 		  </div>
-		</spring:bind>
-
-		<form:hidden path="encaminhamento.id" />
-						
+		
 				
 		<div class="form-group">
 		  <div class="col-sm-offset-2 col-sm-10">

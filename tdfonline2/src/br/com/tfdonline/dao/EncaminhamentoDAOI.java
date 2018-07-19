@@ -15,7 +15,7 @@ public interface EncaminhamentoDAOI {
     
     List<Encaminhamento> findAll();
     
-    public List<Marcacao> findbyNomePaciente(String nomepaciente);
+    public List<Encaminhamento> findbyNomePaciente(String nomepaciente);
      
     void deleteEncaminhamentoByID(Integer id);
      

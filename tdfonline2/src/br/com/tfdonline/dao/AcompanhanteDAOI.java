@@ -24,7 +24,7 @@ public interface AcompanhanteDAOI {
 	
 	public List<Acompanhante> findbyPacienteID(Integer pacienteid) ;
 	
-	public List<Acompanhante> findbyBeneficioAvulsoID(Integer beneficoavulsoid) ;
+	public List<Acompanhante> findbyBeneficioID(Integer beneficoavulsoid) ;
 	
 	
 	

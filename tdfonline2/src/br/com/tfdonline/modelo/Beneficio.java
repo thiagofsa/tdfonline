@@ -1,8 +1,11 @@
 package br.com.tfdonline.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 //@Table(name = "paciente" , schema = "tfdonline")
@@ -25,14 +34,49 @@ private static final long serialVersionUID = 1L;
 	private Integer id;
 	
 	private float valor;
+	
+	private float vagas;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataviagemida;
+	
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataviagemvolta;
 	
 	private String caminhoarquivo;
 	
+	private String observacao;
+	
 	@OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name = "idencaminhamento")
-	private Encaminhamento encaminhamento;
+    @JoinColumn(name = "idpaciente" )
+	private Paciente paciente;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idunidadesaude")
+	private UnidadeSaude unidadesaude;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name = "idprocedimento")
+	private Procedimento procedimento;
+	
+   
+	@ManyToMany(cascade = { 
+			 CascadeType.PERSIST,
+				CascadeType.MERGE,  
+		    })
+	@JoinTable(name = "acompanhantepacientebeneficioavulso",
+	   		 joinColumns = { @JoinColumn(name = "idbeneficioavulso") }, 
+	   	     inverseJoinColumns = { @JoinColumn(name = "idacompanhante") }
+		    )
+	private List<Acompanhante> acompanhantespacientebeneficioavulso = new ArrayList<Acompanhante>();
+	
+	
+	public Beneficio() {
+		
+		this.vagas=1;
+	}
 	
 	
 	public boolean isNew() {
@@ -43,13 +87,9 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
 
 
 	public void setId(Integer id) {
@@ -125,26 +165,73 @@ private static final long serialVersionUID = 1L;
 	}
 
 
-
-
-	public Encaminhamento getEncaminhamento() {
-		return encaminhamento;
+	public String getObservacao() {
+		return observacao;
 	}
 
 
-
-
-	public void setEncaminhamento(Encaminhamento encaminhamento) {
-		this.encaminhamento = encaminhamento;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
+	}
+
+
+	public UnidadeSaude getUnidadesaude() {
+		return unidadesaude;
+	}
+
+
+	public void setUnidadesaude(UnidadeSaude unidadesaude) {
+		this.unidadesaude = unidadesaude;
+	}
+
+
+	public Procedimento getProcedimento() {
+		return procedimento;
+	}
+
+
+	public void setProcedimento(Procedimento procedimento) {
+		this.procedimento = procedimento;
+	}
 
 
 	
 
 
+	public float getVagas() {
+		return vagas;
+	}
 
-		
+
+	public void setVagas(float vagas) {
+		this.vagas = vagas;
+	}
+
+
+	public List<Acompanhante> getAcompanhantespacientebeneficioavulso() {
+		return acompanhantespacientebeneficioavulso;
+	}
+
+
+	public void setAcompanhantespacientebeneficioavulso(List<Acompanhante> acompanhantespacientebeneficioavulso) {
+		this.acompanhantespacientebeneficioavulso = acompanhantespacientebeneficioavulso;
+	}
+
+
+
+
+
 
 }
+
+

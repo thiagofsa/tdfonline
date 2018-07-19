@@ -1,15 +1,18 @@
 package br.com.tfdonline.dao;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Beneficio;
+import br.com.tfdonline.modelo.Encaminhamento;
 
 @Repository
 @Transactional
@@ -35,6 +38,8 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
 	
 	@Override
 	public void addBeneficio(Beneficio beneficio) {
+		
+		//sessionFactory.getCurrentSession().update(beneficio.getPaciente());
 		 sessionFactory.getCurrentSession().save(beneficio);
 		
 	}
@@ -62,8 +67,9 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
 	public void updateBeneficio(Beneficio beneficio) {
 		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().clear();
+		sessionFactory.getCurrentSession().update(beneficio.getPaciente());
 		sessionFactory.getCurrentSession().update(beneficio);
-				
+		
 		System.out.println("---> Beneficio atualizado pelo DAO!!!");
 		
 	}
@@ -96,7 +102,7 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
 		// TODO Auto-generated method stub
 		if (findByID(beneficio.getId())==null) {
 			this.addBeneficio(beneficio);
-			System.out.println("estou no DAO, tentanto ADD a beneficio...");
+			System.out.println("estou no BeneficioDAO, tentanto ADD a beneficio...");
 		} else {
 			
 			this.updateBeneficio(beneficio);
@@ -110,6 +116,23 @@ public class BeneficioDAOImp implements BeneficioDAOI, Serializable{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
+	@Override
+	public List<Beneficio> findbyPeriodo(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial, @DateTimeFormat(pattern = "yyyy-MM-dd")Date datafinal) {
+		// TODO Auto-generated method stub
+					
+			String hql = "FROM Beneficio b WHERE b.dataviagemida BETWEEN :start AND :end";
+			
+			Query query = sessionFactory.getCurrentSession().createQuery(hql);
+			query.setParameter("start", datainicial);
+			query.setParameter("end", datafinal);
+			 
+			List<Beneficio> lista = query.list();
+			System.out.println("NUmero de BENEFICIOS ENCONTRADOS EM findByPeriodo="+ lista.size());
+			
+			return lista;
+		}
 
 	
 }

@@ -33,9 +33,9 @@ import br.com.tfdonline.dao.PacienteDAOI;
 import br.com.tfdonline.dao.ProcedimentoDAOI;
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
-import br.com.tfdonline.modelo.BeneficioAvulso;
+import br.com.tfdonline.modelo.Beneficio;
 import br.com.tfdonline.modelo.Encaminhamento;
-import br.com.tfdonline.modelo.BeneficioAvulso;
+import br.com.tfdonline.modelo.Beneficio;
 import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.modelo.Procedimento;
 import br.com.tfdonline.modelo.UnidadeSaude;
@@ -85,7 +85,7 @@ import br.com.tfdonline.util.DateUtils;
 		@RequestMapping(value = {"/beneficioavulsos/find" })
 		    public String findBeneficioAvulso(Model model) {
 				
-				BeneficioAvulso beneficioavulso = new BeneficioAvulso();
+				Beneficio beneficioavulso = new Beneficio();
 				beneficioavulso.setDataviagemida(new Date());
 				beneficioavulso.setDataviagemvolta(new Date());
 				beneficioavulso.setPaciente(new Paciente());
@@ -103,7 +103,7 @@ import br.com.tfdonline.util.DateUtils;
 		public String showFindBeneficioAvulsoForm(@RequestParam("nome") String nome, @RequestParam("datafim") Date datafim, @RequestParam("dataini") Date dataini, Model model) {
 			
 			
-			List<BeneficioAvulso> beneficioavulsoLista= new ArrayList<BeneficioAvulso>();
+			List<Beneficio> beneficioavulsoLista= new ArrayList<Beneficio>();
 					
 			System.out.println("chamando o beneficioavulsos/find/............");
 			System.out.println("Nome="+nome);
@@ -134,7 +134,7 @@ import br.com.tfdonline.util.DateUtils;
 
 		//populando um procedimento vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectprocedimento/beneficioavulsos/" })
-		public String selectProcedimento(@ModelAttribute("beneficioavulsoForm")  BeneficioAvulso beneficioavulso,
+		public String selectProcedimento(@ModelAttribute("beneficioavulsoForm")  Beneficio beneficioavulso,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request){
 		 	
@@ -171,7 +171,7 @@ import br.com.tfdonline.util.DateUtils;
 		@RequestMapping(value = "/beneficioavulsos/selectprocedimento/{id}")
 		public String selectProcedimento(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 			
-			BeneficioAvulso beneficioavulso =(BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulso =(Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			System.out.println("ID da beneficioavulso na sessao em Select Procedimento=" + beneficioavulso.getId());
 			Procedimento procedimento  = procedimentoDAO.findByID(id);
 			beneficioavulso.setProcedimento(procedimento);
@@ -193,7 +193,7 @@ import br.com.tfdonline.util.DateUtils;
 		
 		//populando um unidadesaude vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectunidadesaude/beneficioavulsos/" })
-		public String selectUnidadeSaude(@ModelAttribute("beneficioavulsoForm")  BeneficioAvulso beneficioavulso,
+		public String selectUnidadeSaude(@ModelAttribute("beneficioavulsoForm")  Beneficio beneficioavulso,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request){
 		 	
@@ -230,7 +230,7 @@ import br.com.tfdonline.util.DateUtils;
 		@RequestMapping(value = "/beneficioavulsos/selectunidadesaude/{id}")
 		public String selectUnidadeSaude(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 			
-			BeneficioAvulso beneficioavulso =(BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulso =(Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			System.out.println("ID da beneficioavulso na sessao em Select UnidadeSaude=" + beneficioavulso.getId());
 			UnidadeSaude unidadesaude  = unidadesaudeDAO.findByID(id);
 			beneficioavulso.setUnidadesaude(unidadesaude);
@@ -253,7 +253,7 @@ import br.com.tfdonline.util.DateUtils;
 		
 		//populando uma vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectpaciente/beneficioavulsos/" })
-		public String selectPaciente(@ModelAttribute("beneficioavulsoForm")  BeneficioAvulso beneficioavulso,
+		public String selectPaciente(@ModelAttribute("beneficioavulsoForm")  Beneficio beneficioavulso,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request){
 		 	
@@ -290,7 +290,7 @@ import br.com.tfdonline.util.DateUtils;
 		@RequestMapping(value = "/beneficioavulsos/selectpaciente/{id}")
 		public String selectPaciente(@PathVariable("id") int id, Model model, HttpServletRequest request) {
 			
-			BeneficioAvulso beneficioavulso =(BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulso =(Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			System.out.println("ID da beneficioavulso na sessao em Select Paciente=" + beneficioavulso.getId());
 			Paciente paciente  = pacienteDAO.findByID(id);
 			beneficioavulso.setPaciente(paciente);
@@ -331,12 +331,12 @@ import br.com.tfdonline.util.DateUtils;
 		//populando um grid de Acompanhantes para serem escolhidos
 		
 		@RequestMapping(value = {"/selectacompanhante/beneficioavulsos/" })
-		public String selectAcompanhante(@ModelAttribute("beneficioavulsoForm")  BeneficioAvulso beneficioavulso,
+		public String selectAcompanhante(@ModelAttribute("beneficioavulsoForm")  Beneficio beneficioavulso,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request){
 		 	
 			//primeira vez da exibicao...vamos popular o form
-			BeneficioAvulso beneficioavulsoSession = (BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulsoSession = (Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			
 			System.out.println("Paciente selecionado na BeneficioAvulso-->"+ beneficioavulsoSession.getPaciente().getNome());
 			
@@ -361,7 +361,7 @@ import br.com.tfdonline.util.DateUtils;
 			
 			//Processar o checkbox itens marcados....
 			
-			BeneficioAvulso beneficioavulsoSession = (BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulsoSession = (Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			System.out.println("Paciente selecionado..."+ beneficioavulsoSession.getPaciente().getNome());
 			
 			//array de IDs passados pelos checkboxes...
@@ -434,7 +434,7 @@ import br.com.tfdonline.util.DateUtils;
 		
 		@RequestMapping(value = "/beneficioavulsos", method = RequestMethod.POST)
 		//public String saveOrUpdateBeneficioAvulso(@ModelAttribute("beneficioavulsoForm") @Validated BeneficioAvulso beneficioavulso,
-		public String saveOrUpdateBeneficioAvulso(@ModelAttribute("beneficioavulsoForm")  BeneficioAvulso beneficioavulso,
+		public String saveOrUpdateBeneficioAvulso(@ModelAttribute("beneficioavulsoForm")  Beneficio beneficioavulso,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
@@ -442,7 +442,7 @@ import br.com.tfdonline.util.DateUtils;
 			
 			System.out.println("Em saveOrUpdate, salvando ou atualizando beneficioavulso.............");
 			
-			BeneficioAvulso beneficioavulsoSession = (BeneficioAvulso) request.getSession().getAttribute("beneficioavulsoSession");
+			Beneficio beneficioavulsoSession = (Beneficio) request.getSession().getAttribute("beneficioavulsoSession");
 			System.out.println("ID de beneficioavulso da session="+ beneficioavulsoSession.getId());
 			
 			System.out.println("ID de beneficioavulso passada pelo form="+ beneficioavulso.getId());
@@ -496,7 +496,7 @@ import br.com.tfdonline.util.DateUtils;
 			System.out.println("showUpdateBeneficioAvulsoFOrm() -->> ID BeneficioAvulso passado pelo form = " + id);
 			
 			System.out.println("Pesquisando  ID beneficioavulso no DAO ---> ID = "+id);
-			BeneficioAvulso beneficioavulso = beneficioavulsoDAO.findByID(id);
+			Beneficio beneficioavulso = beneficioavulsoDAO.findByID(id);
 			
 			
 			if (beneficioavulso!=null) {
@@ -506,7 +506,7 @@ import br.com.tfdonline.util.DateUtils;
 				System.out.println("BeneficioAvulso nao localizado");
 			
 			
-			beneficioavulso.setAcompanhantespacientebeneficioavulso(acompanhanteDAO.findbyBeneficioAvulsoID(id));
+			beneficioavulso.setAcompanhantespacientebeneficioavulso(acompanhanteDAO.findbyBeneficioID(id));
 			model.addAttribute("acompanhantespaciente",beneficioavulso.getAcompanhantespacientebeneficioavulso());
 			model.addAttribute("beneficioavulsoForm", beneficioavulso);
 					
@@ -526,7 +526,7 @@ import br.com.tfdonline.util.DateUtils;
 			logger.debug("showBeneficioAvulso() id: {}", id);
 			System.out.println("-----> procurando pelo beneficioavulso id="+id);
 
-			BeneficioAvulso beneficioavulso = beneficioavulsoDAO.findByID(id);
+			Beneficio beneficioavulso = beneficioavulsoDAO.findByID(id);
 			if (beneficioavulso == null) {
 				model.addAttribute("css", "danger");
 				model.addAttribute("msg", "BeneficioAvulso não encontrado");
@@ -543,7 +543,7 @@ import br.com.tfdonline.util.DateUtils;
 
 			logger.debug("showAddBeneficioAvulsoForm()");
 						// set default value
-			BeneficioAvulso beneficioavulso = new BeneficioAvulso();
+			Beneficio beneficioavulso = new Beneficio();
 			beneficioavulso.setId(-1);
 			beneficioavulso.setDataviagemida(new Date());
 			

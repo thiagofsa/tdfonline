@@ -30,7 +30,7 @@
 
 	<div class="row">
 		<label class="col-sm-2">Nome Paciente</label>
-		<div class="col-sm-10">${encaminhamento.marcacao.paciente.nome}</div>
+		<div class="col-sm-10">${paciente.nome}</div>
 	</div>
 	
 	

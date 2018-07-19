@@ -66,6 +66,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	public void updateEncaminhamento(Encaminhamento encaminhamento) {
 		// TODO Auto-generated method stub
 		//sessionFactory.getCurrentSession().clear();
+
 		sessionFactory.getCurrentSession().merge(encaminhamento);
 				
 		System.out.println("---> Encaminhamento atualizado pelo DAO!!!");
@@ -145,14 +146,14 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 
 
 	@Override
-	public List<Marcacao> findbyNomePaciente(String nomepaciente) {
+	public List<Encaminhamento> findbyNomePaciente(String nomepaciente) {
 		// TODO Auto-generated method stub
-		String hql = "FROM Encaminhamento e WHERE e.distribuicao.motorista.id=:keyword";
+		String hql = "FROM Encaminhamento e WHERE e.marcacao.paciente.nome like :keyword";
 		String keyword = nomepaciente;
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("keyword", "%" + keyword + "%");
 		 
-		List<Marcacao> lista = query.list();
+		List<Encaminhamento> lista = query.list();
 		
 		return lista;
 	}

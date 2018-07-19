@@ -3,31 +3,31 @@ package br.com.tfdonline.dao;
 import java.util.Date;
 import java.util.List;
 
-import br.com.tfdonline.modelo.BeneficioAvulso;
+import br.com.tfdonline.modelo.Beneficio;
 import br.com.tfdonline.modelo.Marcacao;
 
 public interface BeneficioAvulsoDAOI {
 
-	void addBeneficioAvulso(BeneficioAvulso beneficio);
+	void addBeneficioAvulso(Beneficio beneficio);
     
-    List<BeneficioAvulso> findAll();
+    List<Beneficio> findAll();
      
     void deleteBeneficioAvulsoByID(Integer id);
      
-    BeneficioAvulso findByID(Integer id);
+    Beneficio findByID(Integer id);
      
-    void updateBeneficioAvulso(BeneficioAvulso beneficio);
+    void updateBeneficioAvulso(Beneficio beneficio);
 
-	void saveOrUpdate(BeneficioAvulso beneficio);
+	void saveOrUpdate(Beneficio beneficio);
 	
-	public List<BeneficioAvulso> findbyPacienteID(Integer idpaciente);
+	public List<Beneficio> findbyPacienteID(Integer idpaciente);
 	
-	public List<BeneficioAvulso> findbyMarcacaoID(Integer idmarcacao);
+	public List<Beneficio> findbyMarcacaoID(Integer idmarcacao);
 	
-	public List<BeneficioAvulso> findLast();
+	public List<Beneficio> findLast();
 	
-	public List<BeneficioAvulso> findbyNomeData(Date datainicial,  Date datafinal, String nome) ;
+	public List<Beneficio> findbyNomeData(Date datainicial,  Date datafinal, String nome) ;
 	
-	List<BeneficioAvulso> findbyData(Date datainicial, Date datafinal);
+	List<Beneficio> findbyData(Date datainicial, Date datafinal);
 	
 }

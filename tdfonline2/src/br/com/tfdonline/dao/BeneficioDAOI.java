@@ -1,5 +1,6 @@
 package br.com.tfdonline.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.tfdonline.modelo.Beneficio;
@@ -21,5 +22,7 @@ public interface BeneficioDAOI {
 	public List<Beneficio> findbyPacienteID(Integer idpaciente);
 	
 	public List<Beneficio> findbyMarcacaoID(Integer idmarcacao);
+	
+	public List<Beneficio> findbyPeriodo(Date datainicial, Date datafinal);
 	
 }

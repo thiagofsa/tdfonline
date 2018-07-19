@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Entity
 //@Table(name = "paciente" , schema = "tfdonline")
 @Table(name = "acompanhantepacientebeneficioavulso",schema = "tfdonline")
-public class Acompanhantepacientebeneficioavulso implements Serializable {
+public class Acompanhantepacientebeneficio implements Serializable {
 
 private static final long serialVersionUID = 1L;
 	
@@ -21,8 +21,8 @@ private static final long serialVersionUID = 1L;
 	private Integer idacompanhante;
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="idbeneficioavulso")
-	private Integer idbeneficioavulso;
+	@Column(name="idbeneficio")
+	private Integer idbeneficio;
 
 	public Integer getIdacompanhante() {
 		return idacompanhante;
@@ -32,16 +32,17 @@ private static final long serialVersionUID = 1L;
 		this.idacompanhante = idacompanhante;
 	}
 
-	public Integer getIdbeneficioavulso() {
-		return idbeneficioavulso;
-	}
-
-	public void setIdbeneficioavulso(Integer idbeneficioavulso) {
-		this.idbeneficioavulso = idbeneficioavulso;
-	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public Integer getIdbeneficio() {
+		return idbeneficio;
+	}
+
+	public void setIdbeneficio(Integer idbeneficio) {
+		this.idbeneficio = idbeneficio;
 	}
 
 	

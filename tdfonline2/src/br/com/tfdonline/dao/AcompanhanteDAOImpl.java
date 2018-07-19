@@ -139,6 +139,9 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 		return acompanhantes;
 	}
 
+	
+
+	
 
 	@Override
 	public List<Acompanhante> findbyPacienteID(Integer pacienteid) {
@@ -174,19 +177,18 @@ public class AcompanhanteDAOImpl implements AcompanhanteDAOI, Serializable{
 
 
 	@Override
-	public List<Acompanhante> findbyBeneficioAvulsoID(Integer beneficoavulsoid) {
+	public List<Acompanhante> findbyBeneficioID(Integer beneficoid) {
 		// TODO Auto-generated method stub
-		System.out.println("Entrando no AcompanhanteDAO.findbyBeneficioAvulsoID()");
-		System.out.println("Valor do ID BeneficioAvulso="+ beneficoavulsoid );
+		System.out.println("Entrando no AcompanhanteDAO.findbyBeneficioID()");
+		System.out.println("Valor do ID Beneficio="+ beneficoid );
 		
 		
-		String squery = "select apba.idacompanhante from Acompanhantepacientebeneficioavulso apba, BeneficioAvulso ba where ba.id=apba.idbeneficioavulso and ba.id="+beneficoavulsoid;
+		String squery = "select apba.idacompanhante from Acompanhantepacientebeneficio apba, Beneficio ba where ba.id=apba.idbeneficio and ba.id="+beneficoid;
 		
 		List<Acompanhante> acompanhantes = new ArrayList<Acompanhante>();
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(squery);
 			
-		
 		
 		List result = query.list();
 		Acompanhante acompanhante ;

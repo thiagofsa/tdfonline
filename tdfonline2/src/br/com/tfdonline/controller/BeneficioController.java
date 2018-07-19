@@ -1,7 +1,7 @@
 package br.com.tfdonline.controller;
 
 
-	import java.util.List;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -71,7 +71,7 @@ import br.com.tfdonline.modelo.Encaminhamento;
 				Encaminhamento encaminhamento = new Encaminhamento();
 				model.addAttribute("encaminhamento", encaminhamento);	
 				
-				beneficio.setEncaminhamento(encaminhamento);
+				;
 			
 				
 			//colocando os dados da beneficio na sessao..			
@@ -107,14 +107,30 @@ import br.com.tfdonline.modelo.Encaminhamento;
 			System.out.println("Encaminhamento.id form encaminhamentoDAO="+ encaminhamento.getId());
 			
 			
+			System.out.println("*************Paciente da marcacao="+ encaminhamento.getMarcacao().getPaciente().getNome());		
+			//beneficio.setEncaminhamento(encaminhamento);
 			
-			beneficio.setEncaminhamento(encaminhamento);
+			
+			beneficio.setPaciente(encaminhamento.getMarcacao().getPaciente());
+			beneficio.setUnidadesaude(encaminhamento.getMarcacao().getUnidadesaude());
+			beneficio.setProcedimento(encaminhamento.getMarcacao().getProcedimento());
+			
+			beneficio.setVagas(encaminhamento.getVagas());
+			
+						
+			beneficio.setDataviagemida(encaminhamento.getDataviagem());
+			beneficio.setDataviagemvolta(encaminhamento.getDataviagemvolta());
+			
+			List<Acompanhante> acompanhantes = acompanhanteDAO.findbyMarcacaoID(encaminhamento.getMarcacao().getId());		
+			beneficio.setAcompanhantespacientebeneficioavulso(acompanhantes);
+			
+			
 			request.getSession().setAttribute("beneficioSession", beneficio);
 			model.addAttribute("beneficioForm", beneficio);
 			
-			List<Acompanhante> acompanhantespacientemarcacao = acompanhanteDAO.findbyMarcacaoID(encaminhamento.getMarcacao().getId());
 			
-			model.addAttribute("acompanhantespaciente", acompanhantespacientemarcacao);
+			
+			model.addAttribute("acompanhantespaciente", acompanhantes);
 			
 			
 			return "beneficioform";
@@ -137,8 +153,8 @@ import br.com.tfdonline.modelo.Encaminhamento;
 			System.out.println("Depois do formBeneficio, salvando ou atualizando beneficio.............");
 			
 			
-			beneficio.setDataviagemida(beneficio.getEncaminhamento().getDataviagem());
-			beneficio.setDataviagemvolta(beneficio.getEncaminhamento().getDataviagemvolta());
+			//**18-07beneficio.setDataviagemida(beneficio.getEncaminhamento().getDataviagem());
+			//**18-07beneficio.setDataviagemvolta(beneficio.getEncaminhamento().getDataviagemvolta());
 
 
 				// Add message to flash scope
@@ -150,7 +166,10 @@ import br.com.tfdonline.modelo.Encaminhamento;
 				}
 				
 				
+				
 				beneficioDAO.saveOrUpdate(beneficio);
+				
+				
 				System.out.println(".....Salvo ou atualizado o beneficio.....");
 				System.out.println("redirecionando para... \"redirect:/beneficios/\" + beneficio.getId();");
 				// POST/REDIRECT/GET

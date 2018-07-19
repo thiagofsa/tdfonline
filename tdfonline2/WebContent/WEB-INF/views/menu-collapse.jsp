@@ -92,7 +92,7 @@
           Benefício
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="${pageContext.request.contextPath}/beneficios/add">Novo - De marcacao</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/beneficios/add">Novo - De Encam.</a>
           <a class="dropdown-item" href="#">Listar</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/beneficioavulsos/add">Novo - Beneficio Avulso</a>          
         </div>
@@ -107,6 +107,7 @@
           <a class="dropdown-item" href="#">Pacientes</a>
           <a class="dropdown-item" href="#">Marcações</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/encaminhamentopormotoristaedatareport">Encaminhamentos por Motorista</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/beneficiosporperiodoreport">Beneficios</a>
                  
         </div>
       </li>

@@ -508,7 +508,12 @@
        <put-attribute name="title" value="Relatorio Enc por Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentopormotoristaedatareportpage.jsp" />  
    </definition>
-   
+
+	<definition name="beneficiosporperiodoreportpage" extends="base.definition">  
+       <put-attribute name="title" value="Relatorio Enc por Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/beneficios/beneficiosporperiodoreportpage.jsp" />  
+   </definition>
+      
  
  
 </tiles-definitions>
