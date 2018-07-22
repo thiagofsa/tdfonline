@@ -490,7 +490,24 @@
        <put-attribute name="body" value="/WEB-INF/views/contactuspage.jsp" />  
    </definition>  
    
-        
+<!-- ####################### Transacao PAGES ############################## -->
+   
+   <definition name="listatransacaospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista de Transacoes" />  
+       <put-attribute name="body" value="/WEB-INF/views/transacaos/lista.jsp" />  
+   </definition>
+   
+   <definition name="transacaoform" extends="base.definition">  
+       <put-attribute name="title" value="Detalhes da Transação" />  
+       <put-attribute name="body" value="/WEB-INF/views/transacaos/transacaoform.jsp" />  
+   </definition>
+   
+   <definition name="transacaocadastro" extends="base.definition">  
+       <put-attribute name="title" value="Cadastro de Veiculo" />  
+       <put-attribute name="body" value="/WEB-INF/views/transacaos/transacaocadastro.jsp" />  
+   </definition>
+   
+           
   
    <!--ResultEmail Page -->
    <definition name="resultemail" extends="base.definition">  
