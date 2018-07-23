@@ -23,7 +23,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">        
      
-          <!-- <a class="dropdown-item" href="#"><i class="fas fa-male"></i> Beneficiários de Diárias</a> -->
+          
           <a class="dropdown-item" href="${pageContext.request.contextPath}/pacientes/"><i class="fas fa-procedures mr-2"></i> Pacientes</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/acompanhantes/"> <i class="fas fa-user-friends mr-2"></i> Acompanhantes</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/procedimentos/"><i class="fas fa-stethoscope mr-2"></i> Procedimentos Médico</a>
@@ -40,14 +40,32 @@
           	
           			+ "/usuarios/" + "><i class='fas fa-users mr-2'></i> Usuarios</a>"
           			); 
-	      }
-          
+           }          
           %>         
          
         </div>
       </li>
       
-            
+          
+          <%
+          
+          if (user.getAdmin()>0){
+        	//menu Transacoes	
+            	
+          	out.println("<li class=\"nav-item dropdown\">");
+          	
+          	out.println("<a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\"> Transacoes</a>");
+          
+          	out.println("<div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">");
+          	
+          	out.println("<a class=dropdown-item href="+request.getContextPath()        	
+  			+ "/transacaos/" + "><i class='fas fa-users mr-2'></i> Logs </a>"
+  			);   
+          
+          	out.println("</div> </li>");
+              
+          }
+          %>
       
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -108,6 +126,8 @@
           <a class="dropdown-item" href="#">Marcações</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/encaminhamentopormotoristaedatareport">Encaminhamentos por Motorista</a>
           <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/beneficiosporperiodoreport">Beneficios</a>
+          <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/registrosmssreport">SMSs enviados</a>
+          
                  
         </div>
       </li>

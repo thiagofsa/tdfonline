@@ -160,16 +160,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 	  System.out.println("Testando o envio de SMS........");
 	  
 	  
-	  /* try {
-		SMSSender.sendMessage("Testando o SMS para o TFDControl", "87998093458");
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		System.out.println("Problema no envio do SMS");
-		e.printStackTrace();
-	}
-	*/
-	  //fim
-	  
+	   
 	  return modelAndView;
 	  	 
 	  }

@@ -21,9 +21,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.BeneficioDAOI;
 import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.dao.LogTransacaoDAOI;
+import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Beneficio;
 import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.Transacao;
+import br.com.tfdonline.modelo.Usuario;
 
 
 	@Controller
@@ -31,13 +35,18 @@ import br.com.tfdonline.modelo.Encaminhamento;
 
 
 		private final Logger logger = LoggerFactory.getLogger(BeneficioController.class);
-
+ 
 		@Autowired
 		private BeneficioDAOI beneficioDAO;
 		@Autowired
-		private EncaminhamentoDAOI encaminhamentoDAO;
+		private EncaminhamentoDAOI encaminhamentoDAO; 
 		@Autowired
 		private AcompanhanteDAOI acompanhanteDAO;
+		@Autowired
+		private LogTransacaoDAOI logtransacaoDAO;
+		
+		@Autowired
+		private TransacaoDAOI transacaoDAO;
 
 		/*@Autowired
 		//BeneficioFormValidator beneficioFormValidator;
@@ -116,7 +125,6 @@ import br.com.tfdonline.modelo.Encaminhamento;
 			beneficio.setProcedimento(encaminhamento.getMarcacao().getProcedimento());
 			
 			beneficio.setVagas(encaminhamento.getVagas());
-			
 						
 			beneficio.setDataviagemida(encaminhamento.getDataviagem());
 			beneficio.setDataviagemvolta(encaminhamento.getDataviagemvolta());
@@ -147,7 +155,7 @@ import br.com.tfdonline.modelo.Encaminhamento;
 		//public String saveOrUpdateBeneficio(@ModelAttribute("beneficioForm") @Validated Beneficio beneficio,
 		public String saveOrUpdateBeneficio(@ModelAttribute("beneficioForm")  Beneficio beneficio,
 				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes) {
+				final RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
 			logger.debug("saveOrUpdateBeneficio() : {}", beneficio);
 			System.out.println("Depois do formBeneficio, salvando ou atualizando beneficio.............");
@@ -171,8 +179,25 @@ import br.com.tfdonline.modelo.Encaminhamento;
 				
 				
 				System.out.println(".....Salvo ou atualizado o beneficio.....");
-				System.out.println("redirecionando para... \"redirect:/beneficios/\" + beneficio.getId();");
-				// POST/REDIRECT/GET
+
+
+				//LOG DA TRANSACAO
+				Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_BENEFICIO, TransacaoDAOI.ADD);
+				
+				if (transacao!=null) {
+					
+					Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+					logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, beneficio.getId());	
+					System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_BENEFICIO + "-"+ TransacaoDAOI.ADD+ "no BD");
+					
+					
+				}else {
+					System.out.println("Transacao ADD Beneficio setada para não LOG");
+				}
+				
+				//FIM LOG
+				
+				
 				return "redirect:/beneficios/" + beneficio.getId();
 				//return "/beneficios/" + beneficio.getId();
 
@@ -246,7 +271,7 @@ import br.com.tfdonline.modelo.Encaminhamento;
 		// delete beneficio
 		@RequestMapping(value = "/beneficios/{id}/delete")
 		public String deleteBeneficio(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes, HttpServletRequest request) {
 
 			
 			logger.debug("deleteBeneficio() : {}", id);
@@ -259,6 +284,22 @@ import br.com.tfdonline.modelo.Encaminhamento;
 			
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Beneficio deletado!");
+			
+			//LOG DA TRANSACAO
+			Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_BENEFICIO, TransacaoDAOI.DELETE);
+			
+			if (transacao!=null) {
+				
+				Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+				logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, id);	
+				System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_BENEFICIO + "-"+ TransacaoDAOI.DELETE+ "no BD");
+				
+				
+			}else {
+				System.out.println("Transacao DELETE Beneficio setada para não LOG");
+			}
+			
+			//FIM LOG
 			
 			
 			return "redirect:/beneficios/";

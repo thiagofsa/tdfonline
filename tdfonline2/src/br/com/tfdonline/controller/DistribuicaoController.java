@@ -1,12 +1,8 @@
-package br.com.tfdonline.controller;
+ package br.com.tfdonline.controller;
 
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,16 +20,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.DistribuicaoDAOI;
+import br.com.tfdonline.dao.LogTransacaoDAOI;
 import br.com.tfdonline.dao.MotoristaDAOI;
-
+import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.dao.VeiculoDAOI;
 import br.com.tfdonline.modelo.Distribuicao;
 import br.com.tfdonline.modelo.Motorista;
-
+import br.com.tfdonline.modelo.Transacao;
+import br.com.tfdonline.modelo.Usuario;
 import br.com.tfdonline.modelo.Veiculo;
 
 	@Controller
@@ -50,9 +47,13 @@ import br.com.tfdonline.modelo.Veiculo;
 		private MotoristaDAOI motoristaDAO;
 		
 		@Autowired
-		private VeiculoDAOI veiculoDAO;
-
-	
+		private VeiculoDAOI veiculoDAO;	
+		
+		@Autowired
+		private LogTransacaoDAOI logtransacaoDAO;
+		
+		@Autowired
+		private TransacaoDAOI transacaoDAO;
 	
 	
 		@InitBinder
@@ -60,8 +61,7 @@ import br.com.tfdonline.modelo.Veiculo;
 	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	        sdf.setLenient(true);
 	        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	    }
-		
+	    }		
 
 		// list page
 		@RequestMapping(value = "/distribuicaos")
@@ -70,14 +70,11 @@ import br.com.tfdonline.modelo.Veiculo;
 			logger.debug("showAllDistribuicaos()");
 			model.addAttribute("distribuicaos", distribuicaoDAO.findAll());
 			return "listadistribuicaospage";
-
-		}
-		
+		}		
 				
 		// popula o form para a pesquisa de Distribuicao
 		@RequestMapping(value = {"/distribuicaos/find" })
-		    public String findDistribuicao(Model model) {
-			 	
+		    public String findDistribuicao(Model model) {			 	
 				
 				Distribuicao distribuicao = new Distribuicao();
 				distribuicao.setDataviagem(new Date());
@@ -92,11 +89,7 @@ import br.com.tfdonline.modelo.Veiculo;
 			logger.debug("Distribuicaos.FindByData()");
 			model.addAttribute("distribuicaos", distribuicaoDAO.findbyData(data));
 			return "listadistribuicaospage";
-
 		}
-		
-		
-		
 		
 		//populando um veiculo vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectveiculo/distribuicaos/" })
@@ -106,32 +99,29 @@ import br.com.tfdonline.modelo.Veiculo;
 		 	
 			//primeira vez da exibicao...vamos popular o form
 				Veiculo veiculo = new Veiculo();
-				model.addAttribute("veiculo", veiculo);	
-				
+				model.addAttribute("veiculo", veiculo);					
 			 
 			//colocando os dados da distribuicao na sessao..			
 			if  (request.getSession().getAttribute("distribuicaoSession")==null) {
 				request.getSession().setAttribute("distribuicaoSession", distribuicao);
 			}
-		 	return "selectveiculoform";
+		 	//return "selectveiculoform";
+		 	return "redirect:/distribuicaos/selectveiculo2";
 	    }
-		
-		
-		
-		
+				
 		@RequestMapping(value = {"/distribuicaos/selectveiculo2" })
-		public String selectVeiculo(@RequestParam("descricao") String descricao, Model model, @ModelAttribute("veiculo") Veiculo veiculo){
+		//public String selectVeiculo(@RequestParam("descricao") String descricao, Model model, @ModelAttribute("veiculo") Veiculo veiculo){
+		public String selectVeiculo(Model model, @ModelAttribute("veiculo") Veiculo veiculo){
 		 	
-			System.out.println("chamando o distribuicaos/SelectVeiculo2/............Veiculo.descricao="+descricao);
+			System.out.println("chamando o distribuicaos/SelectVeiculo2/............Veiculo.descricao=");
 			
-			model.addAttribute("veiculos", veiculoDAO.findbyDescricao(descricao));
+			//model.addAttribute("veiculos", veiculoDAO.findbyDescricao(descricao));
+			model.addAttribute("veiculos", veiculoDAO.findAll());
 			System.out.println("VeiculoDAO chamado...");
 			
-			model.addAttribute("veiculo", veiculo);	
+			model.addAttribute("veiculo", veiculo);				
 			
-			
-		 	return "selectveiculoform";
-		 	
+		 	return "selectveiculoform";		 	
 	    }
 		
 		@RequestMapping(value = "/distribuicaos/selectveiculo/{id}")
@@ -144,14 +134,8 @@ import br.com.tfdonline.modelo.Veiculo;
 			request.getSession().setAttribute("distribuicaoSession", distribuicao);
 			model.addAttribute("distribuicaoForm", distribuicao);
 			
-			return "distribuicaoform";
-			
-		
+			return "distribuicaoform";		
 		}
-		
-		
-		
-		
 		
 		//populando uma vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectmotorista/distribuicaos/" })
@@ -169,23 +153,23 @@ import br.com.tfdonline.modelo.Veiculo;
 					request.getSession().setAttribute("distribuicaoSession", distribuicao);
 				}
 			
-		 	return "selectmotoristaform";
-		 	
+		 	//return "selectmotoristaform";
+		 	return "redirect:/distribuicaos/selectmotorista2";
 	    }
 		
 		@RequestMapping(value = {"/distribuicaos/selectmotorista2" })
-		public String selectMotorista(@RequestParam("nome") String nome, Model model, @ModelAttribute("motorista") Motorista motorista){
+		//public String selectMotorista(@RequestParam("nome") String nome, Model model, @ModelAttribute("motorista") Motorista motorista){
+		public String selectMotorista(Model model, @ModelAttribute("motorista") Motorista motorista){
 		 	
-			System.out.println("chamando o distribuicaos/Selectmotorista2/............Motorista.nome="+nome);
+			System.out.println("chamando o distribuicaos/Selectmotorista2/.....Motorista.nome=");
 			
-			model.addAttribute("motoristas", motoristaDAO.findbyName(nome));
+			//model.addAttribute("motoristas", motoristaDAO.findbyName(nome));			
+			model.addAttribute("motoristas", motoristaDAO.findAll());
 			System.out.println("MotoristaDAO chamado...");
 			
-			model.addAttribute("motorista", motorista);	
+			model.addAttribute("motorista", motorista);				
 			
-			
-		 	return "selectmotoristaform";
-		 	
+		 	return "selectmotoristaform";		 	
 	    }
 		
 		
@@ -199,22 +183,13 @@ import br.com.tfdonline.modelo.Veiculo;
 			request.getSession().setAttribute("distribuicaoSession", distribuicao);
 			model.addAttribute("distribuicaoForm", distribuicao);
 			
-			return "distribuicaoform";
-			
-		
+			return "distribuicaoform";		
 		}
 		
-		
-
-		
 		@RequestMapping(value = "/distribuicaos", method = RequestMethod.POST)
-		//public String saveOrUpdateDistribuicao(@ModelAttribute("distribuicaoForm") @Validated Distribuicao distribuicao,
 		public String saveOrUpdateDistribuicao(@ModelAttribute("distribuicaoForm")  Distribuicao distribuicao,
 				BindingResult result, Model model, 
 				final RedirectAttributes redirectAttributes, HttpServletRequest request) {
-
-			
-			//distribuicao = request.getSession().getAttribute("distribuicaoSession");
 			
 			System.out.println("Em saveOrUpdate, salvando ou atualizando distribuicao.............");
 			
@@ -223,25 +198,16 @@ import br.com.tfdonline.modelo.Veiculo;
 			
 			System.out.println("ID de distribuicao passada pelo form="+ distribuicao.getId());
 			System.out.println("ID de Motorista passada pelo form="+ distribuicao.getMotorista().getId());
-			System.out.println("ID de Veiculo passada pelo form="+ distribuicao.getVeiculo().getId());
-		
+			System.out.println("ID de Veiculo passada pelo form="+ distribuicao.getVeiculo().getId());		
 			
-			distribuicao.setVagas(distribuicao.getVeiculo().getVagas());
-			
-			
-			
-			
-		/*	if (result.hasErrors()) {
-				populateDefaultModel(model);
-				return "distribuicaoform";
-			} else*/ {
+			distribuicao.setVagas(distribuicao.getVeiculo().getVagas());			
+			{
 
 				// Add message to flash scope
-				redirectAttributes.addFlashAttribute("css", "success");
 				if(distribuicao.isNew()){
-				  redirectAttributes.addFlashAttribute("msg", "Distribuicao adicionado com sucesso!");
+				  redirectAttributes.addFlashAttribute("msg", "Viagem ADICIONADA com sucesso!");
 				}else{
-				  redirectAttributes.addFlashAttribute("msg", "Distribuicao atualizado com sucesso!");
+				  redirectAttributes.addFlashAttribute("msg", "Viagem ATUALIZADA com sucesso!");
 				}
 				
 				System.out.println("SaveOrUpdate: Motorista da distribuicao="+ distribuicao.getMotorista().getNome());
@@ -249,18 +215,28 @@ import br.com.tfdonline.modelo.Veiculo;
 				
 				distribuicaoDAO.saveOrUpdate(distribuicao);
 				System.out.println(".....Salvo ou atualizado o distribuicao.....");
-				System.out.println("redirecionando para... \"redirect:/distribuicaos/\" + distribuicao.getId();");
-				// POST/REDIRECT/GET
+				System.out.println("redirecionando para listadistribuicaospage");
 				
+//LOG DA TRANSACAO
+				Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_DISTRIBUICAO, TransacaoDAOI.ADD);
 				
-				return "redirect:/distribuicaos/" + distribuicao.getId();
-				//return "/distribuicaos/" + distribuicao.getId();
+				if (transacao!=null) {
+					
+					Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+					logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, distribuicao.getId());	
+					System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_DISTRIBUICAO + "-"+ TransacaoDAOI.ADD+ "no BD");
+					
+					
+				}else {
+					System.out.println("Transacao ADD Encaminhamento setada para não LOG");
+				}
+				
+				//FIM LOG
 
-				// POST/FORWARD/GET
-				// return "distribuicao/list";
 
+
+				return "redirect:/distribuicaos/";				
 			}
-
 		}
 
 		// show update form , chamado pela listagem, para preencher o form com o id passado e devolvero form pra edicao para o distribuicaoformpage
@@ -270,22 +246,18 @@ import br.com.tfdonline.modelo.Veiculo;
 			System.out.println("showUpdateDistribuicaoFOrm() -->> ID Distribuicao passado pelo form = " + id);
 			
 			System.out.println("Pesquisando  ID distribuicao no DAO ---> ID = "+id);
-			Distribuicao distribuicao = distribuicaoDAO.findByID(id);
-			
+			Distribuicao distribuicao = distribuicaoDAO.findByID(id);			
 			
 			if (distribuicao!=null) {
 				 System.out.println("Distribuicao Encontrada ------->Motorista da distribuicao="+ distribuicao.getMotorista().getNome());
 				 distribuicao.setId(id);
 			}else
-				System.out.println("Distribuicao nao localizado");
+				System.out.println("Distribuicao nao localizado");			
 			
+			model.addAttribute("distribuicaoForm", distribuicao);			
+			request.getSession().setAttribute("distribuicaoSession", distribuicao);						
 			
-			model.addAttribute("distribuicaoForm", distribuicao);
-			
-			request.getSession().setAttribute("distribuicaoSession", distribuicao);
-						
 			return "distribuicaoform";
-
 		}
 
 		// show distribuicao (detalhes)
@@ -303,7 +275,6 @@ import br.com.tfdonline.modelo.Veiculo;
 			model.addAttribute("distribuicao", distribuicao);
 
 			return "distribuicaoshow";
-
 		}
 		
 		//  /add distribuicao form
@@ -314,50 +285,50 @@ import br.com.tfdonline.modelo.Veiculo;
 						// set default value
 			Distribuicao distribuicao = new Distribuicao();
 			distribuicao.setId(-1);
-			distribuicao.setDataviagem(new Date());
-			
+			//distribuicao.setDataviagem(new Date());			
 			distribuicao.setMotorista(new Motorista());
-			distribuicao.setVeiculo(new Veiculo());
-			
+			distribuicao.setVeiculo(new Veiculo());			
 			
 			distribuicao.setVagas(0);
 						
 			model.addAttribute("distribuicaoForm", distribuicao);
 			
-			request.getSession().setAttribute("distribuicaoSession", distribuicao);
+			request.getSession().setAttribute("distribuicaoSession", distribuicao);			
 
-			
-
-			return "distribuicaoform";
-
+			return "distribuicaocadastro";
 		}
-
 
 		// delete distribuicao
 		@RequestMapping(value = "/distribuicaos/{id}/delete")
 		public String deleteDistribuicao(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
-
+			final RedirectAttributes redirectAttributes, HttpServletRequest request) {
 			
 			logger.debug("deleteDistribuicao() : {}", id);
 			System.out.println("deletando a distribuicao ="+ id);
-			
-			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Distribuicao deletado com sucesso!");
 
 			distribuicaoDAO.deleteDistribuicaoByID(new Integer(id));
-			
-			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Distribuicao deletado!");
-			
-			
-			return "redirect:/distribuicaos/";
-			//return "listadistribuicaospage";
-
-		}
-
+				
+			redirectAttributes.addFlashAttribute("msg", "Viagem DELETADA com sucesso!");
 	
+	//LOG DA TRANSACAO
+			Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_DISTRIBUICAO, TransacaoDAOI.DELETE);
+			
+			if (transacao!=null) {
+				
+				Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+				logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, id);	
+				System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_DISTRIBUICAO + "-"+ TransacaoDAOI.DELETE+ "no BD");
+				
+				
+			}else {
+				System.out.println("Transacao ADD Encaminhamento setada para não LOG");
+			}
+			
+			//FIM LOG
 
+			return "redirect:/distribuicaos/";
+		}
 	}
 	
+
 

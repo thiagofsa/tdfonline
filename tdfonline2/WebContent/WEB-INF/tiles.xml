@@ -532,6 +532,12 @@
    </definition>
       
  
+   <definition name="registrosmsreportpage" extends="base.definition">  
+       <put-attribute name="title" value="Relatorio Enc por Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/registrosmss/registrosmsmsporperiodoreportpage.jsp" />  
+   </definition>
+   
+   
  
 </tiles-definitions>
 

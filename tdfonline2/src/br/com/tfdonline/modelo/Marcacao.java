@@ -61,8 +61,8 @@ private static final long serialVersionUID = 1L;
 	
 	
 	@OneToOne(cascade = { 
-	         CascadeType.MERGE
-	    }) 
+	         CascadeType.MERGE, 
+	    }, fetch=FetchType.EAGER) 
     @JoinColumn(name = "idpaciente")
 	Paciente paciente;
 	

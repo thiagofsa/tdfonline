@@ -37,6 +37,13 @@
 <bean id="beneficiosporperiodoReport"
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/Beneficiosporperiodo.jrxml"
-  	p:reportDataKey="datasource" />  	  	
+  	p:reportDataKey="datasource" />
+  	
+  	
+<bean id="registrosmspormotoristaReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/RegistroSMSporperiodo2.jrxml"
+  	p:reportDataKey="datasource" />   	 
+  	
   	  	
 </beans>

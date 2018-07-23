@@ -13,7 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import org.springframework.web.servlet.view.jasperreports.AbstractJasperReportsSingleFormatView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsCsvView;
 import org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView;
@@ -32,9 +32,10 @@ import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.DistribuicaoDAOI;
 import br.com.tfdonline.dao.EncaminhamentoDAOI;
 import br.com.tfdonline.dao.EncaminhamentoVoltaDAOI;
+import br.com.tfdonline.dao.RegistroSMSDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Distribuicao;
-import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.RegistroSMS;
 import br.com.tfdonline.modelo.Marcacao;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -43,18 +44,19 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 	 * Handles and retrieves download request
 	 */
 	@Controller
-	public class EncaminhamentoReportController {
+	public class RegistroSMSReportController {
 	 
-	 protected static Logger logger = Logger.getLogger("EncaminhamentoReportController");
+	 protected static Logger logger = Logger.getLogger("RegistroSMSReportController");
 	 
 	 @Autowired	 
-	 EncaminhamentoDAOI encaminhamentoDAO ;	   
+	 RegistroSMSDAOI registrosmsDAO ;	   
+	 
+	 
+	 @Autowired	 
+	 EncaminhamentoDAOI encaminhamentoDAO ;
+	 
 	 @Autowired	 
 	 EncaminhamentoVoltaDAOI encaminhamentovoltaDAO ;
-	 @Autowired	 
-	 AcompanhanteDAOI acompanhanteDAO ;
-	 @Autowired	 
-	 DistribuicaoDAOI distribuicaoDAO ;
 	 
 	 
 		protected static final String HEADER_CONTENT_DISPOSITION = "Content-Disposition";
@@ -113,7 +115,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 		
 		  //**@RequestMapping(method = RequestMethod.GET)
 		
-				@RequestMapping(value = "/reports/encaminhamentopormotoristaedatareport", method = RequestMethod.GET)
+				@RequestMapping(value = "/reports/registrosmssreport", method = RequestMethod.GET)
 			    public String getDownloadPage( Model model) {
 			     logger.debug("Received request to show download page");
 			     
@@ -126,24 +128,10 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 			     	Distribuicao distribuicao = new Distribuicao();
 					model.addAttribute("distribuicao", distribuicao);			     
 			     
-			     return "encaminhamentopormotoristaedatareportpage";
+			     return "registrosmsreportpage";
 			 }    				
 				
-				@RequestMapping(value = {"/report/selectdistribuicao/" })
-				public String selectDistribuicao(@RequestParam(value="dataviagem1",  required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date dataviagem1, Model model, @ModelAttribute("distribuicao") Distribuicao distribuicao){
-				 	
-					System.out.println("chamando o encaminhamentos/Selectdistribuicao2/............Distribuicao.data="+ dataviagem1);
-					
-					model.addAttribute("distribuicaos", distribuicaoDAO.findbyData(dataviagem1));
-					System.out.println("DistribuicaoDAO chamado...");
-					
-					model.addAttribute("distribuicao", distribuicao);	
-					
-					System.out.println("DistribuicaoDAO chamado... coloquei na sessao");
-					
-					 return "encaminhamentopormotoristaedatareportpage";		 	
-			    }		
-				
+			
 				
 				
 	    /**
@@ -152,28 +140,22 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 	     * @param type the format of the report, i.e pdf
 	     * 
 	     */
- @RequestMapping(value = "/reports/encaminhamentospormotoristaedatareport", method = RequestMethod.GET)
-	public ModelAndView doEncaminhamentosPorMotoristaMultiReport(@RequestParam(value="type", required=false) String type, @RequestParam(value="dataviagem",  required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date dataviagem, @RequestParam(value="idmotorista",required=false) int idmotorista,
+ @RequestMapping(value = "/reports/registrosmssreport2", method = RequestMethod.GET)
+	public ModelAndView doRegistroSMSsPorMotoristaMultiReport(@RequestParam(value="type", required=false) String type, @RequestParam(value="datainicio",  required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date datainicio, @RequestParam(value="datafim",  required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date datafim,
 	      ModelAndView modelAndView, ModelMap model, HttpServletRequest httpServletRequest) 
 	   {
-	  logger.debug("Received request to download multi report from Encaminhamentos");
+	  logger.debug("Received request to download multi report from RegistroSMSs");
 	  //String format="pdf";
 	  type="pdf";
 	  
   
-	  List<Encaminhamento> encaminhamentosida= encaminhamentoDAO.findbyMotoristaIDandData(idmotorista, dataviagem);
+	  List<RegistroSMS> registrosmss= registrosmsDAO.findbyPeriodo(datainicio, datafim);
 	  
-	  for (int i=0 ; i< encaminhamentosida.size(); i++) {
-		  System.out.println("Encaminhametoreport... imprimindo acompanhante de paciente");
-		  Marcacao marcacao = encaminhamentosida.get(i).getMarcacao();
-		  List<Acompanhante> acompanhantespacientemarcacao = acompanhanteDAO.findbyMarcacaoID(marcacao.getId());
-		  marcacao.setAcompanhantespacientemarcacao(acompanhantespacientemarcacao);
-		  encaminhamentosida.get(i).setMarcacao(marcacao);		  
-		}
+	  System.out.println("Testando nome do paciente");
+	  System.out.println(registrosmss.get(0).getEncaminhamento().getMarcacao().getPaciente().getNome());
+	  System.out.println("**************************************");
 	  
-	  //Collection<EncaminhamentoVolta> encaminhamentosvolta= encaminhamentovoltaDAO.findbyMotoristaID(idmotorista);
-	  
-	  JRDataSource datasource  = new JRBeanCollectionDataSource(encaminhamentosida);
+	  JRDataSource datasource  = new JRBeanCollectionDataSource(registrosmss);
 	  // In order to use Spring's built-in Jasper support, 
 	  // We are required to pass our datasource as a map parameter
 	   
@@ -181,23 +163,15 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 	  model.addAttribute("datasource", datasource);
 	  model.addAttribute("format", type);
 	  	  
-	  model.addAttribute("qrCode", "user=Daniel%url=www.tfd.com.br/valida?enc=234");
-	  
-	  model.addAttribute("SUBREPORT_DIR", ".");
 	  
 	  System.out.println("Finalmente gerei o report");
 
-	  System.out.println("**************************************");
-	  System.out.println("DIRETORIO DO ARQUIVO JASPER NO REALPATH");
-	  httpServletRequest.getSession().getServletContext().getRealPath(File.separator+"reports"+File.separator+"AcompanhantesEncaminhamentospormotoristaReport.jasper");
-	  System.out.println(httpServletRequest.getSession().getServletContext().getContextPath()+File.separator+"resources");
-	  System.out.println(httpServletRequest.getSession().getServletContext().getRealPath("\\" + "*"));
-	  System.out.println("**************************************");
 	  
+
 	  
 	  // multiReport is the View of our application
 	  // This is declared inside the /WEB-INF/jasper-views.xml
-	  modelAndView = new ModelAndView("encaminhamentopormotoristaReport", model);
+	  modelAndView = new ModelAndView("registrosmspormotoristaReport", model);
 
 	  System.out.println("Testando o envio de SMS........");
 	  

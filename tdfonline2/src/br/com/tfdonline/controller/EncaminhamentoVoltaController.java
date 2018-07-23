@@ -140,6 +140,18 @@ import br.com.tfdonline.modelo.Paciente;
 						//pacienteDAO.saveOrUpdate(paciente);
 						
 						encaminhamentovoltaDAO.saveOrUpdate(encaminhamentovolta);
+
+						
+						System.out.println("Enviarei SMS para o numero "+encaminhamentovolta.getPaciente().getTelefone());
+						/* try {
+						SMSSender.sendMessage("Testando o SMS para o TFDControl", encaminhamentovolta.getPaciente().getTelefone());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Problema no envio do SMS");
+						e.printStackTrace();
+					}
+					*/
+					  //fim sms
 						
 						
 						

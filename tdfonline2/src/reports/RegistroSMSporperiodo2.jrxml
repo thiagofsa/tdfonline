@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="RegistroSMSporperiodo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5eada9a6-c129-44f9-917d-01e4d3efaeff">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="encaminhamentovolta.paciente.nome" class="java.lang.String"/>
+	<field name="encaminhamento.marcacao.paciente.nome" class="java.lang.String"/>
+	<field name="dataenvio" class="java.util.Date"/>
+	<field name="encaminhamento.marcacao.unidadesaude.descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="150" y="18" width="270" height="30" uuid="aac2e3ef-fed4-421d-bd2c-d3c22ef6c8fd"/>
+				<text><![CDATA[Relatório de Envio de SMS ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="10" width="50" height="30" uuid="3a7ca6e4-09bc-49d2-8e4c-0997bb2cabdf"/>
+				<text><![CDATA[IDEnc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="10" width="100" height="30" uuid="043281f9-81ff-4581-9f42-9e9ebcb2a407"/>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="10" width="100" height="30" uuid="6013eb63-5326-4f11-8aff-a351f81938c1"/>
+				<text><![CDATA[Data envio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="290" y="10" width="100" height="30" uuid="73106af9-18b0-4905-aff5-04c3aefedc42">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f0a28325-df99-49fe-8646-7a5ed06da38b"/>
+				</reportElement>
+				<text><![CDATA[UnidadeSaude]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="180" y="10" width="100" height="30" uuid="2597ca1a-9cbb-4fb6-a574-e48d406748ed">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ca5036db-9a35-45d2-a075-e74064d27044"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dataenvio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="10" width="100" height="30" uuid="87da6357-e65a-4a39-99b1-189fd557c5c8">
+					<printWhenExpression><![CDATA[$F{encaminhamentovolta.paciente.nome} !=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamentovolta.paciente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="10" width="100" height="30" uuid="1447dfb9-bb9f-4df0-8067-430f744d01ec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f0a28325-df99-49fe-8646-7a5ed06da38b"/>
+					<printWhenExpression><![CDATA[$F{encaminhamento.marcacao.unidadesaude.descricao}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamento.marcacao.unidadesaude.descricao}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="13" width="82" height="24" uuid="27ad5f5f-7c00-4cf3-b62a-d27fe7c27aab">
+					<printWhenExpression><![CDATA[$F{encaminhamento.marcacao.unidadesaude.descricao}==null]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Volta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="7" width="70" height="30" uuid="c693b5d1-64f5-4b9e-81b3-6f4ba1e04bbf">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5b43c0da-d6b6-450b-969a-4371eecd763f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="10" width="100" height="30" uuid="4e826d99-b994-4b38-9c56-b79eae838e7b">
+					<printWhenExpression><![CDATA[$F{encaminhamento.marcacao.unidadesaude.descricao}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamento.marcacao.paciente.nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+</jasperReport>

@@ -1,10 +1,7 @@
 package br.com.tfdonline.controller;
 
 
-	import java.util.ArrayList;
-	import java.util.LinkedHashMap;
-	import java.util.List;
-	import java.util.Map;
+
 
 
 
@@ -15,7 +12,7 @@ package br.com.tfdonline.controller;
 	import org.springframework.stereotype.Controller;
 	import org.springframework.ui.Model;
 	import org.springframework.validation.BindingResult;
-	import org.springframework.validation.annotation.Validated;
+	
 	import org.springframework.web.bind.WebDataBinder;
 	import org.springframework.web.bind.annotation.InitBinder;
 	import org.springframework.web.bind.annotation.ModelAttribute;
@@ -77,39 +74,27 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 			return "listamotoristaspage";
 		}
 
-		
-		
 		// save or update motorista
 		// 1. @ModelAttribute bind form value
 		// 2. @Validated form validator
-		// 3. RedirectAttributes for flash value
-			
+		// 3. RedirectAttributes for flash value			
 		@RequestMapping(value = "/motoristas", method = RequestMethod.POST)
-		//public String saveOrUpdateMotorista(@ModelAttribute("motoristaForm") @Validated Motorista motorista,
-		
 		public String saveOrUpdateMotorista(@ModelAttribute("motoristaForm")  Motorista motorista,
 				BindingResult result, Model model, final RedirectAttributes redirectAttributes) {
 
 			logger.debug("saveOrUpdateMotorista() : {}", motorista);
 			System.out.println("Depois do formMotorista, salvando ou atualizando motorista.............");
-						
-		/*	if (result.hasErrors()) {
-				populateDefaultModel(model);
-				return "motoristaform";
-			} else*/ 
-				// Add message to flash scope
+			
 				redirectAttributes.addFlashAttribute("css", "success");
 				if(motorista.isNew()){
-				  redirectAttributes.addFlashAttribute("msg", "Motorista adicionado com sucesso!");
+				  redirectAttributes.addFlashAttribute("msg", "Motorista ADICIONADO com sucesso!");
 				}else{
-				  redirectAttributes.addFlashAttribute("msg", "Motorista atualizado com sucesso!");
-				}
-				
-				System.out.println("----->nova rua ====="+ motorista.getCpf());
+				  redirectAttributes.addFlashAttribute("msg", "Motorista ATUALIZADO com sucesso!");
+				}				
+
 				motoristaDAO.saveOrUpdate(motorista);
 				System.out.println(".....Salvo ou atualizado o motorista.....");
-				System.out.println("redirecionando para... \"redirect:/motoristas/\" + motorista.getId();");
-				// POST/REDIRECT/GET
+				System.out.println("redirecionando para listapage");
 				
 				return "redirect:/motoristas/";
 				}
@@ -129,13 +114,9 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 				System.out.println("Motorista nao localizado");
 			
 			model.addAttribute("motoristaForm", motorista);
-			
-			//populateDefaultModel(model); Flavio
-			
+		
 			return "motoristaform";
-			}
-		
-		
+			}		
 
 		// show motorista
 		@RequestMapping(value = "/motoristas/{id}")
@@ -167,8 +148,6 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 						
 			model.addAttribute("motoristaForm", motorista);
 
-			//populateDefaultModel(model); flavio
-
 			return "motoristacadastro";
 		}
 
@@ -182,15 +161,11 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 			motoristaDAO.deleteMotoristaByID(new Integer(id));
 			
-			redirectAttributes.addFlashAttribute("css", "success");
-			redirectAttributes.addFlashAttribute("msg", "Motorista deletado com sucesso!");
-					
-			model.addAttribute("motoristas", motoristaDAO.findAll());			
-			
-			return "listamotoristaspage";
-		}
+			redirectAttributes.addFlashAttribute("msg", "Motorista DELETADO com sucesso!");
 
+			return "redirect:/motoristas/";
+		}	
+}
 	
-	
-	}
-	
+
+

@@ -2,10 +2,8 @@ package br.com.tfdonline.controller;
 
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,18 +22,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.tfdonline.dao.EncaminhamentoDAOI;
 import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.DistribuicaoDAOI;
+import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.dao.LogTransacaoDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
-
-import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Distribuicao;
+import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.Marcacao;
+import br.com.tfdonline.modelo.Transacao;
+import br.com.tfdonline.modelo.Usuario;
 import br.com.tfdonline.util.DateUtils;
 
 
@@ -58,6 +58,12 @@ import br.com.tfdonline.util.DateUtils;
 		@Autowired
 		private AcompanhanteDAOI acompanhanteDAO;
 	
+		@Autowired
+		private LogTransacaoDAOI logtransacaoDAO;
+		
+		@Autowired
+		private TransacaoDAOI transacaoDAO;
+		
 		
 		@InitBinder
 	    public void initBinder(WebDataBinder binder) {
@@ -140,6 +146,31 @@ import br.com.tfdonline.util.DateUtils;
 						encaminhamentoDAO.saveOrUpdate(encaminhamento);
 						
 						
+						//LOG DA TRANSACAO
+						Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO, TransacaoDAOI.ADD);
+						
+						if (transacao!=null) {
+							
+							Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+							logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, encaminhamento.getId());	
+							System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO + "-"+ TransacaoDAOI.ADD+ "no BD");
+							
+							
+						}else {
+							System.out.println("Transacao ADD Encaminhamento setada para não LOG");
+						}
+						
+						
+						System.out.println("Enviarei SMS para o numero "+marcacao.getPaciente().getTelefone());
+						/* try {
+						SMSSender.sendMessage("Testando o SMS para o TFDControl", marcacao.getPaciente().getTelefone());
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Problema no envio do SMS");
+						e.printStackTrace();
+					}
+					*/
+					  //fim sms
 						
 						return "redirect:/encaminhamentos/" + encaminhamento.getId();
 
@@ -167,7 +198,7 @@ import br.com.tfdonline.util.DateUtils;
 			 
 			// 
 			@RequestMapping(value = "/encaminhamentos/lote2")
-			public String encaminhamentoLoteProcessa(@RequestParam("idsmarcacao")String[] idsmarcacao, @RequestParam("iddistribuicao")String iddistribuicao) {
+			public String encaminhamentoLoteProcessa(@RequestParam("idsmarcacao")String[] idsmarcacao, @RequestParam("iddistribuicao")String iddistribuicao,HttpServletRequest request) {
 				
 				System.out.println("chamando o encaminhamentos/lote2............");
 				System.out.println("ID Distribuicao recebido..." + iddistribuicao);
@@ -234,8 +265,37 @@ import br.com.tfdonline.util.DateUtils;
 					encaminhamentoDAO.saveOrUpdate(encaminhamento);
 					
 					
+					//LOG DA TRANSACAO
+					Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO, TransacaoDAOI.ADD);
 					
+					if (transacao!=null) {
+						
+						Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+						logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, encaminhamento.getId());	
+						System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO + "-"+ TransacaoDAOI.ADD+ "no BD");
+						
+						
+					}else {
+						System.out.println("Transacao ADD ENC LOTE setada para não LOG");
+					}
+					
+				
+					System.out.println("Enviarei SMS para o numero "+marcacao.getPaciente().getTelefone());
+					/* try {
+					SMSSender.sendMessage("Testando o SMS para o TFDControl", marcacao.getPaciente().getTelefone());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					System.out.println("Problema no envio do SMS");
+					e.printStackTrace();
 				}
+				*/
+				  //fim sms
+				 
+					
+					
+					
+				}//end FOR
+				
 				System.out.println(idsmarcacao.length + " encaminhamentos em lote salvos com sucesso!");
 				
 				
@@ -436,7 +496,7 @@ import br.com.tfdonline.util.DateUtils;
 		// delete encaminhamento
 		@RequestMapping(value = "/encaminhamentos/{id}/delete")
 		public String deleteEncaminhamento(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes,HttpServletRequest request) {
 
 			
 			logger.debug("deleteEncaminhamento() : {}", id);
@@ -450,6 +510,21 @@ import br.com.tfdonline.util.DateUtils;
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Encaminhamento deletado!");
 			
+			//LOG DA TRANSACAO
+			Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO, TransacaoDAOI.DELETE);
+			
+			if (transacao!=null) {
+				
+				Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+				logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, id);	
+				System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_ENCAMINHAMENTO + "-"+ TransacaoDAOI.DELETE+ "no BD");
+				
+				
+			}else {
+				System.out.println("Transacao DELETE Encaminhamento setada para não LOG");
+			}
+			
+			//FIM LOG
 			
 			return "redirect:/encaminhamentos/";
 			//return "listaencaminhamentospage";

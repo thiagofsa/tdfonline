@@ -29,16 +29,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.AcompanhanteDAOI;
+import br.com.tfdonline.dao.LogTransacaoDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
 import br.com.tfdonline.dao.PacienteDAOI;
 import br.com.tfdonline.dao.ProcedimentoDAOI;
+import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.modelo.Procedimento;
+import br.com.tfdonline.modelo.Transacao;
 import br.com.tfdonline.modelo.UnidadeSaude;
+import br.com.tfdonline.modelo.Usuario;
 import br.com.tfdonline.util.DateUtils;
 
 	@Controller
@@ -62,6 +66,12 @@ import br.com.tfdonline.util.DateUtils;
 		
 		@Autowired
 		private AcompanhanteDAOI acompanhanteDAO;
+		
+		@Autowired
+		private LogTransacaoDAOI logtransacaoDAO;
+		
+		@Autowired
+		private TransacaoDAOI transacaoDAO;
 	
 		
 		@InitBinder
@@ -416,7 +426,8 @@ import br.com.tfdonline.util.DateUtils;
 		
 		
 		
-		
+		//save 
+		//update
 		@RequestMapping(value = "/marcacaos", method = RequestMethod.POST)
 		//public String saveOrUpdateMarcacao(@ModelAttribute("marcacaoForm") @Validated Marcacao marcacao,
 		public String saveOrUpdateMarcacao(@ModelAttribute("marcacaoForm")  Marcacao marcacao,
@@ -462,8 +473,22 @@ import br.com.tfdonline.util.DateUtils;
 				
 				marcacaoDAO.saveOrUpdate(marcacao);
 				System.out.println(".....Salvo ou atualizado o marcacao.....");
-				System.out.println("redirecionando para... \"redirect:/marcacaos/\" + marcacao.getId();");
-				// POST/REDIRECT/GET
+				
+				//LOG DA TRANSACAO
+				Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_MARCACAO, TransacaoDAOI.ADD);
+				
+				if (transacao!=null) {
+					
+					Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+					logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, marcacao.getId());	
+					System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_MARCACAO + "-"+ TransacaoDAOI.ADD+ "no BD");
+					
+					
+				}else {
+					System.out.println("Transacao DELETE USER setada para não LOG");
+				}
+				
+				
 				
 				
 				return "redirect:/marcacaos/" + marcacao.getId();
@@ -600,7 +625,7 @@ import br.com.tfdonline.util.DateUtils;
 		// delete marcacao
 		@RequestMapping(value = "/marcacaos/{id}/delete")
 		public String deleteMarcacao(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes,HttpServletRequest request) {
 
 			
 			logger.debug("deleteMarcacao() : {}", id);
@@ -614,6 +639,20 @@ import br.com.tfdonline.util.DateUtils;
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Marcacao deletado!");
 			
+			//LOG DA TRANSACAO
+			Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_MARCACAO, TransacaoDAOI.DELETE);
+			
+			if (transacao!=null) {
+				
+				Usuario usuarioLogado =((Usuario) request.getSession().getAttribute("usuarioLogado"));
+				logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, id);	
+				System.out.println("Salvando a transacao"+ TransacaoDAOI.ENTIDADE_MARCACAO + "-"+ TransacaoDAOI.DELETE+ "no BD");
+				
+				
+			}else {
+				System.out.println("Transacao DELETE USER setada para não LOG");
+			}
+
 			
 			return "redirect:/marcacaos/";
 			//return "listamarcacaospage";

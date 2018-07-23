@@ -1,29 +1,32 @@
 package br.com.tfdonline.controller;
 
 
-	import java.util.ArrayList;
-	import java.util.LinkedHashMap;
-	import java.util.List;
-	import java.util.Map;
+import java.util.ArrayList;
 
-import javax.mail.Session;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
-	import org.slf4j.LoggerFactory;
-	import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-	import org.springframework.ui.Model;
-	import org.springframework.validation.BindingResult;
-	import org.springframework.web.bind.annotation.ModelAttribute;
-	import org.springframework.web.bind.annotation.PathVariable;
-	import org.springframework.web.bind.annotation.RequestMapping;
-	import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.tfdonline.dao.LogTransacaoDAOI;
+import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.dao.UsuarioDAOI;
+
+import br.com.tfdonline.modelo.Transacao;
 import br.com.tfdonline.modelo.Usuario;
 
 	@Controller
@@ -34,6 +37,12 @@ import br.com.tfdonline.modelo.Usuario;
 
 		@Autowired
 		private UsuarioDAOI usuarioDAO;
+		
+		@Autowired
+		private LogTransacaoDAOI logtransacaoDAO;
+		
+		@Autowired
+		private TransacaoDAOI transacaoDAO;
 
 
 		// list page
@@ -105,12 +114,32 @@ import br.com.tfdonline.modelo.Usuario;
 				  redirectAttributes.addFlashAttribute("msg", "Usuario atualizado com sucesso!");
 				}
 				
+				
 				System.out.println("----->Nome ====="+ usuario.getNome());
 				usuarioDAO.saveOrUpdate(usuario);
 				System.out.println(".....Salvo ou atualizado o usuario.....");
-				System.out.println("redirecionando para... \"redirect:/usuarios/\" + usuario.getId();");
+				
+				
+				//registrando a transção no BD..
+				Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_USUARIO, TransacaoDAOI.ADD);
+				
+				if (transacao!=null) {
+					
+					
+					Usuario usuarioLogado =((Usuario) session.getAttribute("usuarioLogado"));
+					logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, usuario.getId());	
+					System.out.println("Salvando a transacao 1,1 no BD");
+					
+					
+				}else {
+					System.out.println("Transacao setada para não LOG");
+				}
+				
+				
+				
+				
 				// POST/REDIRECT/GET
-				return "redirect:/usuarios/" + usuario.getId();
+				return "redirect:/usuarios";
 				//return "/usuarios/" + usuario.getId();
 
 				// POST/FORWARD/GET
@@ -189,7 +218,7 @@ import br.com.tfdonline.modelo.Usuario;
 		// delete usuario
 		@RequestMapping(value = "/usuarios/{id}/delete")
 		public String deleteUsuario(@PathVariable("id") int id, 
-			final RedirectAttributes redirectAttributes) {
+			final RedirectAttributes redirectAttributes,HttpSession session) {
 
 			
 			logger.debug("deleteUsuario() : {}", id);
@@ -202,6 +231,21 @@ import br.com.tfdonline.modelo.Usuario;
 			
 			redirectAttributes.addFlashAttribute("css", "success");
 			redirectAttributes.addFlashAttribute("msg", "Usuario deletado!");
+			
+			
+			//LOG DA TRANSACAO
+			Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_USUARIO, TransacaoDAOI.DELETE);
+			
+			if (transacao!=null) {
+				
+				Usuario usuarioLogado =((Usuario) session.getAttribute("usuarioLogado"));
+				logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, id);	
+				System.out.println("Salvando a transacao 1,3 no BD");
+				
+				
+			}else {
+				System.out.println("Transacao DELETE USER setada para não LOG");
+			}
 			
 			
 			return "redirect:/usuarios/";
