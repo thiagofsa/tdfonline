@@ -20,6 +20,7 @@ package br.com.tfdonline.controller;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.AcompanhanteDAOI;
@@ -29,6 +30,7 @@ import br.com.tfdonline.modelo.Acompanhante;
 	public class AcompanhanteController {
 
 
+		
 		private final Logger logger = LoggerFactory.getLogger(AcompanhanteController.class);
 
 		@Autowired

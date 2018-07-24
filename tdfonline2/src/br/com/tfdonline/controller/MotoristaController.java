@@ -1,10 +1,6 @@
 package br.com.tfdonline.controller;
 
 
-
-
-
-
 	import org.slf4j.Logger;
 	import org.slf4j.LoggerFactory;
 	import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +16,7 @@ package br.com.tfdonline.controller;
 	import org.springframework.web.bind.annotation.RequestMapping;
 	import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.tfdonline.dao.MotoristaDAOI;
@@ -51,6 +48,14 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 
 			logger.debug("showAllMotoristas()");
 			model.addAttribute("motoristas", motoristaDAO.findAll());
+			
+			String ApplicationPath = 
+					ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("");
+			
+			System.out.println("********************");
+			System.out.println(ApplicationPath);
+			System.out.println("********************");
+			
 			return "listamotoristaspage";
 		}
 			

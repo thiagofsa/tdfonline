@@ -355,8 +355,12 @@
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectacompanhanteform.jsp" />  
    </definition>
    
+   <definition name="uploadformpage" extends="base.definition">  
+       <put-attribute name="title" value="Marcacao -> Acompanhante" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/uploadform.jsp" />  
+   </definition>
    
-   
+      
     <!-- ################ ENCAMINHAMENTOS PAGES  ########################### -->
    
    <definition name="listaencaminhamentospage" extends="base.definition">  

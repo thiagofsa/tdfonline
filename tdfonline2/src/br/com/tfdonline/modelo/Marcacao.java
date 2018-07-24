@@ -46,6 +46,8 @@ private static final long serialVersionUID = 1L;
 	
 	private Integer vagas;
 	
+	private String arquivorequisicao;
+	
 	
 	
 	private int ida;
@@ -234,6 +236,14 @@ private static final long serialVersionUID = 1L;
 
 	public void setVagas(Integer vagas) {
 		this.vagas = vagas;
+	}
+
+	public String getArquivorequisicao() {
+		return arquivorequisicao;
+	}
+
+	public void setArquivorequisicao(String arquivorequisicao) {
+		this.arquivorequisicao = arquivorequisicao;
 	}
 	
 	

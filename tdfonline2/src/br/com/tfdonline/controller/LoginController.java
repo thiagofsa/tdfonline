@@ -1,5 +1,7 @@
 package br.com.tfdonline.controller;
 
+import java.io.File;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.ContextLoader;
 
 import br.com.tfdonline.dao.UsuarioDAOI;
 import br.com.tfdonline.modelo.Usuario;
@@ -43,6 +46,7 @@ public class LoginController {
      public String efetuaLogin(@RequestParam("login") String login, @RequestParam("senha") String senha, HttpSession session, Model model) {
          
 		 System.out.println("LoginController.efetuaLogin()");
+		
 		 
 		 Usuario user = usuarioDAO.findbyLogin(login);
 		 
