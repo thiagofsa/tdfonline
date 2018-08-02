@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+/*body{
+    background: -webkit-linear-gradient(right, #11998e, #38ef7d);
+    background: -o-linear-gradient(right, #11998e, #38ef7d);
+    background: -moz-linear-gradient(right, #11998e, #38ef7d);
+    background: linear-gradient(right, #11998e, #38ef7d);
+}*/
+
+body{	
+	background-attachment:inherit;    
+    background: url(/resources/images/bglogin.jpg) no-repeat center center fixed; 
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+    background-size: cover;
+}
+
+#divlogin{   
+  	
+  	background: -webkit-linear-gradient(right, #141e30, #243b55);
+  	background: -moz-linear-gradient(right, #141e30, #243b55);
+  	background: -o-linear-gradient(right, #141e30, #243b55);
+  	background: linear-gradient(right, #141e30, #243b55);
+  	background: rgba(16,22,28, 0.85);
+    max-width: 270px;
+    min-width: 235px;
+    text-align: center;
+    border-radius: 10px;  
+    box-shadow: 3px 3px 8px #000;
+}
+
+.icone{
+    position: relative;
+}
+    	
+.icone i{
+	position: absolute;
+	right: 0.7rem;
+	top: 0.7rem; 
+	color: #22313F;	    
+}    
+
+.rodape{
+    color: #fff;
+    margin-top: 15%;
+}
+
+.copy{
+    display: block;
+    font-size: 1.1em;
+    font-weight: 900;
+}
