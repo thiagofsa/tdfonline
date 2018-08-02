@@ -39,8 +39,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	
 	@Override
 	public void addEncaminhamento(Encaminhamento encaminhamento) {
-		 sessionFactory.getCurrentSession().save(encaminhamento);
-		
+		 sessionFactory.getCurrentSession().save(encaminhamento);		
 	}
 
 	@Override
@@ -49,8 +48,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		Encaminhamento encaminhamento = sessionFactory.getCurrentSession().load(Encaminhamento.class,id);
 		sessionFactory.getCurrentSession().clear();
 		sessionFactory.getCurrentSession().delete(encaminhamento);
-		System.out.println("dentro do DAO..deletei o Encaminhamento"+ id);
-		
+		System.out.println("dentro do DAO..deletei o Encaminhamento"+ id);		
 	}
 
 	@Override
@@ -69,8 +67,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 
 		sessionFactory.getCurrentSession().merge(encaminhamento);
 				
-		System.out.println("---> Encaminhamento atualizado pelo DAO!!!");
-		
+		System.out.println("---> Encaminhamento atualizado pelo DAO!!!");		
 	}
 	
 	@Override
@@ -80,8 +77,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		   Query query  = sessionFactory.getCurrentSession().createQuery("from Encaminhamento");
            List<Encaminhamento> lista = (List<Encaminhamento>) query.list(); 
            System.out.println("-------->>  Encaminhamentos encontrados ="+ lista.size());
-           return lista;
-		    	
+           return lista;		    	
  	 }
 	
 
@@ -94,8 +90,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		} else {
 			System.out.println("estou no DAOSAVEUPDATE, tentanto ATUALIZAR a encaminhamento...");
 			this.updateEncaminhamento(encaminhamento);
-			System.out.println("estou no DAOSAVEUDPATE, ATUALIZEI a encaminhamento...");
-			
+			System.out.println("estou no DAOSAVEUDPATE, ATUALIZEI a encaminhamento...");			
 		}
 	}
 
@@ -103,8 +98,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 	@Override
 	public List<Encaminhamento> findbyData(@DateTimeFormat(pattern = "yyyy-MM-dd")Date datainicial) {
 	
-	return findbyData(datainicial, new Date());
-	
+	return findbyData(datainicial, new Date());	
 	}	
 	
 	
@@ -134,8 +128,7 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		 
 		List<Encaminhamento> lista = query.list();
 		
-		return lista;
-	
+		return lista;	
 	}
 	
 	@Override
@@ -158,19 +151,14 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		return lista;
 	}
 
-
 	@Override
-	public List<Encaminhamento> findbyMotoristaIDandData(Integer motoristaid, Date dataviagem) {
+	public List<Encaminhamento> findbyDistribuicaoID(Integer distribuicaoid) {
 		
-		String hql = "FROM Encaminhamento e WHERE e.distribuicao.motorista.id=:keyword and e.dataviagem=:data";
-		;
+		String hql = "FROM Encaminhamento WHERE iddistribuicao=:keyword";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setParameter("keyword", motoristaid);
-		query.setParameter("data", dataviagem);
+		query.setParameter("keyword", distribuicaoid);	
 		List<Encaminhamento> lista = query.list();
 		
 		return lista;
-	}
-
-	
+	}	
 }

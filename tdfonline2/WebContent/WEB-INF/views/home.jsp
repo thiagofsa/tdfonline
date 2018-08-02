@@ -22,11 +22,7 @@
 	<div  class="spacesup"></div>
 	<div class="row justify-content-center mt-4" >
 		 <h1>Bem vindo ao TFD Control</h1>
-	</div>
-	
-	
-	
-			
+	</div>	
 	
 </div>        
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>

@@ -22,6 +22,8 @@ public interface LogTransacaoDAOI {
 			
 	public LogTransacao findbyUsuario(String usuario);
 	
+	public List <LogTransacao> findbyUsuarioTipoTransacaoEntidade(String usuario, Integer tipoentidade, Integer tipotransacao);
+	
 		
 	
 }

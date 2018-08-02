@@ -152,16 +152,16 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 	     * @param type the format of the report, i.e pdf
 	     * 
 	     */
- @RequestMapping(value = "/reports/encaminhamentospormotoristaedatareport", method = RequestMethod.GET)
-	public ModelAndView doEncaminhamentosPorMotoristaMultiReport(@RequestParam(value="type", required=false) String type, @RequestParam(value="dataviagem",  required=false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date dataviagem, @RequestParam(value="idmotorista",required=false) int idmotorista,
-	      ModelAndView modelAndView, ModelMap model, HttpServletRequest httpServletRequest) 
+	@RequestMapping(value = "/reports/encaminhamentospormotoristaedatareport", method = RequestMethod.GET)
+	public ModelAndView doEncaminhamentosPorMotoristaMultiReport(@RequestParam(value="type", required=false) String type,
+			@RequestParam(value="distribuicaoid",required=false) int distribuicaoid, ModelAndView modelAndView, ModelMap model, HttpServletRequest httpServletRequest) 
 	   {
 	  logger.debug("Received request to download multi report from Encaminhamentos");
 	  //String format="pdf";
 	  type="pdf";
 	  
   
-	  List<Encaminhamento> encaminhamentosida= encaminhamentoDAO.findbyMotoristaIDandData(idmotorista, dataviagem);
+	  List<Encaminhamento> encaminhamentosida= encaminhamentoDAO.findbyDistribuicaoID(distribuicaoid);	  
 	  
 	  for (int i=0 ; i< encaminhamentosida.size(); i++) {
 		  System.out.println("Encaminhametoreport... imprimindo acompanhante de paciente");
@@ -215,5 +215,3 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 	  return modelAndView;	  	 
 	  } 
  }
-
-

@@ -23,7 +23,8 @@
 			<h4>Informações da nova Marcação</h4>
 		</div>	
 	
-	<spring:url value="/selectpaciente/marcacaos/" var="selectpacienteUrl" />
+	<spring:url value="/selectrequisicao/marcacaos/" var="selectrequisicaoUrl" />
+	<!-- <spring:url value="/selectpaciente/marcacaos/" var="selectpacienteUrl" /> -->
 	<spring:url value="/selectunidadesaude/marcacaos/" var="selectunidadesaudeUrl" />
 	<spring:url value="/selectprocedimento/marcacaos/" var="selectprocedimentoUrl" />
 	<spring:url value="/selectacompanhante/marcacaos/" var="selectacompanhanteUrl" />
@@ -37,6 +38,16 @@
 	
 	<div  class="form-row" >
 		
+		
+		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
+				<label for="requisicao.id">ID Requisicao</label>			
+				<form:input path="requisicao.id" type="text" class="form-control mudacursor" id="requisicao.id" 
+				placeholder="Clique aqui para selecionar requisicao" onclick="location.href='${selectrequisicaoUrl}'" readonly="true" />
+				<form:errors path="requisicao.id" class="control-label" />		
+				<form:hidden path="requisicao.id" />			  
+		  </div>
+		
+				
 		<spring:bind path="paciente.nome">
 		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
 				<label for="paciente.nome">Nome do Paciente</label>			

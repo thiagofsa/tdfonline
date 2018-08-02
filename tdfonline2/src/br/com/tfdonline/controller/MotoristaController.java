@@ -49,12 +49,6 @@ import br.com.tfdonline.validator.MotoristaFormValidator;
 			logger.debug("showAllMotoristas()");
 			model.addAttribute("motoristas", motoristaDAO.findAll());
 			
-			String ApplicationPath = 
-					ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("");
-			
-			System.out.println("********************");
-			System.out.println(ApplicationPath);
-			System.out.println("********************");
 			
 			return "listamotoristaspage";
 		}

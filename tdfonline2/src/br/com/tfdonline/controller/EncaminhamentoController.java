@@ -382,14 +382,18 @@ import br.com.tfdonline.util.DateUtils;
 				final RedirectAttributes redirectAttributes, HttpServletRequest request){
 		 	
 			//primeira vez da exibicao...vamos popular o form
-				Distribuicao distribuicao = new Distribuicao();
-				model.addAttribute("distribuicao", distribuicao);	
 				
+			Encaminhamento encaminhamentoSession = (Encaminhamento) request.getSession().getAttribute("encaminhamentoSession");
+			
+				Distribuicao distribuicao = new Distribuicao();
+				distribuicao.setDataviagem(encaminhamentoSession.getMarcacao().getDataviagem());
+				model.addAttribute("distribuicao", distribuicao);	
+				model.addAttribute("distribuicaos", distribuicaoDAO.findbyData(distribuicao.getDataviagem()));
 			 
 			//colocando os dados da encaminhamento na sessao..			
-				if  (request.getSession().getAttribute("encaminhamentoSession")==null) {
-					request.getSession().setAttribute("encaminhamentoSession", encaminhamento);
-				}
+				
+					request.getSession().setAttribute("encaminhamentoSession", encaminhamentoSession);
+				
 			
 		 	return "selectdistribuicaoform";
 		 	
@@ -398,7 +402,7 @@ import br.com.tfdonline.util.DateUtils;
 		@RequestMapping(value = {"/encaminhamentos/selectdistribuicao2" })
 		public String selectDistribuicao(@RequestParam("dataviagem")@DateTimeFormat(pattern = "yyyy-MM-dd") Date data, Model model, @ModelAttribute("distribuicao") Distribuicao distribuicao){
 		 	
-			System.out.println("chamando o encaminhamentos/Selectdistribuicao2/............Distribuicao.data="+data);
+			
 			
 			model.addAttribute("distribuicaos", distribuicaoDAO.findbyData(data));
 			System.out.println("DistribuicaoDAO chamado...");

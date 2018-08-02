@@ -1,6 +1,9 @@
 package br.com.tfdonline.controller;
 
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import java.util.LinkedHashMap;
@@ -113,6 +116,31 @@ import br.com.tfdonline.modelo.Usuario;
 				}else{
 				  redirectAttributes.addFlashAttribute("msg", "Usuario atualizado com sucesso!");
 				}
+				
+				//encripitando a senha
+				byte messageDigest[] = null ;
+				String senha =null;
+				MessageDigest algorithm;
+				try {
+					algorithm = MessageDigest.getInstance("SHA-256");
+					 messageDigest = algorithm.digest(usuario.getSenha().getBytes("UTF-8"));
+					 StringBuilder hexString = new StringBuilder();
+					 for (byte b : messageDigest) {
+					   hexString.append(String.format("%02X", 0xFF & b));
+					 }
+					  senha = hexString.toString();
+					  System.out.println("Hash senha="+ senha);
+				} catch (NoSuchAlgorithmException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (UnsupportedEncodingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				usuario.setSenha(senha);
+				 
+				
 				
 				
 				System.out.println("----->Nome ====="+ usuario.getNome());

@@ -1,3 +1,4 @@
+<%@page import="br.com.tfdonline.modelo.Encaminhamento"%>
 <%@ page session="false"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,6 +21,7 @@
  
 <body>
 
+	
 	<div class="container">
 	
 	<div  class="spacesup"></div>
@@ -34,7 +36,9 @@
 			<strong>${msg}</strong>
 		    </div>
 		</c:if>
-		
+
+<!--comentei , pois agora estou pegando a data a partir da marcacao.
+ 		
 <spring:url value="/encaminhamentos/selectdistribuicao2" var="selectUrl" />
 
 	<form:form class="form-horizontal" 
@@ -62,12 +66,11 @@
 		</div>
 	</form:form>
 	
-	
-	
-	
+ -->	
+		
 	<c:if test="${not empty distribuicaos}">
 
-		<h1>Distribuicaos</h1>
+		<h1>Distribuicaos para a data  <% out.print(((Encaminhamento)request.getSession().getAttribute("encaminhamentoSession")).getMarcacao().getDataviagem()); %></h1>
 
 		<table class="table table-striped">
 			<thead>

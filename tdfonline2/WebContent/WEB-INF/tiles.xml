@@ -126,6 +126,29 @@
    </definition>
 
 
+<!--  ########################## PACIENTE PAGE ################################-->
+
+   <definition name="listamedicospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista de Medicos" />  
+       <put-attribute name="body" value="/WEB-INF/views/medicos/lista.jsp" />  
+   </definition>
+   
+   <definition name="medicoform" extends="base.definition">  
+       <put-attribute name="title" value="Medico Detalhes" />  
+       <put-attribute name="body" value="/WEB-INF/views/medicos/medicoform.jsp" />  
+   </definition>
+   
+   
+   <definition name="medicoshow" extends="base.definition">  
+       <put-attribute name="title" value="Medico Detalhes" />  
+       <put-attribute name="body" value="/WEB-INF/views/medicos/show.jsp" />  
+   </definition>
+   
+   <definition name="medicocadastro" extends="base.definition">  
+       <put-attribute name="title" value="Cadastrar Medico" />  
+       <put-attribute name="body" value="/WEB-INF/views/medicos/medicocadastro.jsp" />  
+   </definition>
+
 
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
@@ -355,10 +378,11 @@
        <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectacompanhanteform.jsp" />  
    </definition>
    
-   <definition name="uploadformpage" extends="base.definition">  
+   <definition name="selectrequisicaoform" extends="base.definition">  
        <put-attribute name="title" value="Marcacao -> Acompanhante" />  
-       <put-attribute name="body" value="/WEB-INF/views/marcacaos/uploadform.jsp" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/selectrequisicaoform.jsp" />  
    </definition>
+   
    
       
     <!-- ################ ENCAMINHAMENTOS PAGES  ########################### -->
@@ -485,7 +509,84 @@
        <put-attribute name="title" value="Distribuicao -> Unidade Saude" />  
        <put-attribute name="body" value="/WEB-INF/views/distribuicaos/selectveiculoform.jsp" />  
    </definition>
+
+
+<!-- ################ REQUISICAO PAGES  ########################### -->
+      
+   <definition name="listarequisicaospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Requisicaos" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/lista.jsp" />  
+   </definition>
    
+   <definition name="requisicaoform" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/requisicaoform.jsp" />  
+   </definition>
+   
+   <definition name="requisicaocadastro" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/requisicaocadastro.jsp" />  
+   </definition>
+   
+   <definition name="findrequisicao" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Requisicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/find.jsp" />  
+   </definition>
+   
+   <definition name="requisicaoshow" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/show.jsp" />  
+   </definition>
+   
+   <definition name="selectmedicoform" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao -> Medico" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectmedicoform.jsp" />  
+   </definition>
+   
+   <definition name="selectpacienteform" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao -> Paciente" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectpacienteform.jsp" />  
+   </definition>
+   
+   <definition name="uploadformpage" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao- Upload" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/uploadform.jsp" />  
+   </definition>
+   
+   
+   <!-- ################ SECRETARIO PAGES  ########################### -->
+      
+   <definition name="listasecretariospage" extends="base.definition">  
+       <put-attribute name="title" value="Lista Secretarios" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/lista.jsp" />  
+   </definition>
+   
+   <definition name="secretarioform" extends="base.definition">  
+       <put-attribute name="title" value="Secretario" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/secretarioform.jsp" />  
+   </definition>
+   
+   <definition name="secretariocadastro" extends="base.definition">  
+       <put-attribute name="title" value="Secretario" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/secretariocadastro.jsp" />  
+   </definition>
+   
+   <definition name="findsecretario" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Secretario" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/find.jsp" />  
+   </definition>
+   
+   <definition name="secretarioshow" extends="base.definition">  
+       <put-attribute name="title" value="Secretario" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/show.jsp" />  
+   </definition>
+   
+   <definition name="uploadformpage.secretario" extends="base.definition">  
+       <put-attribute name="title" value="Secretario -> Assinatura" />  
+       <put-attribute name="body" value="/WEB-INF/views/secretarios/uploadform.jsp" />  
+   </definition>
+   
+      
    <!-- ############# ContactUs Page ###############-->
    
    
@@ -511,7 +612,31 @@
        <put-attribute name="body" value="/WEB-INF/views/transacaos/transacaocadastro.jsp" />  
    </definition>
    
-           
+
+<!-- ####################### LOGTRANSACAO PAGES ############################## -->
+
+
+	<definition name="findlogtransacaoform" extends="base.definition">  
+       <put-attribute name="title" value="Cadastro de Veiculo" />  
+       <put-attribute name="body" value="/WEB-INF/views/logtransacaos/findlogtransacaoform.jsp" />  
+   </definition>
+   
+		
+	<definition name="listalogtransacaospage" extends="base.definition">  
+       <put-attribute name="title" value="Cadastro de Veiculo" />  
+       <put-attribute name="body" value="/WEB-INF/views/logtransacaos/lista.jsp" />  
+   </definition>
+   
+   <definition name="selectusuarioform.logtransacao" extends="base.definition">  
+       <put-attribute name="title" value="Cadastro de Veiculo" />  
+       <put-attribute name="body" value="/WEB-INF/views/logtransacaos/selectusuarioform.jsp" />  
+   </definition>
+   
+   <definition name="logtransacaoshow" extends="base.definition">  
+       <put-attribute name="title" value="Cadastro de Veiculo" />  
+       <put-attribute name="body" value="/WEB-INF/views/logtransacaos/show.jsp" />  
+   </definition>
+   
   
    <!--ResultEmail Page -->
    <definition name="resultemail" extends="base.definition">  
@@ -523,6 +648,9 @@
        <put-attribute name="title" value="Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/downloadpage.jsp" />  
    </definition>
+   
+   
+   <!-- ####################### REPORT PAGES ############################## -->
    
    
    <definition name="encaminhamentopormotoristaedatareportpage" extends="base.definition">  

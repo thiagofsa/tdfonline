@@ -10,64 +10,53 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title><tiles:getAsString name="title" /></title>
-    
+        
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
     <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >
-    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" > 
-    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" >     
   </head>  
 <body>
 
 	<div class="container">
+	
+		<div  class="spacesup"></div>
+		
+		<div   class="text-center text-uppercase">
+			<h4>Relação dos encaminhamentos</h4>
+		</div>
+		
+		<div  class="row areanotify justify-content-end py-3">		
+			<c:if test="${not empty msg}">			    
+				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+			</c:if>		
+		</div>
 
-<div  class="spacesup"></div>
-<div  class="spacesup"></div>
-		<c:if test="${not empty msg}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" 
-                                aria-label="Close">
-				<span aria-hidden="true">×</span>
-			</button>
-			<strong>${msg}</strong>
-		    </div>
-		</c:if>
-
-		<h1>Todos os Encaminhamentos</h1>
-
-		<table class="table table-striped">
+		<div class="table-responsive-md animated fadein" >
+		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
-					<th>#ID</th>
-					<th>Data</th>
-					<th>Action</th>
+					<th class="text-center">Paciente</th>
+					<th class="text-center">Data</th>
+					<th class="text-center">Veículo</th>
+					<th class="text-center">Ações</th>
 				</tr>
 			</thead>
-
 			<c:forEach var="encaminhamento" items="${encaminhamentos}">
 			    <tr>
-				<td>
-					${encaminhamento.id}
-				</td>
-				<td>${encaminhamento.dataviagem}</td>
-				
-				
-				
-				<td>
-				  <spring:url value="/encaminhamentos/${encaminhamento.id}" var="encaminhamentoUrl" />
-				  <spring:url value="/encaminhamentos/${encaminhamento.id}/delete" var="deleteUrl" /> 
-				  <spring:url value="/encaminhamentos/${encaminhamento.id}/update" var="updateUrl" />
-
-				  <button class="btn btn-info" 
-                                          onclick="location.href='${encaminhamentoUrl}'">Detalhes</button>
-				  <button class="btn btn-primary" 
-                                          onclick="location.href='${updateUrl}'">Atualizar</button>
-				  <button class="btn btn-danger" 
-                                          onclick="location.href='${deleteUrl}'">Deletar</button>
-                                </td>
+			    	<td >${encaminhamento.marcacao.paciente.nome}</td>
+					<td class="text-center">${encaminhamento.dataviagem}</td>
+					<td class="text-center">${encaminhamento.distribuicao.veiculo.descricao}</td>
+					<td class="text-center">
+					  <spring:url value="/encaminhamentos/${encaminhamento.id}" var="encaminhamentoUrl" />
+					  <spring:url value="/encaminhamentos/${encaminhamento.id}/delete" var="deleteUrl" /> 
+					  <spring:url value="/encaminhamentos/${encaminhamento.id}/update" var="updateUrl" />					 
+					  <button class="btn btn-sm" data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-eye"></i></button>			 
+	                </td>
 			    </tr>
 			</c:forEach>
 		</table>
+		</div>
 
 	<div  class="spaceabaixo"></div>	
 </div>

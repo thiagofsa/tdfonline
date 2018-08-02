@@ -33,6 +33,7 @@ import br.com.tfdonline.dao.LogTransacaoDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
 import br.com.tfdonline.dao.PacienteDAOI;
 import br.com.tfdonline.dao.ProcedimentoDAOI;
+import br.com.tfdonline.dao.RequisicaoDAOI;
 import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.dao.UnidadeSaudeDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
@@ -40,6 +41,7 @@ import br.com.tfdonline.modelo.Encaminhamento;
 import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Paciente;
 import br.com.tfdonline.modelo.Procedimento;
+import br.com.tfdonline.modelo.Requisicao;
 import br.com.tfdonline.modelo.Transacao;
 import br.com.tfdonline.modelo.UnidadeSaude;
 import br.com.tfdonline.modelo.Usuario;
@@ -72,6 +74,9 @@ import br.com.tfdonline.util.DateUtils;
 		
 		@Autowired
 		private TransacaoDAOI transacaoDAO;
+		
+		@Autowired
+		private RequisicaoDAOI requisicaoDAO;
 	
 		
 		@InitBinder
@@ -87,7 +92,7 @@ import br.com.tfdonline.util.DateUtils;
 		public String showAllMarcacaos(Model model) {
 
 			logger.debug("showAllMarcacaos()");
-			model.addAttribute("marcacaos", marcacaoDAO.findLast());
+			model.addAttribute("marcacaos", marcacaoDAO.findbyNaoEncaminhadas());
 			return "listamarcacaospage";
 
 		}
@@ -140,7 +145,64 @@ import br.com.tfdonline.util.DateUtils;
 
 		}
 		
+		//populando um requisicao vazio e direcionando para a pagina de pesquisa
+				@RequestMapping(value = {"/selectrequisicao/marcacaos/" })
+				public String selectRequisicao(@ModelAttribute("marcacaoForm")  Marcacao marcacao,
+						BindingResult result, Model model, 
+						final RedirectAttributes redirectAttributes, HttpServletRequest request){
+				 	
+					//primeira vez da exibicao...vamos popular o form
+						Requisicao requisicao = new Requisicao();
+						model.addAttribute("requisicao", requisicao);	
+					
+						
+					//colocando os dados da marcacao na sessao..			
+					if  (request.getSession().getAttribute("marcacaoSession")==null) {
+						request.getSession().setAttribute("marcacaoSession", marcacao);
+					}
+					
+				 	return "selectrequisicaoform";
+				 	
+			    }
+				
+				@RequestMapping(value = {"/marcacaos/selectrequisicao2" })
+				public String selectRequisicao(@RequestParam("nomepaciente") String nome, Model model){
+				 	
+					System.out.println("chamando o marcacaos/SelectRequisicao2/............Requisicao.paciente.nome="+nome);
+					
+					model.addAttribute("requisicaos", requisicaoDAO.findbyNomePaciente(nome));
+					System.out.println("RequisicaoDAO chamado...");
+					
+					
+				 	return "selectrequisicaoform";
+				 	
+			    }
+				
+				@RequestMapping(value = "/marcacaos/selectrequisicao/{id}")
+				public String selectRequisicao(@PathVariable("id") int id, Model model, HttpServletRequest request) {
+					
+					Marcacao marcacao =(Marcacao) request.getSession().getAttribute("marcacaoSession");
+					System.out.println("ID da marcacao na sessao em Select Requisicao=" + marcacao.getId());
+					Requisicao requisicao  = requisicaoDAO.findByID(id);
+					marcacao.setRequisicao(requisicao);
+					marcacao.setProcedimento(requisicao.getProcedimento());
+					marcacao.setPaciente(requisicao.getPaciente());
+					request.getSession().setAttribute("marcacaoSession", marcacao);
+					model.addAttribute("marcacaoForm", marcacao);
+					
+					model.addAttribute("acompanhantespaciente",marcacao.getAcompanhantespacientemarcacao());
+					
+					if (marcacao.isNew()) {
+						return "marcacaocadastro";
+					}else
+						return "marcacaoform";
+					
+				
+				}
 
+
+		
+		
 		//populando um procedimento vazio e direcionando para a pagina de pesquisa
 		@RequestMapping(value = {"/selectprocedimento/marcacaos/" })
 		public String selectProcedimento(@ModelAttribute("marcacaoForm")  Marcacao marcacao,
@@ -556,6 +618,8 @@ import br.com.tfdonline.util.DateUtils;
 				   replica.setUnidadesaude(marcacao.getUnidadesaude());
 				   replica.setProcedimento(marcacao.getProcedimento());
 				   replica.setPaciente(marcacao.getPaciente());
+				   replica.setRequisicao(marcacao.getRequisicao());
+				   			   
 				   
 				   List<Acompanhante> acompanhantespaciente = acompanhanteDAO.findbyMarcacaoID(id);
 				   

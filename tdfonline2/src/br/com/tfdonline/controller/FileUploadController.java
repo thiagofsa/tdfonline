@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class FileUploadController {
 
-	
+	/*
 	@RequestMapping(value = "/uploadform")
     public String showFormUpload(Model model) {
 		
@@ -50,5 +50,5 @@ public class FileUploadController {
            return "home";
        }
     }
-
+*/
 }

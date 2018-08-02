@@ -13,9 +13,7 @@
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
-    <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >
-    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" > 
-    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >    
   </head>  
 <body>
 
@@ -49,8 +47,7 @@
 	
 	<spring:url value="/encaminhamentos" var="encaminhamentoActionUrl" />
 
-	<form:form class="form-horizontal" method="post" 
-                modelAttribute="encaminhamentoForm" action="${encaminhamentoActionUrl}">
+	<form:form  method="post" modelAttribute="encaminhamentoForm" action="${encaminhamentoActionUrl}">
 
 		<form:hidden path="id" />
 		
@@ -176,13 +173,7 @@
 	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
-	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
-	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
-  <script>
-	  $(document).ready(function() {
-		    $('#Tabela').DataTable();
-		} );
-  </script>   
+	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>	
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </body>
 </html>

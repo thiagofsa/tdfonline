@@ -15,58 +15,47 @@
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >
-    <style type="text/css">
-    	.icone{
-    		position: relative;
-    	}    	
-    	.icone i{
-		    position: absolute;
-		    right: 0.7rem;
-		    top: 0.7rem; 
-		    color: #22313F;	    
-		}    
-    </style>
-           
+    <link rel="stylesheet" href= "<c:url value='/resources/css/login.css'/>" >
+   
   </head>  
  
 <body>
 
 <div  class="container">
-	
+
 	<div class="row justify-content-center align-items-center" style=" height: 100vh;">	
 					
-		<div class="shadow p-3" >
-					<c:if test="${not empty msg}">
-					    <div class="alert alert-${css} alert-dismissible" role="alert">
-						<button type="button" class="close" data-dismiss="alert" 
-			                                aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-						<strong>${msg}</strong>
-					    </div>
-					</c:if>
+		<div class="shadow p-3" id="divlogin">
 		
-		
-				<div  id="div">
-		              <h3 class="mb-3 text-center" >TFDControll </h3>
-		              <form   class="mx-auto" action="/springtest/efetualogin" method="post">
-		              
-		                <div class="form-group icone">
-						    <i class="fa fa-user" aria-hidden="true"></i>
-						    <input type="text" class="form-control" id="login" name="login" aria-describedby="login" placeholder="Nome de usuário">
-						</div>
-						
-						<div class="form-group icone">
-						    <i class="fa fa-key" aria-hidden="true"></i>
-						    <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
-						</div>
-						  
-						  <div class="form-group text-center">
-						  	<button type="submit" class="btn btn-block btn-outline-primary mt-4">Entrar</button>  
-						  </div>
-						  
-		              </form>
-		         </div>
+			<c:if test="${not empty msg}">
+				<div  class="row areanotify justify-content-end py-3">							    
+					<strong id="textonotify" class=" animated fadeout font-italic my-3" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>			
+				</div>
+			</c:if>		
+				
+              <div class="row justify-content-center my-3" >
+					<img src="<c:url value="/resources/images/logodark.png"/>">	
+			  </div>
+              <form   class="mx-auto mt-5" action="/springtest/efetualogin" method="post">
+              
+                <div class="form-group icone">
+				    <i class="fa fa-user" aria-hidden="true"></i>
+				    <input type="text" class="form-control" id="login" name="login" aria-describedby="login" placeholder="Nome de usuário">
+				</div>
+				
+				<div class="form-group icone">
+				    <i class="fa fa-key" aria-hidden="true"></i>
+				    <input type="password" class="form-control" id="senha" name="senha" placeholder="Password">
+				</div>
+				  
+				  <div class="form-group text-center">
+				  	<button type="submit" class="btn btn-primary btn-block btn-lg mt-4">Entrar</button>  
+				  </div>						  
+              </form>
+              
+              <div class="row justify-content-center rodape">
+                <span class="copy" >Copyright ©</span> Todos os direitos reservados
+              </div>		   
 		</div>
 	</div>
 </div>

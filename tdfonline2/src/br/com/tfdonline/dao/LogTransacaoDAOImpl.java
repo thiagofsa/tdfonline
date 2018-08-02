@@ -127,6 +127,31 @@ public class LogTransacaoDAOImpl implements LogTransacaoDAOI, Serializable{
 		
 		
 	}
+
+
+	@Override
+	public List<LogTransacao> findbyUsuarioTipoTransacaoEntidade(String login, Integer tipoentidade, Integer tipotransacao) {
+		// TODO Auto-generated method stub
+		
+		String hql = "from LogTransacao lt where lt.usuario.login like '"+ login +"'";
+		
+		if ((tipoentidade!=null) && (tipoentidade>0)){
+			hql += " AND lt.transacao.entidade="+tipoentidade;	
+		}
+		
+		if ((tipotransacao!=null) && (tipotransacao>0)){
+			hql += " AND lt.transacao.operacao="+tipotransacao;	
+		}
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		
+		 
+		List<LogTransacao> lista = query.list();
+		
+		
+		return lista;
+	}
 	
 	
 }

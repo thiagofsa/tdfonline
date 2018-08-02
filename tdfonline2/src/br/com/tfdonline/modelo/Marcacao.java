@@ -46,8 +46,6 @@ private static final long serialVersionUID = 1L;
 	
 	private Integer vagas;
 	
-	private String arquivorequisicao;
-	
 	
 	
 	private int ida;
@@ -60,6 +58,12 @@ private static final long serialVersionUID = 1L;
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date data;
+	
+	
+	
+	@OneToOne 
+    @JoinColumn(name = "idrequisicao")
+	Requisicao requisicao;
 	
 	
 	@OneToOne(cascade = { 
@@ -238,13 +242,15 @@ private static final long serialVersionUID = 1L;
 		this.vagas = vagas;
 	}
 
-	public String getArquivorequisicao() {
-		return arquivorequisicao;
+	public Requisicao getRequisicao() {
+		return requisicao;
 	}
 
-	public void setArquivorequisicao(String arquivorequisicao) {
-		this.arquivorequisicao = arquivorequisicao;
+	public void setRequisicao(Requisicao requisicao) {
+		this.requisicao = requisicao;
 	}
+
+	
 	
 	
 }

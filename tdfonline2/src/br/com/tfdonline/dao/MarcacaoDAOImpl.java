@@ -90,7 +90,7 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		// TODO Auto-generated method stub
 		 
 		   Query query  = sessionFactory.getCurrentSession().createQuery("from Marcacao m ORDER BY m.id DESC");
-		   query.setMaxResults(15);
+		   query.setMaxResults(20);
 		   List<Marcacao> lista = (List<Marcacao>) query.list(); 
            System.out.println("-------->>  Marcacaos encontrados ="+ lista.size());
            return lista;
@@ -176,6 +176,18 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		
 		query.setParameter("start", datainicial);
 		query.setParameter("end", datafinal);
+		 
+		List<Marcacao> lista = query.list();
+		
+		return lista;
+	}
+
+	@Override
+	public List<Marcacao> findbyNaoEncaminhadas() {
+		// TODO Auto-generated method stub
+		String hql = "FROM Marcacao m WHERE m.encaminhada<1" ;
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		 
 		List<Marcacao> lista = query.list();
 		

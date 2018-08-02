@@ -89,7 +89,6 @@
 		</div>
 		
 		<div  class="form-row justify-content-center mt-4" >			
-			
 				<div class="form-group col-xs-4  text-center">		
 					<button type="submit" class="btn btn-outline-success" ><i class="fas fa-check-circle mx-2"></i> <span class="esconder"> Atualizar</span></button>				
 				</div>
@@ -101,30 +100,29 @@
 			
 				<div class="form-group col-xs-4  text-center">				
 					<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/motoristas/"><i class="fas fa-arrow-circle-left mx-2"></i> <span class="esconder"> Cancelar</span></a>				
-				</div>	
-				
+				</div>					
 		</div> 	
 		
 		<!-- Modal -->
-<div class="modal fade" id="exclusao" tabindex="-1" role="dialog" aria-labelledby="exclusao" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title " id="exampleModalLongTitle"><i class="fas fa-exclamation-triangle fa-2x text-warning"></i> <span class="font-italic" > Esta operação não pode ser revertida.</span></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body font-weight-bold">
-        Deseja confirmar a exclusão deste item?
-      </div>
-      <div class="modal-footer">        
-        <button type="button" class="btn btn-sm btn-secondary"  data-toggle="modal" data-target="#exampleModalLong" onclick="location.href='${deleteUrl}'">Confirmar</button>
-        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
-      </div>
-    </div>
-  </div>
-</div>	
+		<div class="modal fade" id="exclusao" tabindex="-1" role="dialog" aria-labelledby="exclusao" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title " id="exampleModalLongTitle"><i class="fas fa-exclamation-triangle fa-2x text-warning"></i> <span class="font-italic" > Esta operação não pode ser revertida.</span></h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body font-weight-bold">
+		        Deseja confirmar a exclusão deste item?
+		      </div>
+		      <div class="modal-footer">        
+		        <button type="button" class="btn btn-sm btn-secondary"  data-toggle="modal" data-target="#exampleModalLong" onclick="location.href='${deleteUrl}'">Confirmar</button>
+		        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Cancelar</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>	
 			
 	</form:form>
 <div  class="spaceabaixo"></div>

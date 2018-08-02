@@ -1,6 +1,9 @@
 package br.com.tfdonline.controller;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.http.HttpSession;
 
@@ -52,7 +55,29 @@ public class LoginController {
 		 
 		 if (user!=null) {
 			 
-			 if (user.getSenha().equals(senha)){
+			 String hashsenha =null;
+			 StringBuilder hexString = null;
+			 
+			MessageDigest algorithm = null;;
+			try {
+				algorithm = MessageDigest.getInstance("SHA-256");
+				byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8")); 
+				 hexString= new StringBuilder();
+				 
+				 for (byte b : messageDigest) {
+				   hexString.append(String.format("%02X", 0xFF & b));
+				 }
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 			  			
+			 hashsenha = hexString.toString();
+			 			 
+			 if (user.getSenha().equals(hashsenha)){
 				 session.setAttribute("usuarioLogado", user);
 				 
 				 if (user.getTransporte()>0) {

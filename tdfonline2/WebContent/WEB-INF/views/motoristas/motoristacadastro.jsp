@@ -18,14 +18,13 @@
 
 <div class="container">
 	
-		<div  class="spacesup"></div>		
-		<div   class="text-center text-uppercase">
-			<h4>Dados do novo motorista</h4>
-		</div>	
+	<div  class="spacesup"></div>		
+	<div   class="text-center text-uppercase">
+		<h4>Dados do novo motorista</h4>
+	</div>	
 
-	<spring:url value="/motoristas" var="motoristaActionUrl" />
-
-	<form:form class="mt-5"  method="post" modelAttribute="motoristaForm" action="${motoristaActionUrl}">
+	<spring:url value="/motoristas" var="motoristaActionUrl"/>
+	<form:form class="mt-4"  method="post" modelAttribute="motoristaForm" action="${motoristaActionUrl}">
 
 		<form:hidden path="id" />
 		
@@ -108,9 +107,9 @@
     	$(document).ready(
 	    	function(){
 	    	 // $('#telefone').mask("(00) 00000-0000");    	 
-	    	  $('#cpf').mask('000.000.000-00');
-	    	  $('#categoriacnh').mask('SS');
-	    	  $('#matricula').mask('#');  
+	    	  $('.cpf').mask('000.000.000-00');
+	    	  $('.categoriacnh').mask('SS');
+	    	  $('.matricula').mask('#');  
 	    	});    	 
     	
     	function myFunction() {	    	

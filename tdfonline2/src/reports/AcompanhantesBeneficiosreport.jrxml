@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AcompanhantesBeneficioreport" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8f604e33-4b84-4502-8c9b-94ed85a04203">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
@@ -9,22 +9,13 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<columnHeader>
-		<band height="37" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="30" uuid="4ca6ad13-087c-4d9f-9671-9a8f8090b8dd">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bcf02be4-54fc-4c29-ae9d-c55dd36eb99c"/>
-				</reportElement>
-				<text><![CDATA[Acomp.]]></text>
-			</staticText>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="32" splitType="Stretch">
+		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="100" height="30" uuid="bec41243-9d70-4f77-8785-e367574116a9">
+				<reportElement x="0" y="0" width="140" height="20" uuid="bec41243-9d70-4f77-8785-e367574116a9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bcf02be4-54fc-4c29-ae9d-c55dd36eb99c"/>
 				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 		</band>

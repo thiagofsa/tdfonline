@@ -33,6 +33,5 @@ public interface EncaminhamentoDAOI {
 	
 	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(Date datavolta);
 	
-	public List<Encaminhamento> findbyMotoristaIDandData(Integer motoristaid, Date dataviagem);
-
+	public List<Encaminhamento> findbyDistribuicaoID(Integer distribuicaoid);
 }

@@ -34,5 +34,7 @@ public interface MarcacaoDAOI {
 	
 	public List<Marcacao> findbyNaoEncaminhadas(Date datainicial,  Date datafinal) ;
 	
+	public List<Marcacao> findbyNaoEncaminhadas() ;
+	
 	
 }

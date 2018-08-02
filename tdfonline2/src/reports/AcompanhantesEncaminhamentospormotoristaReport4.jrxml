@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ae4dff9-1950-4838-a1ef-8d2f421aed5f">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
@@ -11,9 +11,9 @@
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="18" splitType="Stretch">
+		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement x="10" y="4" width="100" height="11" uuid="6a9ea9d3-9181-4f83-be01-b7cb858a3a13">
+				<reportElement x="2" y="2" width="100" height="11" uuid="6a9ea9d3-9181-4f83-be01-b7cb858a3a13">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="360492ae-22dd-4f28-ab16-272a5edf0aa9"/>
 				</reportElement>
 				<textElement>
@@ -21,9 +21,6 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
-			<line>
-				<reportElement x="10" y="4" width="100" height="1" uuid="ac3e2ff6-4e7c-427b-8f43-f5d6d72709f3"/>
-			</line>
 		</band>
 	</detail>
 </jasperReport>
