@@ -45,7 +45,7 @@ private static final long serialVersionUID = 1L;
     @JoinColumn(name = "idencaminhamento")
 	Encaminhamento encaminhamento;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name = "idpaciente")
 	Paciente paciente;
 		

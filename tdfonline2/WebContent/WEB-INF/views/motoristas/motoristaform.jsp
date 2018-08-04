@@ -22,7 +22,7 @@
 	<div  class="spacesup"></div>		
 		
 		<div   class="text-center text-uppercase">
-			<h4>Detalhes do motorista selecionado</h4>
+			<h4  class="h4 font-weight-bold">Detalhes do motorista selecionado</h4>
 		</div>	
 	
 	
@@ -46,7 +46,7 @@
 		<spring:bind path="cpf">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="cpf">Cpf</label>			
-				<form:input path="cpf" type="text" class="form-control" id="cpf" placeholder="___.___.___-__" required="required"/>                                
+				<form:input path="cpf" type="text" class="form-control cpf" id="cpf" placeholder="___.___.___-__" required="required"/>                                
 				<form:errors path="cpf" class="control-label" />			
 		  </div>
 		</spring:bind>	
@@ -54,7 +54,7 @@
 		<spring:bind path="matricula">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="matricula">Matrícula</label>			
-				<form:input path="matricula" type="text" class="form-control" id="matricula" required="required"/>                                
+				<form:input path="matricula" type="text" class="form-control matricula" id="matricula" required="required"/>                                
 				<form:errors path="matricula" class="control-label" />
 		   </div>
 		</spring:bind>		
@@ -73,7 +73,7 @@
 		<spring:bind path="telefone">
 		  <div class="form-group col-md-3  col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="telefone">Telefone</label>			
-				<form:input path="telefone" class="form-control" id="telefone" placeholder="(__) _____-____" required="required"    />                                
+				<form:input path="telefone" class="form-control telefone" id="telefone" placeholder="(__) _____-____" required="required"    />                                
 				<form:errors path="telefone" class="control-label" />
 		   </div>
 		</spring:bind>
@@ -81,7 +81,7 @@
 		<spring:bind path="categoriacnh">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="categoriacnh" >Categoria CNH</label>			
-				<form:input path="categoriacnh" class="form-control" id="categoriacnh" required="required"/>                               
+				<form:input path="categoriacnh" class="form-control categoriacnh" id="categoriacnh" required="required"/>                               
 				<form:errors path="categoriacnh" class="control-label" />			
 		  </div>
 		</spring:bind>
@@ -136,10 +136,10 @@
 	<script>
     	$(document).ready(
 	    	function(){
-	    	  $('#telefone').mask("(00) 00000-0000");    	 
-	    	  $('#cpf').mask('000.000.000-00');
-	    	  $('#categoriacnh').mask('SS');
-	    	  $('#matricula').mask('#');  
+	    	  $('.telefone').mask("(00) 00000-0000");    	 
+	    	  $('.cpf').mask('000.000.000-00');
+	    	  $('.categoriacnh').mask('SS');
+	    	  $('.matricula').mask('#');  
 	    	});    	 
     	
     	function myFunction() {	    	

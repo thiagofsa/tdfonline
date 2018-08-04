@@ -9,21 +9,27 @@
   <head>    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <title><tiles:getAsString name="title" /></title>
     
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
-    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" >
+    <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>">    
   </head>  
 <body>
 
-	<div class="container">
+<div class="container">
 
-		<div  class="spacesup"></div>
-		
-		<div   class="text-center text-uppercase">
-			<h4>Relação das transações com LOG</h4>
-		</div>
+		<div  class="spacesup"></div>		
+	<div   class="text-center text-uppercase font-weight-bold">
+		<h4  class="h4 font-weight-bold">Relação das transações com Log</h4>
+	</div>
+	
+	<div  class="row areanotify justify-content-end py-1">		
+		<c:if test="${not empty msg}">			    
+			<strong id="textonotify" class="animated fadeout font-italic" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+		</c:if>		
+	</div>
 		
 		Entidades:<Br>
 	//USUARIO =1 
@@ -37,32 +43,24 @@
 	//ADD =1
 	//UPDATE = 2
 	//DELETE =3
-	
-		
-		<div  class="row areanotify justify-content-end py-3">		
-			<c:if test="${not empty msg}">			    
-				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
-			</c:if>		
-		</div>
-
 
 		<div class="table-responsive-md animated fadein" >
 		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
 					<th class="text-center">ID</th>
-					<th class="text-center esconder">Entidade</th>
-					<th class="text-center esconder">Operacao</th>
+					<th class="text-center hidea">Entidade</th>
+					<th class="text-center hidea">Operacao</th>
 					<th class="text-center">Ativo</th>
-					
+					<th class="text-center">Detalhes</th>					
 				</tr>
 			</thead>
 
 			<c:forEach var="transacao" items="${transacaos}">
 			    <tr>				
 				
-				<td  class="text-center esconder">${transacao.id}</td>
-				<td  class="text-center esconder">${transacao.entidade}</td>
+				<td  class="text-center hidea">${transacao.id}</td>
+				<td  class="text-center hidea">${transacao.entidade}</td>
 				<td class="text-center" >${transacao.operacao}</td>				
 				<td class="text-center" >${transacao.valor}</td>
 				<td  class="text-center">					
@@ -76,7 +74,7 @@
 		
 		
 
-	<div  class="spaceabaixo"></div>	
+<div  class="spaceabaixo"></div>	
 </div>	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>

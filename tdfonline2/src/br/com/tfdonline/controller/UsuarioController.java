@@ -47,6 +47,35 @@ import br.com.tfdonline.modelo.Usuario;
 		@Autowired
 		private TransacaoDAOI transacaoDAO;
 
+		
+		
+		
+		public String getSenhaCriptografada(String senha) {
+			
+			//encripitando a senha
+			byte messageDigest[] = null ;
+			String senhaCriptografada =null;
+			MessageDigest algorithm;
+			try {
+				algorithm = MessageDigest.getInstance("SHA-256");
+				 messageDigest = algorithm.digest(senha.getBytes("UTF-8"));
+				 StringBuilder hexString = new StringBuilder();
+				 for (byte b : messageDigest) {
+				   hexString.append(String.format("%02X", 0xFF & b));
+				 }
+				  senhaCriptografada = hexString.toString();
+				  System.out.println("Hash senha="+ senhaCriptografada);
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+			return senhaCriptografada;
+		}
 
 		// list page
 		@RequestMapping(value = "/usuarios")
@@ -176,6 +205,94 @@ import br.com.tfdonline.modelo.Usuario;
 			}
 
 		}
+		
+		@RequestMapping(value = "/usuarios/minhaconta")
+		public String showMinhaContaForm(Model model, HttpSession session) {
+
+			System.out.println("UsuarioController.ShowMinhaContaForm");
+			Usuario usuariosession = ((Usuario) session.getAttribute("usuarioLogado"));
+			
+			Usuario usuario = new Usuario();
+			usuario.setId(usuariosession.getId());
+			usuario.setNome(usuariosession.getNome());
+			usuario.setLogin(usuariosession.getLogin());
+			usuario.setEmail(usuariosession.getEmail());
+			usuario.setTelefone(usuariosession.getTelefone());
+			usuario.setSenha("");
+			usuario.setAdmin(usuariosession.getAdmin());
+			usuario.setTransporte(usuariosession.getTransporte());
+			
+			
+			model.addAttribute("usuarioForm", usuario);
+			
+			return "minhaconta";
+
+		}
+		
+		@RequestMapping(value = "/usuarios/minhaconta2", method = RequestMethod.POST)
+		//public String saveOrUpdateUsuario(@ModelAttribute("usuarioForm") @Validated Usuario usuario,
+		public String updateMinhaConta(@ModelAttribute("usuarioForm")  Usuario usuario,
+				BindingResult result, Model model, 
+				final RedirectAttributes redirectAttributes, HttpSession session) {
+			
+			
+			logger.debug("updateMinhaconta : {}", usuario);
+			System.out.println("Depois do formUsuario, salvando ou atualizando usuario.............");
+			System.out.println("Nome do usuario a ser atualizada="+ usuario.getNome());
+						// Add message to flash scope
+				
+			
+				Usuario usuarioBD = usuarioDAO.findByID(usuario.getId());
+				
+				String senhaformcriptografada  = getSenhaCriptografada(usuario.getSenha());
+				
+				if (senhaformcriptografada.equals(usuarioBD.getSenha())){
+					//senha do BD coincide com a digitada pelo usuario no form, vamos atualiza-lo
+					
+					String novasenhacriptografada = getSenhaCriptografada(usuario.getSenhanova1());
+					usuario.setSenha(novasenhacriptografada);
+					
+					System.out.println(".....Salvo ou atualizado o usuario.....");
+					
+					usuarioDAO.saveOrUpdate(usuario);
+					
+					redirectAttributes.addFlashAttribute("css", "success");
+					
+					redirectAttributes.addFlashAttribute("msg", "Usuario atualizado com sucesso!");
+					
+					//registrando a transção no BD..
+					Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_USUARIO, TransacaoDAOI.UPDATE);
+					
+					if (transacao!=null) {
+						
+						Usuario usuarioLogado =((Usuario) session.getAttribute("usuarioLogado"));
+						logtransacaoDAO.saveOrUpdate(usuarioLogado, transacao, usuario.getId());	
+						System.out.println("Salvando a transacao 1,2 no BD");
+						
+						
+					}else {
+						System.out.println("Transacao setada para não LOG");
+					}
+					
+					//devovlendo o usuario atualizado para a sessao
+					session.setAttribute("usuarioLogado", usuario);
+					
+					
+				}else {
+					
+					redirectAttributes.addFlashAttribute("msg", "Senha informada não é a salva no banco de dados!");
+				}
+				
+
+				
+				
+				// POST/REDIRECT/GET
+				return "redirect:/home";
+		
+		
+
+		}
+
 
 		// show update form
 		@RequestMapping(value = "/usuarios/{id}/update")
@@ -193,7 +310,7 @@ import br.com.tfdonline.modelo.Usuario;
 			
 			model.addAttribute("usuarioForm", usuario);
 			
-			populateDefaultModel(model);
+			
 			
 			return "usuarioform";
 
@@ -236,7 +353,7 @@ import br.com.tfdonline.modelo.Usuario;
 						
 			model.addAttribute("usuarioForm", usuario);
 
-			populateDefaultModel(model);
+			
 
 			return "usuariocadastro";
 
@@ -283,32 +400,7 @@ import br.com.tfdonline.modelo.Usuario;
 
 	
 
-		private void populateDefaultModel(Model model) {
-
-			
-
-			Map<String, String> skill = new LinkedHashMap<String, String>();
-			skill.put("Ida", "Ida");
-			skill.put("Volta", "Volta");
-			skill.put("Ida e Volta", "Ida e Volta");
-			model.addAttribute("tipoEncaminhamentoList", skill);
-
-			List<Integer> numbers = new ArrayList<Integer>();
-			numbers.add(1);
-			numbers.add(2);
-			numbers.add(3);
-			numbers.add(4);
-			numbers.add(5);
-			model.addAttribute("numberList", numbers);
-
-			Map<String, String> country = new LinkedHashMap<String, String>();
-			country.put("US", "United Stated");
-			country.put("CN", "China");
-			country.put("SG", "Singapore");
-			country.put("MY", "Malaysia");
-			model.addAttribute("countryList", country);
-
-		}
+		
 
 	}
 	

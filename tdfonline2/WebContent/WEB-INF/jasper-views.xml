@@ -31,19 +31,34 @@
 <bean id="encaminhamentopormotoristaReport"
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/EncaminhamentospormotoristaReport3.jrxml"
-  	p:reportDataKey="datasource" />
-  	
+  	p:reportDataKey="datasource" />  	
   	  	
 <bean id="beneficiosporperiodoReport"
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/Beneficiosporperiodo.jrxml"
-  	p:reportDataKey="datasource" />
-  	
+  	p:reportDataKey="datasource" />  	
   	
 <bean id="registrosmspormotoristaReport"
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/RegistroSMSporperiodo2.jrxml"
-  	p:reportDataKey="datasource" />   	 
+  	p:reportDataKey="datasource" />
+  	
+  	
+<bean id="comprovantemarcacaoReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/Comprovantemarcacaoreport.jrxml"
+  	p:reportDataKey="datasource" />   	  	   	 
+  	
+ <bean id="cartaopacienteReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/CartaoPaciente1.jrxml"
+  	p:reportDataKey="datasource" />      	 
+  	
+ <bean id="cartaodeembarqueReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/CartaodeEmbarque.jrxml"
+  	p:reportDataKey="datasource" />
+  	
   	
   	  	
 </beans>

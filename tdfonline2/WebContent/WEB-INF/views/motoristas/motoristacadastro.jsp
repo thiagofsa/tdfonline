@@ -20,7 +20,7 @@
 	
 	<div  class="spacesup"></div>		
 	<div   class="text-center text-uppercase">
-		<h4>Dados do novo motorista</h4>
+		<h4 class="h4 font-weight-bold">Dados do novo motorista</h4>
 	</div>	
 
 	<spring:url value="/motoristas" var="motoristaActionUrl"/>
@@ -42,7 +42,7 @@
 		<spring:bind path="cpf">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="cpf">Cpf</label>			
-				<form:input path="cpf" type="text" class="form-control" id="cpf" placeholder="___.___.___-__" required="required"/>                                
+				<form:input path="cpf" type="text" class="form-control cpf" id="cpf" placeholder="___.___.___-__" required="required"/>                                
 				<form:errors path="cpf" class="control-label" />			
 		  </div>
 		</spring:bind>	
@@ -50,7 +50,7 @@
 		<spring:bind path="matricula">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="matricula">Matrícula</label>			
-				<form:input path="matricula" type="text" class="form-control" id="matricula" required="required"/>                                
+				<form:input path="matricula" type="text" class="form-control matricula" id="matricula" required="required"/>                                
 				<form:errors path="matricula" class="control-label" />
 		   </div>
 		</spring:bind>		
@@ -69,7 +69,7 @@
 		<spring:bind path="telefone">
 		  <div class="form-group col-md-3 col-sm-6 ${status.error ? 'has-error' : ''}">
 			<label for="telefone">Telefone</label>			
-				<form:input path="telefone" class="form-control" id="telefone" placeholder="(__) _____-____" required="required"/>                                
+				<form:input path="telefone" class="form-control telefone" id="telefone" placeholder="(__) _____-____" required="required"/>                                
 				<form:errors path="telefone" class="control-label" />
 		   </div>
 		</spring:bind>
@@ -77,7 +77,7 @@
 		<spring:bind path="categoriacnh">
 		  <div class="form-group col-md-3  col-sm-6${status.error ? 'has-error' : ''}">
 			<label for="categoriacnh" >Categoria CNH</label>			
-				<form:input path="categoriacnh" class="form-control" id="categoriacnh" required="required"/>                               
+				<form:input path="categoriacnh" class="form-control categoriacnh" id="categoriacnh" required="required"/>                               
 				<form:errors path="categoriacnh" class="control-label" />			
 		  </div>
 		</spring:bind>
@@ -87,15 +87,14 @@
 		
 		<div  class="form-row justify-content-center mt-4" >				
 			<div class="form-group col-xs-6 text-center">		
-				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle mx-2"></i> <span class="esconder"> Cadastrar</span></button>				
-			</div>	
-			
+				<button type="submit" class="btn btn-outline-success"><i class="fas fa-check-circle mx-3"></i> <span class="esconder"> Cadastrar</span></button>				
+			</div>				
 			<div class="form-group  col-xs-6 text-center">		
-				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/motoristas/"><i class="fas fa-arrow-circle-left mx-2"></i> <span class="esconder"> Cancelar</span></a>				
+				<a class="btn btn-outline-dark" href="${pageContext.request.contextPath}/motoristas/"><i class="fas fa-arrow-circle-left mx-3"></i> <span class="esconder"> Cancelar</span></a>				
 			</div>
 		</div>  		
 	</form:form>	
-	<div  class="spaceabaixo"></div>	
+<div  class="spaceabaixo"></div>	
 </div>
 	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
@@ -106,7 +105,7 @@
 	<script>
     	$(document).ready(
 	    	function(){
-	    	 // $('#telefone').mask("(00) 00000-0000");    	 
+	    	  $('.telefone').mask("(00) 00000-0000");    	 
 	    	  $('.cpf').mask('000.000.000-00');
 	    	  $('.categoriacnh').mask('SS');
 	    	  $('.matricula').mask('#');  

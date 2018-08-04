@@ -13,70 +13,65 @@
     <link rel="stylesheet" href= "<c:url value='/resources/css/bootstrap.css'/>" >  
     <link rel="stylesheet" href= "<c:url value='/resources/css/fontawesome.css'/>" >    
     <link rel="stylesheet" href= "<c:url value='/resources/css/animate.min.css'/>" >
-    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>" > 
-    
+    <link rel="stylesheet" href= "<c:url value='/resources/css/jquery.dataTables.css'/>">    
   </head>  
 <body>
 
-	<div class="container">
+<div class="container">
 
-		<c:if test="${not empty msg}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" 
-                                aria-label="Close">
-				<span aria-hidden="true">×</span>
-			</button>
-			<strong>${msg}</strong>
-		    </div>
-		</c:if>
-
-		<h1>Todos os Requisicaos</h1>
-
-		<table class="table table-striped">
+		<div  class="spacesup"></div>		
+	<div   class="text-center text-uppercase">
+		<h4  class="h4 font-weight-bold">Relação das Requisições de T.F.D</h4>
+	</div>
+	
+	<div  class="row areanotify justify-content-end py-1">		
+		<c:if test="${not empty msg}">			    
+			<strong id="textonotify" class="animated fadeout font-italic" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+		</c:if>		
+	</div>
+		
+		<div class="table-responsive-md animated fadein" >		
+		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
-					<th>#ID</th>
-					<th>Data</th>
-					<th>Action</th>
+					<th class="text-center">Paciente</th>
+					<th class="text-center">Procedimento</th>
+					<th class="text-center">Médico Solicitante</th>
+					<th class="text-center">Detalhes</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="requisicao" items="${requisicaos}">
 			    <tr>
-				<td>
-					${requisicao.id}
-				</td>
-				<td>${requisicao.data}</td>
-				
-				
-				
-				<td>
-				  <spring:url value="/requisicaos/${requisicao.id}" var="requisicaoUrl" />
-				  <spring:url value="/requisicaos/${requisicao.id}/delete" var="deleteUrl" /> 
-				  <spring:url value="/requisicaos/${requisicao.id}/update" var="updateUrl" />
-
-				  <button class="btn btn-info" 
-                                          onclick="location.href='${requisicaoUrl}'">Detalhes</button>
-				  <button class="btn btn-primary" 
-                                          onclick="location.href='${updateUrl}'">Atualizar</button>
-				  <button class="btn btn-danger" 
-                                          onclick="location.href='${deleteUrl}'">Deletar</button>
-                                </td>
+					 <td>${requisicao.paciente.nome}</td>
+					 <td>${requisicao.procedimento.nome}</td>
+					 <td>${requisicao.medico.nome}</td>				 			
+					 <td  class="text-center">				   
+					  <spring:url value="/requisicaos/${requisicao.id}/update" var="updateUrl" />
+					  <button class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-eye"></i></button>
+					 </td>				  
 			    </tr>
 			</c:forEach>
 		</table>
+		</div>
+		
+		<div class="row justify-content-center text-center mt-3 animated fadein" >			
+			<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/requisicaos/add">
+			<i class="fas fa-plus-square mx-3"></i><span class="hidea"> Nova Requisição</span></a>
+		</div>	
+		
 
 <div  class="spaceabaixo"></div>	
-</div>
-	
+</div>	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   <script>
-	  $(document).ready(function() {
-		    $('#Tabela').DataTable();
+	  $(document).ready(
+			  function() {
+		    	$('#Tabela').DataTable();		    	
 		} );
   </script>   
 </body>

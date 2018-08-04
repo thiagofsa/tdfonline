@@ -27,12 +27,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.tfdonline.dao.AcompanhanteDAOI;
 import br.com.tfdonline.dao.DistribuicaoDAOI;
 import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.dao.EncaminhamentoVoltaDAOI;
 import br.com.tfdonline.dao.LogTransacaoDAOI;
 import br.com.tfdonline.dao.MarcacaoDAOI;
 import br.com.tfdonline.dao.TransacaoDAOI;
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Distribuicao;
 import br.com.tfdonline.modelo.Encaminhamento;
+import br.com.tfdonline.modelo.EncaminhamentoVolta;
 import br.com.tfdonline.modelo.Marcacao;
 import br.com.tfdonline.modelo.Transacao;
 import br.com.tfdonline.modelo.Usuario;
@@ -50,6 +52,9 @@ import br.com.tfdonline.util.DateUtils;
 		private EncaminhamentoDAOI encaminhamentoDAO;
 		
 		@Autowired
+		private EncaminhamentoVoltaDAOI encaminhamentovoltaDAO;
+		
+		@Autowired
 		private DistribuicaoDAOI distribuicaoDAO;
 		
 		@Autowired
@@ -65,12 +70,6 @@ import br.com.tfdonline.util.DateUtils;
 		private TransacaoDAOI transacaoDAO;
 		
 		
-		@InitBinder
-	    public void initBinder(WebDataBinder binder) {
-	        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	        sdf.setLenient(true);
-	        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	    }
 		
 
 		// list page
@@ -535,8 +534,50 @@ import br.com.tfdonline.util.DateUtils;
 
 		}
 
+		// report
+		@RequestMapping(value = "/encaminhamentos/cartaodeembarque")
+		public String showFindCartaoDeEmbarqueReport(Model model) {
 
+			logger.debug("EncaminhamentoController. showFindCartaoDeEmbarqueReport() ");
+			
+			return "cartaodeembarque";
+
+		}
 		
+		// report
+		@RequestMapping(value = "/encaminhamentos/cartaodeembarque2")
+		public String findCartaoDeEmbarqueReport(
+				@RequestParam("nomepaciente")String nomepaciente,
+				@RequestParam("dataviagemida")@DateTimeFormat(pattern = "dd-MM-yyyy") Date dataviagemida, 
+				@RequestParam("dataviagemvolta")@DateTimeFormat(pattern = "dd-MM-yyyy") Date dataviagemvolta,
+				Model model) {
+			
+			
+			System.out.println("Data inicial = " + dataviagemida);
+			System.out.println("Data Final = " + dataviagemvolta);
+			
+			List<Encaminhamento> encaminhamentosida= encaminhamentoDAO.findbyNomeDataIdaeDataVolta(nomepaciente, dataviagemida, dataviagemvolta);
+			
+			model.addAttribute("encaminhamentosida", encaminhamentosida);
+			
+		
+			List<EncaminhamentoVolta> encaminhamentosvoltaavulsos= encaminhamentovoltaDAO.findAvulsosbyPacienteDataIdaeDataVolta(nomepaciente, dataviagemida, dataviagemvolta);
+			
+			model.addAttribute("encaminhamentosvoltaavulsos", encaminhamentosvoltaavulsos);
+			System.out.println("Size of encaminhamentosvoltaavulsos="+ encaminhamentosvoltaavulsos.size());
+			
+			List<EncaminhamentoVolta> encaminhamentosvoltacomorigem= encaminhamentovoltaDAO.findComretornobyPacienteDataIdaeDataVolta(nomepaciente, dataviagemida, dataviagemvolta);
+			
+			model.addAttribute("encaminhamentosvoltacomorigem", encaminhamentosvoltacomorigem);
+			System.out.println("Size of encaminhamentosvoltacomorigem="+ encaminhamentosvoltacomorigem.size());
+			
+			logger.debug("EncaminhamentoController. showFindCartaoDeEmbarqueReport() ");
+			
+			return "cartaodeembarque";
+
+		}
+
+
 
 	}
 	

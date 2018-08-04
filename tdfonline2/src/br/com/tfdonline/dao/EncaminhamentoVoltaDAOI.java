@@ -28,4 +28,8 @@ public interface EncaminhamentoVoltaDAOI {
 	
 	List<EncaminhamentoVolta> findbyMotoristaID(Integer idmotorista);
 	
+	List<EncaminhamentoVolta> findComretornobyPacienteDataIdaeDataVolta(String nomepaciente, Date dataida, Date datavolta);
+	
+	List<EncaminhamentoVolta> findAvulsosbyPacienteDataIdaeDataVolta(String nomepaciente, Date dataida, Date datavolta);
+	
 }

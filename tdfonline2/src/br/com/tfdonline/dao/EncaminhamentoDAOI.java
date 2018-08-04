@@ -34,4 +34,6 @@ public interface EncaminhamentoDAOI {
 	public List<Encaminhamento> findbyDataVoltaEncaminhamentoVoltaNaoGerado(Date datavolta);
 	
 	public List<Encaminhamento> findbyDistribuicaoID(Integer distribuicaoid);
+	
+	public List<Encaminhamento> findbyNomeDataIdaeDataVolta(String nomepaciente, Date dataida, Date datavolta);
 }

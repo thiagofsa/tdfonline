@@ -142,5 +142,108 @@ public class EncaminhamentoVoltaDAOImpl implements EncaminhamentoVoltaDAOI, Seri
 		return lista;
 	}
 
+
+	@Override
+	public List<EncaminhamentoVolta> findAvulsosbyPacienteDataIdaeDataVolta(String nomepaciente, 
+			@DateTimeFormat(pattern = "dd-MM-yyyy")Date dataida,
+			@DateTimeFormat(pattern = "dd-MM-yyyy")Date datavolta) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		List<EncaminhamentoVolta> lista ;
+		Query query;
+		
+		String hql = "FROM EncaminhamentoVolta ev WHERE ev.paciente.nome like :keyword";
+		
+		String keyword = nomepaciente;
+			
+		
+		if (dataida!=null) {
+			hql+= " AND ev.dataviagem BETWEEN :start AND :end";
+		
+			if (datavolta==null) {
+				datavolta = new Date();
+			
+			
+			}
+			query  = sessionFactory.getCurrentSession().createQuery(hql);
+			query.setParameter("keyword", "%" + keyword + "%");
+			query.setParameter("start", dataida);
+			query.setParameter("end", datavolta);
+		
+		}else {
+		
+		query  = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", "%" + keyword + "%");
+		
+		}
+		
+		lista = query.list();
+		
+		System.out.println("--------------EncaminhamentoVoltaDAO---------");
+		System.out.println("HQL="+ hql);
+		System.out.println("DataIda="+ dataida );
+		System.out.println("DataVolta="+ datavolta );
+		System.out.println("Paciente="+ nomepaciente);
+		System.out.println(lista.size()+ " EncaminhamentosVolta avulsos encontrados");
+		
+		
+				
+		return lista;
+
+	}
+
+
+	@Override
+	public List<EncaminhamentoVolta> findComretornobyPacienteDataIdaeDataVolta(String nomepaciente, Date dataida,
+			Date datavolta) {
+		// TODO Auto-generated method stub
+		
+		
+		List<EncaminhamentoVolta> lista ;
+		Query query;
+		
+		
+		String hql = "FROM EncaminhamentoVolta ev WHERE ev.encaminhamento.marcacao.paciente.nome like :keyword";
+		
+		if (dataida!=null) {
+			hql+= " AND ev.dataviagem BETWEEN :start AND :end";
+		
+			if (datavolta==null) {
+				datavolta = new Date();
+			
+			}
+			query  = sessionFactory.getCurrentSession().createQuery(hql);
+			query.setParameter("keyword", "%" + nomepaciente + "%");
+			query.setParameter("start", dataida);
+			query.setParameter("end", datavolta);
+		
+		}else {
+		
+		query  = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", "%" + nomepaciente + "%");
+		
+		}
+		
+		List<EncaminhamentoVolta> encaminhamentosVolta2 =query.list();
+		
+		System.out.println("--------------EncaminhamentoVoltaDAO---------");
+		System.out.println("HQL="+ hql);
+		System.out.println("DataIda="+ dataida );
+		System.out.println("DataVolta="+ datavolta );
+		System.out.println("Paciente="+ nomepaciente);
+		System.out.println(encaminhamentosVolta2.size()+ " EncaminhamentosVolta com IDA encontrados");
+		
+				
+		return encaminhamentosVolta2;
+		
+
+	}
+	
+	
+	
+
 	
 }

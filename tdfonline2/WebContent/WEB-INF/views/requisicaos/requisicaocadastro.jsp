@@ -24,7 +24,9 @@
 		</div>	
 	 
 	<spring:url value="/selectpaciente/requisicaos/" var="selectpacienteUrl" />
+	<spring:url value="/selectprocedimento/requisicaos/" var="selectprocedimentoUrl" />
 	<spring:url value="/selectmedico/requisicaos/" var="selectmedicoUrl" />
+	<spring:url value="/selectmedicoautorizador/requisicaos/" var="selectmedicoautorizadorUrl" />
 	<spring:url value="/selectarquivo/requisicaos/" var="selectarquivoUrl" />
 	
 	
@@ -50,6 +52,17 @@
 	</div>
 	
 	
+	<spring:bind path="procedimento.nome">
+		  <div class="form-group col-md-6 ${status.error ? 'has-error' : ''}">
+				<label for="procedimento.nome">Nome do Procedimento</label>			
+				<form:input path="procedimento.nome" type="text" class="form-control mudacursor" id="procedimento.nome" 
+				placeholder="Clique aqui para selecionar procedimento" onclick="location.href='${selectprocedimentoUrl}'" readonly="true" />
+				<form:errors path="procedimento.nome" class="control-label" />		
+				<form:hidden path="procedimento.id" />			  
+		  </div>
+		</spring:bind>
+		
+
 	<div  class="form-row" >
 		
 		<spring:bind path="caminhoarquivo">
@@ -76,6 +89,17 @@
 				<form:hidden path="medico.id" />
 		  </div>
 		</spring:bind>		
+		
+		
+		<spring:bind path="medicoautorizador.nome">
+		  <div class="form-group col-md-8 ${status.error ? 'has-error' : ''}">
+				<label for="medicoautorizador.nome">Medico Autorizador</label>
+				<form:input path="medicoautorizador.nome" type="text" class="form-control mudacursor" id="medicoautorizador.nome" 
+				placeholder="Clique aqui para selecionar o Medico" onclick="location.href='${selectmedicoautorizadorUrl}'" readonly="true"/>
+				<form:errors path="medicoautorizador.nome" class="control-label" />
+				<form:hidden path="medicoautorizador.id" />
+		  </div>
+		</spring:bind>
 		
 		<spring:bind path="data">
 		  <div class="form-group col-md-2 ${status.error ? 'has-error' : ''}">			 

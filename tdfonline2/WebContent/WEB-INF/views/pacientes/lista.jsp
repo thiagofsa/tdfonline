@@ -19,8 +19,8 @@
 	<div class="container">
 
 		<div  class="spacesup"></div>		
-		<div   class="text-center text-uppercase">
-			<h4>Relação dos Pacientes</h4>
+		<div   class="text-center text-uppercase font-weight-bold">
+			<h4  class="h4 font-weight-bold">Relação dos Pacientes</h4>
 		</div>
 		
 		<div  class="row areanotify justify-content-end py-1">		
@@ -34,7 +34,7 @@
 			<thead>
 				<tr>					
 					<th class="text-center">Nome</th>
-					<th class="text-center esconder">Telefone</th>
+					<th class="text-center hidea">Telefone</th>
 					<th class="text-center">Cpf</th>
 					<th class="text-center esconder">Cartão SUS</th>
 					<th class="text-center">Detalhes</th>
@@ -43,40 +43,39 @@
 
 			<c:forEach var="paciente" items="${pacientes}">
 			    <tr>
-				<td>${paciente.nome}</td>				
-				<td class="text-center telefone esconder">${paciente.telefone}</td>
-				<td class="text-center cpf">${paciente.cpf}</td>
-				<td class="text-center esconder">${paciente.cartaosus}</td>
-				<td class="text-center">
-				  <spring:url value="/pacientes/${paciente.id}/update" var="updateUrl" />			  
-				  <button class="btn btn-sm" data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-eye"></i></i></button>			  
-                 </td>
+					<td>${paciente.nome}</td>				
+					<td class="text-center telefone hidea">${paciente.telefone}</td>
+					<td class="text-center cpf">${paciente.cpf}</td>
+					<td class="text-center cartaosus hidea">${paciente.cartaosus}</td>
+					<td class="text-center">
+						<spring:url value="/pacientes/${paciente.id}/update" var="updateUrl" />			  
+						<button class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-eye"></i></i></button>			  
+	                </td>
 			    </tr>
 			</c:forEach>
 		</table>
 		</div>
 		
-		<div class="row justify-content-center text-center mt-4 animated" >			
+		<div class="row justify-content-center text-center mt-3 animated fadein" >			
 			<a class="btn btn-outline-primary" href="${pageContext.request.contextPath}/pacientes/add">
 			<i class="fas fa-plus-square mx-3 "></i><span class="esconder"> Adicionar Paciente</span></a>
 		</div>
-	
-	<div  class="spaceabaixo"></div>	
-</div>
-	
+
+<div  class="spaceabaixo"></div>	
+</div>	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   <script>
-  $(document).ready(
-		  function() {
-	    	$('#Tabela').DataTable();
-	    	$('.telefone').mask("(00) 00000-0000");    	 
-	    	$('.cpf').mask('000.000.000-00');		    	
-	} );
-  </script>
-   
+	  $(document).ready(
+			  function() {
+		    	$('#Tabela').DataTable();
+		    	$('.telefone').mask("(00) 00000-0000");    	 
+		    	$('.cpf').mask('000.000.000-00');
+		    	$('.cartaosus').mask('000 0000 0000 0000');
+		} );
+  </script>   
 </body>
 </html>

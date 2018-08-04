@@ -20,8 +20,8 @@
 
 <div class="container">
 	<div  class="spacesup"></div>
-	<div class="row justify-content-center mt-4" >
-		 <h1>Bem vindo ao TFD Control</h1>
+	<div class="row justify-content-center" >
+		 <h4 class="h4 text-uppercase">Informações Gerencias</h4>
 	</div>	
 	
 </div>        

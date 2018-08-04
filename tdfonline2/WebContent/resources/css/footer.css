@@ -1,8 +1,2 @@
 @charset "utf-8";
 
-footer{
-    background: -webkit-linear-gradient(right, #38ef7d, #11998e);
-    background: -o-linear-gradient(right, #38ef7d, #11998e);
-    background: -moz-linear-gradient(right, #38ef7d, #11998e);
-    background: linear-gradient(right, #38ef7d, #11998e);	    
-}

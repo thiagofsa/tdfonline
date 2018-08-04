@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 //@Table(name = "paciente" , schema = "tfdonline")
@@ -24,8 +25,16 @@ private static final long serialVersionUID = 1L;
 	private String nome;
 	private String login;
 	private String senha;
+	
+	@Transient
+	private String senhanova1;
+	
+	@Transient
+	private String senhanova2;
+	
 	private String telefone;
 	private String email;
+	
 	
 	private Integer admin;
 	private Integer transporte;
@@ -90,6 +99,18 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setTransporte(Integer transporte) {
 		this.transporte = transporte;
+	}
+	public String getSenhanova1() {
+		return senhanova1;
+	}
+	public void setSenhanova1(String senhanova1) {
+		this.senhanova1 = senhanova1;
+	}
+	public String getSenhanova2() {
+		return senhanova2;
+	}
+	public void setSenhanova2(String senhanova2) {
+		this.senhanova2 = senhanova2;
 	}	
 	
 }

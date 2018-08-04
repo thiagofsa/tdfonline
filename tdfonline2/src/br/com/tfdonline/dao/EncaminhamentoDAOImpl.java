@@ -160,5 +160,38 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		List<Encaminhamento> lista = query.list();
 		
 		return lista;
+	}
+
+
+	@Override
+	public List<Encaminhamento> findbyNomeDataIdaeDataVolta(String nomepaciente, @DateTimeFormat(pattern = "dd-MM-yyyy")Date dataida, @DateTimeFormat(pattern = "dd-MM-yyyy")Date datavolta) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Encaminhamento e WHERE e.marcacao.paciente.nome like :keyword";
+		
+		if (dataida!=null) {
+			hql = hql + " AND e.dataviagem BETWEEN :start AND :end";
+		
+		}
+		if (datavolta==null) {
+			datavolta = new Date();
+		}
+		
+		System.out.println("--------------EncaminhamentoDAO---------");
+		System.out.println("HQL="+ hql);
+		System.out.println("DataIda="+ dataida );
+		System.out.println("DataVolta="+ datavolta );
+		System.out.println("Paciente="+ nomepaciente);
+		
+		
+		String keyword = nomepaciente;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("keyword", "%" + keyword + "%");
+		query.setParameter("start", dataida);
+		query.setParameter("end", datavolta);
+		 
+		List<Encaminhamento> lista = query.list();
+		
+		System.out.println(lista.size()+ "encaminhamentos encontrados no DAO");
+		return lista;
 	}	
 }

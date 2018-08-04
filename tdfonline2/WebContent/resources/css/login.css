@@ -8,21 +8,22 @@
 }*/
 
 body{	
+	
+}
+
+#side{
 	background-attachment:inherit;    
-    background: url(/resources/images/bglogin.jpg) no-repeat center center fixed; 
+    background: url("../images/bglogin.png") no-repeat center center fixed; 
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
-    background-size: cover;
+    background-size: cover;   
+    border-color: rgba(16,22,28, 0.95);
+    height: 20rem;
 }
 
-#divlogin{   
-  	
-  	background: -webkit-linear-gradient(right, #141e30, #243b55);
-  	background: -moz-linear-gradient(right, #141e30, #243b55);
-  	background: -o-linear-gradient(right, #141e30, #243b55);
-  	background: linear-gradient(right, #141e30, #243b55);
-  	background: rgba(16,22,28, 0.85);
+#divlogin{    	
+  	background: rgba(16,22,28, 0.95);
     max-width: 270px;
     min-width: 235px;
     text-align: center;

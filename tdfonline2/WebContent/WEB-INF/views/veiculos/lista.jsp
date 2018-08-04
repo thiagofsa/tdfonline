@@ -20,24 +20,23 @@
 <div class="container">
 
 	<div  class="spacesup"></div>		
+	<div   class="text-center text-uppercase font-weight-bold">
+		<h4  class="h4 font-weight-bold">Relação dos Veículos</h4>
+	</div>
+	
+	<div  class="row areanotify justify-content-end py-1">		
+		<c:if test="${not empty msg}">			    
+			<strong id="textonotify" class="animated fadeout font-italic" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+		</c:if>		
+	</div>
 		
-		<div   class="text-center text-uppercase">
-			<h4>Relação dos Veículos</h4>
-		</div>
-		
-		<div  class="row areanotify justify-content-end py-3">		
-			<c:if test="${not empty msg}">			    
-				<strong id="textonotify" class=" animated fadeout font-italic mr-2" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
-			</c:if>		
-		</div>
-		
-		<div class="table-responsive-md animated fadein" >	
+		<div class="table-responsive-md animated fadein" >		
 		<table id="Tabela" class="table table-striped table-hover display"  style="width:100%">
 			<thead>
 				<tr>
 					<th  class="text-center">Descrição</th>
 					<th  class="text-center">Placa</th>
-					<th  class="text-center esconder">Situação</th>
+					<th  class="text-center hidea">Situação</th>
 					<th  class="text-center">Detalhes</th>
 				</tr>
 			</thead>
@@ -45,8 +44,8 @@
 			<c:forEach var="veiculo" items="${veiculos}">
 			    <tr>
 				<td>${veiculo.descricao}</td>
-				<td  class="text-center"  id="placa" data-mask="AAA-0000">${veiculo.placa}</td>
-				<td  class="text-center esconder">${veiculo.situacao}</td>				
+				<td  class="text-center placa">${veiculo.placa}</td>
+				<td  class="text-center hidea">${veiculo.situacao}</td>				
 				<td  class="text-center">				  
 				  <spring:url value="/veiculos/${veiculo.id}/update" var="updateUrl" />
 				  <button class="btn btn-sm btn-dark" data-toggle="tooltip" data-placement="botton" title="Visualizar Detalhes" onclick="location.href='${updateUrl}'"><i class="fas fa-eye"></i></button>			  
@@ -55,22 +54,24 @@
 			</c:forEach>
 		</table>
 	</div>
-		
-		<div class="row justify-content-center text-center mt-4" >
-				<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/veiculos/add"><i class="fas fa-plus-square mx-2"></i><span class="esconder"> Adcionar Veículo</span></a>
-		</div>	
+	
+	<div class="row justify-content-center text-center mt-3 animated fadein" >			
+		<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/veiculos/add">
+		<i class="fas fa-plus-square mx-3"></i><span class="hidea"> Adicionar Veículo</span></a>
+	</div>		
 		
 <div  class="spaceabaixo"></div>	
-</div>
-			
+</div>	
 	<script src="<c:url value='/resources/js/jquery.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/popper.min.js'/>"></script>
 	<script src="<c:url value='/resources/js/bootstrap.js'/>"></script>
 	<script src="<c:url value='/resources/js/jquery.dataTables.js'/>"></script>	
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" integrity="sha256-u7MY6EG5ass8JhTuxBek18r5YG6pllB9zLqE4vZyTn4=" crossorigin="anonymous"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
   <script>
-	  $(document).ready(function() {
-		    $('#Tabela').DataTable();
+	  $(document).ready(
+			  function() {
+		    	$('#Tabela').DataTable();    	 
+		    	$('.placa').mask('SSS-0000');		    	
 		} );
   </script>   
 </body>

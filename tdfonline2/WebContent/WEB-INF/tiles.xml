@@ -63,6 +63,11 @@
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariocadastro.jsp" />  
    </definition>
    
+   <definition name="minhaconta" extends="base.definition">  
+       <put-attribute name="title" value="Minha Conta" />  
+       <put-attribute name="body" value="/WEB-INF/views/usuarios/minhaconta.jsp" />  
+   </definition>
+   
    <definition name="usuariobloqueado" extends="base.definition">  
        <put-attribute name="title" value="Usuario Bloqueado" />  
        <put-attribute name="body" value="/WEB-INF/views/usuarios/usuariobloqueado.jsp" />  
@@ -126,7 +131,7 @@
    </definition>
 
 
-<!--  ########################## PACIENTE PAGE ################################-->
+<!--  ########################## Medicos PAGE ################################-->
 
    <definition name="listamedicospage" extends="base.definition">  
        <put-attribute name="title" value="Lista de Medicos" />  
@@ -148,8 +153,7 @@
        <put-attribute name="title" value="Cadastrar Medico" />  
        <put-attribute name="body" value="/WEB-INF/views/medicos/medicocadastro.jsp" />  
    </definition>
-
-
+   
    
    <!-- ############### UNIDADE SAUDE PageS ######################-->
    
@@ -417,9 +421,7 @@
        <put-attribute name="title" value="Encaminhamento em Lote" />  
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/encaminhamentoloteprocessado.jsp" />  
    </definition>
-   
-   
-   
+      
    <definition name="selectdistribuicaoform" extends="base.definition">  
        <put-attribute name="title" value="Encaminhamento -> Distribuicao" />  
        <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/selectdistribuicaoform.jsp" />  
@@ -543,6 +545,16 @@
        <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectmedicoform.jsp" />  
    </definition>
    
+   <definition name="selectmedicoautorizadorform" extends="base.definition">  
+       <put-attribute name="title" value="Localizar Requisicao" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectmedicoautorizadorform.jsp" />  
+   </definition>
+   
+   <definition name="selectprocedimentoform.requisicao" extends="base.definition">  
+       <put-attribute name="title" value="Requisicao -> Procedimento" />  
+       <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectprocedimentoform.jsp" />  
+   </definition>
+   
    <definition name="selectpacienteform" extends="base.definition">  
        <put-attribute name="title" value="Requisicao -> Paciente" />  
        <put-attribute name="body" value="/WEB-INF/views/requisicaos/selectpacienteform.jsp" />  
@@ -586,15 +598,7 @@
        <put-attribute name="body" value="/WEB-INF/views/secretarios/uploadform.jsp" />  
    </definition>
    
-      
-   <!-- ############# ContactUs Page ###############-->
-   
-   
-   <definition name="contactuspage" extends="base.definition">  
-       <put-attribute name="title" value="Contact Us" />  
-       <put-attribute name="body" value="/WEB-INF/views/contactuspage.jsp" />  
-   </definition>  
-   
+  
 <!-- ####################### Transacao PAGES ############################## -->
    
    <definition name="listatransacaospage" extends="base.definition">  
@@ -612,8 +616,8 @@
        <put-attribute name="body" value="/WEB-INF/views/transacaos/transacaocadastro.jsp" />  
    </definition>
    
-
-<!-- ####################### LOGTRANSACAO PAGES ############################## -->
+   
+   <!-- ####################### LOGTRANSACAO PAGES ############################## -->
 
 
 	<definition name="findlogtransacaoform" extends="base.definition">  
@@ -637,21 +641,9 @@
        <put-attribute name="body" value="/WEB-INF/views/logtransacaos/show.jsp" />  
    </definition>
    
+   
   
-   <!--ResultEmail Page -->
-   <definition name="resultemail" extends="base.definition">  
-       <put-attribute name="title" value="Contact with success!" />  
-       <put-attribute name="body" value="/WEB-INF/views/resultemail.jsp" />  
-   </definition>    
- 
-  <definition name="downloadpage" extends="base.definition">  
-       <put-attribute name="title" value="Motorista" />  
-       <put-attribute name="body" value="/WEB-INF/views/downloadpage.jsp" />  
-   </definition>
-   
-   
-   <!-- ####################### REPORT PAGES ############################## -->
-   
+  <!-- ####################### RELATORIOS PAGES ############################## -->
    
    <definition name="encaminhamentopormotoristaedatareportpage" extends="base.definition">  
        <put-attribute name="title" value="Relatorio Enc por Motorista" />  
@@ -661,15 +653,39 @@
 	<definition name="beneficiosporperiodoreportpage" extends="base.definition">  
        <put-attribute name="title" value="Relatorio Enc por Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/beneficios/beneficiosporperiodoreportpage.jsp" />  
-   </definition>
-      
+   </definition>      
  
    <definition name="registrosmsreportpage" extends="base.definition">  
        <put-attribute name="title" value="Relatorio Enc por Motorista" />  
        <put-attribute name="body" value="/WEB-INF/views/registrosmss/registrosmsmsporperiodoreportpage.jsp" />  
    </definition>
    
+   <definition name="cartaopacientepage" extends="base.definition">  
+       <put-attribute name="title" value="Relatorio Enc por Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/pacientes/cartaopaciente.jsp" />  
+   </definition>
    
+   <definition name="comprovantemarcacaoreportpage" extends="base.definition">  
+       <put-attribute name="title" value="Comprovante Marcacao" />  
+       <put-attribute name="body" value="/WEB-INF/views/marcacaos/comprovantemarcacaoreportpage.jsp" />  
+   </definition>
+   
+   <definition name="cartaodeembarque" extends="base.definition">  
+       <put-attribute name="title" value="Cartao de Embarque" />  
+       <put-attribute name="body" value="/WEB-INF/views/encaminhamentos/cartaodeembarque.jsp" />  
+   </definition>
+   
+   
+   
+   
+   
+   
+   <!-- ####################### AJUDA PAGES ############################## -->
+   
+   <definition name="contatopage" extends="base.definition">  
+       <put-attribute name="title" value="Relatorio Enc por Motorista" />  
+       <put-attribute name="body" value="/WEB-INF/views/contato.jsp" />  
+   </definition>
  
 </tiles-definitions>
 
