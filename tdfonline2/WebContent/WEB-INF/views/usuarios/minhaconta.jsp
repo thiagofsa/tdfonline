@@ -23,6 +23,15 @@
 			<h1>Minha conta</h1>
 	
 	<br />
+	
+	
+	<div  class="row areanotify justify-content-end py-1">		
+		<c:if test="${not empty msg}">			    
+			<strong id="textonotify" class="animated fadeout font-italic" ><i class="fas fa-check-circle fa-lg text-success mr-1"></i>${msg}</strong>
+		</c:if>		
+	</div>
+	
+	
 
 	<spring:url value="/usuarios/minhaconta2" var="usuarioActionUrl" />
 

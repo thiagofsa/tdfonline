@@ -36,5 +36,7 @@ public interface MarcacaoDAOI {
 	
 	public List<Marcacao> findbyNaoEncaminhadas() ;
 	
+	public List<Marcacao> findbyNomeNaoEncaminhadasPeriodo(String nomepaciente, Date datainicio, Date datafim) ;
+	
 	
 }

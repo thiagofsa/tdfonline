@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.tfdonline.modelo.Acompanhante;
 import br.com.tfdonline.modelo.Marcacao;
+import br.com.tfdonline.modelo.Requisicao;
 
 @Repository
 @Transactional
@@ -193,6 +194,45 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 		
 		return lista;
 	}
+	
+	
+	@Override
+	public List<Marcacao> findbyNomeNaoEncaminhadasPeriodo(String nomepaciente, Date datainicio, Date datafim) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				String hql = "FROM Marcacao m WHERE m.encaminhada<1";
+				
+				if ((nomepaciente!=null) && (nomepaciente.trim().length()>0)) {
+					
+					hql+= " AND m.paciente.nome like :keyword";
+					
+				}
+				
+				if (datainicio!=null) {
+					hql+= " AND m.data BETWEEN :start AND :end";
+					if (datafim==null) {
+						datafim= new Date();
+					}
+				}
+				
+				Query query = sessionFactory.getCurrentSession().createQuery(hql);
+				
+				if (datainicio!=null) {
+				query.setParameter("start", datainicio);
+				query.setParameter("end", datafim);
+				}
+				
+				if ((nomepaciente!=null) && (nomepaciente.trim().length()>0)) {
+					query.setParameter("keyword", nomepaciente);
+					
+				}
+				 
+				List<Marcacao> lista = query.list();
+				
+				return lista;
+	}
+	
+	
 
 	
 }

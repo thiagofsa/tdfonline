@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class LoginController {
 	 
 	 
 	 @RequestMapping(value ="/efetualogin", method = RequestMethod.POST)
-     public String efetuaLogin(@RequestParam("login") String login, @RequestParam("senha") String senha, HttpSession session, Model model) {
+     public String efetuaLogin(@RequestParam("login") String login, @RequestParam("senha") String senha, HttpSession session, Model model,HttpServletRequest request) {
          
 		 System.out.println("LoginController.efetuaLogin()");
 		
@@ -95,11 +96,13 @@ public class LoginController {
 			 else {
 				 System.out.println("Senha incorreta...voltando para o form de login");
 				 model.addAttribute("msg","Senha incorreta...voltando para o form de login");
+				 request.setAttribute("msg","Senha incorreta...voltando para o form de login");
 				 return "redirect:loginform";
 			 }
          }
 		 System.out.println("Usuário inexistente");
 		 model.addAttribute("msg","Usuário inexistente. Tente novamente ou contacte o administrador");
+		 
 		 
 		 
          return "redirect:loginform";

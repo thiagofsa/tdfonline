@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -114,18 +115,19 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 			 
 		// find2 page
 		@RequestMapping(value = "/marcacaos/comprovantemarcacaoreport2")
-		public String showFindMarcacaoForm(@RequestParam("nomepaciente") String pacientenome, Model model) {
-			
-			
+		public String showFindMarcacaoForm(@RequestParam(value= "nomepaciente", required=false) String nomepaciente, 
+				@RequestParam("datainicio") @DateTimeFormat(pattern = "dd/MM/yyyy")Date datainicio,
+				@RequestParam(value="datafim", required=false) @DateTimeFormat(pattern = "dd/MM/yyyy")Date datafim,
+				Model model) {
 			
 			List<Marcacao> marcacaoLista= new ArrayList<Marcacao>();
 					
 			System.out.println("chamando o marcacaos/find/............");
-			System.out.println("Nome="+pacientenome);
-		
+			System.out.println("Nome="+nomepaciente);
+			System.out.println("Dataini="+datainicio);
+			System.out.println("Datafim="+datafim);
 					
-					marcacaoLista = marcacaoDAO.findbyNomePaciente(pacientenome);
-		
+			marcacaoLista = marcacaoDAO.findbyNomeNaoEncaminhadasPeriodo(nomepaciente, datainicio, datafim);
 			
 			model.addAttribute("marcacaos", marcacaoLista);
 			

@@ -24,18 +24,16 @@
 <div  class="spacesup"></div>
 <div  class="spacesup"></div>
 
-<spring:url value="//marcacaos/comprovantemarcacaoreport2" var="findUrl" />
+<spring:url value="/marcacaos/comprovantemarcacaoreport2" var="findUrl" />
 
 	<form action="${findUrl}" method="POST">
 
 		
 	Nome do Paciente: <input type="text" name="nomepaciente" id="nomepaciente">
 	
-	<!-- Data inicio: <input type="text" name="datainicio" id="datainicio">
+	Data inicio: <input type="text" name="datainicio" id="datainicio">
 	
 	Data fim: <input type="text" name="datafim" id="datafim">
-	
-	 -->
 	
 	
 			

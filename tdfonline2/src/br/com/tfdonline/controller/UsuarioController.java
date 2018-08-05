@@ -10,6 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -233,7 +234,7 @@ import br.com.tfdonline.modelo.Usuario;
 		//public String saveOrUpdateUsuario(@ModelAttribute("usuarioForm") @Validated Usuario usuario,
 		public String updateMinhaConta(@ModelAttribute("usuarioForm")  Usuario usuario,
 				BindingResult result, Model model, 
-				final RedirectAttributes redirectAttributes, HttpSession session) {
+				final RedirectAttributes redirectAttributes, HttpSession session, HttpServletRequest request) {
 			
 			
 			logger.debug("updateMinhaconta : {}", usuario);
@@ -245,6 +246,8 @@ import br.com.tfdonline.modelo.Usuario;
 				Usuario usuarioBD = usuarioDAO.findByID(usuario.getId());
 				
 				String senhaformcriptografada  = getSenhaCriptografada(usuario.getSenha());
+				
+				System.out.println("Senha informada pelo usuario:"+ usuario.getSenha());
 				
 				if (senhaformcriptografada.equals(usuarioBD.getSenha())){
 					//senha do BD coincide com a digitada pelo usuario no form, vamos atualiza-lo
@@ -258,7 +261,8 @@ import br.com.tfdonline.modelo.Usuario;
 					
 					redirectAttributes.addFlashAttribute("css", "success");
 					
-					redirectAttributes.addFlashAttribute("msg", "Usuario atualizado com sucesso!");
+					
+					request.setAttribute("msg","Dados do usuário atualizados com sucesso!");
 					
 					//registrando a transção no BD..
 					Transacao transacao =  transacaoDAO.isRegistravel(TransacaoDAOI.ENTIDADE_USUARIO, TransacaoDAOI.UPDATE);
@@ -281,13 +285,16 @@ import br.com.tfdonline.modelo.Usuario;
 				}else {
 					
 					redirectAttributes.addFlashAttribute("msg", "Senha informada não é a salva no banco de dados!");
+					redirectAttributes.addFlashAttribute("css", "failure");
+					redirectAttributes.addFlashAttribute("css", "error");
+					request.setAttribute("msg","Senha informada não é a salva no banco de dados! <br> voltando para o form de login");
 				}
 				
 
 				
 				
 				// POST/REDIRECT/GET
-				return "redirect:/home";
+				return "minhaconta";
 		
 		
 
