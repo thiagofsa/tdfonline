@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MotoristasReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3f6ba74b-95cd-42ee-972c-8f1872ffbf07">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="qrCode" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="dataviagem" class="java.util.Date"/>
+	<field name="vagas" class="java.lang.Integer"/>
+	<field name="observacao" class="java.lang.String"/>
+	<field name="paciente.nome" class="java.lang.String"/>
+	<field name="distribuicao.motorista.nome" class="java.lang.String"/>
+	<field name="distribuicao.veiculo.descricao" class="java.lang.String"/>
+	<field name="encaminhamento.marcacao.paciente.nome" class="java.lang.String"/>
+	<field name="encaminhamento.distribuicao.motorista.nome" class="java.lang.String"/>
+	<field name="encaminhamento.distribuicao.veiculo.descricao" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement key="" x="80" y="5" width="360" height="51" isPrintInFirstWholeBand="true" uuid="102425ca-4f32-43a1-ade8-95d38f57829e"/>
+				<textElement textAlignment="Center">
+					<font size="20"/>
+					<paragraph lineSpacing="Fixed"/>
+				</textElement>
+				<text><![CDATA[Cartão de Embarque - volta]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="30" y="30" width="100" height="30" uuid="336b705d-a6be-487d-952e-6dbce2b932f0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="afb9f20d-5c04-470e-aab9-f0dcc3f8a760"/>
+				</reportElement>
+				<text><![CDATA[Data Viagem]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="30" height="30" uuid="1cabc683-cfa2-42af-b9e2-c1da7956259e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d4f42dd-0f0a-4bd5-adee-dd35c9e4a38d"/>
+				</reportElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="130" y="30" width="70" height="30" uuid="107769f4-6da5-4ad0-886d-2516fdc5b537">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1bc64059-7bd3-4726-a31a-c8547cb66f14"/>
+				</reportElement>
+				<text><![CDATA[vagas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="30" width="100" height="30" uuid="3e939735-6cae-4adf-adca-a71e69529fdc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a02acd3c-6bf6-4509-96cb-4fda7613a8ba"/>
+				</reportElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="30" width="100" height="30" uuid="627c28fe-33ea-4a95-ac56-2f6d99216147">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4ac56d5-906a-40f1-8e3e-93895a61b8c6"/>
+				</reportElement>
+				<text><![CDATA[Motorista]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="30" width="100" height="30" uuid="6592a780-1c87-4d8e-820d-e250bf6833a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d080c9c-17a0-4ff8-b6af-7507eec5ff1a"/>
+				</reportElement>
+				<text><![CDATA[Veiculo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="110" splitType="Stretch">
+			<textField>
+				<reportElement x="30" y="10" width="100" height="30" uuid="5f7ddbd9-7117-4ada-8a31-17768c43aefb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="afb9f20d-5c04-470e-aab9-f0dcc3f8a760"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dataviagem}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="10" width="30" height="30" uuid="81790535-5a4f-4269-98fa-bdc99296ab7f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2d4f42dd-0f0a-4bd5-adee-dd35c9e4a38d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="130" y="10" width="70" height="30" uuid="148a1a85-cdf8-42bf-8072-cb5bc9ff30fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1bc64059-7bd3-4726-a31a-c8547cb66f14"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{vagas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="10" width="100" height="30" uuid="02d6e01a-2a63-4ac6-8f1c-9008f52f1c4c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a02acd3c-6bf6-4509-96cb-4fda7613a8ba"/>
+					<printWhenExpression><![CDATA[$F{paciente.nome}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{paciente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="10" width="100" height="30" uuid="68faf27d-f413-4a73-982d-13ecc970b028">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4ac56d5-906a-40f1-8e3e-93895a61b8c6"/>
+					<printWhenExpression><![CDATA[$F{distribuicao.motorista.nome}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{distribuicao.motorista.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="10" width="100" height="30" uuid="8842453b-34f9-4b52-bdd4-b6b8b1acff93">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="5d080c9c-17a0-4ff8-b6af-7507eec5ff1a"/>
+					<printWhenExpression><![CDATA[$F{distribuicao.veiculo.descricao}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{distribuicao.veiculo.descricao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="40" width="100" height="30" uuid="b2497813-beed-4968-a65f-8f5b0b8b8bb4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e2d147d1-02fd-437f-9c08-a9cf5a9441ee"/>
+					<printWhenExpression><![CDATA[$F{encaminhamento.marcacao.paciente.nome}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamento.marcacao.paciente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="40" width="100" height="30" uuid="fcd2518b-0fb7-4acf-af2d-14b2385ce2ec">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db68ef76-e227-40a8-b1be-a667e841dd2f"/>
+					<printWhenExpression><![CDATA[$F{encaminhamento.distribuicao.motorista.nome}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamento.distribuicao.motorista.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="40" width="100" height="30" uuid="6c5fddc8-6759-4248-a60e-494ae50e406f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="44a438a8-87b2-4423-873a-48633ff57c7a"/>
+					<printWhenExpression><![CDATA[$F{encaminhamento.distribuicao.veiculo.descricao}!=null]]></printWhenExpression>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{encaminhamento.distribuicao.veiculo.descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="117" splitType="Stretch">
+			<image evaluationTime="Report">
+				<reportElement positionType="FixRelativeToBottom" x="360" y="12" width="90" height="88" uuid="ea7c14a4-bd52-4343-8a1a-68d25eacc066"/>
+				<imageExpression><![CDATA[com.google.zxing.client.j2se.MatrixToImageWriter.toBufferedImage (
+    new com.google.zxing.qrcode.QRCodeWriter().encode( $P{qrCode},com.google.zxing.BarcodeFormat.QR_CODE, 60, 60))]]></imageExpression>
+			</image>
+		</band>
+	</pageFooter>
+</jasperReport>

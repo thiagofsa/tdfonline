@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Beneficiosporperiodo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0893e01c-293b-46b1-ba7c-87acc781870d">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="paciente.nome" class="java.lang.String"/>
+	<field name="procedimento.nome" class="java.lang.String"/>
+	<field name="medico.nome" class="java.lang.String"/>
+	<title>
+		<band height="68"/>
+	</title>
+	<pageHeader>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="195" y="20" width="368" height="30" uuid="26f9912c-a3f7-487a-af5c-89fd418bbb56"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE REQUISIÇÕES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="-67" width="324" height="30" uuid="b784d63e-985b-4d48-9414-af27f7fcbb7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SECRETARIA MUNICIPAL DE SAÚDE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="155" y="-37" width="449" height="30" uuid="d73b75a4-63f2-4aad-b2dd-1abb66e90db2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COORDENAÇÃO DO TRATAMENTO FORA DO DOMICÍLIO]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement x="691" y="-67" width="111" height="35" uuid="e8d5eefc-e6db-4d4a-aa43-cc413f4a8f58"/>
+				<imageExpression><![CDATA["C:/Users/alixandre/eclipse-workspace/tdfonline2/WebContent/resources/img/Guslogo.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="100" height="30" uuid="943fbc44-a8f8-4230-83db-3d8c6bccce1e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ac4c7e9-b9dd-4409-b562-5c3f5b9cbe95"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="80" y="3" width="173" height="30" uuid="19de4ee4-08d1-4fb5-8753-2ea4497ca9fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c54d6cee-2e21-4fc8-a211-0fedb3de69b5"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[paciente.nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="210" y="10" width="202" height="30" uuid="46d2191a-21b5-4aab-86e7-58da2a2b5b3a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5858169-3dec-42fe-b345-644b5a4b5b8f"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<text><![CDATA[Procedimento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="10" width="100" height="30" uuid="54356563-5cec-4503-8e07-a13bc0a1cece">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da388da4-f285-43a1-8a77-efc10703eb78"/>
+				</reportElement>
+				<text><![CDATA[medico.nome]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="52" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="40" uuid="405d0fb7-7b43-4968-97ee-ee2edf9f799f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ac4c7e9-b9dd-4409-b562-5c3f5b9cbe95"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="173" height="40" uuid="0d7de7c7-79d8-42f9-a150-ad3676ea1e0f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c54d6cee-2e21-4fc8-a211-0fedb3de69b5"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paciente.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="-1" width="201" height="40" uuid="88f44cd1-9e93-4647-8ee0-51d104c4ab93">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a5858169-3dec-42fe-b345-644b5a4b5b8f"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{procedimento.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="4" width="100" height="30" uuid="e099329b-597f-4155-8d7d-3c616547c7bd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da388da4-f285-43a1-8a77-efc10703eb78"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{medico.nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="22">
+			<textField>
+				<reportElement x="650" y="0" width="151" height="22" uuid="0ca1f61a-4479-433b-b115-bdbf737557e8"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

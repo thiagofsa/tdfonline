@@ -1,8 +1,7 @@
 package br.com.tfdonline.util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -55,8 +54,8 @@ public class DateUtils {
 	
 	    }
 
-			
-			
+
+	    
 			
 	     public static void main (String args[]) throws Exception {
 	    	 

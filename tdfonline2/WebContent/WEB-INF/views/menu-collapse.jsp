@@ -120,6 +120,7 @@
 			        </a>
 			        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 			          <a class="dropdown-item" href="${pageContext.request.contextPath}/reports/encaminhamentopormotoristaedatareport"><span class="iconajst"><i class="far fa-id-card"></i></span> Pacientes</a>
+			          <a class="dropdown-item" href="${pageContext.request.contextPath}/requisicaos/requisicaosporperiodoreportpage"><span class="iconajst"><i class="far fa-id-card"></i></span> Requisições</a>
 			          <a class="dropdown-item" href="${pageContext.request.contextPath}/report/cartaopaciente/"><span class="iconajst"><i class="fas fa-id-card-alt"></i></span> Cartão do Paciente</a>
 			          <a class="dropdown-item" href="${pageContext.request.contextPath}/encaminhamentos/cartaodeembarque"><span class="iconajst"><i class="fas fa-id-card-alt"></i></span> Cartão de Embarque</a>
 			          <a class="dropdown-item" href="${pageContext.request.contextPath}/marcacaos/comprovantemarcacaoreport"><span class="iconajst"><i class="fas fa-calendar-check"></i></span> Comprovante de Agendamento</a>

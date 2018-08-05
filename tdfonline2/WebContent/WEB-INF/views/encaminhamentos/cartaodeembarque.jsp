@@ -170,7 +170,7 @@
 				<td>${encaminhamentovolta.dataviagem}</td>
 				
 				<td class="text-center">
-				  <spring:url value="/reports/cartaodeembarque/${2}/${encaminhamentovolta.id}" var="encaminhamentovoltaUrl" />
+				  <spring:url value="/reports/cartaodeembarque/${2}/${encaminhamentovoltaavulso.id}" var="encaminhamentovoltaUrl" />
 				  <button class="btn btn-sm" data-toggle="tooltip" data-placement="botton" title="Selecione este Encaminhamento" onclick="location.href='${encaminhamentovoltaUrl}'"><i class="fas fa-check-circle"></i></button>			  
                 </td>
                 </tr>

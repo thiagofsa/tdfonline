@@ -130,5 +130,33 @@ public class RequisicaoDAOImpl implements RequisicaoDAOI, Serializable{
 		return lista;
 		
 	}
+
+
+	@Override
+	public List<Requisicao> findbyNomePacienteDataInicialDataFinal(String nomepaciente, Date datainicial,
+			Date datafinal) {
+		// TODO Auto-generated method stub
+		String hql = "FROM Requisicao r WHERE r.data BETWEEN :start AND :end";
+		
+		if (nomepaciente!=null) {
+			
+			hql+= " AND r.paciente.nome like :keyword";
+			
+		}
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("start", datainicial);
+		query.setParameter("end", datafinal);
+		if (nomepaciente!=null) {
+			query.setParameter("keyword", nomepaciente);
+			
+			
+		}
+		
+		 
+		List<Requisicao> lista = query.list();
+		
+		return lista;
+	}
 	
 }

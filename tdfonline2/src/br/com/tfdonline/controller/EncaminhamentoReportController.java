@@ -236,44 +236,36 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 			List<EncaminhamentoVolta> encaminhamentosvolta = new ArrayList<EncaminhamentoVolta>();
 			encaminhamentosvolta.add(encaminhamentovolta);
 			datasource  = new JRBeanCollectionDataSource(encaminhamentosvolta);
-			String paciente = encaminhamentovolta.getPaciente().getNome();
-			model.addAttribute("qrCode", "paciente="+paciente+ "%url=www.tfd.com.br/encaminhamentos/processaembarque?"+encaminhamentovolta.getId());
+			
+			String paciente;
+			
+			//se o encaminhamento é avulso
+			if (encaminhamentovolta.getPaciente()!=null) {
+				paciente = encaminhamentovolta.getPaciente().getNome();
+			}else {
+				paciente =encaminhamentovolta.getEncaminhamento().getMarcacao().getPaciente().getNome();
+			}
+			
+			model.addAttribute("qrCode", "paciente="+paciente+ "%url=www.tfd.com.br/encaminhamentos/processaembarquevolta?"+encaminhamentovolta.getId());
 						
 		}
 			
-		
-		
-		  // In order to use Spring's built-in Jasper support, 
-		  // We are required to pass our datasource as a map parameter
-		   
 		  // Add our datasource parameter
 		  model.addAttribute("datasource", datasource);
 		  model.addAttribute("format", type);
-		  	  
+		  
+		  if (tipoencaminhamento==1) {
+		  
+			  modelAndView = new ModelAndView("cartaodeembarqueReport", model);
 
-		  
-		  model.addAttribute("SUBREPORT_DIR", ".");
-		  
-		  System.out.println("Finalmente gerei o report");
-
-		  System.out.println("**************************************");
-		  System.out.println("DIRETORIO DO ARQUIVO JASPER NO REALPATH");
-		  httpServletRequest.getSession().getServletContext().getRealPath(File.separator+"reports"+File.separator+"AcompanhantesEncaminhamentospormotoristaReport.jasper");
-		  System.out.println(httpServletRequest.getSession().getServletContext().getContextPath()+File.separator+"resources");
-		  System.out.println(httpServletRequest.getSession().getServletContext().getRealPath("\\" + "*"));
-		  System.out.println("**************************************");
-		  
-		  
-		  // multiReport is the View of our application
-		  // This is declared inside the /WEB-INF/jasper-views.xml
-		  modelAndView = new ModelAndView("cartaodeembarqueReport", model);
-
-		  System.out.println("Testando o envio de SMS........");
-		  
-		  
+		  }else {
+			  modelAndView = new ModelAndView("cartaodeembarquevoltaReport", model);
 			  
-		  return modelAndView;	  	 
+		  }
+		  
+		  System.out.println("Testando o envio de SMS........");
 
+		  return modelAndView;	  	 
 		
 	}
 

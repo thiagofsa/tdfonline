@@ -58,7 +58,16 @@
     class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
     p:url="classpath:reports/CartaodeEmbarque.jrxml"
   	p:reportDataKey="datasource" />
+
+ <bean id="cartaodeembarquevoltaReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/CartaodeEmbarqueVolta.jrxml"
+  	p:reportDataKey="datasource" />
   	
+ <bean id="requisicaosporperiodoReport"
+    class="org.springframework.web.servlet.view.jasperreports.JasperReportsMultiFormatView"
+    p:url="classpath:reports/Requisicaosporperiodo.jrxml"
+  	p:reportDataKey="datasource" />  	  	  	
   	
-  	  	
+  	  	  	
 </beans>

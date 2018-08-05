@@ -27,4 +27,6 @@ public interface RequisicaoDAOI {
 	
 	public List<Requisicao> findbyNomePaciente(String nome);
 	
+	public List<Requisicao> findbyNomePacienteDataInicialDataFinal(String nomepaciente, Date datainicial, Date datafinal);
+	
 }
