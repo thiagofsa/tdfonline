@@ -193,5 +193,41 @@ public class EncaminhamentoDAOImpl implements EncaminhamentoDAOI, Serializable{
 		
 		System.out.println(lista.size()+ "encaminhamentos encontrados no DAO");
 		return lista;
+	}
+
+
+	@Override
+	public Long findbyContadorEncaminhamentosDaData(Date datainicial) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no Encaminhamento.findbyContadorEncaminhamentosDaData");
+				
+		
+		String squery = "select COUNT(*) from Encaminhamento ec where ec.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		Long count = (Long)query.uniqueResult();
+		
+				
+		return count;
+	}
+
+
+	@Override
+	public Long findbyContadorEmbarquesEncaminhamentosDaData(Date datainicial) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no Encaminhamento.findbyContadorEncaminhamentosDaData");
+				
+		
+		String squery = "select COUNT(*) from Encaminhamento ec where ec.embarcado=1 AND ec.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		Long count = (Long)query.uniqueResult();
+		
+				
+		return count;
 	}	
 }

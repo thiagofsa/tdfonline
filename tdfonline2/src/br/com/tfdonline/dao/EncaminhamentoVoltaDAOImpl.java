@@ -241,6 +241,36 @@ public class EncaminhamentoVoltaDAOImpl implements EncaminhamentoVoltaDAOI, Seri
 		
 
 	}
+
+
+	@Override
+	public int findbyContadorEncaminhamentosVoltaDaData(Date datainicial) {
+		// TODO Auto-generated method stub
+		String squery = "select COUNT(*) from EncaminhamentoVolta ev where ev.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		int count = (int)query.uniqueResult();
+		
+				
+		return count;
+	}
+
+
+	@Override
+	public int findbyContadorEmbarquesEncaminhamentosVoltaDaData(Date datainicial) {
+		// TODO Auto-generated method stub
+		String squery = "select COUNT(*) from EncaminhamentoVolta ev where ev.embarcado=1 AND ev.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		int count = (int)query.uniqueResult();
+		
+				
+		return count;
+	}
 	
 	
 	

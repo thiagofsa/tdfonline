@@ -218,8 +218,8 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 				Query query = sessionFactory.getCurrentSession().createQuery(hql);
 				
 				if (datainicio!=null) {
-				query.setParameter("start", datainicio);
-				query.setParameter("end", datafim);
+					query.setParameter("start", datainicio);
+					query.setParameter("end", datafim);
 				}
 				
 				if ((nomepaciente!=null) && (nomepaciente.trim().length()>0)) {
@@ -231,7 +231,80 @@ public class MarcacaoDAOImpl implements MarcacaoDAOI, Serializable{
 				
 				return lista;
 	}
+
+
+	@Override
+	public int findbyContadorNaoConfirmadasNaoEncaminhadas(Date datainicial) {
+		// TODO Auto-generated method stub
+
+		System.out.println("Entrando no MarcacaoDAO.findbyContadorNaoConfirmadasNaoEncaminhadas");
+				
+		
+		String squery = "select COUNT(*) from Marcacao m where m.confirmada=0 AND m.encaminhada=0 AND m.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		int count = (int)query.uniqueResult();
+		
+				
+		return count;
+		
+	}
 	
+	@Override
+	public Long findbyContadorConfirmadasNaoEncaminhadas(Date datainicial) {
+		// TODO Auto-generated method stub
+
+		System.out.println("Entrando no MarcacaoDAO.findbyContadorNaoConfirmadasNaoEncaminhadas");
+				
+		
+		String squery = "select COUNT(*) from Marcacao m where m.confirmada=1 AND m.encaminhada=0 AND m.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		Long count = (Long)query.uniqueResult();
+		
+				
+		return count;
+		
+	}
+
+	@Override
+	public Long findbyContadorEncaminhadas(Date datainicial) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no MarcacaoDAO.findbyContadorNaoConfirmadasNaoEncaminhadas");
+				
+		
+		String squery = "select COUNT(*) from Marcacao m where m.encaminhada=1 AND m.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		Long count = (Long)query.uniqueResult();
+		
+				
+		return count;
+	}
+
+	
+	@Override
+	public Long findbyContadorMarcacoesData(Date datainicial) {
+		// TODO Auto-generated method stub
+		System.out.println("Entrando no MarcacaoDAO.findbyContadorMarcacoesData");
+				
+		
+		String squery = "select COUNT(*) from Marcacao m where m.dataviagem=:data";
+		
+		
+		Query query = sessionFactory.getCurrentSession().createQuery(squery);
+		query.setParameter("data", datainicial);
+		Long count = (Long)query.uniqueResult();
+		
+				
+		return count;
+	}
 	
 
 	

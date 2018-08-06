@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.ContextLoader;
 
+import br.com.tfdonline.dao.EncaminhamentoDAOI;
+import br.com.tfdonline.dao.EncaminhamentoVoltaDAOI;
+import br.com.tfdonline.dao.MarcacaoDAOI;
 import br.com.tfdonline.dao.UsuarioDAOI;
 import br.com.tfdonline.modelo.Usuario;
 
@@ -25,6 +29,15 @@ public class LoginController {
 	
 	@Autowired
 	private UsuarioDAOI usuarioDAO;
+	
+	@Autowired	 
+	 EncaminhamentoDAOI encaminhamentoDAO ;
+	
+	@Autowired	 
+	 EncaminhamentoVoltaDAOI encaminhamentovoltaDAO ;
+	
+	@Autowired	 
+	 MarcacaoDAOI marcacaoDAO ;
 	
 	
 	 @RequestMapping(value ="/login")
@@ -79,17 +92,36 @@ public class LoginController {
 			 hashsenha = hexString.toString();
 			 			 
 			 if (user.getSenha().equals(hashsenha)){
+				 
+				 System.out.println("Senha digititada corretamente...");
+				 
 				 session.setAttribute("usuarioLogado", user);
 				 
-				 if (user.getTransporte()>0) {
+				 if (user.getPerfilusuario()==UsuarioDAOI.PERFIL_TRANSPORTE) {
 					 System.out.println("Redirecionand para a home do 	transporte...");
 					 					 
 				 }
 				 				 
-				 if (user.getAdmin()>0) {
+				 if (user.getPerfilusuario()== UsuarioDAOI.PERFIL_ADMIN) {
 					 System.out.println("Redirecionand para a home do adm...");
 					 				 
 				 }
+				 	
+				 		
+			 			System.out.println("passei no Logincontroller, anest homepage........");
+			 			
+			 			if ((user.getPerfilusuario()==UsuarioDAOI.PERFIL_ADMIN) || (user.getPerfilusuario()==UsuarioDAOI.PERFIL_USUARIO)) {
+			 			
+			 				Long contadorEncaminhamentos = encaminhamentoDAO.findbyContadorEncaminhamentosDaData(new Date());
+			 				Long contadorEmbarquesEncaminhamentos = encaminhamentoDAO.findbyContadorEmbarquesEncaminhamentosDaData(new Date());
+			 				
+			 				request.setAttribute("contadorEncaminhamentos", contadorEncaminhamentos);
+			 				request.setAttribute("contadorEmbarquesEncaminhamentos", contadorEmbarquesEncaminhamentos);
+			 				
+			 			}
+			 			
+			 			
+			 		
 				 
 				 return "homepage";
 			 }

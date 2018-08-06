@@ -6,6 +6,13 @@ import br.com.tfdonline.modelo.Usuario;
 
 public interface UsuarioDAOI {
 
+	public static Integer PERFIL_ADMIN=1;
+	public static Integer PERFIL_USUARIO=2;
+	public static Integer PERFIL_MOTORISTA=3;
+	public static Integer PERFIL_TRANSPORTE=4;
+	public static Integer PERFIL_MEDICO=5;
+	
+	
 	void addUsuario(Usuario usuario);
     
     List<Usuario> findAll();

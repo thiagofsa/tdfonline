@@ -220,8 +220,9 @@ import br.com.tfdonline.modelo.Usuario;
 			usuario.setEmail(usuariosession.getEmail());
 			usuario.setTelefone(usuariosession.getTelefone());
 			usuario.setSenha("");
-			usuario.setAdmin(usuariosession.getAdmin());
-			usuario.setTransporte(usuariosession.getTransporte());
+			usuario.setPerfilusuario(-1);
+			
+			
 			
 			
 			model.addAttribute("usuarioForm", usuario);
@@ -353,7 +354,7 @@ import br.com.tfdonline.modelo.Usuario;
 			usuario.setId(-1);
 			usuario.setNome("Nome do Usuario");
 			usuario.setTelefone("8888-8888");
-			usuario.setAdmin(0);
+			usuario.setPerfilusuario(-1);
 			usuario.setEmail("email");
 			
 			

@@ -42,9 +42,9 @@
 		
 		<form:hidden path="login" />
 		
-		<form:hidden path="admin" />
 		
-		<form:hidden path="transporte" />
+		
+		
 		
 				
 		<spring:bind path="nome">

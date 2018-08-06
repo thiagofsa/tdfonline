@@ -36,8 +36,7 @@ private static final long serialVersionUID = 1L;
 	private String email;
 	
 	
-	private Integer admin;
-	private Integer transporte;
+	private Integer perfilusuario;
 	
 		
 	
@@ -60,12 +59,7 @@ private static final long serialVersionUID = 1L;
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Integer getAdmin() {
-		return admin;
-	}
-	public void setAdmin(Integer admin) {
-		this.admin = admin;
-	}
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -94,12 +88,7 @@ private static final long serialVersionUID = 1L;
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Integer getTransporte() {
-		return transporte;
-	}
-	public void setTransporte(Integer transporte) {
-		this.transporte = transporte;
-	}
+	
 	public String getSenhanova1() {
 		return senhanova1;
 	}
@@ -111,6 +100,12 @@ private static final long serialVersionUID = 1L;
 	}
 	public void setSenhanova2(String senhanova2) {
 		this.senhanova2 = senhanova2;
+	}
+	public Integer getPerfilusuario() {
+		return perfilusuario;
+	}
+	public void setPerfilusuario(Integer perfilusuario) {
+		this.perfilusuario = perfilusuario;
 	}	
 	
 }

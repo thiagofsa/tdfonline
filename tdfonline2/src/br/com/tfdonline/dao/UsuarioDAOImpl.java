@@ -21,6 +21,11 @@ public class UsuarioDAOImpl implements UsuarioDAOI, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	
+	
+	
+	
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 	
@@ -74,6 +79,7 @@ public class UsuarioDAOImpl implements UsuarioDAOI, Serializable{
 		// TODO Auto-generated method stub
 		 
 		   Query query  = sessionFactory.getCurrentSession().createQuery("from Usuario");
+		   query.setMaxResults(30);
            List<Usuario> lista = (List<Usuario>) query.list(); 
            System.out.println("-------->>  Usuarios encontrados ="+ lista.size());
            return lista;

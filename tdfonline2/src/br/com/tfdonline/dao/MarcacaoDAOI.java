@@ -38,5 +38,20 @@ public interface MarcacaoDAOI {
 	
 	public List<Marcacao> findbyNomeNaoEncaminhadasPeriodo(String nomepaciente, Date datainicio, Date datafim) ;
 	
+	//Em espera para confirmação do paciente
+	public int findbyContadorNaoConfirmadasNaoEncaminhadas(Date datainicial) ;
+	
+	//Confirmadas pelo paciente, aguardando geração de encaminhamento
+	public Long findbyContadorConfirmadasNaoEncaminhadas(Date datainicial) ;
+	
+	//Encaminhadas
+	public Long findbyContadorEncaminhadas(Date datainicial) ;
+	
+	public Long findbyContadorMarcacoesData(Date datainicial) ;
+	
+	
+	
+	
+	
 	
 }

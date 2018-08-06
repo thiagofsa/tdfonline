@@ -32,4 +32,8 @@ public interface EncaminhamentoVoltaDAOI {
 	
 	List<EncaminhamentoVolta> findAvulsosbyPacienteDataIdaeDataVolta(String nomepaciente, Date dataida, Date datavolta);
 	
+	public int findbyContadorEncaminhamentosVoltaDaData(Date datainicial) ;
+	
+	public int findbyContadorEmbarquesEncaminhamentosVoltaDaData(Date datainicial) ;
+	
 }
